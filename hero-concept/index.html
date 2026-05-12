@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EDF — Hero Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Inter:wght@200&display=swap" rel="stylesheet" />
+<style>
+
+:root {
+  --ink:         #000000;
+  --paper-cream: #fffcd1;
+  --blue:        #2956e0;
+  --orange:      #ff3900;
+  --font-display:'Inter', sans-serif;
+  --font-body:   'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --font-mono:   'DM Mono', ui-monospace, Menlo, monospace;
+  --gutter: 60px;
+  --bottom-h: 200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  background: var(--paper-cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px var(--gutter);
+}
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.nav__link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  opacity: 0.42;
+  transition: opacity 0.2s;
+}
+.nav__link:hover { opacity: 1; }
+
+/* ── HERO SHELL ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TYPE ZONE — top portion ── */
+.hero__type-zone {
+  flex: 1;
+  position: relative;
+  padding: 100px var(--gutter) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── IMAGES — confined to type zone ── */
+.hero__img {
+  position: absolute;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+/* Tall portrait — top right, overlaps "the" and the top of "future" */
+.hero__img--a {
+  width: 210px; height: 290px;
+  top: 8%;
+  right: 8%;
+  opacity: 0.86;
+  transform: rotate(1.6deg);
+  z-index: 3;
+}
+/* Landscape — sits behind "future", partially covered by text (text z-index higher) */
+.hero__img--b {
+  width: 320px; height: 200px;
+  top: 36%;
+  right: 16%;
+  opacity: 0.65;
+  transform: rotate(-0.8deg);
+  z-index: 1;
+}
+/* Portrait — lower left, bleeds off edge, behind type */
+.hero__img--c {
+  width: 230px; height: 300px;
+  bottom: 8%;
+  left: -16px;
+  opacity: 0.74;
+  transform: rotate(1deg);
+  z-index: 1;
+}
+
+/* Blue accent — vertical bar, right column */
+.hero__accent {
+  position: absolute;
+  width: 8px;
+  height: 140px;
+  background: var(--blue);
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+.hero__label {
+  position: absolute;
+  right: calc(var(--gutter) + 18px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blue);
+  writing-mode: vertical-rl;
+  opacity: 0.60;
+  z-index: 10;
+}
+
+/* ── TYPE ── */
+.hero__type {
+  position: relative;
+  z-index: 2;
+}
+
+/* Each line */
+.hl {
+  display: flex;
+  align-items: baseline;
+  line-height: 0.88;
+  letter-spacing: -0.038em;
+}
+
+/* Primary words — the headline anchors */
+.w {
+  font-size: clamp(60px, 7.8vw, 112px);
+  font-weight: 300;
+  white-space: nowrap;
+}
+/* "future" — the key concept, meaningfully larger */
+.w--hero {
+  font-size: clamp(82px, 10.8vw, 156px);
+  font-weight: 300;
+  white-space: nowrap;
+  letter-spacing: -0.042em;
+}
+/* Connector/function words — small and faded */
+.w--dim {
+  font-size: clamp(30px, 3.9vw, 56px);
+  font-weight: 300;
+  opacity: 0.20;
+  white-space: nowrap;
+  margin-left: 0.28em;
+  align-self: center;
+  letter-spacing: -0.022em;
+}
+.w--dim-r { margin-left: 0.22em; }
+.w--dim-l { margin-right: 0.12em; margin-left: 0; }
+
+/* Hairline between the two sentences */
+.hl-rule {
+  width: 52%;
+  height: 0.5px;
+  background: rgba(0,0,0,0.18);
+  margin: 10px 0 8px;
+}
+
+/* Indent on line 3 and "now." line */
+.hl--indent { padding-left: 2.2em; }
+.hl--right  { justify-content: flex-end; padding-right: calc(var(--gutter) + 40px); }
+
+/* ── BOTTOM STRIP — clearly separated ── */
+.hero__bottom {
+  height: var(--bottom-h);
+  flex-shrink: 0;
+  border-top: 0.5px solid rgba(0,0,0,0.14);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 60px;
+  padding: 0 var(--gutter);
+  position: relative;
+  z-index: 10;
+  background: var(--paper-cream); /* ensures no image bleeds over text */
+}
+
+.hero__bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero__sub {
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.016em;
+  line-height: 1.6;
+  color: var(--ink);
+  opacity: 0.72;
+  max-width: 480px;
+}
+
+.hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hero__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 16px;
+  border: 0.5px solid rgba(0,0,0,0.30);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+.hero__tag:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-cream);
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid rgba(0,0,0,0.40);
+  padding-bottom: 3px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hero__cta:hover { color: var(--orange); border-color: var(--orange); }
+.hero__cta-arrow { display: inline-block; transition: transform 0.2s; }
+.hero__cta:hover .hero__cta-arrow { transform: translateX(5px); }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav__wordmark">Every Day Future</a>
+  <a href="/portal" class="nav__link">Client Portal</a>
+</nav>
+
+<section class="hero">
+
+  <!-- Type zone with images -->
+  <div class="hero__type-zone">
+
+    <img src="../images/mountain-card.png" class="hero__img hero__img--a" alt="" aria-hidden="true" />
+    <img src="../images/horizon.png"       class="hero__img hero__img--b" alt="" aria-hidden="true" />
+    <img src="../images/rose.png"          class="hero__img hero__img--c" alt="" aria-hidden="true" />
+
+    <div class="hero__accent" aria-hidden="true"></div>
+    <div class="hero__label"  aria-hidden="true">Every Day Future</div>
+
+    <div class="hero__type">
+
+      <!-- "Choose the" -->
+      <div class="hl">
+        <span class="w">Choose</span>
+        <span class="w--dim w--dim-r">the</span>
+      </div>
+
+      <!-- "future" — the key word, one size bigger -->
+      <div class="hl">
+        <span class="w--hero">future</span>
+      </div>
+
+      <!-- "you want." — indented -->
+      <div class="hl hl--indent">
+        <span class="w--dim w--dim-l">you</span>
+        <span class="w">want.</span>
+      </div>
+
+      <div class="hl-rule"></div>
+
+      <!-- "Create what" -->
+      <div class="hl">
+        <span class="w">Create</span>
+        <span class="w--dim w--dim-r">what</span>
+      </div>
+
+      <!-- "matters" -->
+      <div class="hl">
+        <span class="w">matters</span>
+      </div>
+
+      <!-- "now." — pushed right -->
+      <div class="hl hl--right">
+        <span class="w--dim w--dim-l">—</span>
+        <span class="w">now.</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom strip: clearly legible, image-free -->
+  <div class="hero__bottom">
+    <div class="hero__bottom-left">
+      <p class="hero__sub">A practice to let the future you want shape how you work now, creating energized progress that expands what's possible.</p>
+      <div class="hero__tags">
+        <span class="hero__tag">More progress</span>
+        <span class="hero__tag">Less resistance</span>
+        <span class="hero__tag">Clear direction</span>
+      </div>
+    </div>
+    <a href="#begin" class="hero__cta">Begin your practice <span class="hero__cta-arrow">→</span></a>
+  </div>
+
+</section>
+
+</body>
+</html>

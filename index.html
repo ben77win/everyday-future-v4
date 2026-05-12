@@ -1,0 +1,1439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Every Day Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Inter:wght@200&display=swap" rel="stylesheet" />
+<style>
+
+/* ─── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --ink:          #000000;
+  --paper:        #ffffff;
+  --paper-off-a:  #fafcfa;
+  --paper-off-b:  #f8fcf7;
+  --paper-cream:  #fffcd1;
+  --paper-sage:   #e9ede7;
+  --blue:         #2956e0;
+  --orange:       #ff3900;
+
+  --font-display: 'Inter', sans-serif;
+  --font-body:    'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --font-mono:    'DM Mono', ui-monospace, Menlo, monospace;
+
+  --max-w: 1280px;
+  --gutter: 60px;
+}
+
+/* ─── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ─── TYPE SCALE ─────────────────────────────────────────────── */
+.t-wordmark {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.t-display {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(42px, 5.5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.030em;
+}
+.t-h2 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.020em;
+}
+.t-h3 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.t-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  letter-spacing: 0.010em;
+}
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.180em;
+  text-transform: uppercase;
+}
+.t-cta {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+}
+.t-caption {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.140em;
+  text-transform: uppercase;
+}
+
+/* ─── LAYOUT HELPERS ─────────────────────────────────────────── */
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ─── HAIRLINES ──────────────────────────────────────────────── */
+.rule-h { display: block; width: 100%; height: 0.5px; background: var(--ink); }
+.rule-h--white { background: rgba(255,255,255,0.45); }
+
+/* ─── EDF STACKED MARK ───────────────────────────────────────── */
+.edf-mark { display: inline-block; }
+.edf-row  { display: block; padding: 10px 0; }
+.edf-div  { display: block; height: 0.5px; background: currentColor; }
+.t-edf {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(52px, 7vw, 110px);
+  letter-spacing: -0.020em;
+  line-height: 1;
+}
+
+/* ─── PILL / CTA ─────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 20px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  border: none;
+}
+.pill--outline {
+  background: transparent;
+  color: var(--ink);
+  border: 0.5px solid var(--ink);
+}
+.pill--outline-white {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border: 0.5px solid rgba(255,255,255,0.55);
+}
+
+/* ─── TAGS ───────────────────────────────────────────────────── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 14px;
+  border: 0.5px solid rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.88);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.130em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.tag:hover {
+  background: rgba(255,255,255,0.92);
+  border-color: rgba(255,255,255,0.92);
+  color: var(--ink);
+}
+
+/* ─── BRUSH MARKS ────────────────────────────────────────────── */
+.mark {
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ─── ORANGE ACCENT DOT ──────────────────────────────────────── */
+.accent-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 22px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.nav.scrolled {
+  background: rgba(255,255,255,0.96);
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nav.scrolled .nav__wordmark { color: var(--ink); }
+.nav.scrolled .nav__link { color: var(--ink); }
+.nav.scrolled .nav__cta { background: var(--ink); color: var(--paper); }
+
+.nav__wordmark {
+  color: rgba(255,255,255,0.92);
+  mix-blend-mode: normal;
+  transition: color 0.3s;
+}
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav__link {
+  color: rgba(255,255,255,0.78);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav__cta {
+  background: rgba(255,255,255,0.15);
+  border: 0.5px solid rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.92);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   S1 — HERO
+════════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/hero-rose.png");
+  background-size: cover;
+  background-position: 50% 30%;
+  opacity: 0.88;
+}
+/* Subtle gradient overlay — darkens bottom so text reads over the image */
+.hero__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.18) 0%,
+    rgba(0,0,0,0.08) 30%,
+    rgba(0,0,0,0.32) 70%,
+    rgba(0,0,0,0.68) 100%
+  );
+}
+
+/* Top chrome: orange dot only — text handled by nav */
+.hero__chrome-top {
+  position: absolute;
+  top: 26px;
+  right: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  z-index: 1;
+}
+
+/* Content: copy only, pinned lower-left */
+.hero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 var(--gutter) 80px;
+}
+
+.hero__copy {
+  max-width: 680px;
+}
+.hero__headline {
+  color: #fff;
+  margin-bottom: 24px;
+}
+.hero__subhead {
+  color: rgba(255,255,255,0.82);
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  font-weight: 300;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+.hero__tags {
+  margin-bottom: 0;
+}
+
+/* Bottom-right folio */
+.hero__folio {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 54px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.160em;
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PERSISTENT FLOATING CTA
+════════════════════════════════════════════════════════════════ */
+.float-cta {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.float-cta.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.float-cta__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 40px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 100px; /* full oval */
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+  white-space: nowrap;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+.float-cta__link:hover {
+  background: var(--orange);
+  box-shadow: 0 6px 32px rgba(255,57,0,0.35);
+  color: var(--paper);
+}
+/* Inverted state when floating over the ink footer */
+.float-cta.over-footer .float-cta__link {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.18);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+.float-cta.over-footer .float-cta__link:hover {
+  background: var(--orange);
+  color: var(--paper);
+  box-shadow: 0 6px 32px rgba(255,57,0,0.35);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   S2 — CHOOSE YOUR WAY
+════════════════════════════════════════════════════════════════ */
+.s2 {
+  background: var(--paper-cream);
+  padding: 100px var(--gutter) 0;
+  overflow: hidden;
+}
+
+/* ① Headline clip reveal */
+@keyframes clipUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.s2__headline-clip {
+  overflow: hidden;
+  display: block;
+}
+.s2__headline {
+  color: var(--ink);
+  font-size: clamp(42px, 4.8vw, 64px);
+  font-weight: 300;
+  display: block;
+  transform: translateY(100%);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s2__headline.revealed {
+  transform: translateY(0);
+}
+
+/* Header */
+.s2__header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+  padding-bottom: 80px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+}
+.s2__header-left { flex: 1; }
+.s2__header-right {
+  max-width: 320px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+.s2__eyebrow {
+  font-size: 13px;
+  color: rgba(0,0,0,0.40);
+  margin-bottom: 22px;
+  letter-spacing: 0.110em;
+}
+.s2__subhead {
+  color: rgba(0,0,0,0.55);
+  font-size: 15px;
+  line-height: 1.7;
+  letter-spacing: 0.020em;
+}
+
+
+/* ── Option rows (3 coaching types) */
+.s2__options {
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+}
+
+/* ② Scroll-reveal: rows start hidden, .revealed snaps them in */
+.s2__option {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0 40px;
+  padding: 44px 0;
+  border-top: 0.5px solid rgba(0,0,0,0.18);
+  cursor: pointer;
+  margin: 0 calc(-1 * var(--gutter));
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  /* scroll reveal state */
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    background 0.25s ease,
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s2__option.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.s2__option:hover {
+  background: var(--orange);
+}
+.s2__option-num { display: none; }
+
+.s2__option-title {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(44px, 5.8vw, 78px);
+  letter-spacing: -0.030em;
+  line-height: 1;
+  color: var(--ink);
+  transition: color 0.22s ease;
+}
+.s2__option:hover .s2__option-title { color: #fff; }
+
+.s2__option-desc {
+  max-width: 260px;
+  font-size: 13px;
+  line-height: 1.65;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.50);
+  text-align: right;
+  transition: color 0.22s ease;
+}
+.s2__option:hover .s2__option-desc { color: rgba(255,255,255,0.80); }
+
+.s2__option-arrow {
+  font-family: var(--font-body);
+  font-size: 32px;
+  color: rgba(0,0,0,0.25);
+  transition: color 0.22s ease, transform 0.22s ease;
+  line-height: 1;
+}
+.s2__option:hover .s2__option-arrow {
+  color: #fff;
+  transform: translateX(6px);
+}
+
+/* ⑤ Free discovery call — parallax scatter */
+.s2__free {
+  position: relative;
+  min-height: 520px;
+  padding: 90px 0 110px;
+  display: flex;
+  align-items: center;
+  background: var(--paper-sage);
+  margin: 0 calc(-1 * var(--gutter));
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  /* scroll reveal */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.s2__free.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Text content — left-anchored, sits above images via z-index */
+.s2__free-content {
+  position: relative;
+  z-index: 2;
+  max-width: 460px;
+  align-self: center;
+}
+.s2__free-title {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(36px, 4.2vw, 58px);
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1.0;
+}
+.s2__free-desc {
+  font-size: 14px;
+  color: rgba(0,0,0,0.50);
+  line-height: 1.65;
+  letter-spacing: 0.020em;
+  margin-bottom: 28px;
+}
+.s2__free-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 39px;
+  padding: 0 24px;
+  border: 0.5px solid rgba(0,0,0,0.35);
+  color: var(--ink);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 14.4px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.s2__free-cta:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+/* Scattered images — absolutely positioned, parallax via JS */
+.s2__free-img {
+  position: absolute;
+  object-fit: cover;
+  pointer-events: none;
+  will-change: transform;
+}
+/* Tall portrait — anchors the cluster */
+.s2__free-img--a {
+  width: 190px; height: 265px;
+  top: 40px; right: 26%;
+  opacity: 0.78;
+}
+/* Small portrait — overlaps A from upper-right */
+.s2__free-img--b {
+  width: 120px; height: 160px;
+  top: 10px; right: 14%;
+  opacity: 0.72;
+}
+/* Wide landscape — low, overlaps A base */
+.s2__free-img--c {
+  width: 210px; height: 145px;
+  bottom: 40px; right: 19%;
+  opacity: 0.76;
+}
+/* Tall narrow — right edge, overlaps B */
+.s2__free-img--d {
+  width: 100px; height: 170px;
+  top: 50px; right: 6%;
+  opacity: 0.70;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   S3 — QUOTES
+   No headline. Three quote blocks. Background shifts between each.
+   Each quote has a full-bleed image overlaid at 0.72 opacity.
+════════════════════════════════════════════════════════════════ */
+.s3__quote {
+  position: relative;
+  padding: 160px var(--gutter) 180px;
+  /* no overflow:hidden — images bleed intentionally */
+}
+.s3__quote--a { background: var(--paper); }
+.s3__quote--b { background: var(--paper-off-a); position: relative; z-index: 2; }
+.s3__quote--c { background: var(--paper-sage); position: relative; z-index: 1; }
+
+/* Hairline between quotes */
+.s3__quote + .s3__quote::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0; left: var(--gutter); right: var(--gutter);
+  height: 0.5px;
+  background: rgba(0,0,0,0.12);
+}
+
+/* The quote text — editorial scale, images break the frame around it */
+.s3__text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(42px, 5.8vw, 80px);
+  line-height: 1.05;
+  letter-spacing: -0.032em;
+  color: var(--ink);
+  max-width: 75%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Opening mark — ghost */
+.s3__text::before {
+  content: '\201C';
+  font-size: 0.50em;
+  line-height: 0;
+  vertical-align: 0.25em;
+  margin-right: 0.05em;
+  opacity: 0.18;
+}
+
+/* Images — oversized, aggressive, bleed edges, sit over text */
+.s3__img {
+  position: absolute;
+  object-fit: cover;
+  opacity: 0.80;
+  pointer-events: none;
+  z-index: 3;
+  will-change: transform;
+}
+
+/* Q1: Tall portrait — bleeds right, sits center-right */
+.s3__img--a {
+  width: 400px; height: 560px;
+  top: 18%;
+  right: -40px;
+}
+
+/* Q2: Wide landscape — bleeds LEFT and down into Q3 */
+.s3__img--b {
+  width: 500px; height: 320px;
+  bottom: -160px;
+  left: -40px;
+}
+
+/* Q3: Portrait — anchored bottom-right, bleeds right and down into S4 */
+.s3__img--c {
+  width: 360px; height: 540px;
+  bottom: -180px;
+  right: -40px;
+  transform: none;
+}
+
+/* Scroll reveal on each quote */
+.s3__quote {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s3__quote.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   S4 — COPY + TAGS
+════════════════════════════════════════════════════════════════ */
+.s4 {
+  background: var(--paper-off-b);
+  padding: 220px var(--gutter) 120px;
+}
+
+.s4__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.s4__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.35;
+  letter-spacing: 0.020em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s4__body.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s4__tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.70s 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.70s 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s4__tags.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s4__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 20px;
+  border: 0.5px solid rgba(0,0,0,0.30);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.s4__tag:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   S5 — WAYMAKER
+════════════════════════════════════════════════════════════════ */
+.s5 {
+  background: var(--paper-cream);
+  padding: 120px var(--gutter) 140px;
+}
+
+.s5__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* Left — Waymaker word + definition */
+.s5__left {
+  position: relative;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s5__left.revealed { opacity: 1; transform: translateY(0); }
+
+.s5__word {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 1.0;
+  letter-spacing: -0.030em;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.s5__definition {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.45);
+  line-height: 1.6;
+}
+
+.s5__mark {
+  position: absolute;
+  top: -8px;
+  left: -22px;
+  width: 72px;
+  opacity: 0.52;
+  pointer-events: none;
+  transform: rotate(-6deg);
+}
+
+/* Right — hairline list */
+.s5__list {
+  list-style: none;
+  border-top: 0.5px solid rgba(0,0,0,0.18);
+  margin-top: 20px;
+}
+
+.s5__item {
+  padding: 28px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: 0.020em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s5__item.revealed { opacity: 1; transform: translateY(0); }
+
+/* ════════════════════════════════════════════════════════════════
+   S6 — TAYLOR
+════════════════════════════════════════════════════════════════ */
+.s6 {
+  background: var(--paper);
+  padding: 120px var(--gutter) 140px;
+}
+
+.s6__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* Left — photo scatter */
+.s6__photos {
+  position: relative;
+  height: 580px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.80s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.80s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s6__photos.revealed { opacity: 1; transform: translateY(0); }
+
+.s6__photo {
+  position: absolute;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+.s6__photo--a {
+  width: 300px; height: 420px;
+  top: 0; left: 0;
+  opacity: 0.82;
+}
+.s6__photo--b {
+  width: 220px; height: 300px;
+  bottom: 0; right: 20px;
+  opacity: 0.76;
+}
+.s6__photo--c {
+  width: 160px; height: 220px;
+  top: 60px; right: 0;
+  opacity: 0.72;
+}
+
+/* Right — bio */
+.s6__bio {
+  padding-top: 8px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.80s 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.80s 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s6__bio.revealed { opacity: 1; transform: translateY(0); }
+
+.s6__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.40);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.s6__name {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(40px, 4.5vw, 58px);
+  letter-spacing: -0.030em;
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+
+.s6__para {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.75;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.70);
+  margin-bottom: 22px;
+}
+.s6__para:last-child { margin-bottom: 0; }
+
+.s6__sign {
+  color: var(--ink);
+  font-style: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════════════════════════ */
+.site-footer {
+  background: var(--ink);
+  padding: 60px var(--gutter);
+}
+.site-footer__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-footer__wordmark {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: rgba(255,255,255,0.72);
+}
+.site-footer__links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.site-footer__link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.46);
+  transition: color 0.2s ease;
+}
+.site-footer__link:hover {
+  color: rgba(255,255,255,0.86);
+}
+.site-footer__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   S7 — FAQ
+════════════════════════════════════════════════════════════════ */
+.s7 {
+  background: var(--paper-sage);
+  padding: 120px var(--gutter) 140px;
+}
+
+.s7__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.s7__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.40);
+  display: block;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.60s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.60s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s7__eyebrow.revealed { opacity: 1; transform: translateY(0); }
+
+.s7__list {
+  border-top: 0.5px solid rgba(0,0,0,0.18);
+}
+
+.s7__item {
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s7__item.revealed { opacity: 1; transform: translateY(0); }
+
+.s7__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 32px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.s7__question {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(18px, 2.2vw, 28px);
+  letter-spacing: 0.010em;
+  color: var(--ink);
+}
+
+.s7__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  color: rgba(0,0,0,0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s7__icon::before,
+.s7__icon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  border-radius: 1px;
+}
+.s7__icon::before { /* horizontal bar */
+  width: 100%; height: 0.5px;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+}
+.s7__icon::after { /* vertical bar */
+  width: 0.5px; height: 100%;
+  left: 50%; top: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.s7__item.open .s7__icon::after {
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0);
+}
+.s7__item.open .s7__trigger .s7__icon {
+  color: var(--ink);
+}
+
+.s7__answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.s7__item.open .s7__answer {
+  max-height: 400px;
+}
+
+.s7__answer-inner {
+  padding: 0 0 36px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.75;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.60);
+  max-width: 640px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAV ───────────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav__wordmark t-wordmark">Every Day Future</a>
+  <div class="nav__right">
+    <a href="/portal" class="nav__link">Client Portal</a>
+  </div>
+</nav>
+
+<!-- ── S1 HERO ────────────────────────────────────────────────── -->
+<section class="hero" id="hero" aria-label="Hero">
+  <div class="hero__bg"></div>
+  <div class="hero__gradient"></div>
+
+  <!-- Top-right chrome: orange dot only -->
+  <div class="hero__chrome-top">
+    <span class="accent-dot"></span>
+  </div>
+
+  <!-- Main content: headline + subhead + tags -->
+  <div class="hero__content">
+    <div class="hero__copy">
+      <h1 class="t-display hero__headline">Choose the <span style="position:relative;display:inline-block;">future<img src="marks/Vector-12.svg" style="position:absolute;bottom:-12px;left:-6px;width:190px;opacity:0.68;pointer-events:none;transform:rotate(1.5deg);filter:brightness(0) invert(1);" aria-hidden="true"/></span> you want. Create what matters <span style="position:relative;display:inline-block;">now.<img src="marks/Vector-5.svg" style="position:absolute;top:-20px;left:-18px;width:145px;opacity:0.62;pointer-events:none;transform:rotate(-2.5deg);filter:brightness(0) invert(1);" aria-hidden="true"/></span></h1>
+      <p class="hero__subhead">A practice to let the future you want shape how you work now, creating energized progress that expands what's possible.</p>
+      <div class="tags hero__tags">
+        <span class="tag">More progress</span>
+        <span class="tag">Less resistance</span>
+        <span class="tag">Clear direction</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── PERSISTENT FLOATING CTA ────────────────────────────────── -->
+<div class="float-cta" id="floatCta">
+  <a href="#begin" class="float-cta__link">
+    <span class="t-cta">Begin your practice</span>
+  </a>
+</div>
+
+<!-- ── S2 CHOOSE YOUR WAY ─────────────────────────────────────── -->
+<section class="s2" id="practice">
+
+  <!-- Header -->
+  <div class="s2__header">
+    <div class="s2__header-left">
+      <span class="s2__headline-clip">
+        <h2 class="s2__headline" id="s2Headline">Choose your way to practice</h2>
+      </span>
+    </div>
+    <div class="s2__header-right" style="position:relative;">
+      <p class="s2__subhead">A new way needs practice to make progress. Begin working with the future you want, now.</p>
+      <img src="marks/Vector-4.svg" style="position:absolute;top:-18px;right:-24px;width:155px;opacity:0.32;pointer-events:none;transform:rotate(-4deg);" alt="" aria-hidden="true" />
+    </div>
+  </div>
+
+  <!-- 3 coaching option rows -->
+  <div class="s2__options">
+
+    <a href="#begin" class="s2__option">
+      <span class="s2__option-title">1:1 Coaching</span>
+      <span class="s2__option-desc">Dedicated practice to work on what matters for you with a coach</span>
+      <span class="s2__option-arrow">→</span>
+    </a>
+
+    <a href="#begin" class="s2__option">
+      <span class="s2__option-title">Group Coaching</span>
+      <span class="s2__option-desc">Shared practice in community with structure, support, and a coach</span>
+      <span class="s2__option-arrow">→</span>
+    </a>
+
+    <a href="#begin" class="s2__option">
+      <span class="s2__option-title">Self-led</span>
+      <span class="s2__option-desc">Practice on your own with structure and guidance</span>
+      <span class="s2__option-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- Free discovery call — parallax scatter strip -->
+  <div class="s2__free" id="s2Free">
+
+    <!-- Text content -->
+    <div class="s2__free-content" style="position:relative;">
+      <div class="s2__free-title">Free discovery call</div>
+      <img src="marks/Vector-6.svg" style="position:absolute;top:28px;left:200px;width:200px;opacity:0.42;pointer-events:none;transform:rotate(3deg);" alt="" aria-hidden="true" />
+      <p class="s2__free-desc">Try practice before you commit</p>
+      <a href="#begin" class="s2__free-cta">Begin</a>
+    </div>
+
+    <!-- Scattered images with parallax data attributes -->
+    <img src="images/feather.png"       class="s2__free-img s2__free-img--a" data-parallax="0.20" alt="" aria-hidden="true" />
+    <img src="images/lotus.png"         class="s2__free-img s2__free-img--b" data-parallax="-0.28" alt="" aria-hidden="true" />
+    <img src="images/dunes.png"         class="s2__free-img s2__free-img--c" data-parallax="0.14" alt="" aria-hidden="true" />
+    <img src="images/window-sunset.png" class="s2__free-img s2__free-img--d" data-parallax="-0.22" alt="" aria-hidden="true" />
+
+  </div>
+
+</section>
+
+<!-- ── S3 QUOTES ──────────────────────────────────────────────── -->
+<section id="quotes">
+
+  <div class="s3__quote s3__quote--a">
+    <p class="s3__text">What I wanted started to show up way sooner than I thought was possible, so I went further</p>
+    <img src="images/mountain-card.png" class="s3__img s3__img--a" data-parallax="0.08" alt="" aria-hidden="true" />
+  </div>
+
+  <div class="s3__quote s3__quote--b">
+    <p class="s3__text">The right things just started to shift and there was a clear way forward.</p>
+    <img src="marks/Vector-1.svg" style="position:absolute;bottom:60px;left:var(--gutter);width:130px;opacity:0.50;pointer-events:none;z-index:2;" alt="" aria-hidden="true" />
+    <img src="images/horizon.png" class="s3__img s3__img--b" data-parallax="-0.10" alt="" aria-hidden="true" />
+  </div>
+
+  <div class="s3__quote s3__quote--c">
+    <p class="s3__text">I realized I wasn't stuck. I just hadn't chosen yet. Once I did, I felt so relieved and powerful.</p>
+    <img src="images/rose.png" class="s3__img s3__img--c" data-parallax="0.09" alt="" aria-hidden="true" />
+  </div>
+
+</section>
+
+<!-- ── S4 — COPY + TAGS ───────────────────────────────────────── -->
+<section class="s4" id="about" style="position:relative;">
+  <img src="marks/Vector-8.svg" style="position:absolute;top:62px;left:var(--gutter);width:125px;opacity:0.42;pointer-events:none;transform:rotate(4deg);" alt="" aria-hidden="true" />
+  <div class="s4__inner">
+    <p class="s4__body" id="s4Body">The future shapes how you think, feel, and act in the present. Practicing the future you want in your work is a simple, effective way to create progress now.</p>
+    <div class="s4__tags" id="s4Tags">
+      <span class="s4__tag">More progress</span>
+      <span class="s4__tag">Less resistance</span>
+      <span class="s4__tag">Clear direction</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── S5 — WAYMAKER ──────────────────────────────────────────── -->
+<section class="s5" id="waymaker">
+  <div class="s5__inner">
+
+    <div class="s5__left" id="s5Left">
+      <img src="marks/Vector-10.svg" class="s5__mark" alt="" aria-hidden="true" />
+      <span class="s5__word">Waymaker</span>
+      <p class="s5__definition">someone who goes first and creates direction</p>
+    </div>
+
+    <ul class="s5__list">
+      <li class="s5__item" id="s5i1">You create in the unknown</li>
+      <li class="s5__item" id="s5i2">Influence follows from what you create</li>
+      <li class="s5__item" id="s5i3">Work expresses your vision</li>
+      <li class="s5__item" id="s5i4">You are always transforming</li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- ── S6 — TAYLOR ────────────────────────────────────────────── -->
+<section class="s6" id="taylor">
+  <div class="s6__inner">
+
+    <!-- Photo scatter -->
+    <div class="s6__photos" id="s6Photos">
+      <img src="images/taylor-01.jpg" class="s6__photo s6__photo--a" data-parallax="0.10" alt="Taylor Winters" />
+      <img src="images/taylor-03.jpg" class="s6__photo s6__photo--b" data-parallax="-0.16" alt="" aria-hidden="true" />
+      <img src="images/taylor-02.jpg" class="s6__photo s6__photo--c" data-parallax="0.22" alt="" aria-hidden="true" />
+    </div>
+
+    <!-- Bio -->
+    <div class="s6__bio" id="s6Bio">
+      <span class="s6__eyebrow">Founder of Every Day Future</span>
+      <h2 class="s6__name">Taylor Winters</h2>
+      <p class="s6__para">I work as an executive coach to highly capable, creative leaders and teams navigating change. I help them create what actually matters.</p>
+      <p class="s6__para">You know how to get results. What you want to create is shifting, and how you work has to change with it.</p>
+      <p class="s6__para">My work is a practice. We work with what's real, what matters, and what you want to create. Not just to improve outcomes, but to change how those outcomes are created.</p>
+      <p class="s6__para" style="position:relative;"><em class="s6__sign">If this <span style="position:relative;display:inline-block;">speaks to you<img src="marks/Vector-5.svg" style="position:absolute;top:-22px;left:-12px;width:240px;opacity:0.48;pointer-events:none;transform:rotate(2deg);" aria-hidden="true"/></span>, this is for you.</em></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── S7 — FAQ ───────────────────────────────────────────────── -->
+<section class="s7" id="faq">
+  <div class="s7__inner" style="position:relative;">
+    <img src="marks/Vector-10.svg" style="position:absolute;top:-24px;left:-4px;width:80px;opacity:0.45;pointer-events:none;transform:rotate(-2deg);" alt="" aria-hidden="true" />
+    <div class="s7__list">
+
+      <div class="s7__item">
+        <button class="s7__trigger" aria-expanded="false">
+          <span class="s7__question">What kind of coaching is this?</span>
+          <span class="s7__icon" aria-hidden="true"></span>
+        </button>
+        <div class="s7__answer"><div class="s7__answer-inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></div>
+      </div>
+
+      <div class="s7__item">
+        <button class="s7__trigger" aria-expanded="false">
+          <span class="s7__question">Who is this practice for?</span>
+          <span class="s7__icon" aria-hidden="true"></span>
+        </button>
+        <div class="s7__answer"><div class="s7__answer-inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></div>
+      </div>
+
+      <div class="s7__item">
+        <button class="s7__trigger" aria-expanded="false">
+          <span class="s7__question">What techniques are used?</span>
+          <span class="s7__icon" aria-hidden="true"></span>
+        </button>
+        <div class="s7__answer"><div class="s7__answer-inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></div>
+      </div>
+
+      <div class="s7__item">
+        <button class="s7__trigger" aria-expanded="false">
+          <span class="s7__question">How is the practice structured?</span>
+          <span class="s7__icon" aria-hidden="true"></span>
+        </button>
+        <div class="s7__answer"><div class="s7__answer-inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></div>
+      </div>
+
+      <div class="s7__item">
+        <button class="s7__trigger" aria-expanded="false">
+          <span class="s7__question">What results can I expect?</span>
+          <span class="s7__icon" aria-hidden="true"></span>
+        </button>
+        <div class="s7__answer"><div class="s7__answer-inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__wordmark">Every Day Future</span>
+    <nav class="site-footer__links" aria-label="Footer">
+      <a href="#" class="site-footer__link">Login</a>
+      <span class="site-footer__dot" aria-hidden="true"></span>
+      <a href="#" class="site-footer__link">Terms &amp; Conditions</a>
+      <span class="site-footer__dot" aria-hidden="true"></span>
+      <a href="#" class="site-footer__link">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+
+<!-- ── SCRIPTS ────────────────────────────────────────────────── -->
+<script>
+  // ── Nav + floating CTA: toggle after hero exits
+  var nav      = document.getElementById('nav');
+  var hero     = document.getElementById('hero');
+  var floatCta = document.getElementById('floatCta');
+
+  new IntersectionObserver(function(entries) {
+    var heroVisible = entries[0].isIntersecting;
+    nav.classList.toggle('scrolled', !heroVisible);
+    floatCta.classList.toggle('visible', !heroVisible);
+  }, { threshold: 0.15 }).observe(hero);
+
+  // ── Float CTA: invert when footer is visible
+  var siteFooter = document.querySelector('.site-footer');
+  new IntersectionObserver(function(entries) {
+    floatCta.classList.toggle('over-footer', entries[0].isIntersecting);
+  }, { threshold: 0 }).observe(siteFooter);
+
+  // ── S2 headline clip reveal: fires once when S2 enters view
+  var s2Headline = document.getElementById('s2Headline');
+  new IntersectionObserver(function(entries, obs) {
+    if (entries[0].isIntersecting) {
+      s2Headline.classList.add('revealed');
+      obs.disconnect();
+    }
+  }, { threshold: 0.3 }).observe(document.getElementById('practice'));
+
+  // ── S2 option rows + free strip + S3 quotes: staggered scroll reveal
+  var revealEls = document.querySelectorAll('.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item');
+  var rowObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var delay = el.dataset.delay || 0;
+        setTimeout(function() { el.classList.add('revealed'); }, delay);
+        rowObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(function(el, i) {
+    el.dataset.delay = i * 110;
+    rowObs.observe(el);
+  });
+
+  // ── Parallax: S2 scatter + S3 quote images
+  var parallaxImgs = document.querySelectorAll('[data-parallax]');
+
+  function updateParallax() {
+    parallaxImgs.forEach(function(img) {
+      var parent = img.closest('.s2__free, .s3__quote, .s6__photos');
+      if (!parent) return;
+      var rect = parent.getBoundingClientRect();
+      var centerOffset = (rect.top + rect.height / 2) - window.innerHeight / 2;
+      var speed = parseFloat(img.dataset.parallax);
+      img.style.transform = 'translateY(' + (centerOffset * speed) + 'px)';
+    });
+  }
+
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  updateParallax();
+
+  // ── FAQ accordion
+  document.querySelectorAll('.s7__trigger').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.s7__item');
+      var isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.s7__item.open').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.s7__trigger').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+</body>
+</html>
