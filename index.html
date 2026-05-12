@@ -1107,6 +1107,106 @@ a { color: inherit; text-decoration: none; }
   max-width: 640px;
 }
 
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET ≤ 900px
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --gutter: 36px; }
+  .s4__inner, .s5__inner, .s6__inner { gap: 48px; }
+  .s6__photos { height: 480px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE ≤ 640px
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+  :root { --gutter: 22px; }
+
+  /* ── NAV */
+  .nav { padding: 18px var(--gutter); }
+
+  /* ── HERO */
+  .hero__content  { padding: 0 var(--gutter) 56px; }
+  .hero__subhead  { font-size: 16px; margin-bottom: 24px; max-width: 100%; }
+  .hero__folio    { display: none; }
+
+  /* ── S2 */
+  .s2 { padding: 64px var(--gutter) 0; }
+
+  .s2__header {
+    flex-direction: column;
+    gap: 28px;
+    padding-bottom: 48px;
+  }
+  .s2__header-right { max-width: 100%; }
+
+  /* Option rows: drop description, keep title + arrow */
+  .s2__option {
+    grid-template-columns: 1fr auto;
+    padding: 30px var(--gutter);
+  }
+  .s2__option-desc { display: none; }
+  .s2__option-title { font-size: clamp(36px, 9.5vw, 56px); }
+
+  /* Free strip: hide scattered images and decorative marks, let text breathe */
+  .s2__free     { min-height: auto; padding-top: 64px; padding-bottom: 72px; overflow: hidden; }
+  .s2__free-img { display: none; }
+  .s2__free-content { max-width: 100%; }
+
+  /* Hide overflow-causing decorative marks on mobile */
+  .s2__header-right img[aria-hidden],
+  .s2__free-content img[aria-hidden] { display: none; }
+
+  /* ── S3 QUOTES */
+  .s3__quote { padding: 72px var(--gutter) 80px; }
+  .s3__img   { display: none; }          /* images hidden on mobile */
+  .s3__text  { max-width: 100%; font-size: clamp(28px, 7.5vw, 46px); }
+
+  /* ── S4 — reduce top padding (no S3 bleed images on mobile) */
+  .s4 { padding: 72px var(--gutter) 72px; }
+  .s4__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* ── S5 WAYMAKER */
+  .s5 { padding: 72px var(--gutter) 88px; }
+  .s5__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .s5__mark { left: -6px; }
+  .s5__list { margin-top: 0; }
+
+  /* ── S6 TAYLOR */
+  .s6 { padding: 72px var(--gutter) 88px; }
+  .s6__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  /* Resize photo scatter to fit a single column */
+  .s6__photos  { height: 320px; overflow: hidden; }
+  .s6__photo--a { width: 200px; height: 280px; top: 0; left: 0; }
+  .s6__photo--b { width: 150px; height: 200px; bottom: 0; right: 0; }
+  .s6__photo--c { width: 110px; height: 150px; top: 40px; right: 80px; }
+
+  /* ── S7 FAQ */
+  .s7 { padding: 72px var(--gutter) 88px; }
+  .s7__trigger  { gap: 24px; padding: 26px 0; }
+
+  /* ── FOOTER */
+  .site-footer { padding: 44px var(--gutter); }
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .site-footer__links { gap: 18px; flex-wrap: wrap; }
+  .site-footer__dot   { display: none; }
+
+}
+
 </style>
 </head>
 <body>
