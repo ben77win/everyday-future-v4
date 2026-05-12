@@ -252,9 +252,8 @@ a { color: inherit; text-decoration: none; }
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-image: url("images/hero-rose.png");
   background-size: cover;
-  background-position: 50% 30%;
+  background-position: 50% 40%;
   opacity: 0.88;
 }
 /* Subtle gradient overlay — darkens bottom so text reads over the image */
@@ -1456,6 +1455,21 @@ a { color: inherit; text-decoration: none; }
 
 <!-- ── SCRIPTS ────────────────────────────────────────────────── -->
 <script>
+  // ── Hero image rotation — cycles sequentially on each reload
+  (function() {
+    var images = [
+      { src: 'images/hero-rose.png',    pos: '50% 30%' },
+      { src: 'images/hero-red-sun.jpg', pos: '50% 40%' },
+      { src: 'images/feather.png',      pos: '50% 50%' },
+      { src: 'images/lotus.png',        pos: '50% 60%' }
+    ];
+    var idx  = (parseInt(localStorage.getItem('edf_hero') || '0') + 1) % images.length;
+    localStorage.setItem('edf_hero', idx);
+    var bg = document.querySelector('.hero__bg');
+    bg.style.backgroundImage    = 'url(' + images[idx].src + ')';
+    bg.style.backgroundPosition = images[idx].pos;
+  })();
+
   // ── Nav + floating CTA: toggle after hero exits
   var nav      = document.getElementById('nav');
   var hero     = document.getElementById('hero');
