@@ -556,16 +556,54 @@ const calendlyUrls: Record<string, string> = {
 
 /* ── Mobile ≤ 640px */
 @media (max-width: 640px) {
+  /* Tighter top padding; extra bottom room for sticky submit */
   .bf-step__inner {
-    padding-top: 52px;
-    padding-bottom: 60px;
+    padding-top: 32px;
+    padding-bottom: 100px;
   }
-  .bf-header { margin-bottom: 36px; }
+
+  /* Tighter header */
+  .bf-header { margin-bottom: 20px; }
+
+  /* Option rows */
   .bf-option { padding-top: 22px; padding-bottom: 22px; }
   .bf-option__label { font-size: clamp(26px, 7.5vw, 38px); }
   .bf-option__desc  { font-size: 12px; }
-  .bf-input { font-size: 16px; } /* prevent iOS zoom on focus */
-  .bf-form-footer { margin-top: 32px; }
+
+  /* Back nav — inline row instead of stacked column */
+  .bf-top-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .bf-selected-badge { margin-bottom: 0; }
+
+  /* Larger input hit targets */
+  .bf-field { padding: 18px 0 20px; }
+  .bf-input {
+    font-size: 16px; /* prevent iOS zoom on focus */
+    padding: 12px 0 14px;
+  }
+
+  /* Sticky submit pinned to bottom */
+  .bf-form-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    padding: 16px 22px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    background: var(--paper-cream, #fffcd1);
+    border-top: 0.5px solid rgba(0,0,0,0.10);
+    gap: 0;
+  }
+  .bf-submit {
+    width: 100%;
+    padding: 0;
+  }
+
   #bfCalendlyMount { margin: 0 calc(-1 * var(--gutter)); }
 }
 </style>
