@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import BeginFlow from '../components/BeginFlow.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Nav />
+
+  <main class="begin-page">
+    <BeginFlow />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  .page-begin .nav__wordmark,
+  .page-begin .nav__link {
+    color: var(--ink);
+  }
+</style>
+
+<style>
+.begin-page {
+  padding-top: 68px;
+  background: var(--paper);
+  min-height: 100vh;
+}
+
+@media (max-width: 640px) {
+  .begin-page { padding-top: 60px; }
+}
+</style>
+
+<script is:inline>
+  document.documentElement.classList.add('page-begin');
+</script>

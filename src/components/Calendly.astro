@@ -1,0 +1,19 @@
+---
+interface Props {
+  url: string;
+}
+const { url } = Astro.props;
+
+// Calendly color settings — matched to design system
+const primaryColor = '2956e0'; // --blue
+const textColor    = '000000'; // --ink
+const bgColor      = 'ffffff'; // --paper
+const fullUrl = `${url}?hide_gdpr_banner=1&primary_color=${primaryColor}&text_color=${textColor}&background_color=${bgColor}`;
+---
+
+<div
+  class="calendly-inline-widget"
+  data-url={fullUrl}
+  style="min-width:280px;height:700px;"
+></div>
+<script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
