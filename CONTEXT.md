@@ -176,10 +176,11 @@ All-positive speeds (0.04/0.06/0.08) keep photos moving together with minimal se
 
 ## JS Summary
 
-Three IntersectionObservers:
+Four IntersectionObservers:
 1. **Nav / float CTA** — toggles `.scrolled` on nav and `.visible` on float CTA when hero exits
-2. **S2 headline clip** — fires once, adds `.revealed` to `#s2Headline`
-3. **Staggered reveal** — observes `.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` — 110ms stagger per element
+2. **Float CTA footer inversion** — adds `.over-footer` to float CTA when `.site-footer` is visible, inverting its colors
+3. **S2 headline clip** — fires once, adds `.revealed` to `#s2Headline`
+4. **Staggered reveal** — observes `.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` — 110ms stagger per element
 
 Parallax scroll handler: queries all `[data-parallax]`, calculates center offset relative to parent `.s2__free`, `.s3__quote`, or `.s6__photos`, applies `translateY`.
 
