@@ -652,16 +652,16 @@ const calendlyUrls: Record<string, string> = {
     data.append('phone',      document.getElementById('bfPhone').value.trim());
     data.append('option',     selectedOption);
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data.toString(),
-    })
-    .then(function () { advanceToStep3(); })
-    .catch(function () {
-      // On network error, still advance — don't block the user
-      advanceToStep3();
-    });
+    // Fire and forget — don't block the user on the network outcome
+    try {
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data.toString(),
+      });
+    } catch (e) {}
+
+    advanceToStep3();
   });
 
   function validateForm() {
