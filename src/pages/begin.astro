@@ -20,6 +20,10 @@ import Footer from '../components/Footer.astro';
   .page-begin .nav__link {
     color: var(--ink);
   }
+
+  /* Hide step 1 before paint when a valid option param is present */
+  html.bf-has-param #bfStep1 { display: none !important; }
+  html.bf-has-param #bfStep2 { display: flex !important; }
 </style>
 
 <style>
@@ -36,4 +40,10 @@ import Footer from '../components/Footer.astro';
 
 <script is:inline>
   document.documentElement.classList.add('page-begin');
+  (function() {
+    var opt = new URLSearchParams(window.location.search).get('option');
+    if (opt && ['1on1','group','orgs','selflead'].indexOf(opt) !== -1) {
+      document.documentElement.classList.add('bf-has-param');
+    }
+  })();
 </script>

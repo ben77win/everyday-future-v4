@@ -41,13 +41,6 @@ const calendlyUrls: Record<string, string> = {
         ))}
       </div>
 
-      <div class="bf-step1-footer">
-        <button class="bf-continue" id="bfContinue" type="button" disabled>
-          <span class="t-cta">Continue</span>
-          <span class="bf-continue__arrow" aria-hidden="true">→</span>
-        </button>
-      </div>
-
     </div>
   </div>
 
@@ -56,12 +49,14 @@ const calendlyUrls: Record<string, string> = {
     <div class="bf-step__inner">
 
       <div class="bf-header">
-        <button class="bf-back" id="bfBack" type="button">
-          <span class="bf-back__arrow" aria-hidden="true">←</span>
-          <span class="t-cta">Change selection</span>
-        </button>
-        <div class="bf-selected-badge" id="bfSelectedBadge"></div>
-        <h2 class="bf-headline">A little about you</h2>
+        <div class="bf-top-nav">
+          <button class="bf-back" id="bfBack" type="button">
+            <span class="bf-back__arrow" aria-hidden="true">←</span>
+            <span class="t-cta">Change selection</span>
+          </button>
+          <div class="bf-selected-badge" id="bfSelectedBadge"></div>
+        </div>
+        <h2 class="bf-headline">About you</h2>
       </div>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
@@ -128,7 +123,6 @@ const calendlyUrls: Record<string, string> = {
             <span class="bf-submit__label t-cta">Begin</span>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
-          <p class="bf-form-note">Taylor will be in touch within one business day.</p>
         </div>
 
       </form>
@@ -270,7 +264,7 @@ const calendlyUrls: Record<string, string> = {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: clamp(28px, 5.5vw, 44px);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.020em;
   line-height: 1.05;
   color: var(--ink);
   transition: color 0.22s ease;
@@ -323,45 +317,13 @@ const calendlyUrls: Record<string, string> = {
   transform: none;
 }
 
-/* ── Step 1 footer */
-.bf-step1-footer {
-  margin-top: 44px;
+/* ── Back + badge stacked nav */
+.bf-top-nav {
   display: flex;
-  align-items: center;
-}
-
-/* ── Continue button */
-.bf-continue {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 48px;
-  padding: 0 40px;
-  background: var(--ink);
-  color: var(--paper);
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  transition: background 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
-}
-.bf-continue:disabled {
-  opacity: 0.28;
-  cursor: default;
-  transform: none;
-}
-.bf-continue:not(:disabled):hover {
-  background: var(--blue);
-}
-.bf-continue__arrow {
-  font-size: 16px;
-  transition: transform 0.2s ease;
-}
-.bf-continue:not(:disabled):hover .bf-continue__arrow {
-  transform: translateX(3px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 
 /* ── Back button */
@@ -373,7 +335,6 @@ const calendlyUrls: Record<string, string> = {
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-bottom: 28px;
   color: rgba(0,0,0,0.40);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -418,11 +379,7 @@ const calendlyUrls: Record<string, string> = {
 .bf-field {
   display: flex;
   flex-direction: column;
-  border-top: 0.5px solid rgba(0,0,0,0.14);
   padding: 20px 0 22px;
-}
-.bf-field:last-of-type {
-  border-bottom: 0.5px solid rgba(0,0,0,0.14);
 }
 
 .bf-label {
@@ -488,7 +445,7 @@ const calendlyUrls: Record<string, string> = {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 52px;
+  height: 48px;
   padding: 0 40px;
   background: var(--ink);
   color: var(--paper);
@@ -527,11 +484,11 @@ const calendlyUrls: Record<string, string> = {
 }
 
 .bf-form-note {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.30);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.010em;
+  color: rgba(0,0,0,0.38);
 }
 
 /* ── Step 3: Calendly */
@@ -606,8 +563,6 @@ const calendlyUrls: Record<string, string> = {
   .bf-option { padding-top: 22px; padding-bottom: 22px; }
   .bf-option__label { font-size: clamp(26px, 7.5vw, 38px); }
   .bf-option__desc  { font-size: 12px; }
-  .bf-step1-footer  { margin-top: 32px; }
-  .bf-continue, .bf-submit { height: 48px; }
   .bf-input { font-size: 16px; } /* prevent iOS zoom on focus */
   .bf-form-footer { margin-top: 32px; }
   #bfCalendlyMount { margin: 0 calc(-1 * var(--gutter)); }
@@ -638,44 +593,43 @@ const calendlyUrls: Record<string, string> = {
   var step2       = document.getElementById('bfStep2');
   var step3       = document.getElementById('bfStep3');
   var optionBtns  = document.querySelectorAll('.bf-option');
-  var continueBtn = document.getElementById('bfContinue');
   var backBtn     = document.getElementById('bfBack');
   var badge       = document.getElementById('bfSelectedBadge');
   var optionInput = document.getElementById('bfOptionInput');
   var form        = document.getElementById('bfForm');
   var submitBtn   = document.getElementById('bfSubmit');
 
+  var advanceTimer = null;
+
   // ── Read URL param on load
   var params = new URLSearchParams(window.location.search);
   var paramOption = params.get('option');
   if (paramOption && OPTION_LABELS[paramOption]) {
-    selectOption(paramOption);
+    selectOption(paramOption, true);
   }
 
   // ── Option selection
   optionBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      selectOption(btn.dataset.key);
+      selectOption(btn.dataset.key, false);
     });
   });
 
-  function selectOption(key) {
+  function selectOption(key, immediate) {
     selectedOption = key;
     optionBtns.forEach(function (btn) {
       var pressed = btn.dataset.key === key;
       btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
     });
-    continueBtn.disabled = false;
+    clearTimeout(advanceTimer);
+    advanceTimer = setTimeout(function () {
+      badge.textContent = OPTION_LABELS[selectedOption] || '';
+      optionInput.value = selectedOption;
+      document.documentElement.classList.remove('bf-has-param');
+      showStep(step2);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, immediate ? 0 : 350);
   }
-
-  // ── Continue → Step 2
-  continueBtn.addEventListener('click', function () {
-    if (!selectedOption) return;
-    badge.textContent = OPTION_LABELS[selectedOption] || '';
-    optionInput.value = selectedOption;
-    showStep(step2);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 
   // ── Back → Step 1
   backBtn.addEventListener('click', function () {
