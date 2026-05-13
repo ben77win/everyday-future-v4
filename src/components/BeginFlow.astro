@@ -119,8 +119,8 @@ const calendlyUrls: Record<string, string> = {
         </div>
 
         <div class="bf-form-footer">
-          <button class="bf-submit" id="bfSubmit" type="submit">
-            <span class="bf-submit__label t-cta">Begin</span>
+          <button class="bf-submit" id="bfSubmit" type="button">
+            <span class="bf-submit__label t-cta" id="bfSubmitLabel">Begin</span>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
         </div>
@@ -638,8 +638,7 @@ const calendlyUrls: Record<string, string> = {
   });
 
   // ── Form submission
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  submitBtn.addEventListener('click', function () {
     if (!validateForm()) return;
 
     submitBtn.disabled = true;
