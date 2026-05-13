@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-13 — Begin page complete and working on staging_
+_Last updated: 2026-05-13 — Astro migration merged to main_
 
 ---
 
@@ -233,91 +233,12 @@ All SVGs in `public/marks/` (served as `/marks/`) — fill `#2956e0`, variable s
 
 ---
 
-## Begin Page (`/begin`)
-
-**Component:** `src/components/BeginFlow.astro` (self-contained — all HTML, CSS, and JS inline)  
-**Page shell:** `src/pages/begin.astro`  
-**Route:** `/begin`
-
-### Flow Overview
-
-Three-step inline flow. No page navigation between steps — JS shows/hides.
-
-| Step | ID | Content |
-|------|-----|---------|
-| 1 | `#bfStep1` | Option selection — 4 cards (1:1, Group, Orgs & Teams, Self-led) |
-| 2 | `#bfStep2` | Contact form — First name, Email, Phone (optional) |
-| 3 | `#bfStep3` | Calendly embed (or self-led confirmation for `selflead`) |
-
-### Step Transitions
-
-- **Step 1 → Step 2:** Clicking an option auto-advances after **350ms** (no Continue button). The selected option is stored in `selectedOption` variable.
-- **Step 2 → Step 1:** "← Change selection" back button.
-- **Step 2 → Step 3:** Clicking BEGIN validates the form, fires a Netlify Forms AJAX POST (fire-and-forget), then immediately calls `advanceToStep3()`.
-
-### URL Param Shortcut
-
-Homepage CTAs link to `/begin?option=1on1` (or `group`, `orgs`, `selflead`). When a valid `option` param is present:
-1. `begin.astro` inline script adds `bf-has-param` class to `<html>` **synchronously before paint**
-2. Global CSS: `html.bf-has-param #bfStep1 { display: none !important }` and `html.bf-has-param #bfStep2 { display: flex !important }` — prevents step 1 flash
-3. BeginFlow IIFE calls `selectOption(paramOption, true)` with `immediate=true` (0ms delay)
-4. setTimeout fires: removes `bf-has-param`, calls `showStep(step2)`, scrolls to top
-
-### CSS Specificity Bug (fixed 2026-05-13)
-
-`html.bf-has-param #bfStep2 { display: flex !important }` has specificity 1-1-1, which beats `.bf-step--hidden[data-astro-cid-*] { display: none !important }` at 0-2-0 — even with `!important` on both. Higher specificity wins. If `bf-has-param` was still on `<html>` when BEGIN was clicked, step 2 could never be CSS-hidden.
-
-**Fix:** `showStep()` now uses `element.style.setProperty('display', 'none', 'important')` for non-target steps (inline `!important` beats any stylesheet rule) and also removes `bf-has-param` on every step transition.
-
-### Netlify Forms
-
-A hidden static form (with `netlify` attribute) is included for build-time form registration. The visible AJAX form POSTs to `/` with `form-name: begin` and `Content-Type: application/x-www-form-urlencoded`. Response is ignored (fire-and-forget in try/catch).
-
-### Calendly Integration
-
-Calendly widgets are created dynamically in JS when step 3 appears. Script loaded lazily on first use. URLs currently use placeholders — **Taylor must supply real Calendly links before launch.**
-
-| Option | Calendly URL |
-|--------|-------------|
-| `1on1` | `https://calendly.com/placeholder-60` ← replace |
-| `group` | `https://calendly.com/placeholder-15` ← replace |
-| `orgs` | `https://calendly.com/placeholder-60` ← replace |
-| `selflead` | No Calendly — shows "You're on the list" confirmation screen |
-
-### Design Decisions (Begin page)
-
-- No "Begin your practice" eyebrow on step 1
-- No Continue button — auto-advance on selection
-- Step 2 nav: back arrow and badge stacked vertically (`bf-top-nav`)
-- Form label: "About you" (not "A little about you")
-- No form note/disclaimer — users are booking on the next screen
-- Field separators: padding only, no border lines between fields
-- Submit button: 48px height, 0 40px padding (matches site CTA standard)
-- Option label letter-spacing: -0.020em (matches h2 scale)
-
----
-
-## Design Reference
-
-EDF brand design.md archived at `_archive/design.md` (copied from the official brand handoff). Key spec vs site build gaps — tracked as open items:
-
-| Element | design.md spec | Site build | Status |
-|---------|---------------|------------|--------|
-| Body letter-spacing | 0.020em | 0.010em | Pending |
-| Display font | Formetica Light | Inter 200 | Pending (license) |
-| Eyebrow size | 13px / 0.110em | 11px / 0.180em | Pending |
-| CTA pill radius | 4px | 100px | Pending (confirm with Taylor) |
-
----
-
 ## Open Items
 
 ### Content
 - [ ] **FAQ answers** — Taylor to provide real copy (currently Latin placeholder)
 - [ ] **Orgs & Teams copy** — Latin placeholder in S2 desc; Taylor to provide real copy
 - [ ] **Formetica license** — currently using Inter 200 as fallback
-- [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch (Begin page step 3 currently shows placeholder 404)
-- [ ] **Begin page: push to main** — Begin page is on `staging` only; needs Ben's explicit approval before merging to `main`
 
 ### Mobile (ideas not yet implemented)
 - [ ] **Word-by-word quote reveal** — animated text reveal on scroll for S3 quotes on mobile
