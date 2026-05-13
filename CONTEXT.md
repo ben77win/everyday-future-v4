@@ -94,9 +94,9 @@ Three photos in an absolute-positioned scatter within `.s6__photos` (position: r
 **Images:**
 | File | Description |
 |------|-------------|
-| `images/taylor-01.png` | Real Taylor portrait (PNG, 1.8MB) |
-| `images/taylor-03.gif` | Looping GIF (3MB, 220×293px) — first 4s of ski lift video at 0.5× speed. Shows chair lift with shadow cast on snow. Shadow composition at ~45–60% of frame height. |
-| `images/taylor-02.jpg` | Family photo (converted from HEIC). Displayed in grayscale via `filter: grayscale(100%)`. |
+| `public/images/taylor-01.png` | Real Taylor portrait (PNG, 1.8MB) |
+| `public/images/taylor-03.gif` | Looping GIF (3MB, 220×293px) — first 4s of ski lift video at 0.5× speed. Shows chair lift with shadow cast on snow. Shadow composition at ~45–60% of frame height. |
+| `public/images/taylor-02.jpg` | Family photo (converted from HEIC). Displayed in grayscale via `filter: grayscale(100%)`. |
 
 **HTML order (determines z-stacking — later = on top):**
 ```html
