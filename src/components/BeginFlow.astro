@@ -586,17 +586,13 @@ const calendlyUrls: Record<string, string> = {
     padding: 12px 0 14px;
   }
 
-  /* Sticky submit pinned to bottom */
+  /* Push submit to bottom via flex */
+  .bf-step__inner { min-height: calc(100dvh - 60px); }
+  .bf-form { flex: 1; display: flex; flex-direction: column; }
   .bf-form-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-top: 0;
-    padding: 16px 22px;
-    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    background: var(--paper-cream, #fffcd1);
-    border-top: 0.5px solid rgba(0,0,0,0.10);
+    margin-top: auto;
+    padding-top: 24px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     gap: 0;
   }
   .bf-submit {
