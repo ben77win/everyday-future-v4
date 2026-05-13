@@ -2,3 +2,11 @@
 SESSION.md
 index.checkpoint-*.html
 hero-concept.html
+
+# Local Netlify folder
+.netlify
+
+# Astro
+node_modules
+dist
+.astro

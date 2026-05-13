@@ -254,7 +254,7 @@ All SVGs in `marks/` — fill `#2956e0`, variable stroke width.
 
 ### Architecture
 - [ ] **Monorepo consolidation** — `everyday-future-v4/` and `edf-portal-updated_3/` to share design tokens
-- [ ] **Staging branch** — all pushes go directly to production
+- [x] **Staging branch** — `staging` branch exists and is wired to Netlify; 1 commit ahead of `main` (docs only). Use staging as review step before merging to main.
 - [ ] **Landing pages** — structure TBD, not started
 
 ### Portal Integration
