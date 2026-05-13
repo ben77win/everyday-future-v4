@@ -125,6 +125,9 @@ const calendlyUrls: Record<string, string> = {
           </button>
         </div>
 
+        <!-- Debug bar — remove before launch -->
+        <div id="bfDebugBar" style="margin-top:12px;font-family:monospace;font-size:11px;color:#666;min-height:16px;"></div>
+
       </form>
     </div>
   </div>
@@ -637,10 +640,32 @@ const calendlyUrls: Record<string, string> = {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
+  // ── Visible debug helper (temporary — remove before launch)
+  function bfDebug(msg) {
+    console.log('[BeginFlow]', msg);
+    var el = document.getElementById('bfDebugBar');
+    if (el) el.textContent = msg;
+  }
+
+  // ── Catch unhandled JS errors and show them on-screen
+  window.addEventListener('error', function (ev) {
+    var el = document.getElementById('bfDebugBar');
+    if (el) {
+      el.style.background = '#c00';
+      el.textContent = 'JS error: ' + ev.message + ' (' + (ev.filename || '') + ':' + ev.lineno + ')';
+    }
+  });
+
   // ── Form submission
   submitBtn.addEventListener('click', function () {
-    if (!validateForm()) return;
+    bfDebug('click — option: ' + selectedOption);
 
+    if (!validateForm()) {
+      bfDebug('validation failed');
+      return;
+    }
+
+    bfDebug('validation passed — advancing');
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
 
@@ -660,7 +685,12 @@ const calendlyUrls: Record<string, string> = {
       });
     } catch (e) {}
 
-    advanceToStep3();
+    try {
+      advanceToStep3();
+      bfDebug('advanceToStep3 complete');
+    } catch (e) {
+      bfDebug('ERROR in advanceToStep3: ' + e.message);
+    }
   });
 
   function validateForm() {
