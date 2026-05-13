@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-13_
+_Last updated: 2026-05-13 — Astro migration merged to main_
 
 ---
 
@@ -66,19 +66,15 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 ### Hero Image Rotation
 Images cycle sequentially on each page reload via `localStorage`. Sequence:
-1. `images/hero-rose.png` — `50% 30%`
-2. `images/hero-red-sun.jpg` — `50% 40%`
-3. `images/feather.png` — `50% 50%`
-4. `images/lotus.png` — `50% 60%`
+1. `/images/hero-rose.png` — `50% 30%`
+2. `/images/hero-red-sun.jpg` — `50% 40%`
+3. `/images/feather.png` — `50% 50%`
+4. `/images/lotus.png` — `50% 60%`
 
 Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `background-position` on `.hero__bg`.
 
-### S2 Hover Colors (per option)
-```css
-.s2__option:hover                          { background: var(--ink); }    /* 1:1 Coaching */
-.s2__options .s2__option:nth-child(2):hover { background: var(--blue); }   /* Group */
-.s2__options .s2__option:nth-child(3):hover { background: var(--orange); } /* Self-Led */
-```
+### S2 Hover Colors
+All four options currently hover to `--ink`. Per-option colors (blue for Group, orange for Self-led, etc.) are a pending decision — see Open Items.
 
 ### Mobile: Cinematic Quotes (S3)
 On mobile (`≤640px`), quote sections become full-viewport cinematic moments:
@@ -104,9 +100,9 @@ Three photos in an absolute-positioned scatter within `.s6__photos` (position: r
 
 **HTML order (determines z-stacking — later = on top):**
 ```html
-<img src="images/taylor-01.png" class="s6__photo s6__photo--a" data-parallax="0.04" />
-<img src="images/taylor-03.gif" class="s6__photo s6__photo--b" data-parallax="0.06" />
-<img src="images/taylor-02.jpg" class="s6__photo s6__photo--c" data-parallax="0.08" />
+<img src="/images/taylor-01.png" class="s6__photo s6__photo--a" data-parallax="0.04" />
+<img src="/images/taylor-03.gif" class="s6__photo s6__photo--b" data-parallax="0.06" />
+<img src="/images/taylor-02.jpg" class="s6__photo s6__photo--c" data-parallax="0.08" />
 ```
 
 **Desktop CSS:**
@@ -191,7 +187,7 @@ FAQ accordion: click triggers `.open` toggle, one item open at a time, `max-heig
 
 ## Marks Library
 
-All SVGs in `marks/` — fill `#2956e0`, variable stroke width.
+All SVGs in `public/marks/` (served as `/marks/`) — fill `#2956e0`, variable stroke width.
 
 | File | Dimensions | Used in |
 |---|---|---|
@@ -213,10 +209,10 @@ All SVGs in `marks/` — fill `#2956e0`, variable stroke width.
 
 ## Images Available
 
-**Brand / scene assets** (`images/`):
+**Brand / scene assets** (`public/images/`):
 `dunes.png`, `feather.png`, `hero-coast.jpg`, `hero-red-sun.jpg`, `hero-rose.png`, `horizon.png`, `lotus.png`, `mountain-card.png`, `painting.png`, `rose.png`, `window-sunset.png`
 
-**Taylor portraits** (`images/`):
+**Taylor portraits** (`public/images/`):
 - `taylor-01.png` — **Active** — Real portrait (PNG)
 - `taylor-02.jpg` — **Active** — Family photo (grayscale)
 - `taylor-03.gif` — **Active** — Ski lift looping GIF
@@ -257,7 +253,7 @@ All SVGs in `marks/` — fill `#2956e0`, variable stroke width.
 - [ ] **Per-option hover colors** — currently all ink. Decide on final per-option colors (blue for Group, cream or other for Orgs & Teams, orange for Self-led) once content direction is settled.
 
 ### Architecture
-- [x] **Astro migration** — complete on `staging` (commit `ebcf4bc`). Pixel-identical to production. Pending Ben's approval to merge to `main`.
+- [x] **Astro migration** — complete and merged to `main` (commit `ebcf4bc`). Live at production and staging.
 - [ ] **Monorepo consolidation** — `everyday-future-v4/` and `edf-portal-updated_3/` to share design tokens
 - [x] **Staging branch** — wired to Netlify, `npm run build` → `dist/` via `netlify.toml`.
 - [ ] **Landing pages** — structure TBD, not started
@@ -283,9 +279,9 @@ Admin creates portals by filling in client name + Drive folder URL + Calendly UR
 
 - GitHub repo: `ben77win/everyday-future-v4`
 - Netlify auto-deploys on push to `main` (production) and `staging`
-- Main site: publish dir = repo root
+- Build command: `npm run build` — publish dir: `dist/` (set via `netlify.toml` in repo root)
 - Hero concept: separate Netlify site, publish dir = `hero-concept/`
-- `.gitignore` excludes: `.DS_Store`, `SESSION.md`, `index.checkpoint-*.html`, `hero-concept.html`
+- `.gitignore` excludes: `.DS_Store`, `SESSION.md`, `index.checkpoint-*.html`, `hero-concept.html`, `node_modules`, `dist`, `.astro`
 - **Note:** Netlify CDN caches aggressively. After pushing, users may need a hard refresh (`Cmd+Shift+R`) to see updates.
 
 ### Deploy Rule
