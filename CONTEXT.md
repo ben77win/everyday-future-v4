@@ -51,14 +51,16 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 | ID | Section | Status |
 |----|---------|--------|
-| S1 | Hero | ✅ Complete |
-| S2 | Coaching options (1:1, Group, Orgs & Teams, Self-Led) | ✅ Complete |
-| S3 | Quotes / testimonial | ✅ Complete |
-| S4 | Waymaker | ✅ Complete |
-| S5 | FAQ | ✅ Complete |
-| S6 | Taylor / About | ✅ Complete |
-| S7 | CTA / closing | ✅ Complete |
-| — | Footer | ✅ Complete |
+| S1 | Hero (`Hero.astro`) | ✅ Complete |
+| S2 | Coaching options — 1:1, Group, Orgs & Teams, Self-Led (`Services.astro`) | ✅ Complete |
+| S3 | Quotes / testimonials (`Testimonials.astro`) | ✅ Complete |
+| S4 | Copy + Tags / About (`About.astro`) | ✅ Complete |
+| S5 | Waymaker (`Waymaker.astro`) | ✅ Complete |
+| S6 | Taylor / Bio (`TaylorBio.astro`) | ✅ Complete |
+| S7 | FAQ accordion (`FAQ.astro`) | ✅ Complete |
+| — | Footer (`Footer.astro`) | ✅ Complete |
+| — | Nav (`Nav.astro`) | ✅ Complete |
+| — | Floating CTA (`CTABar.astro`) | ✅ Complete |
 
 ---
 
@@ -179,7 +181,7 @@ Three IntersectionObservers:
 2. **S2 headline clip** — fires once, adds `.revealed` to `#s2Headline`
 3. **Staggered reveal** — observes `.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` — 110ms stagger per element
 
-Parallax scroll handler: queries all `[data-parallax]`, calculates center offset relative to parent `.s2__free` or `.s3__quote`, applies `translateY`.
+Parallax scroll handler: queries all `[data-parallax]`, calculates center offset relative to parent `.s2__free`, `.s3__quote`, or `.s6__photos`, applies `translateY`.
 
 FAQ accordion: click triggers `.open` toggle, one item open at a time, `max-height` CSS transition.
 
