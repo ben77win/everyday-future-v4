@@ -1,7 +1,51 @@
 ---
 ---
 <div class="float-cta" id="floatCta">
-  <a href="/begin" class="float-cta__link">
+  <a href="/begin" class="float-cta__link" id="floatCtaLink">
     <span class="t-cta">Begin your practice</span>
   </a>
 </div>
+
+<div class="cta-reveal" id="ctaReveal"></div>
+
+<style>
+.cta-reveal {
+  position: fixed;
+  inset: 0;
+  background: var(--ink);
+  pointer-events: none;
+  z-index: 9000;
+  clip-path: circle(0px at var(--ox, 50%) var(--oy, 50%));
+  transition: clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cta-reveal.expanding {
+  clip-path: circle(200vmax at var(--ox, 50%) var(--oy, 50%));
+}
+</style>
+
+<script is:inline>
+(function () {
+  var link    = document.getElementById('floatCtaLink');
+  var overlay = document.getElementById('ctaReveal');
+  if (!link || !overlay) return;
+
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    var href = link.getAttribute('href');
+    var rect = link.getBoundingClientRect();
+    var cx   = rect.left + rect.width  / 2;
+    var cy   = rect.top  + rect.height / 2;
+
+    overlay.style.setProperty('--ox', cx + 'px');
+    overlay.style.setProperty('--oy', cy + 'px');
+
+    requestAnimationFrame(function () {
+      overlay.classList.add('expanding');
+    });
+
+    overlay.addEventListener('transitionend', function () {
+      window.location.href = href;
+    }, { once: true });
+  });
+})();
+</script>
