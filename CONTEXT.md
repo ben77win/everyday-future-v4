@@ -63,6 +63,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 | — | Footer (`Footer.astro`) | ✅ Complete |
 | — | Nav (`Nav.astro`) | ✅ Complete |
 | — | Floating CTA (`CTABar.astro`) | ✅ Complete |
+| — | **Begin flow** (`BeginFlow.astro`, `begin.astro`) | ✅ Complete — staging only |
 
 ---
 
@@ -76,6 +77,56 @@ Images cycle sequentially on each page reload via `localStorage`. Sequence:
 4. `/images/lotus.png` — `50% 60%`
 
 Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `background-position` on `.hero__bg`.
+
+### Begin Flow (`BeginFlow.astro`)
+
+Three-step flow at `/begin` (standalone page) and as a bottom-sheet drawer on the homepage.
+
+**Step 1 — Option selection**
+- Four options: 1:1 Coaching, Group Coaching, Orgs & Teams, Self-led
+- Auto-advances after 350ms on click (no Continue button)
+
+**Step 2 — Contact form**
+- Fields: First name (required), Email (required), Phone (optional)
+- Back button + selected badge above heading
+- Netlify Forms — hidden static form + AJAX POST; advances immediately regardless of network outcome
+- Mobile: flex-push submit button (margin-top: auto), `font-size: 16px` prevents iOS zoom, `env(safe-area-inset-bottom)` for home bar
+
+**Step 3 — Downstream**
+- For 1:1, Group, Orgs: Calendly widget loaded dynamically
+- For Self-led: Confirmation screen ("You're on the list — Winter 2026")
+
+**URL param shortcut:** `/begin?option=1on1|group|orgs|selflead` skips step 1 — inline script adds `bf-has-param` to `<html>` before paint.
+
+**Step visibility fix:** `showStep()` uses `element.style.setProperty('display', 'none', 'important')` and removes `bf-has-param` on every transition to prevent CSS specificity conflicts.
+
+### Begin Drawer (homepage)
+
+`BeginFlow` is embedded in a bottom-sheet drawer on the homepage (`index.astro`). Triggered by "Begin your practice" CTA.
+
+- Drawer: `position: fixed; inset: 0; transform: translateY(100%)→translateY(0)` — 0.55s spring easing
+- URL updates to `/begin` via `history.pushState` on open, reverts via `history.replaceState` on close
+- `window.scrollTo` is patched while drawer is open so BeginFlow's step transitions scroll the drawer's inner scroll area instead of the window
+- Close: ← BACK button, scrim click, Escape key, or browser back
+- Focus trapped to drawer; first interactive element focused after transition
+- `CTABar.astro` calls `window.__openBeginDrawer()` if available, else falls back to `/begin` href navigation
+
+### Nav Contrast (hero page)
+
+Nav text has a soft `text-shadow` for readability over the hero image — no gradient band:
+```css
+.nav__wordmark { text-shadow: 0 1px 12px rgba(0,0,0,0.40), 0 0px 4px rgba(0,0,0,0.20); }
+.nav__link     { text-shadow: 0 1px 10px rgba(0,0,0,0.35), 0 0px 4px rgba(0,0,0,0.18); }
+/* Cleared when scrolled (opaque white bg) or on begin page (dark text on cream bg) */
+```
+
+### Begin Page Background
+
+`/begin` standalone page uses `background: var(--paper-cream)` so the transparent fixed nav blends with the BeginFlow content — no white stripe visible under the nav.
+
+### S3 Quote Text
+
+`.s3__text` has `font-style: italic`.
 
 ### S2 Hover Colors
 All four options currently hover to `--ink`. Per-option colors (blue for Group, orange for Self-led, etc.) are a pending decision — see Open Items.
