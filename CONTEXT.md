@@ -5,16 +5,20 @@ _Last updated: 2026-05-13_
 
 ## Project Overview
 
-Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practice site. Static single-file HTML, all CSS/JS inline, deployed via GitHub → Netlify.
+Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practice site. **Astro 4.16** project, deployed via GitHub → Netlify.
 
-**Primary file:** `index.html`  
+**Framework:** Astro 4.16 (static output)  
 **Repo:** `everyday-future-v4` on GitHub (ben77win/everyday-future-v4)  
 **Live URL:** https://everyday-future-v4.netlify.app (main)  
 **Staging URL:** https://staging--everyday-future-v4.netlify.app (staging branch)  
 **Hero concept URL:** separate Netlify site, publish dir `hero-concept/`  
-**Preview server:** `npx serve -l 3458` (config in `.claude/launch.json`)
+**Dev server:** `npm run dev` (Astro, port 4321 — config in `.claude/launch.json`)  
+**Build:** `npm run build` → `dist/`
 
-**Worktree preview note:** Each worktree needs its own `.claude/launch.json` — the main project server (port 3458) stays bound to its originating worktree. When working in a new worktree, create a fresh `launch.json` inside the worktree's `.claude/` folder using the next available port (3459, 3460, etc.) and start a new preview server from there. Always verify which worktree a running server is attached to via `preview_list` before assuming changes are visible.
+**Rollback tag:** `pre-astro-migration` — points to last single-file HTML state on staging.  
+**Archived HTML:** `_archive/index-pre-astro.html`
+
+**Worktree preview note:** Each worktree needs its own `.claude/launch.json`. Main repo launch.json uses port 4321 (`npm run dev`). Worktrees should use the next available port and start a new server from there.
 
 ---
 
@@ -253,8 +257,9 @@ All SVGs in `marks/` — fill `#2956e0`, variable stroke width.
 - [ ] **Per-option hover colors** — currently all ink. Decide on final per-option colors (blue for Group, cream or other for Orgs & Teams, orange for Self-led) once content direction is settled.
 
 ### Architecture
+- [x] **Astro migration** — complete on `staging` (commit `ebcf4bc`). Pixel-identical to production. Pending Ben's approval to merge to `main`.
 - [ ] **Monorepo consolidation** — `everyday-future-v4/` and `edf-portal-updated_3/` to share design tokens
-- [x] **Staging branch** — `staging` branch exists and is wired to Netlify; 1 commit ahead of `main` (docs only). Use staging as review step before merging to main.
+- [x] **Staging branch** — wired to Netlify, `npm run build` → `dist/` via `netlify.toml`.
 - [ ] **Landing pages** — structure TBD, not started
 
 ### Portal Integration
