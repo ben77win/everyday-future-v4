@@ -35,7 +35,7 @@ export const practiceOptions: PracticeOption[] = [
   },
   {
     key: 'group',
-    label: 'Group Coaching',
+    label: 'Group',
     desc: 'Shared practice in community with structure, support, and a coach',
     calendlyUrl: 'https://calendly.com/placeholder-15',
   },
