@@ -545,105 +545,6 @@ a { color: inherit; text-decoration: none; }
   transform: translateX(6px);
 }
 
-/* ⑤ Free discovery call — parallax scatter */
-.s2__free {
-  position: relative;
-  min-height: 520px;
-  padding: 90px 0 110px;
-  display: flex;
-  align-items: center;
-  background: var(--paper-sage);
-  margin: 0 calc(-1 * var(--gutter));
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-  /* scroll reveal */
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-}
-.s2__free.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Text content — left-anchored, sits above images via z-index */
-.s2__free-content {
-  position: relative;
-  z-index: 2;
-  max-width: 460px;
-  align-self: center;
-}
-.s2__free-title {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(36px, 4.2vw, 58px);
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  margin-bottom: 14px;
-  line-height: 1.0;
-}
-.s2__free-desc {
-  font-size: 14px;
-  color: rgba(0,0,0,0.50);
-  line-height: 1.65;
-  letter-spacing: 0.020em;
-  margin-bottom: 28px;
-}
-.s2__free-cta {
-  display: inline-flex;
-  align-items: center;
-  height: 39px;
-  padding: 0 24px;
-  border: 0.5px solid rgba(0,0,0,0.35);
-  color: var(--ink);
-  border-radius: 4px;
-  font-family: var(--font-mono);
-  font-size: 14.4px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-.s2__free-cta:hover {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: #fff;
-}
-
-/* Scattered images — absolutely positioned, parallax via JS */
-.s2__free-img {
-  position: absolute;
-  object-fit: cover;
-  pointer-events: none;
-  will-change: transform;
-}
-/* Tall portrait — anchors the cluster */
-.s2__free-img--a {
-  width: 190px; height: 265px;
-  top: 40px; right: 26%;
-  opacity: 0.78;
-}
-/* Small portrait — overlaps A from upper-right */
-.s2__free-img--b {
-  width: 120px; height: 160px;
-  top: 10px; right: 14%;
-  opacity: 0.72;
-}
-/* Wide landscape — low, overlaps A base */
-.s2__free-img--c {
-  width: 210px; height: 145px;
-  bottom: 40px; right: 19%;
-  opacity: 0.76;
-}
-/* Tall narrow — right edge, overlaps B */
-.s2__free-img--d {
-  width: 100px; height: 170px;
-  top: 50px; right: 6%;
-  opacity: 0.70;
-}
 
 /* ════════════════════════════════════════════════════════════════
    S3 — QUOTES
@@ -1210,14 +1111,8 @@ a { color: inherit; text-decoration: none; }
   .s2__option-desc { display: none; }
   .s2__option-title { font-size: clamp(36px, 9.5vw, 56px); }
 
-  /* Free strip: hide scattered images and decorative marks, let text breathe */
-  .s2__free     { min-height: auto; padding-top: 64px; padding-bottom: 72px; overflow: hidden; }
-  .s2__free-img { display: none; }
-  .s2__free-content { max-width: 100%; }
-
   /* Hide overflow-causing decorative marks on mobile */
-  .s2__header-right img[aria-hidden],
-  .s2__free-content img[aria-hidden] { display: none; }
+  .s2__header-right img[aria-hidden] { display: none; }
 
   /* ── S3 QUOTES — full-screen cinematic moments on mobile */
   .s3__quote {
