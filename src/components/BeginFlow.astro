@@ -56,8 +56,62 @@ const calendlyUrls: Record<string, string> = {
           </button>
           <div class="bf-selected-badge" id="bfSelectedBadge"></div>
         </div>
+      </div>
+
+      <!-- 1:1 Offering detail (shown only for 1on1) -->
+      <div class="bf-offering bf-offering--hidden" id="bfOffering1on1">
+        <p class="bf-offering__intro">A dedicated one-on-one practice to work on what matters most to you with the support of a coach.</p>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Structure</span>
+          <ul class="bf-offering__list">
+            <li>Limited to a small number of clients at a time</li>
+            <li>Virtual coaching sessions held 2x monthly</li>
+            <li>Flexible scheduling with no rescheduling fees</li>
+            <li>Initial six-month commitment:
+              <ul class="bf-offering__sublist">
+                <li>3-Month Foundation Flow</li>
+                <li>3-Month Calibration Flow</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">What we work with</span>
+          <ul class="bf-offering__list">
+            <li>Conscious change in how you work, relate, and create</li>
+            <li>Expanding possibility and reducing resistance</li>
+            <li>Greater clarity, coherence, courage, connection, and curiosity</li>
+            <li>Meaningful progress toward the future you want</li>
+            <li>Recognizing and changing patterns shaping attention, behavior, relationships, and decision-making</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Between sessions</span>
+          <ul class="bf-offering__list">
+            <li>Active exchange for questions, reflection, accountability, and support</li>
+            <li>Practices and intentional action integrated into real life and work</li>
+            <li>Daily awareness and reflection practices designed to build continuity over time</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">AI-supported practice</span>
+          <ul class="bf-offering__list">
+            <li>Dedicated AI workspace for each client</li>
+            <li>Session recordings and coaching follow-ups</li>
+            <li>Reflection, themes, actions, and pattern tracking over time</li>
+            <li>Increased continuity, awareness, and integration throughout the practice</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__divider"></div>
         <h2 class="bf-headline">About you</h2>
       </div>
+
+      <h2 class="bf-headline bf-headline--form" id="bfAboutHeading">About you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
       <form name="begin" netlify netlify-honeypot="bot-field" hidden>
@@ -360,6 +414,82 @@ const calendlyUrls: Record<string, string> = {
 }
 .bf-selected-badge:empty { display: none; }
 
+/* ── Offering detail block */
+.bf-offering {
+  margin-bottom: 48px;
+}
+.bf-offering--hidden { display: none; }
+
+.bf-offering__intro {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.65;
+  letter-spacing: 0.010em;
+  color: rgba(0,0,0,0.70);
+  margin-bottom: 40px;
+}
+
+.bf-offering__section {
+  margin-bottom: 32px;
+}
+
+.bf-offering__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.160em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.40);
+  margin-bottom: 14px;
+}
+
+.bf-offering__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 0.5px solid rgba(0,0,0,0.10);
+}
+.bf-offering__list > li {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.65;
+  letter-spacing: 0.010em;
+  color: rgba(0,0,0,0.65);
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.10);
+}
+
+.bf-offering__sublist {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 16px;
+}
+.bf-offering__sublist li {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.010em;
+  color: rgba(0,0,0,0.45);
+  padding: 4px 0;
+}
+.bf-offering__sublist li::before {
+  content: '—';
+  margin-right: 8px;
+  opacity: 0.40;
+}
+
+.bf-offering__divider {
+  height: 0.5px;
+  background: rgba(0,0,0,0.12);
+  margin: 40px 0 36px;
+}
+
+/* Hide the plain "About you" heading when offering is visible */
+.bf-headline--form { display: block; }
+.bf-offering:not(.bf-offering--hidden) ~ .bf-headline--form { display: none; }
+
 /* ── Form */
 .bf-form {
   display: flex;
@@ -651,6 +781,17 @@ const calendlyUrls: Record<string, string> = {
       badge.textContent = OPTION_LABELS[selectedOption] || '';
       optionInput.value = selectedOption;
       document.documentElement.classList.remove('bf-has-param');
+
+      // Show/hide 1:1 offering detail
+      var offering = document.getElementById('bfOffering1on1');
+      if (offering) {
+        if (selectedOption === '1on1') {
+          offering.classList.remove('bf-offering--hidden');
+        } else {
+          offering.classList.add('bf-offering--hidden');
+        }
+      }
+
       showStep(step2);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, immediate ? 0 : 350);
