@@ -30,7 +30,7 @@ export const practiceOptions: PracticeOption[] = [
   {
     key: 'orgs',
     label: 'Orgs & Teams',
-    desc: 'Custom coaching and facilitation for organizations, teams, and co-founders',
+    desc: 'Workshops, offsites, and team programs designed and facilitated by a coach',
     calendlyUrl: 'https://calendly.com/placeholder-60',
   },
   {
