@@ -206,7 +206,7 @@ All marks render through the bare `.mark` class (just `display: block; pointer-e
 
 - Fixed top, `22px var(--gutter)` padding.
 - **Over hero (default):** transparent background, wordmark and "Client Portal" link in `rgba(255,255,255,0.92 / 0.78)` with soft text-shadow.
-- **After hero exits viewport:** `.scrolled` class added — `rgba(255,255,255,0.96)` bg, `backdrop-filter: blur(8px)`, `0.5px solid rgba(0,0,0,0.12)` bottom border, text shifts to `--ink`.
+- **After hero exits viewport:** `.scrolled` class added — `rgba(255,255,255,0.96)` bg, `backdrop-filter: blur(8px)`, text shifts to `--ink`. No bottom border.
 - Right side has *only* the Client Portal link in source. Note: `.nav__cta` styles exist in `global.css` but no `nav__cta` element is rendered — this is **dead CSS**.
 
 ### 6.2 Hero (`Hero.astro`)
@@ -334,6 +334,20 @@ All behavior lives inline at the bottom of `Layout.astro` — a single ~70-line 
 ### Hero image rotation
 On every load, reads `localStorage.edf_hero` (default `0`), increments, mods by 4, and writes back. Sets `.hero__bg` `background-image` and `background-position` from a 4-entry table. Sequential — not random.
 
+### Hero wordmark intro animation
+Runs only on pages that contain `.hero__bg` (homepage only). On load:
+
+1. The nav wordmark's original width is measured (for scale calculation).
+2. `hero-wordmark-active` class is added to `<body>`, which sets `.nav__wordmark` to `position: absolute; left: 50%; top: 50%; white-space: nowrap`.
+3. `font-size` is set to `min(8.5vw, 85px)` — rendering at display size so the text is crisp at maximum scale (avoids upscaling pixel blur).
+4. A `NAV_SCALE` factor is computed: `original_nav_width / display_width` (always < 1 — scaling down is always crisp).
+5. Scroll drives a `translate(TX, ty) scale(s)` transform via a passive `scroll` listener with ease-in² (`p²`) curve, completing at 48% of viewport height.
+   - **p = 0:** wordmark centered horizontally (`TX = -heroW/2`, always viewport-width-independent), lifted to 40% of viewport height.
+   - **p = 1:** wordmark resolved to nav center — `translate(-heroW/2, -heroH/2) scale(NAV_SCALE)`.
+6. `.hero__copy` opacity is hidden initially (via `.hero-wordmark-active .hero__copy { opacity: 0 }`) and fades in from p = 0.55 → 1.
+
+The `left: 50%` CSS anchor makes horizontal centering viewport-width-independent. `top: 50%` anchors to the nav bar's vertical center.
+
 ### Scroll observers (all `IntersectionObserver`)
 
 | Trigger element | Threshold | Effect |
@@ -361,7 +375,7 @@ Detailed in §6.8. Open via `window.__openBeginDrawer()`. The drawer **patches `
 
 - **Reveals:** `cubic-bezier(0.16, 1, 0.3, 1)` over `550 – 800ms`. This is the system's hero easing — used for opacity+translateY scroll-ins, the S2 headline clip-up, the FAQ open, and the Begin drawer.
 - **Hovers:** `ease` over `200 – 300ms`. Used for color, background, border-color, transform on small UI bits.
-- **Nav scroll state:** `0.3s ease` on background and border.
+- **Nav scroll state:** `0.3s ease` on background.
 - **Float CTA fade:** `0.4s ease` on opacity.
 
 No bounces. No springs. Nothing decelerates harder than the canonical curve.

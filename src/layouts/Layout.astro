@@ -32,43 +32,55 @@ import '../styles/global.css';
     bg.style.backgroundPosition = images[idx].pos;
   })();
 
-  // ── Hero wordmark intro — nav wordmark scales from large/centered down into nav on scroll
+  // ── Hero wordmark intro — renders large (crisp), scales down into nav on scroll
   (function() {
     var wordmark = document.querySelector('.nav__wordmark');
     var heroCopy = document.querySelector('.hero__copy');
     if (!wordmark || !document.querySelector('.hero__bg')) return;
 
+    // 1. Measure original nav-size width before any changes (used for NAV_SCALE)
+    var r0    = wordmark.getBoundingClientRect();
+
+    // 2. Add active class (CSS sets position:absolute; left:50%; top:50% on wordmark)
+    //    then set large font-size for crisp rendering
+    var navEl = document.getElementById('nav');
     document.body.classList.add('hero-wordmark-active');
+    wordmark.style.fontSize = Math.min(window.innerWidth * 0.085, 85) + 'px';
+    wordmark.offsetWidth; // force reflow
 
-    // Measure natural (rest) position in the nav at scale=1
-    var rect  = wordmark.getBoundingClientRect();
-    var elCX  = rect.left + rect.width  / 2;
-    var elCY  = rect.top  + rect.height / 2;
-    var vpCX  = window.innerWidth  / 2;
-    var vpCY  = window.innerHeight / 2;
+    // 3. Measure hero dimensions and nav height after class has settled
+    var r1    = wordmark.getBoundingClientRect();
+    var heroW = r1.width;
+    var heroH = r1.height;
+    var navH  = navEl.getBoundingClientRect().height; // nav height after class (padding-only)
 
-    // Scale so wordmark fills ~62% of viewport width
-    var SCALE = Math.min((window.innerWidth * 0.62) / rect.width, 9);
+    // 4. NAV_SCALE: shrinks display-size back to nav-size (always < 1 → crisp scaling)
+    var NAV_SCALE = r0.width / heroW;
 
-    // Translate needed so element center lands on viewport center (applied AFTER scale)
-    var TX0 = vpCX - elCX;
-    var TY0 = vpCY - elCY;
+    // With CSS left:50%; top:50%, the element's top-left sits at (vp_width/2, navH/2).
+    // Element natural center = (vp_width/2 + heroW/2,  navH/2 + heroH/2).
+    //
+    // TX = -heroW/2  → centers element horizontally at any viewport width (pure CSS %)
+    //
+    // TYf = -heroH/2 → at p=1: center Y = navH/2 + heroH/2 - heroH/2 = navH/2  (nav center ✓)
+    // TY0            → at p=0: center Y = 40% of viewport height
+    var TX  = -heroW / 2;
+    var TYf = -heroH / 2;
+    var TY0 = (window.innerHeight * 0.40) - (navH / 2 + heroH / 2);
 
-    var THRESHOLD = window.innerHeight * 0.65;
-
+    var THRESHOLD = window.innerHeight * 0.48;
     function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
     function tick() {
-      var p = clamp(window.scrollY / THRESHOLD, 0, 1);
+      var p  = clamp(window.scrollY / THRESHOLD, 0, 1);
+      var pe = p * p; // ease-in² — snaps to nav before overlapping copy
 
-      var scale = SCALE + (1 - SCALE) * p;
-      var tx    = TX0  * (1 - p);
-      var ty    = TY0  * (1 - p);
-
-      wordmark.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+      var scale = 1 + (NAV_SCALE - 1) * pe;
+      var ty    = TY0 + (TYf - TY0) * pe;
+      wordmark.style.transform = 'translate(' + TX + 'px,' + ty + 'px) scale(' + scale + ')';
 
       if (heroCopy) {
-        var cp = clamp((p - 0.3) / 0.55, 0, 1);
+        var cp = clamp((p - 0.55) / 0.35, 0, 1);
         heroCopy.style.opacity   = cp;
         heroCopy.style.transform = 'translateY(' + (20 * (1 - cp)) + 'px)';
       }
