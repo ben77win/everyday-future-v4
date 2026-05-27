@@ -10,6 +10,8 @@ const optionLabelsJson = JSON.stringify(
 );
 ---
 
+<div id="bfData" data-labels={optionLabelsJson} data-urls={calendlyUrlsJson} hidden></div>
+
 <div class="begin-flow" id="beginFlow">
 
   <!-- ── STEP 1: Option selection ─────────────────────────────── -->
@@ -769,9 +771,9 @@ const optionLabelsJson = JSON.stringify(
 <script is:inline>
 (function () {
 
-  var OPTION_LABELS = JSON.parse({optionLabelsJson});
-
-  var CALENDLY_URLS = JSON.parse({calendlyUrlsJson});
+  var bfData = document.getElementById('bfData');
+  var OPTION_LABELS = JSON.parse(bfData.dataset.labels);
+  var CALENDLY_URLS = JSON.parse(bfData.dataset.urls);
 
   // ── State
   var selectedOption = null;
