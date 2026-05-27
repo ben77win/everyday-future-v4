@@ -32,28 +32,45 @@ import '../styles/global.css';
     bg.style.backgroundPosition = images[idx].pos;
   })();
 
-  // ── Hero wordmark intro — large centered wordmark resolves into nav on scroll
+  // ── Hero wordmark intro — nav wordmark scales from large/centered down into nav on scroll
   (function() {
-    var heroWordmark = document.querySelector('.hero-wordmark');
-    var navWordmark  = document.querySelector('.nav__wordmark');
-    var heroCopy     = document.querySelector('.hero__copy');
-    if (!heroWordmark || !document.querySelector('.hero__bg')) return;
+    var wordmark = document.querySelector('.nav__wordmark');
+    var heroCopy = document.querySelector('.hero__copy');
+    if (!wordmark || !document.querySelector('.hero__bg')) return;
 
     document.body.classList.add('hero-wordmark-active');
+
+    // Measure natural (rest) position in the nav at scale=1
+    var rect  = wordmark.getBoundingClientRect();
+    var elCX  = rect.left + rect.width  / 2;
+    var elCY  = rect.top  + rect.height / 2;
+    var vpCX  = window.innerWidth  / 2;
+    var vpCY  = window.innerHeight / 2;
+
+    // Scale so wordmark fills ~62% of viewport width
+    var SCALE = Math.min((window.innerWidth * 0.62) / rect.width, 9);
+
+    // Translate needed so element center lands on viewport center (applied AFTER scale)
+    var TX0 = vpCX - elCX;
+    var TY0 = vpCY - elCY;
 
     var THRESHOLD = window.innerHeight * 0.65;
 
     function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
-    function prog(y, start, end) { return clamp((y - start) / (end - start), 0, 1); }
 
     function tick() {
-      var y = window.scrollY;
-      heroWordmark.style.opacity = 1 - prog(y, 0, THRESHOLD * 0.6);
-      navWordmark.style.opacity  = prog(y, THRESHOLD * 0.4, THRESHOLD);
+      var p = clamp(window.scrollY / THRESHOLD, 0, 1);
+
+      var scale = SCALE + (1 - SCALE) * p;
+      var tx    = TX0  * (1 - p);
+      var ty    = TY0  * (1 - p);
+
+      wordmark.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+
       if (heroCopy) {
-        var p = prog(y, THRESHOLD * 0.25, THRESHOLD * 0.85);
-        heroCopy.style.opacity   = p;
-        heroCopy.style.transform = 'translateY(' + (20 * (1 - p)) + 'px)';
+        var cp = clamp((p - 0.3) / 0.55, 0, 1);
+        heroCopy.style.opacity   = cp;
+        heroCopy.style.transform = 'translateY(' + (20 * (1 - cp)) + 'px)';
       }
     }
 
