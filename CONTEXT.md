@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-27 — design.md created; Services order updated (Orgs & Teams above Group Coaching)_
+_Last updated: 2026-05-27 — BeginFlow offering details added (1:1, Orgs & Teams); practice options extracted to shared data file_
 
 ---
 
@@ -65,12 +65,19 @@ Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `backg
 Three-step flow at `/begin` (standalone page) and as a bottom-sheet drawer on the homepage.
 
 **Step 1 — Option selection**
-- Four options: 1:1 Coaching, Group Coaching, Orgs & Teams, Self-led
+- Four options: 1:1 Coaching, Orgs & Teams, Group Coaching, Self-led (order matches homepage)
 - Auto-advances after 350ms on click (no Continue button)
 
 **Step 2 — Contact form**
 - Fields: First name (required), Email (required), Phone (optional)
 - Back button + selected badge above heading
+- **Offering detail block** shown above "About you" when a relevant option is selected:
+  - `#bfOffering1on1` — shown for `1on1`; sections: Structure, What we work with, Between sessions, AI-supported practice
+  - `#bfOfferingOrgs` — shown for `orgs`; sections: Structure, What we practice, Engagement types, Facilitation & support
+  - Group Coaching: no offering block yet (content pending)
+  - Self-led: no offering block (no detail needed)
+- `.bf-offering--hidden` (CSS `display: none`) toggled by `selectOption()` JS
+- When offering is visible, the standalone "About you" h2 (`.bf-headline--form`) is hidden via CSS sibling selector; the offering block ends with its own "About you" h2 before the form
 - Netlify Forms — hidden static form + AJAX POST; advances immediately regardless of network outcome
 - Mobile: flex-push submit button (margin-top: auto), `font-size: 16px` prevents iOS zoom, `env(safe-area-inset-bottom)` for home bar
 
@@ -348,8 +355,9 @@ EDF brand design.md archived at `_archive/design.md` (copied from the official b
 ## Open Items
 
 ### Content
-- [ ] **FAQ answers** — Taylor to provide real copy (currently Latin placeholder)
-- [ ] **Orgs & Teams copy** — Latin placeholder in S2 desc; Taylor to provide real copy
+- [x] **FAQ answers** — real copy in place (6 Q&As)
+- [x] **Orgs & Teams S2 desc** — real copy in place (via shared options data file)
+- [ ] **Group Coaching offering detail** — no offering block in BeginFlow Step 2 yet; content pending from Taylor
 - [ ] **Formetica license** — currently using Inter 200 as fallback
 - [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch (Begin page step 3 currently shows placeholder 404)
 - [ ] **Begin page: push to main** — Begin page is on `staging` only; needs Ben's explicit approval before merging to `main`
@@ -371,6 +379,7 @@ EDF brand design.md archived at `_archive/design.md` (copied from the official b
 
 ### Architecture
 - [x] **Astro migration** — complete and merged to `main` (commit `ebcf4bc`). Live at production and staging.
+- [x] **Practice options shared data file** — `src/data/options.ts` is the single source of truth for option keys, labels, descriptions, and Calendly URLs. Both `Services.astro` and `BeginFlow.astro` import from it.
 - [ ] **Monorepo consolidation** — `everyday-future-v4/` and `edf-portal-updated_3/` to share design tokens
 - [x] **Staging branch** — wired to Netlify, `npm run build` → `dist/` via `netlify.toml`.
 - [ ] **Landing pages** — structure TBD, not started
