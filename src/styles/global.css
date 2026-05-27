@@ -421,15 +421,49 @@ a { color: inherit; text-decoration: none; }
   gap: 60px;
   padding-bottom: 80px;
   border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  background: var(--paper);
+  margin: -100px calc(-1 * var(--gutter)) 0;
+  padding: 100px var(--gutter) 80px;
 }
-.s2__header-left { flex: 1; }
+.s2__header-left { flex: 0 0 36%; }
 .s2__header-right {
-  max-width: 320px;
+  flex: 1;
   padding-top: 8px;
+}
+.s2__header-body {
+  color: rgba(0,0,0,0.55);
+  font-size: 15px;
+  line-height: 1.7;
+  letter-spacing: 0.020em;
+  margin-top: 28px;
+  max-width: 380px;
+}
+/* Three-tier cards */
+.s2__tiers {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-self: flex-end;
+  gap: 0;
+}
+.s2__tier {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 2 / 3.3;
+  overflow: hidden;
+}
+.s2__tier img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.s2__tier-label {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  color: rgba(255,255,255,0.88);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.130em;
+  text-transform: uppercase;
 }
 .s2__eyebrow {
   font-size: 13px;
@@ -1130,6 +1164,9 @@ a { color: inherit; text-decoration: none; }
 
   /* ── NAV */
   .nav { padding: 18px var(--gutter); }
+  /* On mobile the wordmark animation font-size is small enough that
+     CLIENT PORTAL can collide — hide it on mobile */
+  .nav__right { display: none; }
 
   /* ── HERO */
   .hero__content  { padding: 0 var(--gutter) 56px; }
@@ -1142,10 +1179,28 @@ a { color: inherit; text-decoration: none; }
 
   .s2__header {
     flex-direction: column;
-    gap: 28px;
-    padding-bottom: 48px;
+    gap: 32px;
+    /* recalculate bleed for mobile padding */
+    margin: -64px calc(-1 * var(--gutter)) 0;
+    padding: 64px var(--gutter) 56px;
   }
-  .s2__header-right { max-width: 100%; }
+  .s2__header-left { flex: 1 1 100%; }
+  .s2__header-right { width: 100%; }
+
+  /* Tier cards: horizontal scroll on mobile — one card visible at a time */
+  .s2__tiers {
+    margin: 0 calc(-1 * var(--gutter)); /* bleed to edges */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 var(--gutter);
+    gap: 0;
+  }
+  .s2__tier {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+    aspect-ratio: 2 / 3;
+  }
 
   /* Option rows: drop description, keep title + arrow */
   .s2__option {
