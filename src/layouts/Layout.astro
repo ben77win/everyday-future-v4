@@ -123,8 +123,8 @@ import '../styles/global.css';
     }, { threshold: 0.3 }).observe(s2Section);
   }
 
-  // ── S2 option rows + free strip + S3 quotes: staggered scroll reveal
-  var revealEls = document.querySelectorAll('.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item');
+  // ── S2 option rows + S3 + other sections: staggered scroll reveal
+  var revealEls = document.querySelectorAll('.s2__option, .s3, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item');
   if (revealEls.length) {
     var rowObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -148,7 +148,7 @@ import '../styles/global.css';
   if (parallaxImgs.length) {
     function updateParallax() {
       parallaxImgs.forEach(function(img) {
-        var parent = img.closest('.s2__free, .s3__quote, .s6__photos');
+        var parent = img.closest('.s6__photos');
         if (!parent) return;
         var rect = parent.getBoundingClientRect();
         var centerOffset = (rect.top + rect.height / 2) - window.innerHeight / 2;
@@ -159,6 +159,40 @@ import '../styles/global.css';
     window.addEventListener('scroll', updateParallax, { passive: true });
     updateParallax();
   }
+
+  // ── S3 rail — mouse drag-to-scroll (touch is native)
+  (function () {
+    var rail = document.getElementById('s3Rail');
+    if (!rail) return;
+    var isDown = false, startX = 0, startScroll = 0;
+    rail.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      isDown = true;
+      startX = e.pageX;
+      startScroll = rail.scrollLeft;
+      rail.classList.add('is-dragging');
+      try { rail.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    rail.addEventListener('pointermove', function (e) {
+      if (!isDown) return;
+      var dx = e.pageX - startX;
+      rail.scrollLeft = startScroll - dx;
+    });
+    function endDrag() {
+      if (!isDown) return;
+      isDown = false;
+      rail.classList.remove('is-dragging');
+      // Re-snap to nearest card
+      var cards = rail.querySelectorAll('.s3__card');
+      if (!cards.length) return;
+      var cardW = cards[0].getBoundingClientRect().width;
+      var nearest = Math.round(rail.scrollLeft / cardW) * cardW;
+      rail.scrollTo({ left: nearest, behavior: 'smooth' });
+    }
+    rail.addEventListener('pointerup', endDrag);
+    rail.addEventListener('pointercancel', endDrag);
+    rail.addEventListener('pointerleave', endDrag);
+  })();
 
   // ── FAQ accordion
   document.querySelectorAll('.s7__trigger').forEach(function(btn) {

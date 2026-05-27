@@ -36,7 +36,11 @@ Defined once in `src/styles/global.css` under `:root`.
 | `--paper-off-a` | `#fafcfa` | S3 Q2 background |
 | `--paper-off-b` | `#f8fcf7` | S4 About background |
 | `--paper-cream` | `#fffcd1` | S2 Services background, S5 Waymaker background, Begin drawer background |
-| `--paper-sage` | `#e9ede7` | S2 free strip, S3 Q3, S7 FAQ |
+| `--paper-sage` | `#e9ede7` | S7 FAQ |
+| `--paper-bone` | `#f0e8d8` | S3 section floor — warm-neutral that contrasts cream + sage |
+| `--paper-clay` | `#b87c5e` | S3 outcome card surface — warm earth |
+| `--paper-dusk` | `#1f2a3c` | S3 outcome card surface — twilight |
+| `--paper-moss` | `#3c4a3a` | S3 outcome card surface — forest |
 | `--blue` | `#2956e0` | Brush marks (`.mark`) only. No other element uses this token. |
 | `--orange` | `#ff3900` | Hero top-right `.accent-dot`, footer `.site-footer__dot` (between links), float-CTA hover background |
 
@@ -46,10 +50,7 @@ Defined once in `src/styles/global.css` under `:root`.
 |---|---|---|
 | S1 Hero | `.hero` | `#0a0a0a` + rotating bg image at 0.88 opacity + four-stop dark gradient overlay |
 | S2 Services | `.s2` | `--paper-cream` |
-| S2 free strip | `.s2__free` | `--paper-sage` (full-bleed via negative margins) |
-| S3 Q1 | `.s3__quote--a` | `--paper` |
-| S3 Q2 | `.s3__quote--b` | `--paper-off-a` |
-| S3 Q3 | `.s3__quote--c` | `--paper-sage` |
+| S3 Practice Makes Progress | `.s3` | `--paper-bone` |
 | S4 About | `.s4` | `--paper-off-b` |
 | S5 Waymaker | `.s5` | `--paper-cream` |
 | S6 Taylor | `.s6` | `--paper` |
@@ -113,8 +114,9 @@ Nine reusable classes. Sentence case is universal — title-case headlines do no
 
 - `.s2__headline` — `clamp(42px, 4.8vw, 64px)` / 300 (animated clip-reveal)
 - `.s2__option-title` — `clamp(44px, 5.8vw, 78px)` / 300 / `-0.030em` / `line-height: 1`
-- `.s2__free-title` — `clamp(36px, 4.2vw, 58px)` / 300 / `-0.025em`
-- `.s3__text` — `clamp(42px, 5.8vw, 80px)` / 300 **italic** / `1.05` / `-0.032em`
+- `.s3__heading` — `clamp(42px, 5.2vw, 72px)` / 300 / `-0.028em`
+- `.s3__card-body` — `clamp(17px, 1.4vw, 21px)` / 300 / `1.4` / `0.005em` (outcome cards)
+- `.s3__card-quote` — `clamp(20px, 1.7vw, 26px)` / 300 **italic** / `1.3` / `-0.008em` (testimonial cards)
 - `.s4__body` — `clamp(20px, 2.4vw, 30px)` / 300 / `1.35` / `0.020em`
 - `.s5__word` — `clamp(52px, 7vw, 96px)` / 300 / `-0.030em`
 - `.s5__item` — `clamp(18px, 2vw, 26px)` / 300 / `0.020em`
@@ -307,7 +309,7 @@ A standalone secondary button on the sage band.
 |---|---|---|---|---|
 | S1 Hero | `#hero` | `#0a0a0a` + rotating image | bottom-left copy block | Vector-12 (white) under "future"; Vector-5 (white) over "now." |
 | S2 Services | `#practice` | `--paper-cream` | 2-up header + 4 option rows + free strip | Vector-4 in header; Vector-6 in free strip |
-| S3 Testimonials | `#quotes` | 3-tone tonal shift (paper → off-a → sage) | 3 italic quotes, 3 bleeding images | Vector-1 in Q2 |
+| S3 Practice Makes Progress | `#quotes` | `--paper-bone` | Horizontal snap rail: 4 outcome cards (clay/dusk/moss/ink) interleaved with 4 testimonial cards (paper/off-a/off-b/paper) | — |
 | S4 About | `#about` | `--paper-off-b` | 2-col (body + tag stack) | Vector-8 top-left |
 | S5 Waymaker | `#waymaker` | `--paper-cream` | 2-col (definition + hairline list) | Vector-10 over the word |
 | S6 Taylor | `#taylor` | `--paper` | 2-col (photo scatter + bio) | Vector-5 under "speaks to you" |
@@ -318,7 +320,7 @@ A standalone secondary button on the sage band.
 
 1. **Hero** — frame the choice.
 2. **Services** — show the four ways to enter the practice + a free discovery call.
-3. **Testimonials** — three short voices, big italic type, escalating tonal warmth.
+3. **Practice Makes Progress** — horizontal snap rail of 8 cards: 4 outcomes (saturated dark surfaces) interleaved with 4 testimonials (light surfaces). Real outcomes, real attribution.
 4. **About** — what the work *is*, in one paragraph + three tag-pillars.
 5. **Waymaker** — define who this is for (a word + its definition + its qualities).
 6. **Taylor** — who you're working with.
@@ -355,14 +357,15 @@ The `left: 50%` CSS anchor makes horizontal centering viewport-width-independent
 | `#hero` | 0.15 | Adds `.scrolled` to nav AND `.visible` to float CTA when hero exits |
 | `.site-footer` | 0 | Toggles `.over-footer` on float CTA (inverts color) |
 | `#practice` | 0.3 | One-time: adds `.revealed` to `#s2Headline` (triggers clip-up animation) |
-| `.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` | 0.15 | Staggered reveal — adds `.revealed` with `i * 110ms` delay |
+| `.s2__option, .s3, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` | 0.15 | Staggered reveal — adds `.revealed` with `i * 110ms` delay |
+
+### S3 rail drag-to-scroll
+A pointer-event IIFE on `#s3Rail` handles mouse drag. On `pointerdown` (mouse only), records `startX` and `startScroll`, captures the pointer, and adds `.is-dragging` (which disables `scroll-snap-type` and sets `cursor: grabbing`). On `pointermove`, sets `scrollLeft = startScroll - dx`. On `pointerup/cancel/leave`, removes `.is-dragging` and snaps to the nearest card via `rail.scrollTo({ left: nearest, behavior: 'smooth' })`. Touch scrolling is handled natively by the browser.
 
 ### Parallax (`[data-parallax]`)
 
-A `scroll` listener (passive) walks every `[data-parallax]` element, finds its closest `.s2__free / .s3__quote / .s6__photos` ancestor, computes `centerOffset = (rect.top + rect.height/2) - viewportHeight/2`, then sets `transform: translateY(centerOffset * speed)`. Speeds observed in source:
+A `scroll` listener (passive) walks every `[data-parallax]` element, finds its closest `.s6__photos` ancestor, computes `centerOffset = (rect.top + rect.height/2) - viewportHeight/2`, then sets `transform: translateY(centerOffset * speed)`. Speeds observed in source:
 
-- S2 free scatter: `0.20`, `-0.28`, `0.14`, `-0.22` (mixed directions for jitter)
-- S3 quote images: `0.08`, `-0.10`, `0.09`
 - S6 Taylor photos: `0.04`, `0.06`, `0.08`
 
 ### FAQ accordion
@@ -418,6 +421,7 @@ Sentence case. Long, comma-spliced declaratives. Lower-stakes-than-usual coachin
 - **Don't use `--blue` for UI.** It's a brush color, not a link or button.
 - **Don't expand `--orange`.** Three uses, total. Hover-state on the float CTA, the hero dot, the footer dot separator.
 - **No emoji.** None appear in any component.
+- **`--paper-clay`, `--paper-dusk`, `--paper-moss` are card-tier surfaces only.** Not for type, marks, buttons, or section backgrounds. `--paper-bone` is a section-tier neutral surface — fine for section backgrounds, not for cards or type.
 
 ---
 
@@ -467,47 +471,9 @@ Two breakpoints control everything: **`@media (max-width: 900px)`** (tablet) and
 - **The S2 free-strip parallax scatter is fully removed.** `.s2__free-img { display: none }`. Decorative marks tagged `[aria-hidden]` inside `.s2__header-right` and `.s2__free-content` are also hidden.
 - `.s2__free` loses `min-height`, padding becomes `64px → 72px`
 
-#### S3 — Testimonials (the biggest mobile change in the system)
+#### S3 — Practice Makes Progress (mobile)
 
-Mobile S3 is a different design entirely. Three tonal-shift paper sections become **three full-viewport cinematic moments**:
-
-```css
-.s3__quote {
-  min-height: 90vh;
-  display: flex; align-items: center;
-  padding: 80px var(--gutter) !important;
-  background: #0a0a0a !important;      /* all three quotes go to ink */
-}
-.s3__quote::after {                    /* black gradient overlay */
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom,
-    rgba(0,0,0,0.22) 0%,
-    rgba(0,0,0,0.48) 55%,
-    rgba(0,0,0,0.68) 100%);
-  z-index: 1;
-}
-.s3__img {                             /* image goes full-bleed */
-  position: absolute !important;
-  width: 100% !important; height: 100% !important;
-  top: 0 !important; left: 0 !important;
-  object-fit: cover !important;
-  opacity: 1 !important;               /* was 0.80 — full color on mobile */
-  z-index: 0 !important;
-}
-.s3__text {
-  color: #fff !important;
-  font-size: clamp(26px, 7vw, 40px);
-}
-```
-
-Net effect:
-- **Background:** three paper tones → solid black across all three
-- **Image opacity:** `0.80` → `1.0` (full color, full bleed)
-- **Position:** oversized bleed crops → 100% × 100% full viewport
-- **Text color:** ink → white
-- **Hairline divider** between quotes (`.s3__quote + .s3__quote::before`) is hidden
-
-The desktop S3 and mobile S3 are functionally two different design directions.
+The horizontal rail compresses but stays the same design: cards become `78vw` wide, padding drops to `28px`, heading shrinks to `clamp(34px, 9vw, 48px)`. `padding-right` on the rail drops to `28vw` so the next card peeks in, signalling scroll. The section padding compresses to `80px 0 96px`.
 
 #### S4 — About
 - Padding compresses to `72px var(--gutter)` (was `220px var(--gutter) 120px`)
