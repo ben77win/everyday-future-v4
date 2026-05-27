@@ -203,6 +203,55 @@ const optionLabelsJson = JSON.stringify(
         <h2 class="bf-headline">About you</h2>
       </div>
 
+      <!-- Self-led Offering detail (shown only for selflead) -->
+      <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead">
+        <p class="bf-offering__intro">A self-guided practice with structure, reflection, and practical guidance for conscious change.</p>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Structure</span>
+          <ul class="bf-offering__list">
+            <li>Self-paced access to the EDF Practice</li>
+            <li>Guided frameworks, exercises, reflections, and practices</li>
+            <li>Designed to integrate into real life and work</li>
+            <li>Ongoing access to materials and resources</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">What you practice</span>
+          <ul class="bf-offering__list">
+            <li>Awareness, AIM, Action, and Analysis</li>
+            <li>Conscious change in how you work, relate, and create</li>
+            <li>Expanding possibility and reducing resistance</li>
+            <li>Greater clarity, coherence, courage, connection, and curiosity</li>
+            <li>Meaningful progress toward the future you want to create</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Experience</span>
+          <ul class="bf-offering__list">
+            <li>Independent practice with flexible pacing</li>
+            <li>Reflection and exercises integrated into everyday life</li>
+            <li>Practical tools for recognizing patterns and creating intentional change</li>
+            <li>A repeatable practice for conscious awareness and meaningful progress over time</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Guidance &amp; support</span>
+          <ul class="bf-offering__list">
+            <li>Structured lessons and practices</li>
+            <li>AI-supported reflection and coaching guidance</li>
+            <li>Session recordings, prompts, and practice integration tools</li>
+            <li>Designed for ongoing personal and professional growth through self-led practice</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__divider"></div>
+        <h2 class="bf-headline">About you</h2>
+      </div>
+
       <h2 class="bf-headline bf-headline--form" id="bfAboutHeading">About you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
@@ -866,12 +915,14 @@ const optionLabelsJson = JSON.stringify(
       document.documentElement.classList.remove('bf-has-param');
 
       // Show/hide offering details
-      var offering1on1  = document.getElementById('bfOffering1on1');
-      var offeringOrgs  = document.getElementById('bfOfferingOrgs');
-      var offeringGroup = document.getElementById('bfOfferingGroup');
-      if (offering1on1)  offering1on1.classList.toggle('bf-offering--hidden',  selectedOption !== '1on1');
-      if (offeringOrgs)  offeringOrgs.classList.toggle('bf-offering--hidden',  selectedOption !== 'orgs');
-      if (offeringGroup) offeringGroup.classList.toggle('bf-offering--hidden', selectedOption !== 'group');
+      var offering1on1    = document.getElementById('bfOffering1on1');
+      var offeringOrgs    = document.getElementById('bfOfferingOrgs');
+      var offeringGroup   = document.getElementById('bfOfferingGroup');
+      var offeringSelflead = document.getElementById('bfOfferingSelflead');
+      if (offering1on1)    offering1on1.classList.toggle('bf-offering--hidden',    selectedOption !== '1on1');
+      if (offeringOrgs)    offeringOrgs.classList.toggle('bf-offering--hidden',    selectedOption !== 'orgs');
+      if (offeringGroup)   offeringGroup.classList.toggle('bf-offering--hidden',   selectedOption !== 'group');
+      if (offeringSelflead) offeringSelflead.classList.toggle('bf-offering--hidden', selectedOption !== 'selflead');
 
       showStep(step2);
       window.scrollTo({ top: 0, behavior: 'smooth' });
