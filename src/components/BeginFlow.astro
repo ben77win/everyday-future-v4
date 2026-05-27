@@ -111,6 +111,54 @@ const calendlyUrls: Record<string, string> = {
         <h2 class="bf-headline">About you</h2>
       </div>
 
+      <!-- Orgs & Teams Offering detail (shown only for orgs) -->
+      <div class="bf-offering bf-offering--hidden" id="bfOfferingOrgs">
+        <p class="bf-offering__intro">Custom workshops, offsites, and coaching engagements designed for organizations, leadership teams, co-founders, and cohorts.</p>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Structure</span>
+          <ul class="bf-offering__list">
+            <li>Custom workshops, offsites, and coaching engagements</li>
+            <li>Designed for organizations, leadership teams, co-founders, and cohorts</li>
+            <li>Virtual or in-person formats depending on the engagement</li>
+            <li>Structured around the real dynamics, goals, challenges, and opportunities within the team or organization</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">What we practice</span>
+          <ul class="bf-offering__list">
+            <li>Conscious change in how teams work, relate, communicate, and create</li>
+            <li>Expanding possibility and reducing resistance within organizational systems</li>
+            <li>Greater clarity, coherence, courage, connection, and curiosity across teams</li>
+            <li>Meaningful progress toward aligned goals, culture, leadership, and direction</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Engagement types</span>
+          <ul class="bf-offering__list">
+            <li>Co-founder, executive and leadership team coaching</li>
+            <li>Team workshops and facilitated working sessions</li>
+            <li>Retreats and offsites</li>
+            <li>Ongoing coaching and practice integration for individuals</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
+          <ul class="bf-offering__list">
+            <li>Designed and facilitated directly by a coach</li>
+            <li>Practical frameworks, reflection, exercises, and real-time application</li>
+            <li>Practices integrated into existing workflows and organizational realities</li>
+            <li>AI-supported reflection, synthesis, and follow-up available depending on engagement type</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__divider"></div>
+        <h2 class="bf-headline">About you</h2>
+      </div>
+
       <h2 class="bf-headline bf-headline--form" id="bfAboutHeading">About you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
@@ -782,14 +830,14 @@ const calendlyUrls: Record<string, string> = {
       optionInput.value = selectedOption;
       document.documentElement.classList.remove('bf-has-param');
 
-      // Show/hide 1:1 offering detail
-      var offering = document.getElementById('bfOffering1on1');
-      if (offering) {
-        if (selectedOption === '1on1') {
-          offering.classList.remove('bf-offering--hidden');
-        } else {
-          offering.classList.add('bf-offering--hidden');
-        }
+      // Show/hide offering details
+      var offering1on1 = document.getElementById('bfOffering1on1');
+      var offeringOrgs = document.getElementById('bfOfferingOrgs');
+      if (offering1on1) {
+        offering1on1.classList.toggle('bf-offering--hidden', selectedOption !== '1on1');
+      }
+      if (offeringOrgs) {
+        offeringOrgs.classList.toggle('bf-offering--hidden', selectedOption !== 'orgs');
       }
 
       showStep(step2);
