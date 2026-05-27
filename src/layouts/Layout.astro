@@ -124,7 +124,7 @@ import '../styles/global.css';
   }
 
   // ── S2 option rows + S3 + other sections: staggered scroll reveal
-  var revealEls = document.querySelectorAll('.s2__option, .s3, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item');
+  var revealEls = document.querySelectorAll('.s2__option, .s3, .s4__body, .s4__tags, .s5__left, .s5__body, .s6__photos, .s6__bio, .s7__item');
   if (revealEls.length) {
     var rowObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
