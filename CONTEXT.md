@@ -27,7 +27,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 ## Design System
 
-See [`design.md`](design.md) — canonical reference for all tokens, type scale, marks library, imagery rules, components, and open decisions. The Figma source is `Every Day Futures - Visual Identity.fig` by Form (Alice / designbyform.com).
+See [`design.md`](design.md) — comprehensive as-built reference for all tokens, type scale, marks library, imagery rules, components, mobile, animation, and open decisions. Sourced directly from the repo by Claude Design on 2026-05-27. Supersedes all prior versions. The original Figma source is `Every Day Futures - Visual Identity.fig` by Form (Alice / designbyform.com).
 
 ---
 
