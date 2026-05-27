@@ -15,7 +15,10 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 **Dev server:** `npm run dev` (Astro, port 4321 — config in `.claude/launch.json`)  
 **Build:** `npm run build` → `dist/`
 
-**Rollback tag:** `pre-astro-migration` — points to last single-file HTML state on staging.  
+**Rollback tags:**
+- `pre-astro-migration` — last single-file HTML state on staging
+- `pre-session-2026-05-27` — staging tip before this session (`f3468b1`)
+
 **Archived HTML:** `_archive/index-pre-astro.html`
 
 **Worktree preview note:** Each worktree needs its own `.claude/launch.json`. Main repo launch.json uses port 4321 (`npm run dev`). Worktrees should use the next available port and start a new server from there.
