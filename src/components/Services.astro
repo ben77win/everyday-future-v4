@@ -1,4 +1,5 @@
 ---
+import { practiceOptions } from '../data/options';
 ---
 <section class="s2" id="practice">
 
@@ -30,31 +31,13 @@
 
   <!-- 4 coaching option rows -->
   <div class="s2__options">
-
-    <a href="/begin?option=1on1" class="s2__option">
-      <span class="s2__option-title">1:1 Coaching</span>
-      <span class="s2__option-desc">Dedicated practice to work on what matters for you with a coach</span>
-      <span class="s2__option-arrow">→</span>
-    </a>
-
-    <a href="/begin?option=orgs" class="s2__option">
-      <span class="s2__option-title">Orgs &amp; Teams</span>
-      <span class="s2__option-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
-      <span class="s2__option-arrow">→</span>
-    </a>
-
-    <a href="/begin?option=group" class="s2__option">
-      <span class="s2__option-title">Group Coaching</span>
-      <span class="s2__option-desc">Shared practice in community with structure, support, and a coach</span>
-      <span class="s2__option-arrow">→</span>
-    </a>
-
-    <a href="/begin?option=selflead" class="s2__option">
-      <span class="s2__option-title">Self-led</span>
-      <span class="s2__option-desc">Practice on your own with structure and guidance</span>
-      <span class="s2__option-arrow">→</span>
-    </a>
-
+    {practiceOptions.map((opt) => (
+      <a href={`/begin?option=${opt.key}`} class="s2__option">
+        <span class="s2__option-title">{opt.label}</span>
+        <span class="s2__option-desc">{opt.desc}</span>
+        <span class="s2__option-arrow">→</span>
+      </a>
+    ))}
   </div>
 
 

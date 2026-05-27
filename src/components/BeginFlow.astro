@@ -1,19 +1,13 @@
 ---
 import Calendly from './Calendly.astro';
+import { practiceOptions, optionByKey } from '../data/options';
 
-const options = [
-  { key: '1on1',    label: '1:1 Coaching',   desc: 'One-on-one practice with a dedicated coach' },
-  { key: 'orgs',    label: 'Orgs & Teams',   desc: 'Coaching practice for organisations and teams' },
-  { key: 'group',   label: 'Group Coaching', desc: 'Shared practice in community with a coach' },
-  { key: 'selflead',label: 'Self-led',        desc: 'Practice on your own with structure and guidance' },
-];
-
-const calendlyUrls: Record<string, string> = {
-  '1on1':    'https://calendly.com/placeholder-60',
-  'group':   'https://calendly.com/placeholder-15',
-  'orgs':    'https://calendly.com/placeholder-60',
-  'selflead': '',
-};
+const calendlyUrlsJson = JSON.stringify(
+  Object.fromEntries(practiceOptions.map((o) => [o.key, o.calendlyUrl]))
+);
+const optionLabelsJson = JSON.stringify(
+  Object.fromEntries(practiceOptions.map((o) => [o.key, o.label]))
+);
 ---
 
 <div class="begin-flow" id="beginFlow">
@@ -27,7 +21,7 @@ const calendlyUrls: Record<string, string> = {
       </div>
 
       <div class="bf-options" id="bfOptions" role="group" aria-label="Practice type">
-        {options.map((opt) => (
+        {practiceOptions.map((opt) => (
           <button
             class="bf-option"
             data-key={opt.key}
@@ -775,18 +769,9 @@ const calendlyUrls: Record<string, string> = {
 <script is:inline>
 (function () {
 
-  var OPTION_LABELS = {
-    '1on1':    '1:1 Coaching',
-    'group':   'Group Coaching',
-    'orgs':    'Orgs & Teams',
-    'selflead':'Self-led',
-  };
+  var OPTION_LABELS = JSON.parse({optionLabelsJson});
 
-  var CALENDLY_URLS = {
-    '1on1':  'https://calendly.com/placeholder-60',
-    'group': 'https://calendly.com/placeholder-15',
-    'orgs':  'https://calendly.com/placeholder-60',
-  };
+  var CALENDLY_URLS = JSON.parse({calendlyUrlsJson});
 
   // ── State
   var selectedOption = null;
