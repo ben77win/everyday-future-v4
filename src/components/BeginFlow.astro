@@ -54,205 +54,199 @@ const optionLabelsJson = JSON.stringify(
         </div>
       </div>
 
-      <!-- 1:1 Offering detail (shown only for 1on1) -->
-      <div class="bf-offering bf-offering--hidden" id="bfOffering1on1">
-        <p class="bf-offering__intro">A dedicated one-on-one practice to work on what matters most to you with the support of a coach.</p>
+      <!-- Offering detail (one shown at a time) -->
 
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Structure</span>
-          <ul class="bf-offering__list">
-            <li>Limited to a small number of clients at a time</li>
-            <li>Virtual coaching sessions held 2x monthly</li>
-            <li>Flexible scheduling with no rescheduling fees</li>
-            <li>Initial six-month commitment:
-              <ul class="bf-offering__sublist">
-                <li>3-Month Foundation Flow</li>
-                <li>3-Month Calibration Flow</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+          <!-- 1:1 -->
+          <div class="bf-offering bf-offering--hidden" id="bfOffering1on1">
+            <p class="bf-offering__intro">A dedicated one-on-one practice to work on what matters most to you with the support of a coach.</p>
+            <button class="bf-offering__toggle" type="button" aria-expanded="false">
+              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="bf-offering__sections">
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Structure</span>
+                <ul class="bf-offering__list">
+                  <li>Limited to a small number of clients at a time</li>
+                  <li>Virtual coaching sessions held 2x monthly</li>
+                  <li>Flexible scheduling with no rescheduling fees</li>
+                  <li>Initial six-month commitment:
+                    <ul class="bf-offering__sublist">
+                      <li>3-Month Foundation Flow</li>
+                      <li>3-Month Calibration Flow</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">What we work with</span>
+                <ul class="bf-offering__list">
+                  <li>Conscious change in how you work, relate, and create</li>
+                  <li>Expanding possibility and reducing resistance</li>
+                  <li>Greater clarity, coherence, courage, connection, and curiosity</li>
+                  <li>Meaningful progress toward the future you want</li>
+                  <li>Recognizing and changing patterns shaping attention, behavior, relationships, and decision-making</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Between sessions</span>
+                <ul class="bf-offering__list">
+                  <li>Active exchange for questions, reflection, accountability, and support</li>
+                  <li>Practices and intentional action integrated into real life and work</li>
+                  <li>Daily awareness and reflection practices designed to build continuity over time</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">AI-supported practice</span>
+                <ul class="bf-offering__list">
+                  <li>Dedicated AI workspace for each client</li>
+                  <li>Session recordings and coaching follow-ups</li>
+                  <li>Reflection, themes, actions, and pattern tracking over time</li>
+                  <li>Increased continuity, awareness, and integration throughout the practice</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">What we work with</span>
-          <ul class="bf-offering__list">
-            <li>Conscious change in how you work, relate, and create</li>
-            <li>Expanding possibility and reducing resistance</li>
-            <li>Greater clarity, coherence, courage, connection, and curiosity</li>
-            <li>Meaningful progress toward the future you want</li>
-            <li>Recognizing and changing patterns shaping attention, behavior, relationships, and decision-making</li>
-          </ul>
-        </div>
+          <!-- Orgs & Teams -->
+          <div class="bf-offering bf-offering--hidden" id="bfOfferingOrgs">
+            <p class="bf-offering__intro">Custom workshops, offsites, and coaching engagements designed for organizations, leadership teams, co-founders, and cohorts.</p>
+            <button class="bf-offering__toggle" type="button" aria-expanded="false">
+              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="bf-offering__sections">
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Structure</span>
+                <ul class="bf-offering__list">
+                  <li>Custom workshops, offsites, and coaching engagements</li>
+                  <li>Designed for organizations, leadership teams, co-founders, and cohorts</li>
+                  <li>Virtual or in-person formats depending on the engagement</li>
+                  <li>Structured around the real dynamics, goals, challenges, and opportunities within the team or organization</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">What we practice</span>
+                <ul class="bf-offering__list">
+                  <li>Conscious change in how teams work, relate, communicate, and create</li>
+                  <li>Expanding possibility and reducing resistance within organizational systems</li>
+                  <li>Greater clarity, coherence, courage, connection, and curiosity across teams</li>
+                  <li>Meaningful progress toward aligned goals, culture, leadership, and direction</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Engagement types</span>
+                <ul class="bf-offering__list">
+                  <li>Co-founder, executive and leadership team coaching</li>
+                  <li>Team workshops and facilitated working sessions</li>
+                  <li>Retreats and offsites</li>
+                  <li>Ongoing coaching and practice integration for individuals</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
+                <ul class="bf-offering__list">
+                  <li>Designed and facilitated directly by a coach</li>
+                  <li>Practical frameworks, reflection, exercises, and real-time application</li>
+                  <li>Practices integrated into existing workflows and organizational realities</li>
+                  <li>AI-supported reflection, synthesis, and follow-up available depending on engagement type</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Between sessions</span>
-          <ul class="bf-offering__list">
-            <li>Active exchange for questions, reflection, accountability, and support</li>
-            <li>Practices and intentional action integrated into real life and work</li>
-            <li>Daily awareness and reflection practices designed to build continuity over time</li>
-          </ul>
-        </div>
+          <!-- Group -->
+          <div class="bf-offering bf-offering--hidden" id="bfOfferingGroup">
+            <p class="bf-offering__intro">A shared practice in curated community with structure, support, and coach facilitation.</p>
+            <button class="bf-offering__toggle" type="button" aria-expanded="false">
+              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="bf-offering__sections">
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Structure</span>
+                <ul class="bf-offering__list">
+                  <li>12-week guided group practice</li>
+                  <li>Limited to 8 participants</li>
+                  <li>90-minute virtual group sessions</li>
+                  <li>3 individual coaching sessions included during the program</li>
+                  <li>Structured around the EDF Practice and dimensions of conscious change</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">What we practice</span>
+                <ul class="bf-offering__list">
+                  <li>Conscious change in how we work, relate, and create</li>
+                  <li>Expanding possibility and reducing resistance</li>
+                  <li>Greater clarity, coherence, courage, connection, and curiosity</li>
+                  <li>Meaningful progress through shared practice and accountability</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Experience</span>
+                <ul class="bf-offering__list">
+                  <li>Community with other waymakers navigating growth, change, creativity, leadership, and transition</li>
+                  <li>Shared learning, reflection, and perspective</li>
+                  <li>Practices integrated into real work between sessions</li>
+                  <li>Supportive accountability and continuity through ongoing participation</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
+                <ul class="bf-offering__list">
+                  <li>Coach-led structure and facilitation</li>
+                  <li>Practical frameworks, exercises, reflection, and discussion</li>
+                  <li>AI-supported notes, reflections, and follow-ups available depending on the group format</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">AI-supported practice</span>
-          <ul class="bf-offering__list">
-            <li>Dedicated AI workspace for each client</li>
-            <li>Session recordings and coaching follow-ups</li>
-            <li>Reflection, themes, actions, and pattern tracking over time</li>
-            <li>Increased continuity, awareness, and integration throughout the practice</li>
-          </ul>
-        </div>
+          <!-- Self-led -->
+          <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead">
+            <p class="bf-offering__intro">A self-guided practice with structure, reflection, and practical guidance for conscious change.</p>
+            <button class="bf-offering__toggle" type="button" aria-expanded="false">
+              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="bf-offering__sections">
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Structure</span>
+                <ul class="bf-offering__list">
+                  <li>Self-paced access to the EDF Practice</li>
+                  <li>Guided frameworks, exercises, reflections, and practices</li>
+                  <li>Designed to integrate into real life and work</li>
+                  <li>Ongoing access to materials and resources</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">What you practice</span>
+                <ul class="bf-offering__list">
+                  <li>Awareness, AIM, Action, and Analysis</li>
+                  <li>Conscious change in how you work, relate, and create</li>
+                  <li>Expanding possibility and reducing resistance</li>
+                  <li>Greater clarity, coherence, courage, connection, and curiosity</li>
+                  <li>Meaningful progress toward the future you want to create</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Experience</span>
+                <ul class="bf-offering__list">
+                  <li>Independent practice with flexible pacing</li>
+                  <li>Reflection and exercises integrated into everyday life</li>
+                  <li>Practical tools for recognizing patterns and creating intentional change</li>
+                  <li>A repeatable practice for conscious awareness and meaningful progress over time</li>
+                </ul>
+              </div>
+              <div class="bf-offering__section">
+                <span class="bf-offering__eyebrow">Guidance &amp; support</span>
+                <ul class="bf-offering__list">
+                  <li>Structured lessons and practices</li>
+                  <li>AI-supported reflection and coaching guidance</li>
+                  <li>Session recordings, prompts, and practice integration tools</li>
+                  <li>Designed for ongoing personal and professional growth through self-led practice</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-        <div class="bf-offering__divider"></div>
-        <h2 class="bf-headline">About you</h2>
-      </div>
-
-      <!-- Orgs & Teams Offering detail (shown only for orgs) -->
-      <div class="bf-offering bf-offering--hidden" id="bfOfferingOrgs">
-        <p class="bf-offering__intro">Custom workshops, offsites, and coaching engagements designed for organizations, leadership teams, co-founders, and cohorts.</p>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Structure</span>
-          <ul class="bf-offering__list">
-            <li>Custom workshops, offsites, and coaching engagements</li>
-            <li>Designed for organizations, leadership teams, co-founders, and cohorts</li>
-            <li>Virtual or in-person formats depending on the engagement</li>
-            <li>Structured around the real dynamics, goals, challenges, and opportunities within the team or organization</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">What we practice</span>
-          <ul class="bf-offering__list">
-            <li>Conscious change in how teams work, relate, communicate, and create</li>
-            <li>Expanding possibility and reducing resistance within organizational systems</li>
-            <li>Greater clarity, coherence, courage, connection, and curiosity across teams</li>
-            <li>Meaningful progress toward aligned goals, culture, leadership, and direction</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Engagement types</span>
-          <ul class="bf-offering__list">
-            <li>Co-founder, executive and leadership team coaching</li>
-            <li>Team workshops and facilitated working sessions</li>
-            <li>Retreats and offsites</li>
-            <li>Ongoing coaching and practice integration for individuals</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
-          <ul class="bf-offering__list">
-            <li>Designed and facilitated directly by a coach</li>
-            <li>Practical frameworks, reflection, exercises, and real-time application</li>
-            <li>Practices integrated into existing workflows and organizational realities</li>
-            <li>AI-supported reflection, synthesis, and follow-up available depending on engagement type</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__divider"></div>
-        <h2 class="bf-headline">About you</h2>
-      </div>
-
-      <!-- Group Offering detail (shown only for group) -->
-      <div class="bf-offering bf-offering--hidden" id="bfOfferingGroup">
-        <p class="bf-offering__intro">A shared practice in curated community with structure, support, and coach facilitation.</p>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Structure</span>
-          <ul class="bf-offering__list">
-            <li>12-week guided group practice</li>
-            <li>Limited to 8 participants</li>
-            <li>90-minute virtual group sessions</li>
-            <li>3 individual coaching sessions included during the program</li>
-            <li>Structured around the EDF Practice and dimensions of conscious change</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">What we practice</span>
-          <ul class="bf-offering__list">
-            <li>Conscious change in how we work, relate, and create</li>
-            <li>Expanding possibility and reducing resistance</li>
-            <li>Greater clarity, coherence, courage, connection, and curiosity</li>
-            <li>Meaningful progress through shared practice and accountability</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Experience</span>
-          <ul class="bf-offering__list">
-            <li>Community with other waymakers navigating growth, change, creativity, leadership, and transition</li>
-            <li>Shared learning, reflection, and perspective</li>
-            <li>Practices integrated into real work between sessions</li>
-            <li>Supportive accountability and continuity through ongoing participation</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
-          <ul class="bf-offering__list">
-            <li>Coach-led structure and facilitation</li>
-            <li>Practical frameworks, exercises, reflection, and discussion</li>
-            <li>AI-supported notes, reflections, and follow-ups available depending on the group format</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__divider"></div>
-        <h2 class="bf-headline">About you</h2>
-      </div>
-
-      <!-- Self-led Offering detail (shown only for selflead) -->
-      <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead">
-        <p class="bf-offering__intro">A self-guided practice with structure, reflection, and practical guidance for conscious change.</p>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Structure</span>
-          <ul class="bf-offering__list">
-            <li>Self-paced access to the EDF Practice</li>
-            <li>Guided frameworks, exercises, reflections, and practices</li>
-            <li>Designed to integrate into real life and work</li>
-            <li>Ongoing access to materials and resources</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">What you practice</span>
-          <ul class="bf-offering__list">
-            <li>Awareness, AIM, Action, and Analysis</li>
-            <li>Conscious change in how you work, relate, and create</li>
-            <li>Expanding possibility and reducing resistance</li>
-            <li>Greater clarity, coherence, courage, connection, and curiosity</li>
-            <li>Meaningful progress toward the future you want to create</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Experience</span>
-          <ul class="bf-offering__list">
-            <li>Independent practice with flexible pacing</li>
-            <li>Reflection and exercises integrated into everyday life</li>
-            <li>Practical tools for recognizing patterns and creating intentional change</li>
-            <li>A repeatable practice for conscious awareness and meaningful progress over time</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__section">
-          <span class="bf-offering__eyebrow">Guidance &amp; support</span>
-          <ul class="bf-offering__list">
-            <li>Structured lessons and practices</li>
-            <li>AI-supported reflection and coaching guidance</li>
-            <li>Session recordings, prompts, and practice integration tools</li>
-            <li>Designed for ongoing personal and professional growth through self-led practice</li>
-          </ul>
-        </div>
-
-        <div class="bf-offering__divider"></div>
-        <h2 class="bf-headline">About you</h2>
-      </div>
-
-      <h2 class="bf-headline bf-headline--form" id="bfAboutHeading">About you</h2>
+      <h2 class="bf-headline" id="bfAboutHeading">About you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
       <form name="begin" netlify netlify-honeypot="bot-field" hidden>
@@ -319,8 +313,6 @@ const optionLabelsJson = JSON.stringify(
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
         </div>
-
-
       </form>
     </div>
   </div>
@@ -556,10 +548,11 @@ const optionLabelsJson = JSON.stringify(
 .bf-selected-badge:empty { display: none; }
 
 /* ── Offering detail block */
-.bf-offering {
-  margin-bottom: 48px;
-}
 .bf-offering--hidden { display: none; }
+
+.bf-offering {
+  margin-bottom: 8px;
+}
 
 .bf-offering__intro {
   font-family: var(--font-body);
@@ -568,7 +561,49 @@ const optionLabelsJson = JSON.stringify(
   line-height: 1.65;
   letter-spacing: 0.010em;
   color: rgba(0,0,0,0.70);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+/* Toggle — visible everywhere */
+.bf-offering__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 0.5px solid rgba(0,0,0,0.12);
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  padding: 14px 0;
+  margin-bottom: 36px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.140em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.45);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.bf-offering__toggle:hover { color: rgba(0,0,0,0.75); }
+
+.bf-offering__toggle-icon {
+  font-size: 20px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: rgba(0,0,0,0.35);
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+.bf-offering--expanded .bf-offering__toggle-icon {
+  transform: rotate(45deg);
+}
+
+/* Sections collapsed by default */
+.bf-offering__sections {
+  display: none;
+}
+.bf-offering--expanded .bf-offering__sections {
+  display: block;
 }
 
 .bf-offering__section {
@@ -620,16 +655,6 @@ const optionLabelsJson = JSON.stringify(
   margin-right: 8px;
   opacity: 0.40;
 }
-
-.bf-offering__divider {
-  height: 0.5px;
-  background: rgba(0,0,0,0.12);
-  margin: 40px 0 36px;
-}
-
-/* Hide the plain "About you" heading when offering is visible */
-.bf-headline--form { display: block; }
-.bf-offering:not(.bf-offering--hidden) ~ .bf-headline--form { display: none; }
 
 /* ── Form */
 .bf-form {
@@ -863,6 +888,8 @@ const optionLabelsJson = JSON.stringify(
 
   #bfCalendlyMount { margin: 0 calc(-1 * var(--gutter)); }
 }
+
+
 </style>
 
 <script is:inline>
@@ -914,15 +941,23 @@ const optionLabelsJson = JSON.stringify(
       optionInput.value = selectedOption;
       document.documentElement.classList.remove('bf-has-param');
 
-      // Show/hide offering details
-      var offering1on1    = document.getElementById('bfOffering1on1');
-      var offeringOrgs    = document.getElementById('bfOfferingOrgs');
-      var offeringGroup   = document.getElementById('bfOfferingGroup');
-      var offeringSelflead = document.getElementById('bfOfferingSelflead');
-      if (offering1on1)    offering1on1.classList.toggle('bf-offering--hidden',    selectedOption !== '1on1');
-      if (offeringOrgs)    offeringOrgs.classList.toggle('bf-offering--hidden',    selectedOption !== 'orgs');
-      if (offeringGroup)   offeringGroup.classList.toggle('bf-offering--hidden',   selectedOption !== 'group');
-      if (offeringSelflead) offeringSelflead.classList.toggle('bf-offering--hidden', selectedOption !== 'selflead');
+      // Show/hide offering details; reset any open accordion on switch
+      var allOfferings = ['bfOffering1on1','bfOfferingOrgs','bfOfferingGroup','bfOfferingSelflead'];
+      var keyMap = { '1on1':'bfOffering1on1', 'orgs':'bfOfferingOrgs', 'group':'bfOfferingGroup', 'selflead':'bfOfferingSelflead' };
+      allOfferings.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var isActive = keyMap[selectedOption] === id;
+        el.classList.toggle('bf-offering--hidden', !isActive);
+        // Collapse sections when switching options
+        if (!isActive) {
+          el.classList.remove('bf-offering--expanded');
+          var tog = el.querySelector('.bf-offering__toggle');
+          if (tog) tog.setAttribute('aria-expanded', 'false');
+          var icon = el.querySelector('.bf-offering__toggle-icon');
+          if (icon) icon.textContent = '+';
+        }
+      });
 
       showStep(step2);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -933,6 +968,16 @@ const optionLabelsJson = JSON.stringify(
   backBtn.addEventListener('click', function () {
     showStep(step1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── Offering accordion toggle
+  document.querySelectorAll('.bf-offering__toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var offering = btn.closest('.bf-offering');
+      var expanded = offering.classList.toggle('bf-offering--expanded');
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.querySelector('.bf-offering__toggle-icon').textContent = expanded ? '+' : '+';
+    });
   });
 
   // ── Form submission
