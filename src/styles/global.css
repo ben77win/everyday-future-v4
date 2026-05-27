@@ -1108,7 +1108,7 @@ a { color: inherit; text-decoration: none; }
   transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .s7__item.open .s7__answer {
-  max-height: 400px;
+  max-height: 800px;
 }
 
 .s7__answer-inner {
@@ -1121,6 +1121,8 @@ a { color: inherit; text-decoration: none; }
   color: rgba(0,0,0,0.60);
   max-width: 640px;
 }
+.s7__answer-inner p { margin-bottom: 16px; }
+.s7__answer-inner p:last-child { margin-bottom: 0; }
 
 /* ════════════════════════════════════════════════════════════════
    RESPONSIVE — TABLET ≤ 900px
