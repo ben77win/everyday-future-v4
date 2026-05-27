@@ -32,6 +32,35 @@ import '../styles/global.css';
     bg.style.backgroundPosition = images[idx].pos;
   })();
 
+  // ── Hero wordmark intro — large centered wordmark resolves into nav on scroll
+  (function() {
+    var heroWordmark = document.querySelector('.hero-wordmark');
+    var navWordmark  = document.querySelector('.nav__wordmark');
+    var heroCopy     = document.querySelector('.hero__copy');
+    if (!heroWordmark || !document.querySelector('.hero__bg')) return;
+
+    document.body.classList.add('hero-wordmark-active');
+
+    var THRESHOLD = window.innerHeight * 0.65;
+
+    function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+    function prog(y, start, end) { return clamp((y - start) / (end - start), 0, 1); }
+
+    function tick() {
+      var y = window.scrollY;
+      heroWordmark.style.opacity = 1 - prog(y, 0, THRESHOLD * 0.6);
+      navWordmark.style.opacity  = prog(y, THRESHOLD * 0.4, THRESHOLD);
+      if (heroCopy) {
+        var p = prog(y, THRESHOLD * 0.25, THRESHOLD * 0.85);
+        heroCopy.style.opacity   = p;
+        heroCopy.style.transform = 'translateY(' + (20 * (1 - p)) + 'px)';
+      }
+    }
+
+    window.addEventListener('scroll', tick, { passive: true });
+    tick();
+  })();
+
   // ── Nav + floating CTA: toggle after hero exits
   var nav      = document.getElementById('nav');
   var hero     = document.getElementById('hero');
