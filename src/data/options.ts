@@ -1,3 +1,18 @@
+/**
+ * Practice options — single source of truth.
+ *
+ * Used by:
+ *   - Services.astro      (homepage option rows)
+ *   - BeginFlow.astro     (Step 1 cards, Step 2 offering detail, JS labels + Calendly URLs)
+ *   - Any landing page CTA linking to /begin?option=<key>
+ *
+ * To add or change an option: edit this file only.
+ * Keys are used in URLs (/begin?option=<key>) — do not change them without updating
+ * Netlify redirects and any marketing links that reference them.
+ *
+ * Calendly URLs: update before launch. Replace placeholder-* with real Taylor URLs.
+ */
+
 export interface PracticeOption {
   key: string;
   label: string;
