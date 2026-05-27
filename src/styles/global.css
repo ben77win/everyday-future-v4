@@ -1264,6 +1264,20 @@ a { color: inherit; text-decoration: none; }
     height: 52px;
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+  /* Reset sticky hover on touch — use :active for tap feedback instead */
+  .float-cta__link:hover,
+  .float-cta.over-footer .float-cta__link:hover {
+    background: var(--ink);
+    box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+    color: var(--paper);
+  }
+  .float-cta__link:active { background: var(--orange); color: var(--paper); }
+
+  /* ── S2 options — reset sticky hover, add tap state */
+  .s2__option:hover { background: transparent; }
+  .s2__option:hover .s2__option-arrow { color: rgba(0,0,0,0.25); transform: none; }
+  .s2__option:active { background: var(--paper-bone); }
+  .s2__option:active .s2__option-arrow { color: var(--ink); }
 
 }
 
