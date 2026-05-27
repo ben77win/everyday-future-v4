@@ -1,7 +1,20 @@
 ---
 ---
 <div class="float-cta" id="floatCta">
-  <a href="#begin" class="float-cta__link">
+  <a href="/begin" class="float-cta__link" id="floatCtaLink">
     <span class="t-cta">Begin your practice</span>
   </a>
 </div>
+
+<script is:inline>
+(function () {
+  var link = document.getElementById('floatCtaLink');
+  if (!link) return;
+  link.addEventListener('click', function (e) {
+    if (typeof window.__openBeginDrawer === 'function') {
+      e.preventDefault();
+      window.__openBeginDrawer();
+    }
+  });
+})();
+</script>

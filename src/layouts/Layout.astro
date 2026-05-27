@@ -18,6 +18,8 @@ import '../styles/global.css';
 <script>
   // ── Hero image rotation — cycles sequentially on each reload
   (function() {
+    var bg = document.querySelector('.hero__bg');
+    if (!bg) return;
     var images = [
       { src: '/images/hero-rose.png',    pos: '50% 30%' },
       { src: '/images/hero-red-sun.jpg', pos: '50% 40%' },
@@ -26,7 +28,6 @@ import '../styles/global.css';
     ];
     var idx  = (parseInt(localStorage.getItem('edf_hero') || '0') + 1) % images.length;
     localStorage.setItem('edf_hero', idx);
-    var bg = document.querySelector('.hero__bg');
     bg.style.backgroundImage    = 'url(' + images[idx].src + ')';
     bg.style.backgroundPosition = images[idx].pos;
   })();
@@ -36,73 +37,80 @@ import '../styles/global.css';
   var hero     = document.getElementById('hero');
   var floatCta = document.getElementById('floatCta');
 
-  new IntersectionObserver(function(entries) {
-    var heroVisible = entries[0].isIntersecting;
-    nav.classList.toggle('scrolled', !heroVisible);
-    floatCta.classList.toggle('visible', !heroVisible);
-  }, { threshold: 0.15 }).observe(hero);
+  if (hero && nav && floatCta) {
+    new IntersectionObserver(function(entries) {
+      var heroVisible = entries[0].isIntersecting;
+      nav.classList.toggle('scrolled', !heroVisible);
+      floatCta.classList.toggle('visible', !heroVisible);
+    }, { threshold: 0.15 }).observe(hero);
+  }
 
   // ── Float CTA: invert when footer is visible
   var siteFooter = document.querySelector('.site-footer');
-  new IntersectionObserver(function(entries) {
-    floatCta.classList.toggle('over-footer', entries[0].isIntersecting);
-  }, { threshold: 0 }).observe(siteFooter);
+  if (floatCta && siteFooter) {
+    new IntersectionObserver(function(entries) {
+      floatCta.classList.toggle('over-footer', entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(siteFooter);
+  }
 
   // ── S2 headline clip reveal: fires once when S2 enters view
   var s2Headline = document.getElementById('s2Headline');
-  new IntersectionObserver(function(entries, obs) {
-    if (entries[0].isIntersecting) {
-      s2Headline.classList.add('revealed');
-      obs.disconnect();
-    }
-  }, { threshold: 0.3 }).observe(document.getElementById('practice'));
+  var s2Section  = document.getElementById('practice');
+  if (s2Headline && s2Section) {
+    new IntersectionObserver(function(entries, obs) {
+      if (entries[0].isIntersecting) {
+        s2Headline.classList.add('revealed');
+        obs.disconnect();
+      }
+    }, { threshold: 0.3 }).observe(s2Section);
+  }
 
   // ── S2 option rows + free strip + S3 quotes: staggered scroll reveal
   var revealEls = document.querySelectorAll('.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item');
-  var rowObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var delay = el.dataset.delay || 0;
-        setTimeout(function() { el.classList.add('revealed'); }, delay);
-        rowObs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.15 });
+  if (revealEls.length) {
+    var rowObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var delay = el.dataset.delay || 0;
+          setTimeout(function() { el.classList.add('revealed'); }, delay);
+          rowObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
 
-  revealEls.forEach(function(el, i) {
-    el.dataset.delay = i * 110;
-    rowObs.observe(el);
-  });
-
-  // ── Parallax: S2 scatter + S3 quote images
-  var parallaxImgs = document.querySelectorAll('[data-parallax]');
-
-  function updateParallax() {
-    parallaxImgs.forEach(function(img) {
-      var parent = img.closest('.s2__free, .s3__quote, .s6__photos');
-      if (!parent) return;
-      var rect = parent.getBoundingClientRect();
-      var centerOffset = (rect.top + rect.height / 2) - window.innerHeight / 2;
-      var speed = parseFloat(img.dataset.parallax);
-      img.style.transform = 'translateY(' + (centerOffset * speed) + 'px)';
+    revealEls.forEach(function(el, i) {
+      el.dataset.delay = i * 110;
+      rowObs.observe(el);
     });
   }
 
-  window.addEventListener('scroll', updateParallax, { passive: true });
-  updateParallax();
+  // ── Parallax: S2 scatter + S3 quote images
+  var parallaxImgs = document.querySelectorAll('[data-parallax]');
+  if (parallaxImgs.length) {
+    function updateParallax() {
+      parallaxImgs.forEach(function(img) {
+        var parent = img.closest('.s2__free, .s3__quote, .s6__photos');
+        if (!parent) return;
+        var rect = parent.getBoundingClientRect();
+        var centerOffset = (rect.top + rect.height / 2) - window.innerHeight / 2;
+        var speed = parseFloat(img.dataset.parallax);
+        img.style.transform = 'translateY(' + (centerOffset * speed) + 'px)';
+      });
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+  }
 
   // ── FAQ accordion
   document.querySelectorAll('.s7__trigger').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var item = btn.closest('.s7__item');
       var isOpen = item.classList.contains('open');
-      // Close all
       document.querySelectorAll('.s7__item.open').forEach(function(el) {
         el.classList.remove('open');
         el.querySelector('.s7__trigger').setAttribute('aria-expanded', 'false');
       });
-      // Open clicked if it was closed
       if (!isOpen) {
         item.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
