@@ -43,6 +43,7 @@ const optionLabelsJson = JSON.stringify(
   <!-- ── STEP 2: Contact form ──────────────────────────────────── -->
   <div class="bf-step bf-step--hidden" id="bfStep2">
     <div class="bf-step__inner">
+      <img class="bf-mark" src="/marks/Vector-4.svg" alt="" aria-hidden="true" />
 
       <div class="bf-header">
         <div class="bf-top-nav">
@@ -246,7 +247,7 @@ const optionLabelsJson = JSON.stringify(
             </div>
           </div>
 
-      <h2 class="bf-headline" id="bfAboutHeading">About you</h2>
+      <h2 class="bf-headline bf-about-heading" id="bfAboutHeading">A little about you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
       <form name="begin" netlify netlify-honeypot="bot-field" hidden>
@@ -419,6 +420,27 @@ const optionLabelsJson = JSON.stringify(
   color: rgba(0,0,0,0.50);
 }
 
+/* ── About-you heading (form subhead — smaller than page headline) */
+.bf-about-heading {
+  font-size: clamp(28px, 3.5vw, 40px);
+  margin-bottom: 8px;
+  margin-top: 48px;
+}
+
+/* ── Brush mark */
+.bf-step__inner {
+  position: relative;
+}
+.bf-mark {
+  position: absolute;
+  top: 40px;
+  right: calc(var(--gutter) - 20px);
+  width: clamp(80px, 14vw, 130px);
+  opacity: 0.18;
+  pointer-events: none;
+  transform: rotate(6deg);
+}
+
 /* ── Option buttons */
 .bf-options {
   display: flex;
@@ -532,17 +554,11 @@ const optionLabelsJson = JSON.stringify(
 
 /* ── Selected badge */
 .bf-selected-badge {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 14px;
-  border: 0.5px solid rgba(0,0,0,0.22);
-  border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.130em;
+  letter-spacing: 0.140em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.50);
+  color: rgba(0,0,0,0.38);
   margin-bottom: 18px;
 }
 .bf-selected-badge:empty { display: none; }
@@ -677,20 +693,19 @@ const optionLabelsJson = JSON.stringify(
 }
 
 .bf-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.160em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.40);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.015em;
+  color: rgba(0,0,0,0.50);
   margin-bottom: 10px;
 }
 
 .bf-optional {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.100em;
-  color: rgba(0,0,0,0.28);
-  text-transform: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(0,0,0,0.32);
 }
 
 .bf-input {
@@ -744,7 +759,7 @@ const optionLabelsJson = JSON.stringify(
   background: var(--ink);
   color: var(--paper);
   border: none;
-  border-radius: 100px;
+  border-radius: 0;
   cursor: pointer;
   transition: background 0.25s ease;
   min-width: 140px;
