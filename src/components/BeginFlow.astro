@@ -46,13 +46,11 @@ const optionLabelsJson = JSON.stringify(
       <img class="bf-mark" src="/marks/Vector-4.svg" alt="" aria-hidden="true" />
 
       <div class="bf-header">
-        <div class="bf-top-nav">
-          <button class="bf-back" id="bfBack" type="button">
-            <span class="bf-back__arrow" aria-hidden="true">←</span>
-            <span class="t-cta">Change selection</span>
-          </button>
-          <div class="bf-selected-badge" id="bfSelectedBadge"></div>
-        </div>
+        <div class="bf-selected-badge" id="bfSelectedBadge"></div>
+        <button class="bf-back" id="bfBack" type="button">
+          <span class="bf-back__arrow" aria-hidden="true">←</span>
+          <span class="t-cta">Change selection</span>
+        </button>
       </div>
 
       <!-- Offering detail (one shown at a time) -->
@@ -388,7 +386,7 @@ const optionLabelsJson = JSON.stringify(
 
 /* ── Header block */
 .bf-header {
-  margin-bottom: 52px;
+  margin-bottom: 36px;
 }
 
 .bf-eyebrow {
@@ -525,15 +523,6 @@ const optionLabelsJson = JSON.stringify(
   transform: none;
 }
 
-/* ── Back + badge stacked nav */
-.bf-top-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 28px;
-}
-
 /* ── Back button */
 .bf-back {
   display: inline-flex;
@@ -543,24 +532,25 @@ const optionLabelsJson = JSON.stringify(
   border: none;
   cursor: pointer;
   padding: 0;
-  color: rgba(0,0,0,0.40);
+  color: rgba(0,0,0,0.35);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.140em;
   text-transform: uppercase;
   transition: color 0.2s ease;
+  margin-top: 14px;
 }
 .bf-back:hover { color: var(--ink); }
 .bf-back__arrow { font-size: 14px; }
 
-/* ── Selected badge */
+/* ── Selected badge — display heading */
 .bf-selected-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.140em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.38);
-  margin-bottom: 18px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(38px, 5vw, 62px);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 .bf-selected-badge:empty { display: none; }
 
@@ -858,43 +848,69 @@ const optionLabelsJson = JSON.stringify(
 
 /* ── Mobile ≤ 640px */
 @media (max-width: 640px) {
-  /* Tighter top padding; extra bottom room for sticky submit */
-  .bf-step__inner {
-    padding-top: 32px;
-    padding-bottom: 100px;
-  }
 
-  /* Tighter header */
-  .bf-header { margin-bottom: 20px; }
+  /* Step 1 — content height only, no forced stretch */
+  #bfStep1 { flex: none; }
+  #bfStep1 .bf-step__inner {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    min-height: 0;
+  }
+  #bfStep1 .bf-header { margin-bottom: 12px; }
+
+  /* Step 2 — tight but breathable, fits one screen */
+  #bfStep2 .bf-step__inner {
+    padding-top: 28px;
+    padding-bottom: 0;
+    min-height: calc(100dvh - 60px);
+  }
+  #bfStep2 .bf-header { margin-bottom: 4px; }
+
+  /* Hide brush mark on mobile — clips at edge */
+  .bf-mark { display: none; }
+
+  /* Page headline */
+  .bf-headline { font-size: 34px; }
+
+  /* Selected option — smaller display heading on mobile */
+  .bf-selected-badge { font-size: 32px; }
+
+  /* Back button */
+  .bf-back { margin-top: 8px; }
 
   /* Option rows */
   .bf-option { padding-top: 22px; padding-bottom: 22px; }
   .bf-option__label { font-size: clamp(32px, 8vw, 48px); }
   .bf-option__desc  { font-size: 12px; }
 
-  /* Back nav — inline row instead of stacked column */
-  .bf-top-nav {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+  /* Offering intro */
+  .bf-offering__intro {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 18px;
+    margin-bottom: 14px;
   }
-  .bf-selected-badge { margin-bottom: 0; }
+  .bf-offering__toggle { padding: 12px 0; margin-bottom: 0; }
 
-  /* Larger input hit targets */
-  .bf-field { padding: 18px 0 20px; }
+  /* Form section */
+  .bf-about-heading {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 2px;
+  }
+  .bf-field { padding: 12px 0 14px; }
   .bf-input {
     font-size: 16px; /* prevent iOS zoom on focus */
-    padding: 12px 0 14px;
+    padding: 6px 0 8px;
   }
+  .bf-label { margin-bottom: 4px; }
 
   /* Push submit to bottom via flex */
-  .bf-step__inner { min-height: calc(100dvh - 60px); }
   .bf-form { flex: 1; display: flex; flex-direction: column; }
   .bf-form-footer {
     margin-top: auto;
-    padding-top: 24px;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-top: 20px;
+    padding-bottom: env(safe-area-inset-bottom, 16px);
     gap: 0;
   }
   .bf-submit {
