@@ -1191,12 +1191,12 @@ a { color: inherit; text-decoration: none; }
   /* Hide overflow-causing decorative marks on mobile */
   .s2__header-right img[aria-hidden] { display: none; }
 
-  /* ── S3 RAIL — denser cards on mobile, no gap */
+  /* ── S3 RAIL — one card per screen on mobile, no gaps */
   .s3 { padding: 80px 0 96px; }
   .s3__head { margin-bottom: 32px; }
   .s3__heading { font-size: clamp(34px, 9vw, 48px); }
-  .s3__rail { gap: 0; padding-right: 28vw; }
-  .s3__card { width: 78vw; padding: 28px; }
+  .s3__rail { gap: 0; padding-right: 0; }
+  .s3__card { width: 100vw; padding: 28px; }
   .s3__card-body { font-size: 16px; }
   .s3__card-quote { font-size: clamp(18px, 4.8vw, 22px); }
 
@@ -1215,6 +1215,14 @@ a { color: inherit; text-decoration: none; }
   }
   .s5__mark { left: -6px; }
   .s5__list { margin-top: 0; }
+  /* Dash list style for "You're…" paragraphs on mobile */
+  .s5__para { padding-left: 20px; position: relative; }
+  .s5__para::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: rgba(0,0,0,0.30);
+  }
 
   /* ── S6 TAYLOR */
   .s6 { padding: 72px var(--gutter) 88px; }
@@ -1222,11 +1230,10 @@ a { color: inherit; text-decoration: none; }
     grid-template-columns: 1fr;
     gap: 48px;
   }
-  /* Resize photo scatter to fit a single column */
-  .s6__photos  { height: 340px; overflow: hidden; }
-  .s6__photo--a { width: 200px; height: 280px; top: 0; left: 0; }
-  .s6__photo--b { width: 145px; height: 195px; bottom: 0; right: 0; }
-  .s6__photo--c { width: 105px; height: 145px; top: 130px; right: 165px; }
+  /* Show Taylor portrait only on mobile */
+  .s6__photos { height: auto; }
+  .s6__photo--a { position: relative; width: 100%; height: auto; top: auto; left: auto; }
+  .s6__photo--b, .s6__photo--c { display: none; }
 
   /* ── S7 FAQ */
   .s7 { padding: 72px var(--gutter) 88px; }
@@ -1241,6 +1248,22 @@ a { color: inherit; text-decoration: none; }
   }
   .site-footer__links { gap: 18px; flex-wrap: wrap; }
   .site-footer__dot   { display: none; }
+
+  /* ── CTA BAR — full-width, anchored to bottom on mobile */
+  .float-cta {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: none;
+    padding: 0;
+  }
+  .float-cta__link {
+    width: 100%;
+    border-radius: 0;
+    height: 52px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 
 }
 
