@@ -155,6 +155,54 @@ const optionLabelsJson = JSON.stringify(
         <h2 class="bf-headline">About you</h2>
       </div>
 
+      <!-- Group Offering detail (shown only for group) -->
+      <div class="bf-offering bf-offering--hidden" id="bfOfferingGroup">
+        <p class="bf-offering__intro">A shared practice in curated community with structure, support, and coach facilitation.</p>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Structure</span>
+          <ul class="bf-offering__list">
+            <li>12-week guided group practice</li>
+            <li>Limited to 8 participants</li>
+            <li>90-minute virtual group sessions</li>
+            <li>3 individual coaching sessions included during the program</li>
+            <li>Structured around the EDF Practice and dimensions of conscious change</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">What we practice</span>
+          <ul class="bf-offering__list">
+            <li>Conscious change in how we work, relate, and create</li>
+            <li>Expanding possibility and reducing resistance</li>
+            <li>Greater clarity, coherence, courage, connection, and curiosity</li>
+            <li>Meaningful progress through shared practice and accountability</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Experience</span>
+          <ul class="bf-offering__list">
+            <li>Community with other waymakers navigating growth, change, creativity, leadership, and transition</li>
+            <li>Shared learning, reflection, and perspective</li>
+            <li>Practices integrated into real work between sessions</li>
+            <li>Supportive accountability and continuity through ongoing participation</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__section">
+          <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
+          <ul class="bf-offering__list">
+            <li>Coach-led structure and facilitation</li>
+            <li>Practical frameworks, exercises, reflection, and discussion</li>
+            <li>AI-supported notes, reflections, and follow-ups available depending on the group format</li>
+          </ul>
+        </div>
+
+        <div class="bf-offering__divider"></div>
+        <h2 class="bf-headline">About you</h2>
+      </div>
+
       <h2 class="bf-headline bf-headline--form" id="bfAboutHeading">About you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
@@ -818,14 +866,12 @@ const optionLabelsJson = JSON.stringify(
       document.documentElement.classList.remove('bf-has-param');
 
       // Show/hide offering details
-      var offering1on1 = document.getElementById('bfOffering1on1');
-      var offeringOrgs = document.getElementById('bfOfferingOrgs');
-      if (offering1on1) {
-        offering1on1.classList.toggle('bf-offering--hidden', selectedOption !== '1on1');
-      }
-      if (offeringOrgs) {
-        offeringOrgs.classList.toggle('bf-offering--hidden', selectedOption !== 'orgs');
-      }
+      var offering1on1  = document.getElementById('bfOffering1on1');
+      var offeringOrgs  = document.getElementById('bfOfferingOrgs');
+      var offeringGroup = document.getElementById('bfOfferingGroup');
+      if (offering1on1)  offering1on1.classList.toggle('bf-offering--hidden',  selectedOption !== '1on1');
+      if (offeringOrgs)  offeringOrgs.classList.toggle('bf-offering--hidden',  selectedOption !== 'orgs');
+      if (offeringGroup) offeringGroup.classList.toggle('bf-offering--hidden', selectedOption !== 'group');
 
       showStep(step2);
       window.scrollTo({ top: 0, behavior: 'smooth' });
