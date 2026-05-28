@@ -52,8 +52,8 @@ a { color: inherit; text-decoration: none; }
 .t-display {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(42px, 5.5vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(46px, 6.8vw, 84px);
+  line-height: 1.0;
   letter-spacing: -0.030em;
 }
 .t-h2 {
@@ -74,7 +74,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 24px;
   letter-spacing: 0.020em;
 }
 .t-eyebrow {
@@ -138,8 +138,8 @@ a { color: inherit; text-decoration: none; }
   border: 0.5px solid rgba(255,255,255,0.55);
   color: rgba(255,255,255,0.88);
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.130em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   border-radius: 4px;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
@@ -263,11 +263,11 @@ a { color: inherit; text-decoration: none; }
 }
 .hero__subhead {
   color: rgba(255,255,255,0.82);
-  font-size: 19px;
-  line-height: 1.6;
-  letter-spacing: 0.005em;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.020em;
   font-weight: 300;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   max-width: 520px;
 }
 .hero__tags {
@@ -284,8 +284,8 @@ a { color: inherit; text-decoration: none; }
   gap: 10px;
   color: rgba(255,255,255,0.55);
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.160em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
 }
 
@@ -347,8 +347,10 @@ a { color: inherit; text-decoration: none; }
 }
 .s2__headline {
   color: var(--ink);
-  font-size: clamp(42px, 4.8vw, 64px);
-  font-weight: 300;
+  font-size: clamp(46px, 5.6vw, 84px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.030em;
   display: block;
   transform: translateY(100%);
   transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
@@ -380,8 +382,8 @@ a { color: inherit; text-decoration: none; }
 }
 .s2__header-body {
   color: rgba(0,0,0,0.55);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   margin-top: 28px;
   max-width: 380px;
@@ -409,8 +411,8 @@ a { color: inherit; text-decoration: none; }
   left: 14px;
   color: rgba(255,255,255,0.88);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.130em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
 }
 .s2__eyebrow {
@@ -458,15 +460,15 @@ a { color: inherit; text-decoration: none; }
 .s2__card-label {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(20px, 2vw, 26px);
+  font-size: 32px;
   letter-spacing: -0.020em;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 .s2__card-desc {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 22px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.55);
   transition: color 0.22s ease;
@@ -510,18 +512,18 @@ a { color: inherit; text-decoration: none; }
 }
 .s3__heading {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(42px, 4.8vw, 64px);
-  line-height: 1.08;
-  letter-spacing: -0.020em;
+  font-weight: 400;
+  font-size: clamp(46px, 5.6vw, 84px);
+  line-height: 1.0;
+  letter-spacing: -0.030em;
   color: var(--ink);
   max-width: 760px;
 }
 .s3__subhead {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.55);
   margin-top: 28px;
@@ -563,9 +565,9 @@ a { color: inherit; text-decoration: none; }
 .s3__card-body {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: clamp(17px, 1.4vw, 21px);
-  line-height: 1.4;
-  letter-spacing: 0.005em;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.5;
+  letter-spacing: 0.020em;
   color: rgba(255,255,255,0.94);
   flex: 1;
 }
@@ -578,7 +580,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono);
   font-weight: 400;
   font-size: 13px;
-  letter-spacing: 0.140em;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: #ffffff;
   margin-bottom: 6px;
@@ -594,10 +596,10 @@ a { color: inherit; text-decoration: none; }
 /* Testimonial card internals */
 .s3__card-quote {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
-  font-size: clamp(16px, 1.4vw, 22px);
-  line-height: 1.3;
+  font-size: clamp(15px, 1.2vw, 19px);
+  line-height: 1.35;
   letter-spacing: -0.008em;
   color: var(--ink);
   margin: auto 0;
@@ -630,20 +632,20 @@ a { color: inherit; text-decoration: none; }
 
 .s4__heading {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(42px, 4.8vw, 64px);
-  line-height: 1.08;
-  letter-spacing: -0.020em;
+  font-weight: 400;
+  font-size: clamp(46px, 5.6vw, 84px);
+  line-height: 1.0;
+  letter-spacing: -0.030em;
   color: var(--ink);
   margin-bottom: 28px;
 }
 
 .s4__body {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(20px, 2.4vw, 30px);
-  line-height: 1.35;
-  letter-spacing: 0.020em;
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.010em;
   color: var(--ink);
   opacity: 0;
   transform: translateY(24px);
@@ -711,10 +713,10 @@ a { color: inherit; text-decoration: none; }
 /* Left — heading */
 .s5__heading {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(42px, 4.8vw, 64px);
-  line-height: 1.08;
-  letter-spacing: -0.020em;
+  font-weight: 400;
+  font-size: clamp(46px, 5.6vw, 84px);
+  line-height: 1.0;
+  letter-spacing: -0.030em;
   color: var(--ink);
 }
 
@@ -741,10 +743,10 @@ a { color: inherit; text-decoration: none; }
 .s5__definition {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.45);
-  line-height: 1.6;
+  line-height: 24px;
 }
 
 .s5__mark {
@@ -769,15 +771,17 @@ a { color: inherit; text-decoration: none; }
 .s5__para {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.70);
   margin-bottom: 18px;
 }
 .s5__para:first-child {
-  font-size: clamp(20px, 2vw, 26px);
-  letter-spacing: 0.010em;
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.010em;
   color: var(--ink);
   margin-bottom: 28px;
 }
@@ -840,22 +844,30 @@ a { color: inherit; text-decoration: none; }
 
 .s6__name {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(40px, 4.5vw, 58px);
+  font-weight: 400;
+  font-size: clamp(46px, 5.6vw, 84px);
   letter-spacing: -0.030em;
   line-height: 1.0;
   color: var(--ink);
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .s6__para {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.70);
   margin-bottom: 22px;
+}
+.s6__para:first-child {
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.010em;
+  color: var(--ink);
+  margin-bottom: 28px;
 }
 .s6__para:last-child { margin-bottom: 0; }
 
@@ -894,8 +906,8 @@ a { color: inherit; text-decoration: none; }
 .s-contact__body {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.60);
   margin-bottom: 32px;
@@ -915,8 +927,8 @@ a { color: inherit; text-decoration: none; }
 
 .s-contact__meta-label {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.140em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.40);
 }
@@ -950,8 +962,8 @@ a { color: inherit; text-decoration: none; }
 
 .s-contact__label {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.130em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.40);
   margin-bottom: 6px;
@@ -1001,10 +1013,10 @@ a { color: inherit; text-decoration: none; }
   display: none;
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
+  font-size: 14px;
   color: rgba(0,0,0,0.60);
   margin-top: 24px;
-  line-height: 1.6;
+  line-height: 24px;
 }
 .s-contact__confirm.visible { display: block; }
 
@@ -1101,9 +1113,10 @@ a { color: inherit; text-decoration: none; }
 
 .s7__question {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(18px, 2.2vw, 28px);
-  letter-spacing: 0.010em;
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.010em;
   color: var(--ink);
 }
 
@@ -1155,8 +1168,8 @@ a { color: inherit; text-decoration: none; }
   padding: 0 0 36px;
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.60);
   max-width: 640px;
@@ -1226,6 +1239,16 @@ a { color: inherit; text-decoration: none; }
 
   /* Hide overflow-causing decorative marks on mobile */
   .s2__header-right img[aria-hidden] { display: none; }
+
+  /* ── Body paragraphs — 16px mobile (iOS anti-zoom) */
+  .s2__header-body,
+  .s3__subhead,
+  .s5__para,
+  .s6__para,
+  .s7__answer-inner,
+  .s-contact__body { font-size: 16px; line-height: 26px; }
+  .s-contact__input,
+  .s-contact__textarea { font-size: 16px; }
 
   /* ── S3 RAIL — denser cards on mobile, 28vw peek */
   .s3 { padding: 80px 0 96px; }
