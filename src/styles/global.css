@@ -359,26 +359,14 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(0);
 }
 
-/* Header */
+/* Header: headline + body only — full-bleed cream strip */
 .s2__header {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 60px;
-  padding-bottom: 80px;
-  border-bottom: 0.5px solid rgba(0,0,0,0.18);
   background: var(--paper-cream);
   margin: -100px calc(-1 * var(--gutter)) 0;
-  padding-top: 100px;
-  padding-bottom: 80px;
-  padding-left: max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter)));
-  padding-right: max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter)));
-}
-.s2__header-left { flex: 0 0 36%; }
-.s2__header-right {
-  flex: 1;
-  padding-top: 8px;
+  padding: 100px max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter))) 80px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  max-width: none;
 }
 .s2__header-body {
   color: rgba(0,0,0,0.55);
@@ -386,12 +374,14 @@ a { color: inherit; text-decoration: none; }
   line-height: 24px;
   letter-spacing: 0.020em;
   margin-top: 28px;
-  max-width: 380px;
+  max-width: 560px;
 }
-/* Three-tier cards */
+/* Three-tier tiles: centered row, max 880px */
 .s2__tiers {
   display: flex;
   gap: 0;
+  max-width: 880px;
+  margin: 60px auto 0;
 }
 .s2__tier {
   position: relative;
@@ -405,6 +395,16 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   display: block;
 }
+.s2__tier-num {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  color: rgba(255,255,255,0.70);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+}
 .s2__tier-label {
   position: absolute;
   bottom: 14px;
@@ -414,18 +414,6 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-}
-.s2__eyebrow {
-  font-size: 13px;
-  color: rgba(0,0,0,0.40);
-  margin-bottom: 22px;
-  letter-spacing: 0.110em;
-}
-.s2__subhead {
-  color: rgba(0,0,0,0.55);
-  font-size: 15px;
-  line-height: 1.7;
-  letter-spacing: 0.020em;
 }
 
 
@@ -1210,23 +1198,19 @@ a { color: inherit; text-decoration: none; }
   .s2 { padding: 64px var(--gutter) 0; }
 
   .s2__header {
-    flex-direction: column;
-    gap: 32px;
-    /* recalculate bleed for mobile padding */
     margin: -64px calc(-1 * var(--gutter)) 0;
     padding: 64px var(--gutter) 56px;
   }
-  .s2__header-left { flex: 1 1 100%; }
-  .s2__header-right { width: 100%; }
 
   /* Tier cards: horizontal scroll on mobile — one card visible at a time */
   .s2__tiers {
-    margin: 0 calc(-1 * var(--gutter)); /* bleed to edges */
+    margin: 32px calc(-1 * var(--gutter)) 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     padding: 0 var(--gutter);
     gap: 0;
+    max-width: none;
   }
   .s2__tier {
     flex: 0 0 72vw;
@@ -1234,11 +1218,8 @@ a { color: inherit; text-decoration: none; }
     aspect-ratio: 2 / 3;
   }
 
-  /* Option cards: 2-col on mobile */
-  .s2__cards { grid-template-columns: repeat(2, 1fr); margin-top: 24px; }
-
-  /* Hide overflow-causing decorative marks on mobile */
-  .s2__header-right img[aria-hidden] { display: none; }
+  /* Option cards: 1-col on mobile (Begin-style) */
+  .s2__cards { grid-template-columns: 1fr; margin-top: 24px; }
 
   /* ── Body paragraphs — 16px mobile (iOS anti-zoom) */
   .s2__header-body,

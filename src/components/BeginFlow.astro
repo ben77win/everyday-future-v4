@@ -19,7 +19,7 @@ const optionLabelsJson = JSON.stringify(
     <div class="bf-step__inner">
 
       <div class="bf-header">
-        <h1 class="bf-headline">Choose your way</h1>
+        <h1 class="bf-headline">Choose how you want to practice.</h1>
       </div>
 
       <div class="bf-options" id="bfOptions" role="group" aria-label="Practice type">
@@ -30,9 +30,9 @@ const optionLabelsJson = JSON.stringify(
             type="button"
             aria-pressed="false"
           >
+            <span class="bf-option__arrow" aria-hidden="true">→</span>
             <span class="bf-option__label">{opt.label}</span>
             <span class="bf-option__desc">{opt.desc}</span>
-            <span class="bf-option__arrow" aria-hidden="true">→</span>
           </button>
         ))}
       </div>
@@ -375,6 +375,7 @@ const optionLabelsJson = JSON.stringify(
 }
 
 .bf-step__inner {
+  position: relative;
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
@@ -392,19 +393,20 @@ const optionLabelsJson = JSON.stringify(
 .bf-eyebrow {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.180em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.40);
   margin-bottom: 18px;
 }
 
+/* Step 1 headline / Step 3 headline */
 .bf-headline {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(42px, 5.5vw, 72px);
+  font-weight: 400;
+  font-size: clamp(46px, 5.2vw, 80px);
   letter-spacing: -0.030em;
-  line-height: 1.05;
+  line-height: 1.0;
   color: var(--ink);
 }
 
@@ -412,24 +414,25 @@ const optionLabelsJson = JSON.stringify(
   margin-top: 14px;
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
-  letter-spacing: 0.010em;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.50);
 }
 
-/* ── About-you heading (form subhead — smaller than page headline) */
+/* ── "A little about you" — sub-display */
 .bf-about-heading {
-  font-size: clamp(32px, 3.6vw, 48px);
-  letter-spacing: -0.020em;
-  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.010em;
+  color: var(--ink);
   margin-top: 48px;
+  margin-bottom: 8px;
 }
 
 /* ── Brush mark */
-.bf-step__inner {
-  position: relative;
-}
 .bf-mark {
   position: absolute;
   top: 40px;
@@ -440,88 +443,76 @@ const optionLabelsJson = JSON.stringify(
   transform: rotate(6deg);
 }
 
-/* ── Option buttons */
+/* Step 1 inner is full-width so cards span page */
+#bfStep1 .bf-step__inner {
+  max-width: var(--max-w);
+}
+
+/* ── Step 1 option grid — 4-up matching S2 cards */
 .bf-options {
-  display: flex;
-  flex-direction: column;
-  border-top: 0.5px solid rgba(0,0,0,0.14);
-  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
 }
 
 .bf-option {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
-  align-items: center;
-  column-gap: 20px;
-  padding: 26px 0;
-  border: none;
-  border-bottom: 0.5px solid rgba(0,0,0,0.14);
-  background: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px 32px;
+  background: var(--paper);
+  border: 0.5px solid rgba(0,0,0,0.10);
   cursor: pointer;
   text-align: left;
-  transition: background 0.22s ease, padding-left 0.22s ease, padding-right 0.22s ease;
-  margin: 0 calc(-1 * var(--gutter));
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
+  transition: background 0.22s ease, color 0.22s ease;
+}
+
+.bf-option__arrow {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: rgba(0,0,0,0.30);
+  line-height: 1;
+  transition: color 0.22s ease, transform 0.22s ease;
 }
 
 .bf-option__label {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(38px, 5.5vw, 64px);
-  letter-spacing: -0.025em;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.020em;
   line-height: 1.05;
   color: var(--ink);
   transition: color 0.22s ease;
-  grid-column: 1;
-  grid-row: 1;
 }
 
 .bf-option__desc {
   font-family: var(--font-body);
+  font-weight: 300;
   font-size: 13px;
-  line-height: 1.5;
-  letter-spacing: 0.010em;
-  color: rgba(0,0,0,0.42);
+  line-height: 22px;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.55);
   transition: color 0.22s ease;
-  margin-top: 4px;
-  grid-column: 1;
-  grid-row: 2;
 }
 
-.bf-option__arrow {
-  font-family: var(--font-body);
-  font-size: 24px;
-  color: rgba(0,0,0,0.22);
-  transition: color 0.22s ease, transform 0.22s ease;
-  grid-column: 2;
-  grid-row: 1 / 3;
-  align-self: center;
-}
-
-/* Hover state */
-.bf-option:hover {
-  background: rgba(0,0,0,0.03);
-}
-.bf-option:hover .bf-option__label { color: var(--ink); }
+/* Hover: full ink invert */
+.bf-option:hover { background: var(--ink); }
+.bf-option:hover .bf-option__label { color: var(--paper); }
+.bf-option:hover .bf-option__desc  { color: rgba(255,255,255,0.62); }
 .bf-option:hover .bf-option__arrow {
-  color: rgba(0,0,0,0.50);
+  color: var(--blue);
   transform: translateX(4px);
 }
 
 /* Selected state */
-.bf-option[aria-pressed="true"] {
-  background: var(--ink);
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-}
-.bf-option[aria-pressed="true"] .bf-option__label { color: #fff; }
-.bf-option[aria-pressed="true"] .bf-option__desc  { color: rgba(255,255,255,0.55); }
-.bf-option[aria-pressed="true"] .bf-option__arrow {
-  color: rgba(255,255,255,0.60);
-  transform: none;
-}
+.bf-option[aria-pressed="true"] { background: var(--ink); }
+.bf-option[aria-pressed="true"] .bf-option__label { color: var(--paper); }
+.bf-option[aria-pressed="true"] .bf-option__desc  { color: rgba(255,255,255,0.62); }
+.bf-option[aria-pressed="true"] .bf-option__arrow { color: var(--blue); }
 
 /* ── Back button */
 .bf-back {
@@ -534,8 +525,8 @@ const optionLabelsJson = JSON.stringify(
   padding: 0;
   color: rgba(0,0,0,0.35);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.140em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   transition: color 0.2s ease;
   margin-top: 14px;
@@ -543,13 +534,13 @@ const optionLabelsJson = JSON.stringify(
 .bf-back:hover { color: var(--ink); }
 .bf-back__arrow { font-size: 14px; }
 
-/* ── Selected badge — display heading */
+/* ── Option name — page heading on Step 2 */
 .bf-selected-badge {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(38px, 5vw, 62px);
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  font-weight: 400;
+  font-size: clamp(46px, 5.2vw, 80px);
+  letter-spacing: -0.030em;
+  line-height: 1.0;
   color: var(--ink);
 }
 .bf-selected-badge:empty { display: none; }
@@ -564,14 +555,14 @@ const optionLabelsJson = JSON.stringify(
 .bf-offering__intro {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 17px;
-  line-height: 1.65;
-  letter-spacing: 0.010em;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.70);
   margin-bottom: 20px;
 }
 
-/* Toggle — visible everywhere */
+/* WHAT'S INCLUDED toggle row */
 .bf-offering__toggle {
   display: flex;
   align-items: center;
@@ -579,13 +570,13 @@ const optionLabelsJson = JSON.stringify(
   width: 100%;
   background: none;
   border: none;
-  border-top: 0.5px solid rgba(0,0,0,0.12);
-  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  border-top: 0.5px solid rgba(0,0,0,0.18);
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
   padding: 14px 0;
   margin-bottom: 36px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.140em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.45);
   cursor: pointer;
@@ -599,7 +590,7 @@ const optionLabelsJson = JSON.stringify(
   font-weight: 300;
   color: rgba(0,0,0,0.35);
   line-height: 1;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 .bf-offering--expanded .bf-offering__toggle-icon {
   transform: rotate(45deg);
@@ -620,8 +611,8 @@ const optionLabelsJson = JSON.stringify(
 .bf-offering__eyebrow {
   display: block;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.160em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.40);
   margin-bottom: 14px;
@@ -636,9 +627,9 @@ const optionLabelsJson = JSON.stringify(
 .bf-offering__list > li {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.65;
-  letter-spacing: 0.010em;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.65);
   padding: 10px 0;
   border-bottom: 0.5px solid rgba(0,0,0,0.10);
@@ -653,7 +644,8 @@ const optionLabelsJson = JSON.stringify(
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 14px;
-  letter-spacing: 0.010em;
+  line-height: 24px;
+  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.45);
   padding: 4px 0;
 }
@@ -681,20 +673,22 @@ const optionLabelsJson = JSON.stringify(
   display: flex;
   flex-direction: column;
   padding: 20px 0 22px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
 }
+.bf-field:first-of-type { border-top: 0.5px solid rgba(0,0,0,0.12); }
 
 .bf-label {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
-  letter-spacing: 0.015em;
-  color: rgba(0,0,0,0.50);
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.55);
   margin-bottom: 10px;
 }
 
 .bf-optional {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
   color: rgba(0,0,0,0.32);
 }
@@ -702,12 +696,12 @@ const optionLabelsJson = JSON.stringify(
 .bf-input {
   background: transparent;
   border: none;
-  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  border-bottom: 0.5px solid rgba(0,0,0,0.30);
   outline: none;
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 18px;
-  letter-spacing: 0.005em;
+  font-size: 16px;
+  letter-spacing: 0.020em;
   color: var(--ink);
   padding: 8px 0 10px;
   width: 100%;
@@ -715,17 +709,18 @@ const optionLabelsJson = JSON.stringify(
   -webkit-appearance: none;
   border-radius: 0;
 }
-.bf-input::placeholder { color: rgba(0,0,0,0.22); }
-.bf-input:focus { border-bottom-color: var(--ink); }
-.bf-input.bf-input--error { border-bottom-color: var(--orange); }
+.bf-input::placeholder { color: rgba(0,0,0,0.28); }
+.bf-input:focus { border-bottom-color: var(--blue); }
+.bf-input.bf-input--error { border-bottom-color: var(--ink); }
 
 .bf-field-error {
   display: none;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--ink);
+  opacity: 0.55;
   margin-top: 8px;
 }
 .bf-field-error.visible { display: block; }
@@ -750,7 +745,7 @@ const optionLabelsJson = JSON.stringify(
   background: var(--ink);
   color: var(--paper);
   border: none;
-  border-radius: 0;
+  border-radius: 4px;
   cursor: pointer;
   transition: background 0.25s ease;
   min-width: 140px;
@@ -760,7 +755,7 @@ const optionLabelsJson = JSON.stringify(
 
 .bf-submit__label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14.4px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
   transition: opacity 0.2s;
@@ -786,8 +781,9 @@ const optionLabelsJson = JSON.stringify(
 .bf-form-note {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 13px;
-  letter-spacing: 0.010em;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.38);
 }
 
@@ -815,9 +811,9 @@ const optionLabelsJson = JSON.stringify(
 .bf-selflead__body {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 17px;
-  line-height: 1.75;
-  letter-spacing: 0.010em;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.60);
   max-width: 460px;
   margin-bottom: 44px;
@@ -832,8 +828,8 @@ const optionLabelsJson = JSON.stringify(
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.140em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.40);
   text-decoration: none;
@@ -846,19 +842,29 @@ const optionLabelsJson = JSON.stringify(
   border-bottom-color: rgba(0,0,0,0.30);
 }
 
+/* ── Tablet ≤ 900px */
+@media (max-width: 900px) {
+  .bf-options { grid-template-columns: repeat(2, 1fr); }
+  #bfStep1 .bf-step__inner { max-width: 100%; }
+}
+
 /* ── Mobile ≤ 640px */
 @media (max-width: 640px) {
 
-  /* Step 1 — content height only, no forced stretch */
+  /* Step 1 */
   #bfStep1 { flex: none; }
   #bfStep1 .bf-step__inner {
     padding-top: 20px;
     padding-bottom: 40px;
     min-height: 0;
   }
-  #bfStep1 .bf-header { margin-bottom: 12px; }
+  #bfStep1 .bf-header { margin-bottom: 16px; }
 
-  /* Step 2 — tight but breathable, fits one screen */
+  /* Step 1 cards: 1-up on mobile */
+  .bf-options { grid-template-columns: 1fr; }
+  .bf-option__label { font-size: 28px; }
+
+  /* Step 2 */
   #bfStep2 .bf-step__inner {
     padding-top: 28px;
     padding-bottom: 0;
@@ -866,46 +872,32 @@ const optionLabelsJson = JSON.stringify(
   }
   #bfStep2 .bf-header { margin-bottom: 4px; }
 
-  /* Hide brush mark on mobile — clips at edge */
+  /* Hide brush mark on mobile */
   .bf-mark { display: none; }
 
   /* Page headline */
   .bf-headline { font-size: 34px; }
 
-  /* Selected option — smaller display heading on mobile */
+  /* Option name heading on Step 2 */
   .bf-selected-badge { font-size: 32px; }
 
   /* Back button */
   .bf-back { margin-top: 8px; }
 
-  /* Option rows */
-  .bf-option { padding-top: 22px; padding-bottom: 22px; }
-  .bf-option__label { font-size: clamp(32px, 8vw, 48px); }
-  .bf-option__desc  { font-size: 12px; }
-
-  /* Offering intro */
-  .bf-offering__intro {
-    font-size: 15px;
-    line-height: 1.6;
-    margin-top: 18px;
-    margin-bottom: 14px;
-  }
+  /* Offering */
+  .bf-offering__intro { margin-top: 18px; margin-bottom: 14px; }
   .bf-offering__toggle { padding: 12px 0; margin-bottom: 0; }
 
   /* Form section */
   .bf-about-heading {
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 20px;
     margin-bottom: 2px;
   }
   .bf-field { padding: 12px 0 14px; }
-  .bf-input {
-    font-size: 16px; /* prevent iOS zoom on focus */
-    padding: 6px 0 8px;
-  }
   .bf-label { margin-bottom: 4px; }
 
-  /* Push submit to bottom via flex */
+  /* Push submit to bottom */
   .bf-form { flex: 1; display: flex; flex-direction: column; }
   .bf-form-footer {
     margin-top: auto;
@@ -915,6 +907,7 @@ const optionLabelsJson = JSON.stringify(
   }
   .bf-submit {
     width: 100%;
+    border-radius: 0;
     padding: 0;
   }
 

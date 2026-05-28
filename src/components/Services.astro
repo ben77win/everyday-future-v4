@@ -3,33 +3,34 @@ import { practiceOptions } from '../data/options';
 ---
 <section class="s2" id="practice">
 
-  <!-- Header -->
+  <!-- Header: headline + body only -->
   <div class="s2__header">
-    <div class="s2__header-left">
-      <span class="s2__headline-clip">
-        <h2 class="s2__headline" id="s2Headline">Choose how you practice</h2>
-      </span>
-      <p class="s2__header-body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
+    <span class="s2__headline-clip">
+      <h2 class="s2__headline" id="s2Headline">Choose how<br />you practice</h2>
+    </span>
+    <p class="s2__header-body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
+  </div>
+
+  <!-- Tier tiles: Foundation / Calibration / Expansion — centered, max 880px -->
+  <div class="s2__tiers">
+    <div class="s2__tier">
+      <span class="s2__tier-num">— 01</span>
+      <img src="/images/dunes.png" alt="" />
+      <span class="s2__tier-label">Foundation</span>
     </div>
-    <div class="s2__header-right">
-      <div class="s2__tiers">
-        <div class="s2__tier">
-          <img src="/images/dunes.png" alt="Foundation" />
-          <span class="s2__tier-label">Foundation</span>
-        </div>
-        <div class="s2__tier">
-          <img src="/images/feather.png" alt="Calibration" />
-          <span class="s2__tier-label">Calibration</span>
-        </div>
-        <div class="s2__tier">
-          <img src="/images/lotus.png" alt="Expansion" />
-          <span class="s2__tier-label">Expansion</span>
-        </div>
-      </div>
+    <div class="s2__tier">
+      <span class="s2__tier-num">— 02</span>
+      <img src="/images/feather.png" alt="" />
+      <span class="s2__tier-label">Calibration</span>
+    </div>
+    <div class="s2__tier">
+      <span class="s2__tier-num">— 03</span>
+      <img src="/images/lotus.png" alt="" />
+      <span class="s2__tier-label">Expansion</span>
     </div>
   </div>
 
-  <!-- 4 option cards -->
+  <!-- Option cards: 4-up grid -->
   <div class="s2__cards">
     {practiceOptions.map((opt) => (
       <a href={`/begin?option=${opt.key}`} class="s2__card">
