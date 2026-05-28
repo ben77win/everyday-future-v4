@@ -42,210 +42,112 @@ const optionLabelsJson = JSON.stringify(
 
   <!-- ── STEP 2: Contact form ──────────────────────────────────── -->
   <div class="bf-step bf-step--hidden" id="bfStep2">
-    <div class="bf-step__inner">
-      <img class="bf-mark" src="/marks/Vector-4.svg" alt="" aria-hidden="true" />
+    <div class="bf-step__inner bf-step2__inner">
 
-      <div class="bf-header">
-        <div class="bf-selected-badge" id="bfSelectedBadge"></div>
+      <!-- Top nav bar: ← CHANGE SELECTION  • SELECTED · 1:1 COACHING -->
+      <div class="bf-step2-nav">
         <button class="bf-back" id="bfBack" type="button">
-          <span class="bf-back__arrow" aria-hidden="true">←</span>
-          <span class="t-cta">Change selection</span>
+          <span class="bf-back__arrow" aria-hidden="true">←</span> Change selection
         </button>
+        <span class="bf-step2-badge" id="bfSelectedBadge"></span>
       </div>
 
-      <!-- Offering detail (one shown at a time) -->
+      <!-- 2-col: heading+body left, offering card right -->
+      <div class="bf-step2-cols">
+
+        <div class="bf-step2-left">
+          <h1 class="bf-step2-heading">Begin your<br>practice.</h1>
+          <p class="bf-step2-sub">A few details. You'll be on Taylor's calendar in less than a minute. There's no obligation — the first conversation is a fit-check, not a sales call.</p>
+        </div>
+
+        <div class="bf-step2-right">
 
           <!-- 1:1 -->
           <div class="bf-offering bf-offering--hidden" id="bfOffering1on1">
-            <p class="bf-offering__intro">A dedicated one-on-one practice to work on what matters most to you with the support of a coach.</p>
-            <button class="bf-offering__toggle" type="button" aria-expanded="false">
-              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="bf-offering__sections">
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Structure</span>
-                <ul class="bf-offering__list">
-                  <li>Limited to a small number of clients at a time</li>
-                  <li>Virtual coaching sessions held 2x monthly</li>
-                  <li>Flexible scheduling with no rescheduling fees</li>
-                  <li>Initial six-month commitment:
-                    <ul class="bf-offering__sublist">
-                      <li>3-Month Foundation Flow</li>
-                      <li>3-Month Calibration Flow</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">What we work with</span>
-                <ul class="bf-offering__list">
-                  <li>Conscious change in how you work, relate, and create</li>
-                  <li>Expanding possibility and reducing resistance</li>
-                  <li>Greater clarity, coherence, courage, connection, and curiosity</li>
-                  <li>Meaningful progress toward the future you want</li>
-                  <li>Recognizing and changing patterns shaping attention, behavior, relationships, and decision-making</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Between sessions</span>
-                <ul class="bf-offering__list">
-                  <li>Active exchange for questions, reflection, accountability, and support</li>
-                  <li>Practices and intentional action integrated into real life and work</li>
-                  <li>Daily awareness and reflection practices designed to build continuity over time</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">AI-supported practice</span>
-                <ul class="bf-offering__list">
-                  <li>Dedicated AI workspace for each client</li>
-                  <li>Session recordings and coaching follow-ups</li>
-                  <li>Reflection, themes, actions, and pattern tracking over time</li>
-                  <li>Increased continuity, awareness, and integration throughout the practice</li>
-                </ul>
+            <div class="bf-offering-card">
+              <span class="bf-offering-card__eyebrow">01 / The 1:1 Practice</span>
+              <h3 class="bf-offering-card__title">A practice designed around you, in 60-minute sessions.</h3>
+              <div class="bf-offering-card__grid">
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Structure</span>
+                  <p class="bf-offering-card__body">Monthly subscription. 60-minute virtual sessions. Three-month minimum arc, ongoing thereafter.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">What we work with</span>
+                  <p class="bf-offering-card__body">Whatever is alive in your work and life. Direction, ambition, transition, relationships, resistance, capacity.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Between sessions</span>
+                  <p class="bf-offering-card__body">Ten to twenty minutes of daily practice. Reflection, exercises, intentional action.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">AI-supported practice</span>
+                  <p class="bf-offering-card__body">Optional. Session transcripts and pattern recognition support continuity across the arc.</p>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Orgs & Teams -->
           <div class="bf-offering bf-offering--hidden" id="bfOfferingOrgs">
-            <p class="bf-offering__intro">Custom workshops, offsites, and coaching engagements designed for organizations, leadership teams, co-founders, and cohorts.</p>
-            <button class="bf-offering__toggle" type="button" aria-expanded="false">
-              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="bf-offering__sections">
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Structure</span>
-                <ul class="bf-offering__list">
-                  <li>Custom workshops, offsites, and coaching engagements</li>
-                  <li>Designed for organizations, leadership teams, co-founders, and cohorts</li>
-                  <li>Virtual or in-person formats depending on the engagement</li>
-                  <li>Structured around the real dynamics, goals, challenges, and opportunities within the team or organization</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">What we practice</span>
-                <ul class="bf-offering__list">
-                  <li>Conscious change in how teams work, relate, communicate, and create</li>
-                  <li>Expanding possibility and reducing resistance within organizational systems</li>
-                  <li>Greater clarity, coherence, courage, connection, and curiosity across teams</li>
-                  <li>Meaningful progress toward aligned goals, culture, leadership, and direction</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Engagement types</span>
-                <ul class="bf-offering__list">
-                  <li>Co-founder, executive and leadership team coaching</li>
-                  <li>Team workshops and facilitated working sessions</li>
-                  <li>Retreats and offsites</li>
-                  <li>Ongoing coaching and practice integration for individuals</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
-                <ul class="bf-offering__list">
-                  <li>Designed and facilitated directly by a coach</li>
-                  <li>Practical frameworks, reflection, exercises, and real-time application</li>
-                  <li>Practices integrated into existing workflows and organizational realities</li>
-                  <li>AI-supported reflection, synthesis, and follow-up available depending on engagement type</li>
-                </ul>
+            <div class="bf-offering-card">
+              <span class="bf-offering-card__eyebrow">02 / Orgs &amp; Teams</span>
+              <h3 class="bf-offering-card__title">Custom programs for organizations, leadership teams, and cohorts.</h3>
+              <div class="bf-offering-card__grid">
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Structure</span>
+                  <p class="bf-offering-card__body">Custom workshops, offsites, and coaching engagements. Virtual or in-person depending on the engagement.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">What we practice</span>
+                  <p class="bf-offering-card__body">Conscious change in how teams work, relate, and create. Clarity, coherence, and aligned direction.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Engagement types</span>
+                  <p class="bf-offering-card__body">Executive coaching, team workshops, retreats and offsites, co-founder programs.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Facilitation &amp; support</span>
+                  <p class="bf-offering-card__body">Designed and facilitated directly by a coach. Practical frameworks integrated into real workflows.</p>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Group -->
           <div class="bf-offering bf-offering--hidden" id="bfOfferingGroup">
-            <p class="bf-offering__intro">A shared practice in curated community with structure, support, and coach facilitation.</p>
-            <button class="bf-offering__toggle" type="button" aria-expanded="false">
-              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="bf-offering__sections">
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Structure</span>
-                <ul class="bf-offering__list">
-                  <li>12-week guided group practice</li>
-                  <li>Limited to 8 participants</li>
-                  <li>90-minute virtual group sessions</li>
-                  <li>3 individual coaching sessions included during the program</li>
-                  <li>Structured around the EDF Practice and dimensions of conscious change</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">What we practice</span>
-                <ul class="bf-offering__list">
-                  <li>Conscious change in how we work, relate, and create</li>
-                  <li>Expanding possibility and reducing resistance</li>
-                  <li>Greater clarity, coherence, courage, connection, and curiosity</li>
-                  <li>Meaningful progress through shared practice and accountability</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Experience</span>
-                <ul class="bf-offering__list">
-                  <li>Community with other waymakers navigating growth, change, creativity, leadership, and transition</li>
-                  <li>Shared learning, reflection, and perspective</li>
-                  <li>Practices integrated into real work between sessions</li>
-                  <li>Supportive accountability and continuity through ongoing participation</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Facilitation &amp; support</span>
-                <ul class="bf-offering__list">
-                  <li>Coach-led structure and facilitation</li>
-                  <li>Practical frameworks, exercises, reflection, and discussion</li>
-                  <li>AI-supported notes, reflections, and follow-ups available depending on the group format</li>
-                </ul>
+            <div class="bf-offering-card">
+              <span class="bf-offering-card__eyebrow">03 / Group</span>
+              <h3 class="bf-offering-card__title">A shared practice in community with structure and coach facilitation.</h3>
+              <div class="bf-offering-card__grid">
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Structure</span>
+                  <p class="bf-offering-card__body">12-week guided group practice. Limited to 8 participants. 90-minute virtual sessions plus 3 individual coaching sessions.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">What we practice</span>
+                  <p class="bf-offering-card__body">Conscious change in how we work, relate, and create. Expanding possibility through shared practice and accountability.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Experience</span>
+                  <p class="bf-offering-card__body">Community with waymakers navigating growth, change, and transition. Shared learning and supportive accountability.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Facilitation &amp; support</span>
+                  <p class="bf-offering-card__body">Coach-led structure and facilitation. Practical frameworks, reflection, and AI-supported follow-ups.</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Self-led -->
-          <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead">
-            <p class="bf-offering__intro">A self-guided practice with structure, reflection, and practical guidance for conscious change.</p>
-            <button class="bf-offering__toggle" type="button" aria-expanded="false">
-              What's included <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="bf-offering__sections">
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Structure</span>
-                <ul class="bf-offering__list">
-                  <li>Self-paced access to the EDF Practice</li>
-                  <li>Guided frameworks, exercises, reflections, and practices</li>
-                  <li>Designed to integrate into real life and work</li>
-                  <li>Ongoing access to materials and resources</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">What you practice</span>
-                <ul class="bf-offering__list">
-                  <li>Awareness, AIM, Action, and Analysis</li>
-                  <li>Conscious change in how you work, relate, and create</li>
-                  <li>Expanding possibility and reducing resistance</li>
-                  <li>Greater clarity, coherence, courage, connection, and curiosity</li>
-                  <li>Meaningful progress toward the future you want to create</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Experience</span>
-                <ul class="bf-offering__list">
-                  <li>Independent practice with flexible pacing</li>
-                  <li>Reflection and exercises integrated into everyday life</li>
-                  <li>Practical tools for recognizing patterns and creating intentional change</li>
-                  <li>A repeatable practice for conscious awareness and meaningful progress over time</li>
-                </ul>
-              </div>
-              <div class="bf-offering__section">
-                <span class="bf-offering__eyebrow">Guidance &amp; support</span>
-                <ul class="bf-offering__list">
-                  <li>Structured lessons and practices</li>
-                  <li>AI-supported reflection and coaching guidance</li>
-                  <li>Session recordings, prompts, and practice integration tools</li>
-                  <li>Designed for ongoing personal and professional growth through self-led practice</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <!-- Self-led: no offering card -->
+          <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead"></div>
 
-      <h2 class="bf-headline bf-about-heading" id="bfAboutHeading">A little about you</h2>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <h2 class="bf-about-heading" id="bfAboutHeading">About you</h2>
 
       <!-- Netlify Forms — hidden form for build-time detection -->
       <form name="begin" netlify netlify-honeypot="bot-field" hidden>
@@ -277,7 +179,7 @@ const optionLabelsJson = JSON.stringify(
         </div>
 
         <div class="bf-field">
-          <label class="bf-label" for="bfEmail">Email address</label>
+          <label class="bf-label" for="bfEmail">Email</label>
           <input
             class="bf-input"
             id="bfEmail"
@@ -308,7 +210,7 @@ const optionLabelsJson = JSON.stringify(
 
         <div class="bf-form-footer">
           <button class="bf-submit" id="bfSubmit" type="button">
-            <span class="bf-submit__label t-cta" id="bfSubmitLabel">Begin</span>
+            <span class="bf-submit__label" id="bfSubmitLabel">Begin Practice →</span>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
         </div>
@@ -385,7 +287,7 @@ const optionLabelsJson = JSON.stringify(
   flex-direction: column;
 }
 
-/* ── Header block */
+/* ── Header block (Step 1 / Step 3) */
 .bf-header {
   margin-bottom: 36px;
 }
@@ -420,7 +322,135 @@ const optionLabelsJson = JSON.stringify(
   color: rgba(0,0,0,0.50);
 }
 
-/* ── "A little about you" — sub-display */
+/* Step 1 inner is full-width so cards span page */
+#bfStep1 .bf-step__inner {
+  max-width: var(--max-w);
+}
+
+/* ── Step 2 inner — wider to accommodate 2-col */
+.bf-step2__inner {
+  max-width: var(--max-w) !important;
+}
+
+/* ── Step 2 nav bar */
+.bf-step2-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 20px;
+  margin-bottom: 60px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+}
+
+.bf-step2-badge {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.40);
+}
+.bf-step2-badge:not(:empty)::before {
+  content: '•';
+  margin-right: 10px;
+  color: rgba(0,0,0,0.25);
+}
+.bf-step2-badge:empty { display: none; }
+
+/* ── Step 2 two-column layout */
+.bf-step2-cols {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 80px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+
+.bf-step2-heading {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(46px, 5.2vw, 80px);
+  letter-spacing: -0.030em;
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.bf-step2-sub {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.55);
+}
+
+/* ── Offering card (right column) */
+.bf-offering-card {
+  background: var(--paper);
+  padding: 32px;
+}
+
+.bf-offering-card__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.40);
+  margin-bottom: 16px;
+}
+
+.bf-offering-card__title {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(18px, 1.8vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -0.010em;
+  color: var(--ink);
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+}
+
+.bf-offering-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.bf-offering-card__section {
+  padding: 20px 20px 20px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.10);
+}
+.bf-offering-card__section:nth-child(even) {
+  padding-left: 20px;
+  padding-right: 0;
+  border-left: 0.5px solid rgba(0,0,0,0.10);
+}
+.bf-offering-card__section:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.bf-offering-card__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.40);
+  margin-bottom: 10px;
+}
+
+.bf-offering-card__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.65);
+}
+
+/* ── "About you" heading */
 .bf-about-heading {
   font-family: var(--font-body);
   font-weight: 400;
@@ -428,24 +458,7 @@ const optionLabelsJson = JSON.stringify(
   line-height: 1.2;
   letter-spacing: -0.010em;
   color: var(--ink);
-  margin-top: 48px;
   margin-bottom: 8px;
-}
-
-/* ── Brush mark */
-.bf-mark {
-  position: absolute;
-  top: 40px;
-  right: calc(var(--gutter) - 20px);
-  width: clamp(80px, 14vw, 130px);
-  opacity: 0.18;
-  pointer-events: none;
-  transform: rotate(6deg);
-}
-
-/* Step 1 inner is full-width so cards span page */
-#bfStep1 .bf-step__inner {
-  max-width: var(--max-w);
 }
 
 /* ── Step 1 option grid — 4-up matching S2 cards */
@@ -529,131 +542,12 @@ const optionLabelsJson = JSON.stringify(
   letter-spacing: 0.110em;
   text-transform: uppercase;
   transition: color 0.2s ease;
-  margin-top: 14px;
 }
 .bf-back:hover { color: var(--ink); }
 .bf-back__arrow { font-size: 14px; }
 
-/* ── Option name — page heading on Step 2 */
-.bf-selected-badge {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: clamp(46px, 5.2vw, 80px);
-  letter-spacing: -0.030em;
-  line-height: 1.0;
-  color: var(--ink);
-}
-.bf-selected-badge:empty { display: none; }
-
-/* ── Offering detail block */
+/* ── Offering block visibility */
 .bf-offering--hidden { display: none; }
-
-.bf-offering {
-  margin-bottom: 8px;
-}
-
-.bf-offering__intro {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.70);
-  margin-bottom: 20px;
-}
-
-/* WHAT'S INCLUDED toggle row */
-.bf-offering__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background: none;
-  border: none;
-  border-top: 0.5px solid rgba(0,0,0,0.18);
-  border-bottom: 0.5px solid rgba(0,0,0,0.18);
-  padding: 14px 0;
-  margin-bottom: 36px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.45);
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-.bf-offering__toggle:hover { color: rgba(0,0,0,0.75); }
-
-.bf-offering__toggle-icon {
-  font-size: 20px;
-  font-family: var(--font-body);
-  font-weight: 300;
-  color: rgba(0,0,0,0.35);
-  line-height: 1;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-.bf-offering--expanded .bf-offering__toggle-icon {
-  transform: rotate(45deg);
-}
-
-/* Sections collapsed by default */
-.bf-offering__sections {
-  display: none;
-}
-.bf-offering--expanded .bf-offering__sections {
-  display: block;
-}
-
-.bf-offering__section {
-  margin-bottom: 32px;
-}
-
-.bf-offering__eyebrow {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.40);
-  margin-bottom: 14px;
-}
-
-.bf-offering__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border-top: 0.5px solid rgba(0,0,0,0.10);
-}
-.bf-offering__list > li {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.65);
-  padding: 10px 0;
-  border-bottom: 0.5px solid rgba(0,0,0,0.10);
-}
-
-.bf-offering__sublist {
-  list-style: none;
-  padding: 0;
-  margin: 8px 0 0 16px;
-}
-.bf-offering__sublist li {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.45);
-  padding: 4px 0;
-}
-.bf-offering__sublist li::before {
-  content: '—';
-  margin-right: 8px;
-  opacity: 0.40;
-}
 
 /* ── Form */
 .bf-form {
@@ -678,19 +572,20 @@ const optionLabelsJson = JSON.stringify(
 .bf-field:first-of-type { border-top: 0.5px solid rgba(0,0,0,0.12); }
 
 .bf-label {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.55);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.45);
   margin-bottom: 10px;
 }
 
 .bf-optional {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(0,0,0,0.32);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.28);
 }
 
 .bf-input {
@@ -867,49 +762,43 @@ const optionLabelsJson = JSON.stringify(
   /* Step 2 */
   #bfStep2 .bf-step__inner {
     padding-top: 28px;
-    padding-bottom: 0;
-    min-height: calc(100dvh - 60px);
+    padding-bottom: 40px;
   }
-  #bfStep2 .bf-header { margin-bottom: 4px; }
-
-  /* Hide brush mark on mobile */
-  .bf-mark { display: none; }
 
   /* Page headline */
   .bf-headline { font-size: 34px; }
+  .bf-step2-heading { font-size: 34px; }
 
-  /* Option name heading on Step 2 */
-  .bf-selected-badge { font-size: 32px; }
+  /* Step 2 nav */
+  .bf-step2-nav { margin-bottom: 32px; }
 
-  /* Back button */
-  .bf-back { margin-top: 8px; }
-
-  /* Offering */
-  .bf-offering__intro { margin-top: 18px; margin-bottom: 14px; }
-  .bf-offering__toggle { padding: 12px 0; margin-bottom: 0; }
-
-  /* Form section */
-  .bf-about-heading {
-    font-size: 22px;
-    margin-top: 20px;
-    margin-bottom: 2px;
+  /* Step 2: stack columns on mobile */
+  .bf-step2-cols {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
   }
+
+  /* Offering card grid: 1-col on mobile */
+  .bf-offering-card { padding: 20px; }
+  .bf-offering-card__grid { grid-template-columns: 1fr; }
+  .bf-offering-card__section:nth-child(even) {
+    padding-left: 0;
+    border-left: none;
+  }
+  .bf-offering-card__section:nth-last-child(-n+2) {
+    border-bottom: 0.5px solid rgba(0,0,0,0.10);
+  }
+  .bf-offering-card__section:last-child {
+    border-bottom: none;
+  }
+
+  /* About heading */
+  .bf-about-heading { font-size: 22px; margin-bottom: 4px; }
+
+  /* Form fields */
   .bf-field { padding: 12px 0 14px; }
   .bf-label { margin-bottom: 4px; }
-
-  /* Push submit to bottom */
-  .bf-form { flex: 1; display: flex; flex-direction: column; }
-  .bf-form-footer {
-    margin-top: auto;
-    padding-top: 20px;
-    padding-bottom: env(safe-area-inset-bottom, 16px);
-    gap: 0;
-  }
-  .bf-submit {
-    width: 100%;
-    border-radius: 0;
-    padding: 0;
-  }
 
   #bfCalendlyMount { margin: 0 calc(-1 * var(--gutter)); }
 }
