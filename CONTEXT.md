@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-27 — BeginFlow offering details added (1:1, Orgs & Teams); practice options extracted to shared data file_
+_Last updated: 2026-05-28 — Mobile pass complete; Begin page + all changes merged to main/production_
 
 ---
 
@@ -45,7 +45,7 @@ See [`design.md`](design.md) — comprehensive as-built reference for all tokens
 | — | Footer (`Footer.astro`) | ✅ Complete |
 | — | Nav (`Nav.astro`) | ✅ Complete |
 | — | Floating CTA (`CTABar.astro`) | ✅ Complete |
-| — | **Begin flow** (`BeginFlow.astro`, `begin.astro`) | ✅ Complete — staging only |
+| — | **Begin flow** (`BeginFlow.astro`, `begin.astro`) | ✅ Complete — **live on main** |
 
 ---
 
@@ -192,12 +192,16 @@ All-positive speeds (0.04/0.06/0.08) keep photos moving together with minimal se
 .s2__header { flex-direction: column; gap: 28px; }
 .s2__option { grid-template-columns: 1fr auto; }
 .s2__option-desc { display: none; }
-.s2__free-img { display: none; }
-.s2__header-right img[aria-hidden],
-.s2__free-content img[aria-hidden] { display: none; }
-.s2__free { overflow: hidden; }
+/* Tier images: horizontal scroll, snap, no gap */
+.s2__tiers { overflow-x: auto; scroll-snap-type: x mandatory; gap: 0; padding: 0 var(--gutter); }
+.s2__tier { flex: 0 0 72vw; scroll-snap-align: start; }
+/* Hover reset + active tap state */
+.s2__option:hover { background: transparent; }
+.s2__option:active { background: var(--paper-bone); }
 
-/* S3 — cinematic (see above) */
+/* S3 — one card per screen, no gaps */
+.s3__rail { gap: 0; padding-right: 0; }
+.s3__card { width: 100vw; }
 
 /* S4 */
 .s4 { padding: 72px var(--gutter) 72px; }
@@ -206,13 +210,24 @@ All-positive speeds (0.04/0.06/0.08) keep photos moving together with minimal se
 /* S5 */
 .s5__inner { grid-template-columns: 1fr; }
 
-/* S6 */
+/* S6 — portrait only */
 .s6__inner { grid-template-columns: 1fr; }
-.s6__photos { height: 340px; overflow: hidden; }
+.s6__photos { height: auto; }
+.s6__photo--a { position: relative; width: 100%; height: auto; top: auto; left: auto; }
+.s6__photo--b, .s6__photo--c { display: none; }
 
-/* Footer */
+/* CTA bar — full-width anchored to bottom */
+.float-cta { bottom: 0; left: 0; right: 0; width: 100%; transform: none; }
+.float-cta__link { width: 100%; border-radius: 0; height: 52px; }
+.float-cta__link:active { background: var(--orange); }
+
+/* Footer — clears fixed CTA bar */
+.site-footer { padding-bottom: calc(52px + env(safe-area-inset-bottom, 16px)); }
 .site-footer__inner { flex-direction: column; align-items: flex-start; gap: 28px; }
 ```
+
+### Hero Wordmark (mobile)
+Animation is skipped on mobile (`window.innerWidth < 641` early return in Layout.astro JS). Wordmark stays in nav — no risk of clipping at small viewports.
 
 ---
 
@@ -360,7 +375,7 @@ EDF brand design.md archived at `_archive/design.md` (copied from the official b
 - [ ] **Group Coaching offering detail** — no offering block in BeginFlow Step 2 yet; content pending from Taylor
 - [ ] **Formetica license** — currently using Inter 200 as fallback
 - [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch (Begin page step 3 currently shows placeholder 404)
-- [ ] **Begin page: push to main** — Begin page is on `staging` only; needs Ben's explicit approval before merging to `main`
+- [x] **Begin page: pushed to main** — Live at https://everyday-future-v4.netlify.app (2026-05-28)
 
 ### Mobile (ideas not yet implemented)
 - [ ] **Word-by-word quote reveal** — animated text reveal on scroll for S3 quotes on mobile
