@@ -431,7 +431,10 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 0.5px solid rgba(0,0,0,0.18);
   background: var(--paper-cream);
   margin: -100px calc(-1 * var(--gutter)) 0;
-  padding: 100px var(--gutter) 80px;
+  padding-top: 100px;
+  padding-bottom: 80px;
+  padding-left: max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter)));
+  padding-right: max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter)));
 }
 .s2__header-left { flex: 0 0 36%; }
 .s2__header-right {
@@ -502,8 +505,8 @@ a { color: inherit; text-decoration: none; }
   border-top: 0.5px solid rgba(0,0,0,0.18);
   cursor: pointer;
   margin: 0 calc(-1 * var(--gutter));
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
+  padding-left: max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter)));
+  padding-right: max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter)));
   /* scroll reveal state */
   opacity: 0;
   transform: translateY(28px);
@@ -1215,14 +1218,6 @@ a { color: inherit; text-decoration: none; }
   }
   .s5__mark { left: -6px; }
   .s5__list { margin-top: 0; }
-  /* Dash list style for "You're…" paragraphs on mobile */
-  .s5__para { padding-left: 20px; position: relative; }
-  .s5__para::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: rgba(0,0,0,0.30);
-  }
 
   /* ── S6 TAYLOR */
   .s6 { padding: 72px var(--gutter) 88px; }
