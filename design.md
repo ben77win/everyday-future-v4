@@ -1,533 +1,331 @@
 # Every Day Future — Design System (design.md)
 
-> Derived from `ben77win/everyday-future-v4@staging` — an Astro 4 site, single layout, ten components. Every token, class name, selector, and behavior in this document is traceable to a specific file in that repo.
+> Derived strictly from the Figma source (`Every Day Futures - Visual Identity.fig` by Form / Alice / designbyform.com) — every token, type spec, surface, and rule in this document is traceable to that file. Where the staging build extended beyond the brand source (orange dots, --paper-bone, --paper-clay, --paper-dusk, --paper-moss, the 100px pill CTA), this pass returns to strict compliance.
 
-**Source map**
-
-| Concern | File |
-|---|---|
-| Tokens, type scale, all section styles | `src/styles/global.css` |
-| Head, fonts, all behavior (JS) | `src/layouts/Layout.astro` |
-| Page composition | `src/pages/index.astro` |
-| Section components | `src/components/{Hero, Services, Testimonials, About, Waymaker, TaylorBio, FAQ, Footer, Nav, CTABar, BeginFlow}.astro` |
-| Brush marks | `public/marks/Vector{,-1..-12}.svg` (13 files) |
-| Photography | `public/images/*.{png,jpg,gif}` (21 files) |
+**Source files:**
+- `Palette Swap.html` + `styles/palette-swap.css` — visual reference, pixel-exact
+- `handoff/Tokens.css` — drop-in :root replacement for `src/styles/global.css`
+- This document — design system spec
 
 ---
 
 ## 1. Voice in one line
 
-> **Choose the future you want. Create what matters now.**
+> **Choose how you practice.**
 
-A quiet, editorial coaching site. Type is the hero. Photography is full-bleed and partial-opacity. Hand-drawn blue brush marks sit *over* type and images as overlays. The page reads like a publication, not a SaaS landing page.
+A quiet, editorial coaching site. Type is the hero. Photography is full-bleed and partial-opacity. Hand-drawn blue brush marks sit over type and images as overlays. The page reads like a publication, not a SaaS landing page.
 
 ---
 
 ## 2. Tokens
 
-Defined once in `src/styles/global.css` under `:root`.
+### 2.1 Color — 7 tokens, total
 
-### 2.1 Color
-
-| Token | Value | Where it shows up |
+| Token | Hex | Used in |
 |---|---|---|
-| `--ink` | `#000000` | All display + body type, hairlines, default CTA fill, footer background, hero scrim base |
-| `--paper` | `#ffffff` | Page default, S3 Q1 background, S6 Taylor background |
-| `--paper-off-a` | `#fafcfa` | S3 Q2 background |
-| `--paper-off-b` | `#f8fcf7` | S4 About background |
-| `--paper-cream` | `#fffcd1` | S2 Services background, S5 Waymaker background, Begin drawer background |
-| `--paper-sage` | `#e9ede7` | S7 FAQ |
-| `--paper-bone` | `#f0e8d8` | S3 section floor — warm-neutral that contrasts cream + sage |
-| `--paper-clay` | `#b87c5e` | S3 outcome card surface — warm earth |
-| `--paper-dusk` | `#1f2a3c` | S3 outcome card surface — twilight |
-| `--paper-moss` | `#3c4a3a` | S3 outcome card surface — forest |
-| `--blue` | `#2956e0` | Brush marks (`.mark`) only. No other element uses this token. |
-| `--orange` | `#ff3900` | Hero top-right `.accent-dot`, footer `.site-footer__dot` (between links), float-CTA hover background |
+| `--ink` | `#000000` | All type, hairlines, S3 outcome cards, S2 hover, footer, hero gradient base |
+| `--paper` | `#FFFFFF` | Page default, S2 cards (on cream), S3 floor, S6 Taylor, Begin Step 3 panel |
+| `--paper-off-a` | `#FAFCFA` | Reserved — barely-warm paper variant |
+| `--paper-off-b` | `#F8FCF7` | S4 About |
+| `--paper-cream` | `#FFFCD1` | S2 Practice background, S5 Waymaker, Begin drawer/page |
+| `--paper-sage` | `#E9EDE7` | S3 testimonial cards (rotation), S7 FAQ |
+| `--blue` | `#2956E0` | Brush marks (default), interaction accent (CTA hover, link hover, focus ring) |
 
-**Section background map (canonical)**
-
-| Section | Element | Background |
-|---|---|---|
-| S1 Hero | `.hero` | `#0a0a0a` + rotating bg image at 0.88 opacity + four-stop dark gradient overlay |
-| S2 Services | `.s2` | `--paper-cream` |
-| S3 Practice Makes Progress | `.s3` | `--paper-bone` |
-| S4 About | `.s4` | `--paper-off-b` |
-| S5 Waymaker | `.s5` | `--paper-cream` |
-| S6 Taylor | `.s6` | `--paper` |
-| S7 FAQ | `.s7` | `--paper-sage` |
-| Footer | `.site-footer` | `--ink` |
-| Begin drawer | `.begin-drawer` | `--paper-cream` |
-
-**Rules from the code:**
-- **Black + electric blue is the only signal pair.** Every "moment" is one of those two against a paper.
-- **Hierarchy = stacked papers, never borders.** No 1px solid section dividers exist in the codebase; tone shifts do the work.
-- **Blue is a brush color, not an interface color.** It exists only in `.mark` overlays. No button, link, or text uses `--blue` in source.
-- **Orange is a spice.** Three exact uses: `.accent-dot` (hero), `.site-footer__dot` (footer separator), `.float-cta__link:hover` (and footer's inverted hover variant).
-- **Hairline alphas observed in the wild:** `rgba(0,0,0,0.10 / 0.12 / 0.18 / 0.30 / 0.35 / 0.40 / 0.45 / 0.55)` and `rgba(255,255,255,0.45 / 0.55)`. **`0.18` is the default** for structural hairlines.
+### Rules of color use
+- **Ink is type, hairlines, dark surfaces.** Pure #000.
+- **Blue is brush + interaction accent.** Default for brush marks. Hover state for primary CTAs. Link hover. Focus rings. Three jobs.
+- **Cream is the warm motif** — S2 and S5 are cream sections. Begin flow uses cream as the conversion surface.
+- **Sage is the cool gallery floor** — used on S3 testimonial cards and the S7 FAQ section.
+- **No orange.** Anywhere on the site. Orange appears only on the Form agency cover sheet as a brand mark — not part of the EDF website palette.
+- **No project-extension tokens.** `--paper-bone`, `--paper-clay`, `--paper-dusk`, `--paper-moss` are removed. `--ink-soft` and `--blue-deep` are removed.
 
 ### 2.2 Type tokens
 
 ```css
---font-display: 'Inter', sans-serif;                            /* wordmark only */
 --font-body:    'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+--font-display: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;  /* same family */
 --font-mono:    'DM Mono', ui-monospace, Menlo, monospace;
+--font-cover:   'Inter', sans-serif;  /* Formetica Light fallback — cover only */
 ```
 
-Loaded in `Layout.astro` from Google Fonts:
+Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
-```
-family=DM+Mono:wght@300;400&family=Inter:wght@200
-```
-
-— **only Inter 200, DM Mono 300, and DM Mono 400** are fetched. Helvetica Neue ships with the OS; no webfont fallback is loaded for it.
+**Weights**
+- 200 — Helvetica Neue Ultralight — wordmark
+- 300 — Helvetica Neue 45 Light — body
+- 400 — Helvetica Neue 55 Roman — display, names, option titles, FAQ questions
 
 ### 2.3 Layout tokens
 
 ```css
 --max-w: 1280px;
---gutter: 60px;   /* desktop */
-                  /* 36px tablet  (max-width 900px) */
-                  /* 22px mobile  (max-width 640px) */
+--gutter: 60px;     /* 36px tablet  (max-width 900px) */
+                    /* 22px mobile  (max-width 640px) */
 ```
-
-Two breakpoints: **`@media (max-width: 900px)`** and **`@media (max-width: 640px)`**.
 
 ---
 
 ## 3. Typography
 
-Nine reusable classes. Sentence case is universal — title-case headlines do not exist in source.
+| Use | Family | Weight | Size | Line | Tracking |
+|---|---|---|---|---|---|
+| Wordmark (nav, footer) | Helvetica Neue | 200 | 25px nav · 22px footer | 1 | -0.020em |
+| Cover wordmark | Inter (Formetica fallback) | 200 | 200px | 1 | -0.020em |
+| Display headline (hero, S2–S5 heads, S6 name, Begin headings) | Helvetica Neue 55 Roman | **400** | clamp(46, 5.6vw, 84) | 1.0 | -0.030em |
+| Sub-display (S4 body, S5 first para, S7 question, form heading, offering name) | Helvetica Neue 55 Roman | 400 | clamp(22, 2.2vw, 32) | 1.2 | -0.010em |
+| S3 outcome / testimonial card body | Helvetica Neue / Roman + Light | 400 / 300 | clamp(15, 1.2vw, 19) | 1.35–1.5 | varies |
+| Body (S5/S6 paragraphs, S2 sub, S7 answers, form fields, contact form) | Helvetica Neue 45 Light | 300 | **14px desktop / 16px mobile** | 24px / 26px | +0.020em |
+| Mono UI (eyebrows, nav links, footer, tags, captions) | DM Mono Regular | 400 | **13px / 0.110em** uppercase | 1 | 0.110em |
+| CTA label (float CTA + form buttons) | DM Mono Regular | 400 | **14.4px / 0.110em** uppercase | 1 | 0.110em |
 
-| Class | Family | Weight | Size | Line | Tracking | Used in |
-|---|---|---|---|---|---|---|
-| `.t-wordmark` | Inter | 200 | `22px` | — | `-0.01em` | Nav wordmark, footer wordmark variant |
-| `.t-display` | Helvetica | 300 | `clamp(42px, 5.5vw, 72px)` | `1.05` | `-0.030em` | Hero headline |
-| `.t-h2` | Helvetica | 300 | `clamp(32px, 3.6vw, 48px)` | `1.08` | `-0.020em` | Generic H2 helper (not actively used by S2-S7 — they declare their own sizes) |
-| `.t-h3` | Helvetica | 300 | `clamp(22px, 2.2vw, 32px)` | `1.15` | `-0.015em` | Reserved helper |
-| `.t-edf` | Helvetica | 500 | `clamp(52px, 7vw, 110px)` | `1` | `-0.020em` | EDF stacked mark (unused in current build but the helper exists) |
-| `.t-body` | Helvetica | 300 | `15px` | `1.7` | `0.010em` | Generic body helper |
-| `.t-eyebrow` | DM Mono | 400 | `11px` | `1` | `0.180em` UPPER | Generic eyebrow helper |
-| `.t-cta` | DM Mono | 400 | `11px` | — | `0.110em` UPPER | Float-CTA label, drawer close "Back" |
-| `.t-caption` | DM Mono | 300 | `11px` | — | `0.140em` UPPER | Reserved |
-
-**Section-local type declarations override `.t-h2/.t-h3/.t-body` in most places.** Notable per-section sizes:
-
-- `.s2__headline` — `clamp(42px, 4.8vw, 64px)` / 300 (animated clip-reveal)
-- `.s2__option-title` — `clamp(44px, 5.8vw, 78px)` / 300 / `-0.030em` / `line-height: 1`
-- `.s3__heading` — `clamp(42px, 5.2vw, 72px)` / 300 / `-0.028em`
-- `.s3__card-body` — `clamp(17px, 1.4vw, 21px)` / 300 / `1.4` / `0.005em` (outcome cards)
-- `.s3__card-quote` — `clamp(20px, 1.7vw, 26px)` / 300 **italic** / `1.3` / `-0.008em` (testimonial cards)
-- `.s4__body` — `clamp(20px, 2.4vw, 30px)` / 300 / `1.35` / `0.020em`
-- `.s5__word` — `clamp(52px, 7vw, 96px)` / 300 / `-0.030em`
-- `.s5__item` — `clamp(18px, 2vw, 26px)` / 300 / `0.020em`
-- `.s6__name` — `clamp(40px, 4.5vw, 58px)` / 300 / `-0.030em`
-- `.s6__para` — `15px` / 300 / `1.75` / `0.020em`
-- `.s7__question` — `clamp(18px, 2.2vw, 28px)` / 300 / `0.010em`
-
-**Tracking rule of thumb:** negative kerning (`-0.020em` → `-0.032em`) appears at display scale (≥36px). Body and meta sit at `+0.010em → +0.020em`. The `0.110em` and `0.140em–0.180em` ranges are reserved for ALL-CAPS DM Mono.
+**The .fig source has NO per-section eyebrow text.** The only eyebrow in the brand source is "TYPOGRAPHY" as a category label on the style tile. Section eyebrows ("01 / WHY THIS EXISTS"-style) are a staging-build convention — removed in this pass. Headlines carry section identity.
 
 ---
 
-## 4. Imagery
+## 4. Surfaces by section
 
-Stored in `public/images/`. The hero rotates one of four on each reload (via `localStorage.edf_hero`):
-
-```
-hero-rose.png  →  hero-red-sun.jpg  →  feather.png  →  lotus.png  → (loops)
-```
-
-Each rotation entry carries a `background-position` (e.g. `50% 30%`, `50% 40%`) so the crop is intentional.
-
-**Photo inventory & where each lives:**
-
-| File | Used in | Treatment |
+| Section | Background | Notes |
 |---|---|---|
-| `hero-rose.png`, `hero-red-sun.jpg`, `feather.png`, `lotus.png` | Hero rotation | full-bleed bg, `opacity: 0.88`, gradient overlay |
-| `mountain-card.png` | S3 Q1 — tall portrait bleeding right | `opacity: 0.80`, parallax `0.08` |
-| `horizon.png` | S3 Q2 — wide landscape bleeding left+down | `opacity: 0.80`, parallax `-0.10` |
-| `rose.png` | S3 Q3 — portrait bleeding right+down into S4 | `opacity: 0.80`, parallax `0.09` |
-| `feather.png`, `lotus.png`, `dunes.png`, `window-sunset.png` | S2 free-strip parallax scatter | `0.70–0.78` opacity, 4 absolute positions |
-| `taylor-01.png` | S6 — main portrait | `opacity: 0.82`, parallax `0.04` |
-| `taylor-03.gif` | S6 — looping ski-lift GIF | `opacity: 0.76`, parallax `0.06` |
-| `taylor-02.jpg` | S6 — small family photo, **grayscale** | `opacity: 0.72`, `filter: grayscale(100%)`, parallax `0.08` |
-| ~~`painting.png`, `hero-coast.jpg`, `taylor-03.jpg`, `taylor-04..07.{jpg}`, `taylor-04b.jpg`, `taylor-05b.jpg`~~ | **Deleted 2026-05-27** | Removed from `public/images/` — no longer in repo |
+| S1 Hero | `#000` + rotating bg image at 0.86 opacity + four-stop dark gradient | 4-image rotation: horizon · rose · window-sunset · hero-red-sun |
+| S2 Practice | `--paper-cream` | New layout: header + 3 tier tiles + 4 option cards |
+| S3 Outcomes | `--paper` | Drag-snap rail · 8 cards alternating ink (outcome) / sage (testimonial) · auto-advance 4s |
+| S4 About | `--paper-off-b` | Heading + body + 3-tag column |
+| S5 Waymaker | `--paper-cream` | Long-form prose, ink-blue brush mark on heading |
+| S6 Taylor | `--paper` | Single portrait (taylor-01.png) + bio |
+| S7 FAQ | `--paper-sage` | Accordion, single-open behavior |
+| Footer | `--ink` | Wordmark + Contact · Instagram · Login · Terms · Privacy |
+| Contact | `--paper` | Anchored #contact, accessible from footer |
+| Begin drawer / /begin | `--paper-cream` | 4 option cards (Begin-style grid) |
+| Begin Step 2 | `--paper-cream` | Back nav + offering detail block (1:1 / Orgs / Group variants) + form |
+| Begin Step 3 | `--paper-cream` + paper panel | Calendly embed or Self-led confirmation |
 
-**Treatment rules from the code:**
-- Photos are always opacity-reduced (`0.70–0.88`) so the underlying paper bleeds through.
-- No rounded corners, no shadows, no borders on image tiles. Hard rectangular edges everywhere.
-- Crops are full-bleed within their tile (`object-fit: cover`).
-- One single image uses a `grayscale` filter (`taylor-02`). The rest are full color.
-- Mobile S3 inverts: images go to **full bleed at 100% opacity** under a black gradient, with white text on top — three full-viewport cinematic moments instead of three tonal blocks.
+**Section sequence:** ink → cream → paper → off-b → cream → paper → sage → ink. The scroll reads as a gentle climate map; cream appears twice (S2 and S5) as the warm motif; sage and paper alternate as quiet floors.
 
 ---
 
-## 5. Brush marks
+## 5. Components
 
-13 SVGs in `public/marks/`, drawn with a pressure-sensitive stylus. **They are filled paths (not strokes) — variable-width by design. Do not redraw with uniform-width beziers.**
+### 5.1 Nav (`Nav.astro`)
+- Fixed top, padding `22px var(--gutter)`
+- Centered wordmark + right-anchored "Client Portal" link
+- **Over hero:** transparent background, white wordmark + link with soft text-shadow
+- **Scrolled:** `rgba(255,255,255,0.36)` glass + `backdrop-filter: blur(8px)`, ink text
+- **Eliminate the wordmark intro animation.** The staging build animates the wordmark from giant center to nav. Drop this — wordmark stays in nav from page load.
 
-All marks render through the bare `.mark` class (just `display: block; pointer-events: none; user-select: none`). Sizing, position, rotation, and opacity are applied **inline at the component level**, not via class modifiers.
+### 5.2 Hero (`Hero.astro`)
+- 100vh, min 640px, `#000` base
+- Rotating bg image at `opacity: 0.86`
+- 4-stop top-to-bottom gradient (`rgba(0,0,0,0.18 / 0.08 / 0.32 / 0.70)`)
+- Bottom-left copy block: `.hero__headline` (Roman 400, clamp(46,6.8vw,84)) + `.hero__sub` (Light 300, 16px) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
+- Brush mark over "possibility" — Vector-5.svg, filtered white via mask
+- Rotation sequence (localStorage `edf_hero`): horizon · rose · window-sunset · hero-red-sun
 
-**Active marks** (used in current components):
+### 5.3 Float CTA (`CTABar.astro`)
+- Fixed bottom, centered, fades in past hero (IntersectionObserver, threshold 0.15)
+- **4px rectangle, NOT 100px pill** (matches the .fig GET IN TOUCH button)
+- 48px tall, padding 0 40px, DM Mono 14.4px / 0.110em, white on ink
+- **Hover:** background flips to `--blue`. No shadow.
+- Mobile: full-width bottom bar (no radius), 56px tall, env(safe-area-inset-bottom)
+- Label: "Begin Practice"
 
-| File | Used by | Treatment notes |
-|---|---|---|
-| `Vector-12.svg` | `Hero.astro` — under "future" | 190px, opacity 0.68, rotate 1.5°, `filter: brightness(0) invert(1)` → **white** |
-| `Vector-5.svg` | `Hero.astro` — over "now." | 145px, opacity 0.62, rotate -2.5°, **filtered to white** |
-| `Vector-5.svg` | `TaylorBio.astro` — under "speaks to you" | 240px, opacity 0.48, rotate 2°, **blue (default)** |
-| `Vector-4.svg` | `Services.astro` — S2 header right | 155px, opacity 0.32, rotate -4° |
-| `Vector-6.svg` | `Services.astro` — S2 free strip | 200px, opacity 0.42, rotate 3° |
-| `Vector-1.svg` | `Testimonials.astro` — S3 Q2 | 130px, opacity 0.50, absolute bottom-left of quote |
-| `Vector-8.svg` | `About.astro` — S4 top-left | 125px, opacity 0.42, rotate 4° |
-| `Vector-10.svg` | `Waymaker.astro` — S5, **and** `FAQ.astro` — S7 top-left | S5: 72px, opacity 0.52, rotate -6°. S7: 80px, opacity 0.45, rotate -2° |
+### 5.4 S2 Services (`Services.astro`)
+- Cream background
+- Header (full-width): h2 headline + supporting body copy ("Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.")
+- **3 tier tiles** (Foundation / Calibration / Expansion): 880px max-width centered, 3-up grid, aspect-ratio 2/3.3, 4px gap, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left
+  - Images: dunes.png / feather.png / lotus.png
+- **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): Begin-style grid, 4-up, paper on cream, top-right `→` indicator, hover inverts to ink with arrow turning blue
+- Mobile: tiles become horizontal scroll-snap (70vw cards), option cards stack vertically
 
-**Idle marks** (present in `public/marks/` but never imported by a component):
+### 5.5 S3 Outcomes (`Testimonials.astro`)
+- Paper background
+- Horizontal drag-snap rail · 8 cards · aspect-ratio 2/3, width clamp(200, 20vw, 280) · 4px gap
+- Alternating: ink (outcome) / sage (testimonial) · ink / sage · ink / sage · ink / sage
+- Outcomes: white type, top hairline, attribution block (Mono name + Light role)
+- Testimonials: ink type, italic-NOT-applied (the .fig is Roman, not italic — drop the italic from staging)
+- **Auto-advance every 4 seconds**, pauses on hover or pointer-down
+- Mobile: 70vw cards, 30vw peek, 4px gap
 
-`Vector.svg`, `Vector-2.svg`, `Vector-3.svg`, `Vector-7.svg`, `Vector-9.svg`, `Vector-11.svg` — 6 marks kept as a reserve.
+### 5.6 S4 About (`About.astro`)
+- Off-b background
+- 2-col grid: heading + body left, 3-tag column right
+- Vector-8.svg brush mark top-left of section, filtered `--blue` at 0.55 opacity, rotated 4°
+- Tags: 36px tall, 4px radius, 0.5px ink/30 border, DM Mono 13px
 
-**Mark treatment, codified:**
-- Default stroke color is `#2956e0` (baked into each SVG file).
-- To render over photography or a dark hero, apply `filter: brightness(0) invert(1)` to make them **white**, then drop opacity to `0.6–0.7`.
-- All marks are `position: absolute`, `pointer-events: none`, with manual `top/left/right` placement and small rotations (`-6° to +4°` observed).
-- Marks cross hard edges intentionally — they sit over type and image, not behind.
-- They are good candidates for `stroke-dasharray` entry animations, but the current code does not animate them; they only fade with their parent block during scroll-reveal.
+### 5.7 S5 Waymaker (`Waymaker.astro`)
+- Cream background — the second cream moment
+- Single column, max 1280px
+- Vector-10.svg brush mark over heading, filtered `--blue` at 0.52, rotated -6°
+- First paragraph is sub-display Roman 400, rest is body Light 300
 
----
+### 5.8 S6 Taylor (`TaylorBio.astro`)
+- Paper background
+- 2-col grid: **single portrait** (taylor-01.png) + bio
+- Photo: 420×560 max, full opacity (no opacity reduction, no parallax scatter)
+- Bio: name in Roman 400 (clamp(46, 5.6vw, 84)) + 3 paragraphs body
+- **Drop the photo scatter** (taylor-03.gif, taylor-02.jpg removed from scope)
 
-## 6. Components
+### 5.9 S7 FAQ (`FAQ.astro`)
+- Sage background
+- Accordion list, single-open behavior (clicking opens one, closes others)
+- Trigger: question (Roman 400) + plus icon (20x20, 0.5px crossbars)
+- Open state: vertical bar fades, max-height 800px
+- Vector-10.svg brush mark top-left, rotated -2°
+- 6 real Q&As (already in staging build)
 
-### 6.1 Nav (`Nav.astro`)
+### 5.10 Footer (`Footer.astro`)
+- Ink background, padding 60px var(--gutter)
+- Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
+- Right: link row — **Contact · Instagram · Login · Terms & Conditions · Privacy Policy**
+- Links: DM Mono 13px / 0.110em uppercase, white at 0.46, hover to white at 0.86
+- **No orange dot separators** — just flat row with 28px gap
+- Mobile: stacks vertical, gap 14px 22px wrap
 
-```html
-<nav class="nav" id="nav">
-  <a href="/" class="nav__wordmark t-wordmark">Every Day Future</a>
-  <div class="nav__right">
-    <a href="/portal" class="nav__link">Client Portal</a>
-  </div>
-</nav>
-```
+### 5.11 Contact (`Contact.astro` — NEW)
+- Anchored `#contact`, accessible from footer link
+- Paper background, padding 140px var(--gutter) 160px
+- 2-col layout: heading "In touch." + body + meta (Direct / Elsewhere) left, 4-field form right
+- Form: Name · Email · Subject · Message (textarea) + "Send a note →" submit
+- Submission: Netlify Forms → coach@everydayfuture.work + ben@wintersand.co
+- Mobile: single column, 80px padding
 
-- Fixed top, `22px var(--gutter)` padding.
-- **Over hero (default):** transparent background, wordmark and "Client Portal" link in `rgba(255,255,255,0.92 / 0.78)` with soft text-shadow.
-- **After hero exits viewport:** `.scrolled` class added — `rgba(255,255,255,0.96)` bg, `backdrop-filter: blur(8px)`, text shifts to `--ink`. No bottom border.
-- Right side has *only* the Client Portal link in source. Note: `.nav__cta` styles exist in `global.css` but no `nav__cta` element is rendered — this is **dead CSS**.
-
-### 6.2 Hero (`Hero.astro`)
-
-```
-.hero (100vh, min 640px, #0a0a0a)
-├── .hero__bg              ← rotating image at opacity 0.88
-├── .hero__gradient        ← 4-stop top→bottom (18 → 8 → 32 → 68 % black)
-├── .hero__chrome-top      ← orange accent dot, top-right
-└── .hero__content         ← bottom-left, padded 80px from bottom
-    └── .hero__copy        ← max-width 680px
-        ├── h1.t-display.hero__headline   ← white, two inline marks (Vector-12, Vector-5)
-        ├── p.hero__subhead               ← 19px/1.6, rgba(255,255,255,0.82), max-width 520px
-        └── .tags.hero__tags              ← 3 tag pills
-```
-
-### 6.3 Float CTA (`CTABar.astro`)
-
-The persistent "Begin your practice" pill.
-
-- **Position:** `fixed`, `bottom: 32px`, horizontally centered (`left: 50%; transform: translateX(-50%)`).
-- **Shape:** `height: 48px`, `padding: 0 40px`, `border-radius: 100px` (pure pill).
-- **Type:** DM Mono 11px, `0.110em`, UPPERCASE, white on `--ink`.
-- **Shadow:** `0 4px 28px rgba(0,0,0,0.28)`.
-- **States:**
-  - Default: hidden (`opacity: 0`, `pointer-events: none`) while hero is in view; fades in (`.visible`) once hero exits.
-  - Hover: background → `--orange`, shadow → `0 6px 32px rgba(255,57,0,0.35)`.
-  - **`.over-footer`** (when site footer is in viewport): inverts to **white pill on black**; hover still goes orange.
-- **Behavior:** click is intercepted; if `window.__openBeginDrawer` exists, it slides up the Begin drawer instead of navigating.
-
-### 6.4 Service options (`Services.astro` / `.s2__option`)
-
-Full-width rows separated by 0.5px hairlines (`rgba(0,0,0,0.18)`).
-
-```
-[ Title ─────────────────── ]   [ description ]   [ → ]
-```
-
-- **Title:** `clamp(44px, 5.8vw, 78px)`, weight 300, tracking `-0.030em`, line-height 1.
-- **Description:** `max-width: 260px`, `13px`, right-aligned, `rgba(0,0,0,0.50)`.
-- **Arrow:** body font, 32px, `rgba(0,0,0,0.25)`.
-- **Hover:** entire row background → `--ink` (full-bleed via negative `var(--gutter)` margins), title → white, description → `rgba(255,255,255,0.80)`, arrow → white + `translateX(6px)`.
-- **Source order:** `1:1 Coaching → Orgs & Teams → Group Coaching → Self-led`.
-- **Reveal:** rows start `opacity: 0; translateY(28px)`, animated to identity with `cubic-bezier(0.16, 1, 0.3, 1)` over 650ms, staggered 110ms by global observer.
-- **Mobile:** description hidden; title scales to `clamp(36px, 9.5vw, 56px)`; row uses gutter padding directly.
-
-### 6.5 Tags (two flavors)
-
-Hero tags (`.tag`) sit over dark imagery:
-
-- 30px tall, `0 14px` padding, `0.5px solid rgba(255,255,255,0.55)`, `color: rgba(255,255,255,0.88)`.
-- DM Mono 10px / `0.130em` / UPPER, `border-radius: 4px`.
-- Hover inverts to white fill / black text.
-
-S4 tags (`.s4__tag`) sit over paper:
-
-- 36px tall, `0 20px` padding, `0.5px solid rgba(0,0,0,0.30)`, ink text.
-- DM Mono 13px / `0.110em` / UPPER.
-- Hover inverts to ink fill / white text.
-
-### 6.6 S2 free strip CTA (`.s2__free-cta`)
-
-A standalone secondary button on the sage band.
-
-- 39px tall, `0 24px` padding, `0.5px solid rgba(0,0,0,0.35)`, `border-radius: 4px`.
-- DM Mono **14.4px** / `0.110em` / UPPER — **larger than `.t-cta`'s 11px**. The only CTA in the system at that size; treat as a one-off, not a template.
-- Hover: fills `--orange`, border matches, text white.
-
-### 6.7 FAQ accordion (`FAQ.astro` / `.s7__item`)
-
-- 0.5px hairlines above and below the list, one between each item.
-- Trigger row: 32px y-padding, question (left) + plus icon (right).
-- **Plus icon (`.s7__icon`):** 20×20, drawn entirely with `::before` (horizontal 0.5px bar) and `::after` (vertical 0.5px bar). Open state fades the vertical bar via opacity + `scaleY(0)`, leaving a minus.
-- **Answer:** `max-height: 0 → 400px` transition over 450ms, `cubic-bezier(0.16, 1, 0.3, 1)`.
-- **Single-open behavior:** clicking a closed item closes all others.
-
-### 6.8 Begin drawer (`index.astro` styles, `BeginFlow.astro` content)
-
-- Full-viewport modal that slides up from the bottom: `transform: translateY(100%) → 0` over 550ms, `cubic-bezier(0.16, 1, 0.3, 1)`.
-- Background: `--paper-cream` to match S2 and S5.
-- Sticky 60px top bar with a `← Back` close button (DM Mono 11px, `0.140em`).
-- Below the bar: scrollable region (`overflow-y: auto`) hosting `<BeginFlow />`.
-- Behind: a `rgba(0,0,0,0.35)` scrim that fades in.
-- **History integration:** `pushState('/begin')` on open, `replaceState('/')` on close. Escape key closes. Float-CTA click opens the drawer instead of navigating.
-
-### 6.9 Footer (`Footer.astro` / `.site-footer`)
-
-- `--ink` background, `60px var(--gutter)` padding, `max-width: 1280px` inner.
-- Left: wordmark in Inter 200 / 18px / `rgba(255,255,255,0.72)` (note: smaller than nav at 22px).
-- Right: `Login · ● · Terms & Conditions · ● · Privacy Policy` — `●` is a **6px orange dot**, DM Mono 13px / `0.110em` / UPPER link text in `rgba(255,255,255,0.46)`, hovering to `0.86`.
-- Mobile: stacks vertically, dots hidden.
+### 5.12 BeginFlow (`BeginFlow.astro`)
+- 3-step flow at `/begin` (page) and as drawer over homepage
+- Step 1: eyebrow "— · Begin your practice" + heading "Choose how you want to practice." + 4 option cards (1:1, Orgs & Teams, Group, Self-led)
+  - Auto-advance after 350ms on selection
+  - URL param shortcut: `/begin?option=1on1|group|orgs|selflead`
+- Step 2: change-selection bar + selected badge + heading + offering detail block + form
+  - Offering variants per option (1:1 / Orgs / Group / Self-led)
+  - **Group offering copy** — see §7 below
+  - Form: First name / Email / Phone (optional) + "Begin Practice →"
+- Step 3: schedule heading + Calendly embed OR Self-led "You're on the list" confirmation
+  - Calendly URLs placeholder — Taylor to provide
 
 ---
 
-## 7. Section anatomy
+## 6. Imagery
 
-| Section | ID | Background | Inner pattern | Key marks |
-|---|---|---|---|---|
-| S1 Hero | `#hero` | `#0a0a0a` + rotating image | bottom-left copy block | Vector-12 (white) under "future"; Vector-5 (white) over "now." |
-| S2 Services | `#practice` | `--paper-cream` | 2-up header + 4 option rows + free strip | Vector-4 in header; Vector-6 in free strip |
-| S3 Practice Makes Progress | `#quotes` | `--paper-bone` | Horizontal snap rail: 4 outcome cards (clay/dusk/moss/ink) interleaved with 4 testimonial cards (paper/off-a/off-b/paper) | — |
-| S4 About | `#about` | `--paper-off-b` | 2-col (body + tag stack) | Vector-8 top-left |
-| S5 Waymaker | `#waymaker` | `--paper-cream` | 2-col (definition + hairline list) | Vector-10 over the word |
-| S6 Taylor | `#taylor` | `--paper` | 2-col (photo scatter + bio) | Vector-5 under "speaks to you" |
-| S7 FAQ | `#faq` | `--paper-sage` | accordion list (5 items) | Vector-10 top-left |
-| Footer | — | `--ink` | wordmark + link row | — |
+Stored in `public/images/`. **No grayscale-by-default treatment.** Full color throughout. **No hover-color-from-grayscale signature move.** (The staging build's "Digital Curator" gesture is dropped.)
 
-**The narrative the section order tells:**
+**Hero rotation** (sequential via `localStorage.edf_hero`):
+1. horizon.png — 50% 50%
+2. rose.png — 50% 35%
+3. window-sunset.png — 50% 60%
+4. hero-red-sun.jpg — 50% 40%
 
-1. **Hero** — frame the choice.
-2. **Services** — show the four ways to enter the practice + a free discovery call.
-3. **Practice Makes Progress** — horizontal snap rail of 8 cards: 4 outcomes (saturated dark surfaces) interleaved with 4 testimonials (light surfaces). Real outcomes, real attribution.
-4. **About** — what the work *is*, in one paragraph + three tag-pillars.
-5. **Waymaker** — define who this is for (a word + its definition + its qualities).
-6. **Taylor** — who you're working with.
-7. **FAQ** — answer the residual hesitation.
-8. **Footer** — the legal floor.
+**S2 tier tiles:**
+- dunes.png — Foundation
+- feather.png — Calibration
+- lotus.png — Expansion
+
+**S6 Taylor:**
+- taylor-01.png — single full portrait (no scatter)
+
+**Treatment rules:**
+- Hero bg at `opacity: 0.86` with dark gradient overlay
+- S2 tier images at full opacity (no overlay needed — they sit in cards)
+- S6 portrait at full opacity
+- No grayscale filters anywhere
 
 ---
 
-## 8. Animation & interaction
+## 7. Begin offering detail copy
 
-All behavior lives inline at the bottom of `Layout.astro` — a single ~70-line IIFE, no libraries.
+### Group Coaching (provided)
 
-### Hero image rotation
-On every load, reads `localStorage.edf_hero` (default `0`), increments, mods by 4, and writes back. Sets `.hero__bg` `background-image` and `background-position` from a 4-entry table. Sequential — not random.
+> A shared practice in curated community with structure, support, and coach facilitation.
 
-### Hero wordmark intro animation
-Runs only on pages that contain `.hero__bg` (homepage only). On load:
+**Structure**
+- 12-week guided group practice
+- Limited to 8 participants
+- 90-minute virtual group sessions
+- 3 individual coaching sessions included during the program
+- Structured around the EDF Practice and dimensions of conscious change
 
-1. The nav wordmark's original width is measured (for scale calculation).
-2. `hero-wordmark-active` class is added to `<body>`, which sets `.nav__wordmark` to `position: absolute; left: 50%; top: 50%; white-space: nowrap`.
-3. `font-size` is set to `min(8.5vw, 85px)` — rendering at display size so the text is crisp at maximum scale (avoids upscaling pixel blur).
-4. A `NAV_SCALE` factor is computed: `original_nav_width / display_width` (always < 1 — scaling down is always crisp).
-5. Scroll drives a `translate(TX, ty) scale(s)` transform via a passive `scroll` listener with ease-in² (`p²`) curve, completing at 48% of viewport height.
-   - **p = 0:** wordmark centered horizontally (`TX = -heroW/2`, always viewport-width-independent), lifted to 40% of viewport height.
-   - **p = 1:** wordmark resolved to nav center — `translate(-heroW/2, -heroH/2) scale(NAV_SCALE)`.
-6. `.hero__copy` opacity is hidden initially (via `.hero-wordmark-active .hero__copy { opacity: 0 }`) and fades in from p = 0.55 → 1.
+**What we practice**
+- Conscious change in how we work, relate, and create
+- Expanding possibility and reducing resistance
+- Greater clarity, coherence, courage, connection, and curiosity
+- Meaningful progress through shared practice and accountability
 
-The `left: 50%` CSS anchor makes horizontal centering viewport-width-independent. `top: 50%` anchors to the nav bar's vertical center.
+**Experience**
+- Community with other waymakers navigating growth, change, creativity, leadership, and transition
+- Shared learning, reflection, and perspective
+- Practices integrated into real work between sessions
+- Supportive accountability and continuity through ongoing participation
 
-### Scroll observers (all `IntersectionObserver`)
+**Facilitation & Support**
+- Coach-led structure and facilitation
+- Practical frameworks, exercises, reflection, and discussion
+- AI-supported notes, reflections, and follow-ups available depending on the group format
 
-| Trigger element | Threshold | Effect |
-|---|---|---|
-| `#hero` | 0.15 | Adds `.scrolled` to nav AND `.visible` to float CTA when hero exits |
-| `.site-footer` | 0 | Toggles `.over-footer` on float CTA (inverts color) |
-| `#practice` | 0.3 | One-time: adds `.revealed` to `#s2Headline` (triggers clip-up animation) |
-| `.s2__option, .s3, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` | 0.15 | Staggered reveal — adds `.revealed` with `i * 110ms` delay |
+### 1:1 Coaching, Orgs & Teams, Self-led
+Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and `#bfOfferingOrgs`). Self-led has no offering block by design.
 
-### S3 rail drag-to-scroll
-A pointer-event IIFE on `#s3Rail` handles mouse drag. On `pointerdown` (mouse only), records `startX` and `startScroll`, captures the pointer, and adds `.is-dragging` (which disables `scroll-snap-type` and sets `cursor: grabbing`). On `pointermove`, sets `scrollLeft = startScroll - dx`. On `pointerup/cancel/leave`, removes `.is-dragging` and snaps to the nearest card via `rail.scrollTo({ left: nearest, behavior: 'smooth' })`. Touch scrolling is handled natively by the browser.
+---
 
-### Parallax (`[data-parallax]`)
+## 8. Behavior + interaction
 
-A `scroll` listener (passive) walks every `[data-parallax]` element, finds its closest `.s6__photos` ancestor, computes `centerOffset = (rect.top + rect.height/2) - viewportHeight/2`, then sets `transform: translateY(centerOffset * speed)`. Speeds observed in source:
+### Sticky float CTA
+- IntersectionObserver on `.hero`, threshold 0.15
+- `opacity: 0 → 1` over 0.4s when hero exits view
+- Pointer-events toggled with visibility
+- **No more "over-footer" inversion** — strict palette has no orange, so the inverted-pill state is dropped. The CTA stays ink+blue-hover throughout the scroll.
 
-- S6 Taylor photos: `0.04`, `0.06`, `0.08`
+### Hover states
+- **Primary CTA:** hover background → `--blue` (was orange in staging)
+- **S2 option card:** hover surface inverts to ink, label/desc go white, top-right arrow goes blue
+- **S3 rail:** drag-to-scroll + auto-advance every 4 seconds (pauses on hover)
+- **Nav link (scrolled):** hover text → `--blue`
+- **Footer link:** hover text → white at 0.86
+- **Form field:** focus underline → `--blue`
+
+### Tap states (mobile)
+- Tap = brief active state, no persistent hover. Active state mirrors hover (ink invert) momentarily before navigation.
 
 ### FAQ accordion
-Click any `.s7__trigger` → closes every open item, then opens the clicked one (unless it was the open one). Uses `aria-expanded` for screen readers. Animates via `max-height: 0 → 400px`.
+- Click trigger → close all other open items, toggle clicked item
+- `max-height: 0 → 800px` over 0.45s
+- Plus icon → minus via opacity + scaleY transition on vertical bar
 
-### Begin drawer
-Detailed in §6.8. Open via `window.__openBeginDrawer()`. The drawer **patches `window.scrollTo`** so that `BeginFlow`'s internal step transitions scroll the *drawer*'s scrollable region rather than the page.
+### Hero rotation
+- Sequential cycle on each reload via localStorage
+- 4 images, position presets per image
+- Fade-in via `background-image` transition
 
-### Easing & timing — the canonical curve
-
-- **Reveals:** `cubic-bezier(0.16, 1, 0.3, 1)` over `550 – 800ms`. This is the system's hero easing — used for opacity+translateY scroll-ins, the S2 headline clip-up, the FAQ open, and the Begin drawer.
-- **Hovers:** `ease` over `200 – 300ms`. Used for color, background, border-color, transform on small UI bits.
-- **Nav scroll state:** `0.3s ease` on background.
-- **Float CTA fade:** `0.4s ease` on opacity.
-
-No bounces. No springs. Nothing decelerates harder than the canonical curve.
-
----
-
-## 9. Layout fundamentals
-
-- **Max content width:** `1280px`, centered, with `var(--gutter)` left/right padding.
-- **Gutter:** `60px → 36px → 22px` at the two breakpoints.
-- **Breakpoints:** `≤900px` (tablet) and `≤640px` (mobile). Below mobile, gutters hold at 22px.
-- **Hairlines:** always `0.5px solid` with an alpha-modulated black, never a solid token. `rgba(0,0,0,0.18)` is the structural default; `0.12` is "barely there"; `0.30 – 0.40` is "outlined element" (S2 free CTA, S4 tag).
-- **Border-radius palette:** `4px` (pills, tags), `100px` (float CTA), `50%` (orange dots). **Everything else is `0`.** Architecture, not consumer-tech.
-- **Shadows:** only the float CTA has them — `0 4px 28px rgba(0,0,0,0.28)` default, `0 6px 32px rgba(255,57,0,0.35)` on hover, `0 4px 28px rgba(0,0,0,0.18)` over-footer. Everywhere else, **depth comes from paper-on-paper, not shadow.**
+### S3 rail
+- Drag-to-scroll (mouse): pointer events, captures pointer, snaps to nearest card on release
+- Touch: native scroll-snap (no JS needed)
+- **Auto-advance:** `setInterval(4000)` scrolls one card width forward, loops to start at end
+- Pauses on `pointerdown` and `mouseenter`, resumes on `mouseleave`
 
 ---
 
-## 10. The lexicon (sampled from copy)
+## 9. Don'ts (strict-Figma compliance)
 
-`practice · progress · future · choose · clarity · direction · waymaker · transforming · what matters · resistance · now · invest`
-
-Hero: *"Choose the future you want. Create what matters now."*
-S2: *"A new way needs practice to make progress."*
-S4: *"The future shapes how you think, feel, and act in the present."*
-S5 (Waymaker definition): *"someone who goes first and creates direction"*
-S6 sign-off: *"If this speaks to you, this is for you."*
-
-Sentence case. Long, comma-spliced declaratives. Lower-stakes-than-usual coaching language. No exclamation marks anywhere in the codebase.
-
----
-
-## 11. Don'ts (codified from what the code refuses to do)
-
-- **No gradient backgrounds** outside the hero scrim and the float-CTA hover shadow. Cream stays flat.
-- **No shadows on type, cards, or sections.** Only the float CTA carries a shadow.
-- **No solid section borders.** Section boundaries are tone shifts. Hairlines exist only as 0.5px alpha-modulated black, and only inside sections (between option rows, between FAQ items, etc.).
-- **No rounded corners** beyond the three values in §9. No 8px, no 12px, no 16px.
-- **No title-case headlines.** Sentence case is universal.
-- **Don't redraw the brush marks.** They are pressure-sensitive variable-width fills — copy the SVGs from `public/marks/`. A uniform-width path is the wrong shape.
-- **Don't use `--blue` for UI.** It's a brush color, not a link or button.
-- **Don't expand `--orange`.** Three uses, total. Hover-state on the float CTA, the hero dot, the footer dot separator.
-- **No emoji.** None appear in any component.
-- **`--paper-clay`, `--paper-dusk`, `--paper-moss` are card-tier surfaces only.** Not for type, marks, buttons, or section backgrounds. `--paper-bone` is a section-tier neutral surface — fine for section backgrounds, not for cards or type.
+- **No orange anywhere.** Not for dots, separators, CTAs, hovers. The .fig restricts orange to the Form agency cover sheet only.
+- **No bone/clay/dusk/moss colors.** Project additions, not in source.
+- **No grayscale-by-default photography.** Staging's "Digital Curator" treatment is dropped.
+- **No wordmark intro animation.** Wordmark is static in the nav from load.
+- **No italic on S3 quotes.** The .fig source is Roman, not italic.
+- **No section eyebrow text.** Headlines carry section identity. The .fig has no per-section labels.
+- **No 100px pill on the float CTA.** The .fig's button is a 4px rectangle.
+- **No photo scatter on S6.** Single portrait only.
+- **No orange dot separators in footer.** Just gap between links.
+- **No emoji.** Anywhere.
 
 ---
 
-## 12. Known inconsistencies and dead code
+## 10. Open items for code/content
 
-A short list of things the next pass should resolve:
-
-1. **`.nav__cta` styles exist; the element doesn't.** `global.css` defines styles for `.nav__cta`, but `Nav.astro` only renders the wordmark and `Client Portal` link. Either re-add the CTA in the nav or strip the orphan CSS.
-2. **Generic helpers `.t-h2`, `.t-h3`, `.t-edf`, `.t-eyebrow`, `.t-caption`, `.rule-h`, `.edf-mark`, `.pill--outline*` are defined but mostly not used.** Section components declare their own type sizes inline. These helpers may be from a Figma-era token export that the current build outgrew.
-3. **Two coaching tier orders.** The visual order in `Services.astro` is **1:1 → Orgs → Group → Self-led**, but the `option=` querystring suggests the canonical naming is `1on1`, `orgs`, `group`, `selflead`. Stay consistent.
-4. **Lorem ipsum in FAQ.** All five answers are placeholder Latin. Real copy required.
-5. **`Orgs & Teams` description is lorem ipsum** in `Services.astro`. Real copy required.
-6. ~~**9 unused photos in `public/images/`**~~ — **Resolved 2026-05-27.** All 9 unused photos (`hero-coast.jpg`, `painting.png`, `taylor-03.jpg`, `taylor-04..07.{jpg}`, `taylor-04b.jpg`, `taylor-05b.jpg`) deleted from repo.
-7. **6 unused marks** (`Vector.svg`, `Vector-2/3/7/9/11.svg`). Same question as photos.
-8. **The hero rotation increments on every load** — refreshing the page changes the image. This may or may not be desirable. The doc-of-record should call it out.
+| Item | Owner | Notes |
+|---|---|---|
+| Formetica Light license | Taylor / Ben | Cover wordmark only. Currently using Inter 200 fallback. |
+| Calendly URLs | Taylor | Begin Step 3, per option (1:1, Group, Orgs) |
+| Form routing | Engineering | Netlify Forms → coach@everydayfuture.work, ben@wintersand.co |
+| Per-page SEO meta | Engineering | Titles, descriptions, OG images, structured data |
+| Cross-OS wordmark | Engineering | Helvetica Neue Ultralight falls back to Arial Regular on Windows/Android. Accept variation. |
+| /contact route | Engineering | New page using the Contact.astro component (or section anchored from homepage footer — choose one) |
 
 ---
 
-## 11. Mobile
-
-Two breakpoints control everything: **`@media (max-width: 900px)`** (tablet) and **`@media (max-width: 640px)`** (mobile). The site uses these as overrides on top of the desktop base.
-
-### 11.1 Layout shifts (≤900px)
-
-- `--gutter: 36px` (was `60px`)
-- `.s4__inner, .s5__inner, .s6__inner { gap: 48px }` — tighter cross-axis gap on two-col blocks
-- `.s6__photos { height: 480px }` — Taylor scatter shortens
-
-### 11.2 Mobile rewrites (≤640px)
-
-#### Layout
-- `--gutter: 22px`
-- `.nav { padding: 18px var(--gutter) }` — tightens
-
-#### Hero
-- `.hero__content` bottom padding drops `80px → 56px`
-- `.hero__subhead` shrinks from `19px → 16px`, `max-width` released to `100%`
-- `.hero__folio` (bottom-right meta chip) is **hidden**
-- `.hero__tags` switches `flex-direction: column`, `align-items: flex-start` — tags stack vertically left-aligned
-
-#### S2 — Services
-- `.s2 { padding: 64px var(--gutter) 0 }` — top padding drops `100px → 64px`
-- `.s2__header` collapses to `flex-direction: column`, gap `60px → 28px`, bottom padding `80px → 48px`
-- **Option rows drop their description entirely** — `.s2__option-desc { display: none }`. Grid changes from `1fr auto auto` to `1fr auto` (title + arrow only).
-- `.s2__option-title` scales to `clamp(36px, 9.5vw, 56px)` (was `clamp(44px, 5.8vw, 78px)`)
-- `.s2__option` padding becomes `30px var(--gutter)`
-- **The S2 free-strip parallax scatter is fully removed.** `.s2__free-img { display: none }`. Decorative marks tagged `[aria-hidden]` inside `.s2__header-right` and `.s2__free-content` are also hidden.
-- `.s2__free` loses `min-height`, padding becomes `64px → 72px`
-
-#### S3 — Practice Makes Progress (mobile)
-
-The horizontal rail compresses but stays the same design: cards become `78vw` wide, padding drops to `28px`, heading shrinks to `clamp(34px, 9vw, 48px)`. `padding-right` on the rail drops to `28vw` so the next card peeks in, signalling scroll. The section padding compresses to `80px 0 96px`.
-
-#### S4 — About
-- Padding compresses to `72px var(--gutter)` (was `220px var(--gutter) 120px`)
-- `.s4__inner` grid drops to single column, `gap: 40px`
-
-#### S5 — Waymaker
-- Padding compresses to `72px var(--gutter) 88px`
-- `.s5__inner` drops to single column, `gap: 40px`
-- `.s5__mark` left position adjusts (`-22px → -6px`) so it doesn't overflow
-- `.s5__list` `margin-top` zeroed (the desktop 20px is removed)
-
-#### S6 — Taylor
-- Padding compresses to `72px var(--gutter) 88px`
-- `.s6__inner` drops to single column, `gap: 48px`
-- **Photo scatter shrinks** to a 340px-tall mini-arrangement with new pixel positions:
-  - `.s6__photo--a` — `200 × 280px` at top-left
-  - `.s6__photo--b` — `145 × 195px` at bottom-right
-  - `.s6__photo--c` — `105 × 145px` overlapping at `top: 130px, right: 165px` (the grayscale image)
-
-#### S7 — FAQ
-- Padding compresses to `72px var(--gutter) 88px`
-- `.s7__trigger` gap drops `40px → 24px`, padding `32px → 26px` — denser rows
-
-#### Footer
-- Padding compresses to `44px var(--gutter)`
-- `.site-footer__inner` becomes `flex-direction: column`, `align-items: flex-start`, `gap: 28px`
-- Footer link row gets `flex-wrap: wrap`, gap drops to `18px`
-- **Orange dot separators are hidden** (`display: none`) on mobile
-
-#### Begin drawer
-- `.begin-drawer__bar` padding adjusts to `0 22px`
-
-### 11.3 What stays identical across breakpoints
-
-- All token values (`--paper-*`, `--ink`, `--blue`, `--orange`)
-- Type families and weights
-- Type scale at display sizes uses `clamp()` so it fluidly resizes without breakpoint changes (`.t-display`, `.t-h2`, `.t-h3`, `.t-edf`, plus most section-local titles)
-- The full mark library — every active mark keeps its desktop placement on tablet, and only the S2 decorative marks are hidden on mobile
-- The paper background map (S1 Hero, S2 cream, S3 papers, S4 off-b, S5 cream, S6 paper, S7 sage, Footer ink) **except** S3, which goes solid black on mobile
-- All animations and the canonical easing curve
-- Float CTA size and shape (`48px × 100px-radius` pill stays the same on all viewports)
-- Nav structure (wordmark + Client Portal link)
-- FAQ accordion behavior
-
-### 11.4 Observations about the mobile design (descriptive only)
-
-A few things worth knowing about how mobile currently behaves; these are statements of fact, not change proposals.
-
-- **The CSS is desktop-first.** Base rules describe desktop; mobile is expressed as `max-width` override layers. Mobile-only behavior (the S3 inversion in particular) lives entirely inside `@media (max-width: 640px)` blocks, which means you need to read the desktop styles first to understand the mobile result.
-- **Several `!important` declarations cluster in mobile S3** because the rule needs to override desktop opacity/position/color values that win specificity otherwise.
-- **Decorative marks are removed by selector pattern** (`[aria-hidden]`) rather than by class — adding a new decorative mark on mobile requires it to be `aria-hidden` to participate in the hide rule.
-- **Three things only ever appear on desktop:** option-row descriptions, the S2 free-strip scatter (`feather/lotus/dunes/window-sunset`), and the hero folio chip. Designs that lean on those won't have a mobile equivalent without new work.
-- **Two things only ever appear on mobile:** the S3 full-bleed black cinematic mode, and the wrapped multi-line footer link row.
-
----
-
-*This document supersedes any prior `design.md` in the repo. Edits to design should land both in source and in this file in the same PR.*
+*This document is the source of truth for the EDF redesign. Edits should land here and in `palette-swap.css` together.*

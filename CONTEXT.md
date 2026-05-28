@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-28 — Mobile pass complete; Begin page + all changes merged to main/production_
+_Last updated: 2026-05-28 — Design pass complete on staging; strict Figma compliance, new S2 card grid, S3 ink/sage rail, Contact section, no orange_
 
 ---
 
@@ -356,14 +356,26 @@ Calendly widgets are created dynamically in JS when step 3 appears. Script loade
 
 ## Design Reference
 
-EDF brand design.md archived at `_archive/design.md` (copied from the official brand handoff). Key spec vs site build gaps — tracked as open items:
+`design.md` at repo root is the source of truth for the EDF brand system — updated 2026-05-28 to the handoff 2 spec (strict Figma compliance). Key changes from prior build:
 
-| Element | design.md spec | Site build | Status |
-|---------|---------------|------------|--------|
-| Body letter-spacing | 0.020em | 0.010em | Pending |
-| Display font | Formetica Light | Inter 200 | Pending (license) |
-| Eyebrow size | 13px / 0.110em | 11px / 0.180em | Pending |
-| CTA pill radius | 4px | 100px | Pending (confirm with Taylor) |
+| Element | Before | After (this pass) |
+|---------|--------|-------------------|
+| Color palette | 11 tokens incl. orange, bone, clay, dusk, moss | 7 tokens — paper/off-a/off-b/cream/sage/ink/blue |
+| Float CTA shape | 100px pill | 4px rectangle |
+| Float CTA hover | Orange | Blue |
+| CTA label | "Begin" | "Begin Practice" |
+| Display font weight | 300 (Light) | 400 (Roman) |
+| Eyebrow size | 11px / 0.180em | 13px / 0.110em |
+| Wordmark family | Inter (--font-display) | Helvetica Neue (--font-body, w:200) |
+| S2 layout | Option rows (title + arrow) | 4-up card grid |
+| S3 surface | paper-bone | paper (white) |
+| S3 card alternation | clay/dusk/moss/ink outcomes | strict ink/sage |
+| S3 quote style | italic | roman |
+| S6 Taylor photos | 3-photo scatter + parallax | single portrait, full opacity |
+| Section eyebrows | Present on some sections | None |
+| Orange accent dots | In footer, hero | Removed |
+| Footer links | Login · Terms · Privacy | Contact · Instagram · Login · Terms · Privacy |
+| Contact section | None | New `Contact.astro` at `#contact` |
 
 ---
 
@@ -372,9 +384,11 @@ EDF brand design.md archived at `_archive/design.md` (copied from the official b
 ### Content
 - [x] **FAQ answers** — real copy in place (6 Q&As)
 - [x] **Orgs & Teams S2 desc** — real copy in place (via shared options data file)
-- [ ] **Group Coaching offering detail** — no offering block in BeginFlow Step 2 yet; content pending from Taylor
-- [ ] **Formetica license** — currently using Inter 200 as fallback
-- [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch (Begin page step 3 currently shows placeholder 404)
+- [x] **Group Coaching offering detail** — implemented in BeginFlow Step 2 (`#bfOfferingGroup`)
+- [x] **Contact section** — `Contact.astro` at `#contact`, Netlify Forms wiring (routing to Netlify dashboard)
+- [ ] **Formetica license** — currently using Helvetica Neue (falls back to Arial on Windows/Android)
+- [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch
+- [ ] **Netlify Forms routing** — configure in Netlify dashboard: `coach@everydayfuture.work` + `ben@wintersand.co`
 - [x] **Begin page: pushed to main** — Live at https://everyday-future-v4.netlify.app (2026-05-28)
 
 ### Mobile (ideas not yet implemented)

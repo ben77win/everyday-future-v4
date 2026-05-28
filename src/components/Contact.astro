@@ -1,0 +1,117 @@
+---
+---
+<!-- Hidden static form for Netlify build-time detection -->
+<form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="text" name="subject" />
+  <textarea name="message"></textarea>
+</form>
+
+<section class="s-contact" id="contact">
+  <div class="s-contact__inner">
+
+    <!-- Left: heading + info -->
+    <div class="s-contact__left">
+      <h2 class="s-contact__heading">In touch.</h2>
+      <p class="s-contact__body">Reach out directly with questions, ideas, or to learn more about working with Taylor.</p>
+      <div class="s-contact__meta">
+        <div class="s-contact__meta-item">
+          <span class="s-contact__meta-label">Direct</span>
+          <span class="s-contact__meta-value">
+            <a href="mailto:coach@everydayfuture.work">coach@everydayfuture.work</a>
+          </span>
+        </div>
+        <div class="s-contact__meta-item">
+          <span class="s-contact__meta-label">Elsewhere</span>
+          <span class="s-contact__meta-value">
+            <a href="https://instagram.com/everydayfuture" target="_blank" rel="noopener">Instagram</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="s-contact__form-wrap">
+      <form class="s-contact__form" id="contactForm" novalidate>
+        <input type="hidden" name="form-name" value="contact" />
+        <p style="display:none" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+
+        <div class="s-contact__field">
+          <label class="s-contact__label" for="contactName">Name</label>
+          <input
+            class="s-contact__input"
+            id="contactName"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+            placeholder="Your name"
+          />
+        </div>
+
+        <div class="s-contact__field">
+          <label class="s-contact__label" for="contactEmail">Email</label>
+          <input
+            class="s-contact__input"
+            id="contactEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="you@example.com"
+            inputmode="email"
+          />
+        </div>
+
+        <div class="s-contact__field">
+          <label class="s-contact__label" for="contactSubject">Subject</label>
+          <input
+            class="s-contact__input"
+            id="contactSubject"
+            name="subject"
+            type="text"
+            placeholder="What's on your mind?"
+          />
+        </div>
+
+        <div class="s-contact__field">
+          <label class="s-contact__label" for="contactMessage">Message</label>
+          <textarea
+            class="s-contact__textarea"
+            id="contactMessage"
+            name="message"
+            required
+            placeholder="Your message"
+            rows="5"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="s-contact__submit">Send a note →</button>
+        <p class="s-contact__confirm" id="contactConfirm">Got it — we'll be in touch soon.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+(function () {
+  var form    = document.getElementById('contactForm');
+  var confirm = document.getElementById('contactConfirm');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    }).catch(function () {});
+    form.style.display = 'none';
+    if (confirm) confirm.classList.add('visible');
+  });
+})();
+</script>

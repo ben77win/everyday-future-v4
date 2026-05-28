@@ -21,10 +21,10 @@ import '../styles/global.css';
     var bg = document.querySelector('.hero__bg');
     if (!bg) return;
     var images = [
-      { src: '/images/hero-rose.png',    pos: '50% 30%' },
-      { src: '/images/hero-red-sun.jpg', pos: '50% 40%' },
-      { src: '/images/feather.png',      pos: '50% 50%' },
-      { src: '/images/lotus.png',        pos: '50% 60%' }
+      { src: '/images/horizon.png',       pos: '50% 50%' },
+      { src: '/images/rose.png',          pos: '50% 35%' },
+      { src: '/images/window-sunset.png', pos: '50% 60%' },
+      { src: '/images/hero-red-sun.jpg',  pos: '50% 40%' }
     ];
     var idx  = (parseInt(localStorage.getItem('edf_hero') || '0') + 1) % images.length;
     localStorage.setItem('edf_hero', idx);
@@ -45,14 +45,6 @@ import '../styles/global.css';
     }, { threshold: 0.15 }).observe(hero);
   }
 
-  // ── Float CTA: invert when footer is visible
-  var siteFooter = document.querySelector('.site-footer');
-  if (floatCta && siteFooter) {
-    new IntersectionObserver(function(entries) {
-      floatCta.classList.toggle('over-footer', entries[0].isIntersecting);
-    }, { threshold: 0 }).observe(siteFooter);
-  }
-
   // ── S2 headline clip reveal: fires once when S2 enters view
   var s2Headline = document.getElementById('s2Headline');
   var s2Section  = document.getElementById('practice');
@@ -65,8 +57,8 @@ import '../styles/global.css';
     }, { threshold: 0.3 }).observe(s2Section);
   }
 
-  // ── S2 option rows + S3 + other sections: staggered scroll reveal
-  var revealEls = document.querySelectorAll('.s2__option, .s3, .s4__body, .s4__tags, .s5__left, .s5__body, .s6__photos, .s6__bio, .s7__item');
+  // ── S2 cards + S3 + other sections: staggered scroll reveal
+  var revealEls = document.querySelectorAll('.s2__card, .s3, .s4__body, .s4__tags, .s5__left, .s5__body, .s6__photos, .s6__bio, .s7__item');
   if (revealEls.length) {
     var rowObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -85,22 +77,25 @@ import '../styles/global.css';
     });
   }
 
-  // ── Parallax: S2 scatter + S3 quote images
-  var parallaxImgs = document.querySelectorAll('[data-parallax]');
-  if (parallaxImgs.length) {
-    function updateParallax() {
-      parallaxImgs.forEach(function(img) {
-        var parent = img.closest('.s6__photos');
-        if (!parent) return;
-        var rect = parent.getBoundingClientRect();
-        var centerOffset = (rect.top + rect.height / 2) - window.innerHeight / 2;
-        var speed = parseFloat(img.dataset.parallax);
-        img.style.transform = 'translateY(' + (centerOffset * speed) + 'px)';
-      });
-    }
-    window.addEventListener('scroll', updateParallax, { passive: true });
-    updateParallax();
-  }
+  // ── S3 rail auto-advance every 4s, pauses on hover/touch
+  (function () {
+    var rail = document.getElementById('s3Rail');
+    if (!rail) return;
+    var paused = false;
+    rail.addEventListener('pointerdown', function() { paused = true; });
+    rail.addEventListener('mouseenter',  function() { paused = true; });
+    rail.addEventListener('mouseleave',  function() { paused = false; });
+    setInterval(function() {
+      if (paused) return;
+      var cards = rail.querySelectorAll('.s3__card');
+      if (!cards.length) return;
+      var w = cards[0].getBoundingClientRect().width + 4;
+      var max = rail.scrollWidth - rail.clientWidth;
+      var next = rail.scrollLeft + w;
+      if (next > max - 8) next = 0;
+      rail.scrollTo({ left: next, behavior: 'smooth' });
+    }, 4000);
+  })();
 
   // ── S3 rail — mouse drag-to-scroll (touch is native)
   (function () {
