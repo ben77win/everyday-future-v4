@@ -37,6 +37,8 @@ import '../styles/global.css';
     var wordmark = document.querySelector('.nav__wordmark');
     var heroCopy = document.querySelector('.hero__copy');
     if (!wordmark || !document.querySelector('.hero__bg')) return;
+    // Skip hero wordmark animation on mobile — wordmark stays in nav
+    if (window.innerWidth < 641) return;
 
     // 1. Measure original nav-size width before any changes (used for NAV_SCALE)
     var r0    = wordmark.getBoundingClientRect();

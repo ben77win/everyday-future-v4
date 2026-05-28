@@ -1239,8 +1239,8 @@ a { color: inherit; text-decoration: none; }
   .s7 { padding: 72px var(--gutter) 88px; }
   .s7__trigger  { gap: 24px; padding: 26px 0; }
 
-  /* ── FOOTER */
-  .site-footer { padding: 44px var(--gutter); }
+  /* ── FOOTER — extra bottom padding clears the fixed BEGIN bar */
+  .site-footer { padding: 44px var(--gutter) calc(52px + env(safe-area-inset-bottom, 16px)); }
   .site-footer__inner {
     flex-direction: column;
     align-items: flex-start;
