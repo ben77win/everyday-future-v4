@@ -255,21 +255,21 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__copy {
-  max-width: 680px;
+  max-width: 520px;
 }
 .hero__headline {
   color: #fff;
   margin-bottom: 24px;
-  font-size: clamp(46px, 8.3vw, 120px);
+  font-size: clamp(46px, 6.8vw, 84px);
 }
 .hero__subhead {
   color: rgba(255,255,255,0.82);
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 26px;
   letter-spacing: 0.020em;
   font-weight: 300;
   margin-bottom: 28px;
-  max-width: 680px;
+  max-width: 520px;
 }
 .hero__tags {
   margin-bottom: 0;

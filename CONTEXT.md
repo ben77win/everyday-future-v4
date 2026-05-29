@@ -32,8 +32,9 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 **Never change these CSS values without Ben's explicit approval:**
 - Body font-size: `14px` desktop / `16px` mobile — `+0.020em` tracking — `24px`/`26px` line-height
 - Display headings: `clamp(46px, 5.6vw, 84px)` weight 400, `-0.030em` — S2/S3/S4/S5 section heads
-- **Hero headline override:** `clamp(46px, 8.3vw, 120px)` — comp screenshot showed much larger than the comp HTML spec (`6.8vw / 84px`); Ben approved larger value but exact size not yet verified
-- **Hero subhead:** `font-size: 20px` / `line-height: 32px` / `max-width: 680px` (was 16px/26px/520px)
+- **Hero headline:** `clamp(46px, 6.8vw, 84px)` — exact comp spec (previous session had inflated override at 8.3vw/120px — reverted)
+- **Hero subhead:** `font-size: 16px` / `line-height: 26px` / `max-width: 520px` — exact comp spec
+- **Hero copy block:** `max-width: 520px`
 - S2 option cards: `aspect-ratio: 1/1` (square) — `padding: 40px 28px 36px` — `gap: 16px` grid — no border — `aspect-ratio` must stay square
 - S3 card: `clamp(280px, 30vw, 420px)` / `aspect-ratio: 3/4` / `padding: 40px`
 - S3 card body: `clamp(17px, 1.4vw, 21px)`

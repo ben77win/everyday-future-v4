@@ -116,7 +116,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - 100vh, min 640px, `#000` base
 - Rotating bg image at `opacity: 0.86`
 - 4-stop top-to-bottom gradient (`rgba(0,0,0,0.18 / 0.08 / 0.32 / 0.70)`)
-- Bottom-left copy block: `.hero__headline` (Roman 400, **`clamp(46px,8.3vw,120px)`** — comp screenshot showed larger than comp HTML spec of 6.8vw/84px; override applied) + `.hero__subhead` (Light 300, **20px / 32px / max-width 680px**) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
+- Bottom-left copy block: `.hero__headline` (Roman 400, `clamp(46px, 6.8vw, 84px)`) + `.hero__subhead` (Light 300, 16px / 26px / max-width 520px) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
 - Brush mark over "possibility" — Vector-5.svg, filtered white via mask
 - Rotation sequence (localStorage `edf_hero`): horizon · rose · window-sunset · hero-red-sun
 
