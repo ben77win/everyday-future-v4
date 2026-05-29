@@ -116,7 +116,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - 100vh, min 640px, `#000` base
 - Rotating bg image at `opacity: 0.86`
 - 4-stop top-to-bottom gradient (`rgba(0,0,0,0.18 / 0.08 / 0.32 / 0.70)`)
-- Bottom-left copy block: `.hero__headline` (Roman 400, clamp(46,6.8vw,84)) + `.hero__sub` (Light 300, 16px) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
+- Bottom-left copy block: `.hero__headline` (Roman 400, **`clamp(46px,8.3vw,120px)`** — comp screenshot showed larger than comp HTML spec of 6.8vw/84px; override applied) + `.hero__subhead` (Light 300, **20px / 32px / max-width 680px**) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
 - Brush mark over "possibility" — Vector-5.svg, filtered white via mask
 - Rotation sequence (localStorage `edf_hero`): horizon · rose · window-sunset · hero-red-sun
 
@@ -133,17 +133,17 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Header (full-width): h2 headline + supporting body copy ("Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.")
 - **3 tier tiles** (Foundation / Calibration / Expansion): 880px max-width centered, 3-up grid, aspect-ratio 2/3.3, 4px gap, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left
   - Images: dunes.png / feather.png / lotus.png
-- **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): Begin-style grid, 4-up, paper on cream, top-right `→` indicator, hover inverts to ink with arrow turning blue
-- Mobile: tiles become horizontal scroll-snap (70vw cards), option cards stack vertically
+- **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): 4-up grid, `aspect-ratio: 1/1` (square), paper on cream, padding `40px 28px 36px`, 16px gap, no border. Label (32px) top-left, desc (16px Light, `rgba(0,0,0,0.55)`) pushed to bottom via `margin-top: auto`, `→` arrow `position: absolute; top/right: 28px`. Hover inverts surface to ink, arrow turns blue.
+- Mobile: tiles become horizontal scroll-snap (70vw cards), option cards stack to 1-up vertically at ≤640px, 2-up at ≤900px
 
-### 5.5 S3 Outcomes (`Testimonials.astro`)
+### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background
-- Horizontal drag-snap rail · 8 cards · aspect-ratio 2/3, width clamp(200, 20vw, 280) · 4px gap
+- Horizontal drag-snap rail · 8 cards · **aspect-ratio 3/4, width clamp(280, 30vw, 420px), padding 40px** · no gap
 - Alternating: ink (outcome) / sage (testimonial) · ink / sage · ink / sage · ink / sage
-- Outcomes: white type, top hairline, attribution block (Mono name + Light role)
-- Testimonials: ink type, italic-NOT-applied (the .fig is Roman, not italic — drop the italic from staging)
-- **Auto-advance every 4 seconds**, pauses on hover or pointer-down
-- Mobile: 70vw cards, 30vw peek, 4px gap
+- Outcomes: white type `clamp(17px, 1.4vw, 21px)` Light 300, attribution block (Mono name + Light role)
+- Testimonials: ink type `clamp(20px, 1.7vw, 26px)` Roman 400, NOT italic, opening `"` glyph
+- Mouse drag-to-scroll + snap; touch is native
+- Mobile: 78vw cards, 28px padding, no gap
 
 ### 5.6 S4 About (`About.astro`)
 - Off-b background

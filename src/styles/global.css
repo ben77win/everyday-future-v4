@@ -260,15 +260,16 @@ a { color: inherit; text-decoration: none; }
 .hero__headline {
   color: #fff;
   margin-bottom: 24px;
+  font-size: clamp(46px, 8.3vw, 120px);
 }
 .hero__subhead {
   color: rgba(255,255,255,0.82);
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 20px;
+  line-height: 32px;
   letter-spacing: 0.020em;
   font-weight: 300;
   margin-bottom: 28px;
-  max-width: 520px;
+  max-width: 680px;
 }
 .hero__tags {
   margin-bottom: 0;
@@ -355,12 +356,12 @@ a { color: inherit; text-decoration: none; }
   max-width: none;
 }
 .s2__header-body {
-  color: rgba(0,0,0,0.55);
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
-  margin-top: 28px;
-  max-width: 560px;
+  color: rgba(0,0,0,0.72);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.5;
+  letter-spacing: 0.010em;
+  margin-top: 32px;
+  max-width: 760px;
 }
 /* Three-tier tiles: centered row, max 880px */
 .s2__tiers {
@@ -403,11 +404,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 
-/* ── Option cards (4-up grid, Begin-style) */
+/* ── Option cards (4-up grid) */
 .s2__cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+  gap: 16px;
   max-width: var(--max-w);
   margin: 48px auto 0;
 }
@@ -415,21 +416,19 @@ a { color: inherit; text-decoration: none; }
 .s2__card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 28px 24px 32px;
+  gap: 14px;
+  padding: 40px 28px 36px;
   background: var(--paper);
-  border: 0.5px solid rgba(0,0,0,0.10);
   cursor: pointer;
   text-decoration: none;
   color: var(--ink);
-  transition: background 0.22s ease, color 0.22s ease;
+  transition: background 0.25s ease, color 0.25s ease;
   position: relative;
+  aspect-ratio: 1 / 1;
 }
-.s2__card:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-.s2__card:hover .s2__card-arrow { color: var(--blue); }
+.s2__card:hover { background: var(--ink); color: var(--paper); }
+.s2__card:hover .s2__card-arrow { color: var(--blue); transform: translateX(4px); }
+.s2__card:hover .s2__card-desc  { color: rgba(255,255,255,0.62); }
 
 .s2__card-label {
   font-family: var(--font-body);
@@ -441,22 +440,21 @@ a { color: inherit; text-decoration: none; }
 .s2__card-desc {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 13px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 26px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.55);
-  transition: color 0.22s ease;
+  margin-top: auto;
+  transition: color 0.25s ease;
 }
-.s2__card:hover .s2__card-desc { color: rgba(255,255,255,0.65); }
-
 .s2__card-arrow {
   position: absolute;
   top: 28px;
-  right: 24px;
+  right: 28px;
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 22px;
   color: rgba(0,0,0,0.30);
-  transition: color 0.22s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
   line-height: 1;
 }
 
@@ -523,10 +521,10 @@ a { color: inherit; text-decoration: none; }
 /* Cards */
 .s3__card {
   flex: 0 0 auto;
-  width: clamp(200px, 20vw, 280px);
-  aspect-ratio: 2 / 3;
+  width: clamp(280px, 30vw, 420px);
+  aspect-ratio: 3 / 4;
   scroll-snap-align: start;
-  padding: 24px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   user-select: none;
@@ -539,7 +537,7 @@ a { color: inherit; text-decoration: none; }
 .s3__card-body {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: clamp(14px, 1vw, 16px);
+  font-size: clamp(17px, 1.4vw, 21px);
   line-height: 1.5;
   letter-spacing: 0.020em;
   color: rgba(255,255,255,0.94);
@@ -572,7 +570,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-weight: 400;
   font-style: normal;
-  font-size: clamp(15px, 1.2vw, 19px);
+  font-size: clamp(20px, 1.7vw, 26px);
   line-height: 1.35;
   letter-spacing: -0.008em;
   color: var(--ink);
@@ -679,7 +677,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 48px;
+  gap: 56px;
   max-width: var(--max-w);
   margin: 0 auto;
 }
@@ -735,6 +733,7 @@ a { color: inherit; text-decoration: none; }
 
 /* Right — body copy */
 .s5__body {
+  max-width: 880px;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
@@ -748,7 +747,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.70);
+  color: rgba(0,0,0,0.72);
   margin-bottom: 18px;
 }
 .s5__para:first-child {
@@ -812,7 +811,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.110em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.40);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   display: block;
 }
 
@@ -834,14 +833,6 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.70);
   margin-bottom: 22px;
-}
-.s6__para:first-child {
-  font-size: clamp(22px, 2.2vw, 32px);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.010em;
-  color: var(--ink);
-  margin-bottom: 28px;
 }
 .s6__para:last-child { margin-bottom: 0; }
 
@@ -947,7 +938,7 @@ a { color: inherit; text-decoration: none; }
 .s-contact__textarea {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--ink);
   background: transparent;
@@ -1018,7 +1009,7 @@ a { color: inherit; text-decoration: none; }
 .site-footer__links {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 28px;
 }
 .site-footer__link {
   font-family: var(--font-mono);
@@ -1088,7 +1079,7 @@ a { color: inherit; text-decoration: none; }
 .s7__question {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(22px, 2.2vw, 32px);
+  font-size: clamp(20px, 2vw, 28px);
   line-height: 1.2;
   letter-spacing: -0.010em;
   color: var(--ink);
@@ -1145,7 +1136,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.60);
+  color: rgba(0,0,0,0.62);
   max-width: 640px;
 }
 .s7__answer-inner p { margin-bottom: 16px; }
@@ -1213,17 +1204,15 @@ a { color: inherit; text-decoration: none; }
   .s6__para,
   .s7__answer-inner,
   .s-contact__body { font-size: 16px; line-height: 26px; }
-  .s-contact__input,
-  .s-contact__textarea { font-size: 16px; }
 
   /* ── S3 RAIL — denser cards on mobile, 28vw peek */
   .s3 { padding: 80px 0 96px; }
   .s3__head { margin-bottom: 32px; }
   .s3__heading { font-size: clamp(34px, 9vw, 48px); }
-  .s3__rail { gap: 4px; padding-right: 28vw; }
+  .s3__rail { gap: 0; padding-right: 28vw; }
   .s3__card { width: 78vw; padding: 28px; }
   .s3__card-body { font-size: 16px; }
-  .s3__card-quote { font-size: clamp(16px, 4.8vw, 20px); }
+  .s3__card-quote { font-size: clamp(18px, 4.8vw, 22px); }
 
   /* ── S4 — reduce top padding (no S3 bleed images on mobile) */
   .s4 { padding: 72px var(--gutter) 72px; }

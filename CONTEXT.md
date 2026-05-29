@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-28 — Design pass complete on staging; strict Figma compliance, new S2 card grid, S3 ink/sage rail, Contact section, no orange_
+_Last updated: 2026-05-29 — Design comp audit pass: S2 card redesign, hero type scale override, S5/S6/S7/footer fixes_
 
 ---
 
@@ -25,6 +25,25 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 ---
 
+## ⚠️ Design Authority + CSS Lock Rule
+
+**Handoff 4** (`/Users/agentcomputer/Desktop/Claude Workspace/handoff 4/`) is the canonical design reference. Read those files before touching any CSS. Within handoff 4, component-specific spec files (e.g. `S3 Practice Makes Progress.md`) override the general `design.md` for that section.
+
+**Never change these CSS values without Ben's explicit approval:**
+- Body font-size: `14px` desktop / `16px` mobile — `+0.020em` tracking — `24px`/`26px` line-height
+- Display headings: `clamp(46px, 5.6vw, 84px)` weight 400, `-0.030em` — S2/S3/S4/S5 section heads
+- **Hero headline override:** `clamp(46px, 8.3vw, 120px)` — comp screenshot showed much larger than the comp HTML spec (`6.8vw / 84px`); Ben approved larger value but exact size not yet verified
+- **Hero subhead:** `font-size: 20px` / `line-height: 32px` / `max-width: 680px` (was 16px/26px/520px)
+- S2 option cards: `aspect-ratio: 1/1` (square) — `padding: 40px 28px 36px` — `gap: 16px` grid — no border — `aspect-ratio` must stay square
+- S3 card: `clamp(280px, 30vw, 420px)` / `aspect-ratio: 3/4` / `padding: 40px`
+- S3 card body: `clamp(17px, 1.4vw, 21px)`
+- S3 card quote: `clamp(20px, 1.7vw, 26px)`
+- All Mono: `13px` / `0.110em` (UI) · `14.4px` / `0.110em` (CTA) — never 10/11/12px or other tracking
+
+**If the spec file and the live code disagree, check with Ben before changing either.**
+
+---
+
 ## Design System
 
 See [`design.md`](design.md) — comprehensive as-built reference for all tokens, type scale, marks library, imagery rules, components, mobile, animation, and open decisions. Sourced directly from the repo by Claude Design on 2026-05-27. Supersedes all prior versions. The original Figma source is `Every Day Futures - Visual Identity.fig` by Form (Alice / designbyform.com).
@@ -37,7 +56,7 @@ See [`design.md`](design.md) — comprehensive as-built reference for all tokens
 |----|---------|--------|
 | S1 | Hero (`Hero.astro`) | ✅ Complete |
 | S2 | Coaching options — 1:1, Group, Orgs & Teams, Self-Led (`Services.astro`) | ✅ Complete |
-| S3 | Quotes / testimonials (`Testimonials.astro`) | ✅ Complete |
+| S3 | Practice Makes Progress — snap rail (`Testimonials.astro`) | ✅ Complete — 8 cards, ink/sage, `clamp(280,30vw,420)` / `3:4` |
 | S4 | Copy + Tags / About (`About.astro`) | ✅ Complete |
 | S5 | Waymaker (`Waymaker.astro`) | ✅ Complete |
 | S6 | Taylor / Bio (`TaylorBio.astro`) | ✅ Complete |
@@ -113,19 +132,33 @@ Nav text has a soft `text-shadow` for readability over the hero image — no gra
 
 `/begin` standalone page uses `background: var(--paper-cream)` so the transparent fixed nav blends with the BeginFlow content — no white stripe visible under the nav.
 
-### S3 Quote Text
+### S3 — Practice Makes Progress
 
-`.s3__text` has `font-style: italic`.
+Horizontal snap rail. 8 cards alternating ink (outcome) / sage (testimonial). Mouse drag + touch scroll.
 
-### S2 Hover Colors
-All four options currently hover to `--ink`. Per-option colors (blue for Group, orange for Self-led, etc.) are a pending decision — see Open Items.
+- Card: `width: clamp(280px, 30vw, 420px)` · `aspect-ratio: 3/4` · `padding: 40px`
+- Outcome body: `clamp(17px, 1.4vw, 21px)` Light 300
+- Testimonial quote: `clamp(20px, 1.7vw, 26px)` Roman 400, NOT italic, `"` glyph prefix
+- Mobile (≤640px): `78vw` cards, `28px` padding, no gap
 
-### Mobile: Cinematic Quotes (S3)
-On mobile (`≤640px`), quote sections become full-viewport cinematic moments:
-- `.s3__quote` → `min-height: 90vh`, `background: #0a0a0a`, flexbox centered
-- `.s3__img` → `position: absolute`, fills full section with `object-fit: cover`, `opacity: 1`
-- `::after` gradient overlay: `rgba(0,0,0,0.22) → 0.68`
-- `.s3__text` → `z-index: 2`, white text, `clamp(26px, 7vw, 40px)`
+### S2 Option Cards
+4-up grid, square (`aspect-ratio: 1/1`), paper on cream, padding `40px 28px 36px`, `gap: 16px`, no border.
+- Label: 32px Roman 400, `-0.020em`, top of card
+- Desc: 16px Light 300, `+0.020em`, `26px` line-height, `rgba(0,0,0,0.55)`, `margin-top: auto` (pushed to bottom)
+- Arrow (→): `position: absolute; top: 28px; right: 28px`, `22px`, `rgba(0,0,0,0.30)`
+- Hover: surface inverts to `--ink`, label/desc go white, arrow goes `--blue` + `translateX(4px)`
+- Per-option hover colors are a backlog item (all currently `--ink`)
+
+### Design Comp Audit Fixes (2026-05-29)
+CSS values verified against handoff 4 comp and corrected:
+- S7 question: `clamp(20px, 2vw, 28px)` (was `clamp(22px, 2.2vw, 32px)`)
+- S7 answer color: `rgba(0,0,0,0.62)` (was 0.60)
+- S5 para color: `rgba(0,0,0,0.72)` (was 0.70)
+- S5 inner gap: `56px` (was 48px)
+- S5 body: `max-width: 880px` added (was missing)
+- S6 eyebrow margin-bottom: `24px` (was 16px)
+- Footer links gap: `28px` (was 40px)
+- BeginFlow Step 1 cards: `aspect-ratio: 1/1` added (square, matches S2 cards)
 
 ### Mobile: Hero Tags
 ```css
