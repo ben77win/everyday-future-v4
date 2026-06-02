@@ -1191,8 +1191,9 @@ a { color: inherit; text-decoration: none; }
     aspect-ratio: 2 / 3;
   }
 
-  /* Option cards: 1-col on mobile (Begin-style) */
+  /* Option cards: full-width landscape on mobile to conserve vertical space */
   .s2__cards { grid-template-columns: 1fr; margin-top: 16px; }
+  .s2__card { aspect-ratio: 1.74 / 1; padding: 28px; }
 
   /* ── Body paragraphs — 16px mobile (iOS anti-zoom) */
   .s3__subhead,

@@ -136,7 +136,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): 4-up grid, `aspect-ratio: 1/1` (square), paper on cream, padding `40px 28px 36px`, 16px gap, no border. Label (32px) top-left, desc (16px Light, `rgba(0,0,0,0.55)`) pushed to bottom via `margin-top: auto`. No arrow. Hover inverts surface to `--blue` (the Begin Practice blue) with white text; mobile `:active` matches. `margin: 24px auto 0`.
 - **3 tier tiles** (Foundation / Calibration / Expansion): centered row, `max-width: 660px` so each tile is 220px wide, gap 0 (flush), aspect-ratio 2/3.3, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left. `margin: 48px auto 0`.
   - Images: dunes.png / feather.png / lotus.png
-- Mobile: tiles become horizontal scroll-snap (72vw cards) and sit below the stacked option cards; option cards stack to 1-up vertically at ≤640px, 2-up at ≤900px
+- Mobile: tiles become horizontal scroll-snap (72vw cards) and sit below the stacked option cards; option cards are 2-up at ≤900px, and at ≤640px stack 1-up full-width **landscape** (`aspect-ratio: 1.74/1` ≈ 331×190px at 375px, dropping the desktop square) with `28px` padding
 
 ### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background

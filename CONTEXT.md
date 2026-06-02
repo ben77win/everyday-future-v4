@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-06-02 — S2: header body restyled to match S4 body type (weight 400); tier tiles resized to 220px wide (max-width 660px, gap 0) and moved below the option cards (header→cards→tiles), divider hairline removed, header→cards gap tightened (card margin 24px desktop / 16px mobile); option cards lost their → arrow and hover/active now inverts to --blue (was --ink); float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
+_Last updated: 2026-06-02 — S2: header body restyled to match S4 body type (weight 400); tier tiles resized to 220px wide (max-width 660px, gap 0) and moved below the option cards (header→cards→tiles), divider hairline removed, header→cards gap tightened (card margin 24px desktop / 16px mobile); option cards lost their → arrow and hover/active now inverts to --blue (was --ink); mobile (≤640px) option cards now 1-up full-width landscape (aspect-ratio 1.74/1 ≈ 331×190px, padding 28px) instead of square; float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
 
 ---
 
@@ -36,7 +36,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 - **Hero subhead:** `font-size: 16px` / `line-height: 26px` / `max-width: 520px` — exact comp spec
 - **Hero copy block:** `max-width: 520px`
 - S2 header body (`.s2__header-body`): matches S4 body type — `--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, `-0.010em`, solid `--ink`; keeps 22px clamp floor on mobile (NOT reduced to 16px like other paragraphs)
-- S2 option cards: `aspect-ratio: 1/1` (square) — `padding: 40px 28px 36px` — `gap: 16px` grid — no border — `aspect-ratio` must stay square
+- S2 option cards: desktop `aspect-ratio: 1/1` (square) — `padding: 40px 28px 36px` — `gap: 16px` grid — no border — desktop square is locked. **Mobile (≤640px): 1-up full-width landscape `aspect-ratio: 1.74/1` (≈331×190px at 375px), `padding: 28px`** — square is dropped only at this breakpoint
 - S3 card: `clamp(280px, 30vw, 420px)` / `aspect-ratio: 3/4` / `padding: 40px`
 - S3 card body: `clamp(17px, 1.4vw, 21px)`
 - S3 card quote: `clamp(20px, 1.7vw, 26px)`
