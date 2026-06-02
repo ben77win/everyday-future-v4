@@ -266,10 +266,9 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 ## 8. Behavior + interaction
 
 ### Sticky float CTA
-- IntersectionObserver on `.hero`, threshold 0.15
-- `opacity: 0 → 1` over 0.4s when hero exits view
-- Pointer-events toggled with visibility
-- **No more "over-footer" inversion** — strict palette has no orange, so the inverted-pill state is dropped. The CTA stays ink+blue-hover throughout the scroll.
+- **Visible from first paint and persists throughout the scroll.** `.float-cta` base is `opacity: 1; pointer-events: auto` — the button shows immediately over the hero and never hides.
+- The hero IntersectionObserver (threshold 0.15) still drives the nav `.scrolled` glass state; it also toggles a now-redundant `.visible` class on the CTA (harmless — base is already visible).
+- **Over-footer inversion (palette-compliant).** A second IntersectionObserver on `.site-footer` (threshold 0) toggles `.over-footer` on the CTA. Over the ink footer the button inverts to `--paper` (white) background with `--ink` text so it stays legible; the rollover stays `--blue` with white text. This is NOT the dropped orange inversion — it uses only palette tokens.
 
 ### Hover states
 - **Primary CTA:** hover background → `--blue` (was orange in staging)

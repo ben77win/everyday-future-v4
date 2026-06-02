@@ -45,6 +45,14 @@ import '../styles/global.css';
     }, { threshold: 0.15 }).observe(hero);
   }
 
+  // ── Float CTA: invert colors when over the footer
+  var siteFooter = document.querySelector('.site-footer');
+  if (siteFooter && floatCta) {
+    new IntersectionObserver(function(entries) {
+      floatCta.classList.toggle('over-footer', entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(siteFooter);
+  }
+
   // ── S2 headline clip reveal: fires once when S2 enters view
   var s2Headline = document.getElementById('s2Headline');
   var s2Section  = document.getElementById('practice');
