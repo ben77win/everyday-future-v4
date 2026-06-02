@@ -192,7 +192,8 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Anchored `#contact`, accessible from footer link
 - Paper background, padding 140px var(--gutter) 160px
 - 2-col layout: heading "Get in touch" + body + meta (Direct / Elsewhere) left, 4-field form right
-- Form: Name · Email · Subject · Message (textarea) + "Send a note →" submit
+- Form: Name · Email · Subject · Message (textarea) + "Send a note" submit (no arrow)
+- **Submit button** (`.s-contact__submit`): same treatment as the float-CTA / Begin Practice button (48px tall, padding 0 40px, 4px radius, ink bg, DM Mono 14.4px / 0.110em uppercase, hover → `--blue`). `align-self: flex-end` so it sizes to content (not full-width stretch) and right-aligns — keeps it clear of the bottom-left float CTA.
 - Submission: Netlify Forms → coach@everydayfuture.work + ben@wintersand.co
 - Mobile: single column, 80px padding
 
