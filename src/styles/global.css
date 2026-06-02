@@ -336,10 +336,6 @@ a { color: inherit; text-decoration: none; }
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
 }
-.s2__headline-clip {
-  overflow: hidden;
-  display: block;
-}
 .s2__headline {
   color: var(--ink);
   font-size: clamp(46px, 5.6vw, 84px);
@@ -347,10 +343,13 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.0;
   letter-spacing: -0.030em;
   display: block;
-  transform: translateY(100%);
-  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.70s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .s2__headline.revealed {
+  opacity: 1;
   transform: translateY(0);
 }
 

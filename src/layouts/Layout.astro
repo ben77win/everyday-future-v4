@@ -53,20 +53,8 @@ import '../styles/global.css';
     }, { threshold: 0 }).observe(siteFooter);
   }
 
-  // ── S2 headline clip reveal: fires once when S2 enters view
-  var s2Headline = document.getElementById('s2Headline');
-  var s2Section  = document.getElementById('practice');
-  if (s2Headline && s2Section) {
-    new IntersectionObserver(function(entries, obs) {
-      if (entries[0].isIntersecting) {
-        s2Headline.classList.add('revealed');
-        obs.disconnect();
-      }
-    }, { threshold: 0.3 }).observe(s2Section);
-  }
-
   // ── S2 cards + S3 + other sections: staggered scroll reveal
-  var revealEls = document.querySelectorAll('.s2__card, .s3, .s4__body, .s4__tags, .s5__left, .s5__body, .s6__photos, .s6__bio, .s7__item');
+  var revealEls = document.querySelectorAll('.s2__headline, .s2__card, .s3, .s4__body, .s4__tags, .s5__left, .s5__body, .s6__photos, .s6__bio, .s7__item');
   if (revealEls.length) {
     var rowObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {

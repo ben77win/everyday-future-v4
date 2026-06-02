@@ -267,11 +267,10 @@ Animation is skipped on mobile (`window.innerWidth < 641` early return in Layout
 
 ## JS Summary
 
-Four IntersectionObservers:
+Three IntersectionObservers:
 1. **Nav / float CTA** — toggles `.scrolled` on nav and `.visible` on float CTA when hero exits
 2. **Float CTA footer inversion** — adds `.over-footer` to float CTA when `.site-footer` is visible, inverting its colors
-3. **S2 headline clip** — fires once, adds `.revealed` to `#s2Headline`
-4. **Staggered reveal** — observes `.s2__option, .s2__free, .s3__quote, .s4__body, .s4__tags, .s5__left, .s5__item, .s6__photos, .s6__bio, .s7__item` — 110ms stagger per element
+3. **Staggered reveal** — observes `.s2__headline, .s2__card, .s3, .s4__body, .s4__tags, .s5__left, .s5__body, .s6__photos, .s6__bio, .s7__item` — 110ms stagger per element. The S2 headline uses this standard fade-up (opacity + translateY 24px); it no longer has a bespoke clip-mask slide-up reveal.
 
 Parallax scroll handler: queries all `[data-parallax]`, calculates center offset relative to parent `.s2__free`, `.s3__quote`, or `.s6__photos`, applies `translateY`.
 
