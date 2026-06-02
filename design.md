@@ -141,10 +141,11 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 ### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background
+- Header: h2 "Practice makes progress" + sub-heading "Testimonials and outcomes" (`.s3__subhead`) — sub-heading uses the **same type treatment as the S2 header body** (`--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, -0.010em, solid `--ink`, `margin-top: 32px`, `max-width: 760px`; keeps the 22px clamp floor on mobile, NOT reduced to 16px)
 - Horizontal drag-snap rail · 8 cards · **aspect-ratio 3/4, width clamp(280, 30vw, 420px), padding 40px** · no gap
 - Alternating: ink (outcome) / sage (testimonial) · ink / sage · ink / sage · ink / sage
 - Outcomes: white type `clamp(17px, 1.4vw, 21px)` Light 300, attribution block (Mono name + Light role)
-- Testimonials: ink type `clamp(20px, 1.7vw, 26px)` Roman 400, NOT italic, opening `"` glyph
+- Testimonials: ink type `clamp(20px, 1.7vw, 26px)` Roman 400, **italic**, wrapped in opening `"` (`::before`) + closing `"` (`::after`) glyphs at 0.30 opacity
 - Mouse drag-to-scroll + snap; touch is native
 - Mobile: 78vw cards, 28px padding, no gap
 
