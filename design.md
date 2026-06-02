@@ -129,6 +129,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Label: "Begin Practice"
 
 ### 5.4 S2 Services (`Services.astro`)
+- **Section top padding (shared header rhythm):** `120px` desktop / `72px` mobile — standardized across S2, S3, S4, S5 so every section header sits at the same top gap. (S2 achieves this via three coupled rules: `.s2` padding-top, `.s2__header` negative margin-top, and `.s2__header` padding-top, all matched.)
 - Cream background
 - Header (full-width): h2 headline + supporting body copy ("Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.")
   - Body copy (`.s2__header-body`) uses the **same type treatment as the S4 body** (`.s4__body`): `--font-body`, weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, letter-spacing -0.010em, solid `--ink`. No reveal animation. Layout props specific to this header: `margin-top: 32px`, `max-width: 760px`. On mobile it keeps the 22px clamp floor (NOT reduced to the 16px body size that other paragraphs use).

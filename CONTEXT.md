@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-06-02 — S2: header body restyled to match S4 body type (weight 400); tier tiles resized to 220px wide (max-width 660px, gap 0) and moved below the option cards (header→cards→tiles), divider hairline removed, header→cards gap tightened (card margin 24px desktop / 16px mobile); option cards lost their → arrow and hover/active now inverts to --blue (was --ink); mobile (≤640px) option cards now 1-up full-width landscape (aspect-ratio 1.74/1 ≈ 331×190px, padding 28px) instead of square; float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
+_Last updated: 2026-06-02 — S2: header body restyled to match S4 body type (weight 400); tier tiles resized to 220px wide (max-width 660px, gap 0) and moved below the option cards (header→cards→tiles), divider hairline removed, header→cards gap tightened (card margin 24px desktop / 16px mobile); option cards lost their → arrow and hover/active now inverts to --blue (was --ink); mobile (≤640px) option cards now 1-up full-width landscape (aspect-ratio 1.74/1 ≈ 331×190px, padding 28px) instead of square; section top padding standardized to 120px desktop / 72px mobile across S2/S3/S4/S5 (S3 was 140/80, S4 was 220/72) for a consistent header gap; float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
 
 ---
 
