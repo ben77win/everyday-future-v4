@@ -152,7 +152,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.6 S4 About (`About.astro`)
 - Off-b background
 - 2-col grid: heading + body left, 3-tag column right
-- Vector-8.svg brush mark top-left of section, filtered `--blue` at 0.55 opacity, rotated 4°
+- Vector-8.svg brush mark anchored to the heading (top-left, inside a `position:relative` inline-block wrapper around the `<h2>`, like S5's mark), `.s4__mark` top -48px / left -6px / 125px wide, filtered `--blue` at 0.55 opacity, rotated 4°
 - Tags: 36px tall, 4px radius, 0.5px ink/30 border, DM Mono 13px
 
 ### 5.7 S5 Waymaker (`Waymaker.astro`)

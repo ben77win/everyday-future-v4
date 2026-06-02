@@ -618,6 +618,16 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 28px;
 }
 
+.s4__mark {
+  position: absolute;
+  top: -48px;
+  left: -6px;
+  width: 125px;
+  opacity: 0.55;
+  pointer-events: none;
+  transform: rotate(4deg);
+}
+
 .s4__body {
   font-family: var(--font-body);
   font-weight: 400;
