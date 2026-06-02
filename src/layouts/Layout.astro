@@ -142,6 +142,17 @@ import '../styles/global.css';
       }
     });
   });
+
+  // ── Taylor bio "show more"
+  var bioToggle = document.getElementById('s6MoreToggle');
+  if (bioToggle) {
+    var bioEl = document.getElementById('s6Bio');
+    bioToggle.addEventListener('click', function() {
+      var open = bioEl.classList.toggle('more-open');
+      bioToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      bioToggle.textContent = open ? 'Show less' : 'Show more';
+    });
+  }
 </script>
 
 </body>

@@ -813,23 +813,13 @@ a { color: inherit; text-decoration: none; }
 
 /* Right — bio */
 .s6__bio {
-  padding-top: 8px;
+  padding-top: 0;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.80s 0.15s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.80s 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .s6__bio.revealed { opacity: 1; transform: translateY(0); }
-
-.s6__eyebrow {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.40);
-  margin-bottom: 24px;
-  display: block;
-}
 
 .s6__name {
   font-family: var(--font-body);
@@ -851,6 +841,37 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 22px;
 }
 .s6__para:last-child { margin-bottom: 0; }
+
+/* Collapsible "show more" — paragraphs 4 & 5 */
+.s6__more {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.40s ease;
+}
+.s6__bio.more-open .s6__more {
+  max-height: 600px;
+  opacity: 1;
+}
+.s6__more .s6__para:last-child { margin-bottom: 0; }
+
+.s6__more-toggle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.020em;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 18px;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+.s6__more-toggle:hover { color: var(--blue); }
 
 .s6__sign {
   color: var(--ink);

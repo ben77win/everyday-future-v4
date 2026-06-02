@@ -166,7 +166,8 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Paper background
 - 2-col grid: **single portrait** (taylor-01.png) + bio
 - Photo: 420×560 max, full opacity (no opacity reduction, no parallax scatter)
-- Bio: name in Roman 400 (clamp(46, 5.6vw, 84)) + 3 paragraphs body
+- Bio: name in Roman 400 (clamp(46, 5.6vw, 84)) + 5 paragraphs body. **No eyebrow** — the "Founder of Every Day Future" mono eyebrow (`.s6__eyebrow`) was removed; the name is now the first element in the bio column. `.s6__bio` padding-top set to 0 so the name top sits flush with the photo top (`align-items: start`).
+- **Show more / show less:** first 3 paragraphs always visible; paragraphs 4 & 5 wrapped in `.s6__more` (collapsed via `max-height:0` / `opacity:0`, expands to `max-height:600px` when `.s6__bio` gets `.more-open`). Toggle is `.s6__more-toggle` — underlined Helvetica Neue text link, 16px, ink → `--blue` on hover; label swaps "Show more" ⇄ "Show less". JS lives in `Layout.astro` (after the FAQ accordion), keyed off `#s6MoreToggle` / `#s6Bio`.
 - **Drop the photo scatter** (taylor-03.gif, taylor-02.jpg removed from scope)
 
 ### 5.9 S7 FAQ (`FAQ.astro`)
