@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+const { title, intro } = Astro.props;
+---
+
+<Layout>
+  <Nav />
+
+  <main class="legal">
+    <div class="legal__inner">
+      <a href="/" class="legal__back">← Every Day Future</a>
+      <h1 class="legal__title">{title}</h1>
+      <p class="legal__intro">{intro}</p>
+
+      <slot />
+
+      <p class="legal__footer">LTW Coaching LLC DBA Every Day Future · Washington State · info@everydayfuture.work</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>document.documentElement.classList.add('page-legal');</script>

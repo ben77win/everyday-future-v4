@@ -183,7 +183,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.10 Footer (`Footer.astro`)
 - Ink background, padding 60px var(--gutter)
 - Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
-- Right: link row — **Contact · Instagram · Login · Terms & Conditions · Privacy Policy**
+- Right: link row — **Contact · Instagram · Login · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)**
 - Links: DM Mono 13px / 0.110em uppercase, white at 0.46, hover to white at 0.86
 - **No orange dot separators** — just flat row with 28px gap
 - Mobile: stacks vertical, gap 14px 22px wrap
@@ -219,6 +219,16 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
   - Calendly URLs placeholder — Taylor to provide
 - **Body copy → `.t-body-lg`:** `.bf-subhead`, `.bf-step2-sub`, `.bf-offering-card__body`, `.bf-selflead__body` all use the shared body class (17px desktop / 16px mobile); their scoped type props were stripped so the class is the single source of truth.
 - **Link hovers → `--blue`:** `.bf-back` (change selection) and `.bf-selflead__home` hover to `--blue` (was `--ink`), matching the site's interaction convention.
+
+### 5.13 Legal pages — Privacy & Terms (`/privacy`, `/terms`)
+- Routes: `src/pages/privacy.astro` + `src/pages/terms.astro`, both rendered through the shared **`LegalDoc.astro`** component (Layout + Nav + Footer chrome; takes `title` / `intro` props + a `<slot>` for sections). Privacy = 13 sections; Terms = 13 sections.
+- Linked from the footer (Terms → `/terms`, Privacy → `/privacy`); Terms §5 cross-links to `/privacy`.
+- **No metadata strip:** there is intentionally NO "Effective Date / Governing Law / Contact" sup line under the title (removed), and no "Last updated" date in the page footer line. Intro paragraph sits directly under the title.
+- **Contact email is `info@everydayfuture.work`** throughout (not coach@).
+- **No section numbers:** the "01 / 02 / …" labels above each heading were removed (per Ben); in-body cross-references that pointed to them were reworded to name the section instead. Headings sit at the top of each section.
+- **Styling (`.legal*` in global.css):** paper background, 760px column. Title = display (`clamp(44,5.2vw,76)`/400/-0.030em); page footer line in DM Mono 13px uppercase; section `h2` `clamp(24,2.4vw,34)`/400; body 17px / line-height 1.7 / ink 0.68; lists use a blue dash bullet (`::before`), bold lead terms in ink; `--caps` modifier for the all-caps legal clauses. Email/cross-links in `--blue`. A "← Every Day Future" back link (Mono, hover → `--blue`) sits above the title.
+- Nav forced to ink on these pages via `.page-legal` (set by an inline script), since the nav sits on a paper background instead of the hero.
+- **Excluded from publish:** the source docs' closing attorney-review disclaimer, and the Terms "Cancellation & Rescheduling" section (removed at Ben's request).
 
 ---
 
