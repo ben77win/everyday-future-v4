@@ -448,7 +448,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 16px;
-  line-height: 26px;
+  line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.55);
   margin-top: auto;
@@ -760,7 +760,7 @@ a { color: inherit; text-decoration: none; }
 .s5__para {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.72);
@@ -844,7 +844,7 @@ a { color: inherit; text-decoration: none; }
 .s6__para {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.020em;
   color: rgba(0,0,0,0.70);
