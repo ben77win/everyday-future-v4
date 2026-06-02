@@ -1281,6 +1281,7 @@ a { color: inherit; text-decoration: none; }
   }
   /* Tap feedback for CTA */
   .float-cta__link:active { background: var(--blue); color: var(--paper); }
+  .float-cta.over-footer .float-cta__link:active { background: var(--blue); color: var(--paper); }
 
   /* Tap feedback for S2 cards */
   .s2__card:active { background: var(--ink); color: var(--paper); }
