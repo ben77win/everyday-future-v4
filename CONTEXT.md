@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-05-29 — Design comp audit pass: S2 card redesign, hero type scale override, S5/S6/S7/footer fixes_
+_Last updated: 2026-06-02 — S2 header body copy restyled to match S4 body type (`.s2__header-body` = `.s4__body` treatment, weight 400); float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
 
 ---
 
@@ -35,6 +35,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 - **Hero headline:** `clamp(46px, 6.8vw, 84px)` — exact comp spec (previous session had inflated override at 8.3vw/120px — reverted)
 - **Hero subhead:** `font-size: 16px` / `line-height: 26px` / `max-width: 520px` — exact comp spec
 - **Hero copy block:** `max-width: 520px`
+- S2 header body (`.s2__header-body`): matches S4 body type — `--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, `-0.010em`, solid `--ink`; keeps 22px clamp floor on mobile (NOT reduced to 16px like other paragraphs)
 - S2 option cards: `aspect-ratio: 1/1` (square) — `padding: 40px 28px 36px` — `gap: 16px` grid — no border — `aspect-ratio` must stay square
 - S3 card: `clamp(280px, 30vw, 420px)` / `aspect-ratio: 3/4` / `padding: 40px`
 - S3 card body: `clamp(17px, 1.4vw, 21px)`

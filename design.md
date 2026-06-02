@@ -131,6 +131,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.4 S2 Services (`Services.astro`)
 - Cream background
 - Header (full-width): h2 headline + supporting body copy ("Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.")
+  - Body copy (`.s2__header-body`) uses the **same type treatment as the S4 body** (`.s4__body`): `--font-body`, weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, letter-spacing -0.010em, solid `--ink`. No reveal animation. Layout props specific to this header: `margin-top: 32px`, `max-width: 760px`. On mobile it keeps the 22px clamp floor (NOT reduced to the 16px body size that other paragraphs use).
 - **3 tier tiles** (Foundation / Calibration / Expansion): 880px max-width centered, 3-up grid, aspect-ratio 2/3.3, 4px gap, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left
   - Images: dunes.png / feather.png / lotus.png
 - **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): 4-up grid, `aspect-ratio: 1/1` (square), paper on cream, padding `40px 28px 36px`, 16px gap, no border. Label (32px) top-left, desc (16px Light, `rgba(0,0,0,0.55)`) pushed to bottom via `margin-top: auto`, `→` arrow `position: absolute; top/right: 28px`. Hover inverts surface to ink, arrow turns blue.
