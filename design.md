@@ -205,11 +205,14 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
   - Auto-advance after 350ms on selection
   - URL param shortcut: `/begin?option=1on1|group|orgs|selflead`
 - Step 2: change-selection bar (with **× close → `/`** top-right, `.bf-close`, hover → `--blue`) + heading + offering detail block + form
+  - **Layout (`.bf-step2-cols`, `grid-template-areas`):** on desktop the **intro + "About you" + form stack in the LEFT column** and the **offering card spans the RIGHT** (areas: heading/sub/about/form left, `card` right; a flexible 5th row keeps the left items from spreading when the card is taller). The form is now a child of `.bf-step2-cols` (no longer a full-width block below).
+  - **Mobile (≤640px):** single column, order **heading → sub → card → about → form**; the offering detail grid is **collapsed by default** behind a "What's included +/−" toggle (`.bf-offering__toggle`, mobile-only — desktop always shows the grid). Toggle expands `.bf-offering--expanded .bf-offering-card__grid`.
   - **Heading is the selected service name** (`#bfStep2Heading`, e.g. "1:1 Coaching" / "Orgs & Teams" / "Group" / "Self-led"), set by JS from `OPTION_LABELS[selectedOption]` — replaces the old static "Begin your practice."
   - The old `.bf-step2-badge` ("• 1:1 COACHING") is **removed** — the service now lives in the heading instead of next to "Change selection"
   - Offering variants per option (1:1 / Orgs / Group / Self-led)
   - **Group offering copy** — see §7 below
   - Form: First name / Email / Phone (optional) + "Begin Practice" submit (no arrow; same button as float CTA)
+  - **"About you" heading** (`.bf-about-heading`): `clamp(32px, 3.4vw, 48px)` / weight 400 / line-height 1.1 / -0.020em (28px mobile) — bumped up from the old `clamp(22, 2.2vw, 32)` so the form section reads as a clear header.
   - **Form lines (matches Contact form):** inputs have `border: none` (no own underline); the single line per field is the `.bf-field` divider (0.5px / 0.18, `:first-of-type` adds a top divider). Focus/error feedback moved onto that divider — `.bf-field:focus-within` → `--blue`, `.bf-field:has(.bf-input--error)` → `--ink`. (Removed the old double line: input underline + field divider.)
 - Step 3: schedule heading + Calendly embed OR Self-led "You're on the list" confirmation
   - Self-led "Return to Every Day Future" link — no arrow
