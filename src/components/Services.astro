@@ -9,6 +9,16 @@ import { practiceOptions } from '../data/options';
     <p class="s2__header-body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
   </div>
 
+  <!-- Option cards: 4-up grid -->
+  <div class="s2__cards">
+    {practiceOptions.map((opt) => (
+      <a href={`/begin?option=${opt.key}`} class="s2__card">
+        <span class="s2__card-label">{opt.label}</span>
+        <span class="s2__card-desc">{opt.desc}</span>
+      </a>
+    ))}
+  </div>
+
   <!-- Tier tiles: Foundation / Calibration / Expansion — centered, max 880px -->
   <div class="s2__tiers">
     <div class="s2__tier">
@@ -26,17 +36,6 @@ import { practiceOptions } from '../data/options';
       <img src="/images/lotus.png" alt="" />
       <span class="s2__tier-label">Expansion</span>
     </div>
-  </div>
-
-  <!-- Option cards: 4-up grid -->
-  <div class="s2__cards">
-    {practiceOptions.map((opt) => (
-      <a href={`/begin?option=${opt.key}`} class="s2__card">
-        <span class="s2__card-arrow" aria-hidden="true">→</span>
-        <span class="s2__card-label">{opt.label}</span>
-        <span class="s2__card-desc">{opt.desc}</span>
-      </a>
-    ))}
   </div>
 
 </section>

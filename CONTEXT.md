@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-06-02 — S2 header body copy restyled to match S4 body type (`.s2__header-body` = `.s4__body` treatment, weight 400); float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
+_Last updated: 2026-06-02 — S2: header body restyled to match S4 body type (weight 400); tier tiles resized to 220px wide (max-width 660px, gap 0) and moved below the option cards (header→cards→tiles), divider hairline removed, header→cards gap tightened (card margin 24px desktop / 16px mobile); option cards lost their → arrow and hover/active now inverts to --blue (was --ink); float CTA always-visible + over-footer invert + mobile :active blue; "Get in touch" copy_
 
 ---
 
@@ -147,9 +147,9 @@ Horizontal snap rail. 8 cards alternating ink (outcome) / sage (testimonial). Mo
 4-up grid, square (`aspect-ratio: 1/1`), paper on cream, padding `40px 28px 36px`, `gap: 16px`, no border.
 - Label: 32px Roman 400, `-0.020em`, top of card
 - Desc: 16px Light 300, `+0.020em`, `26px` line-height, `rgba(0,0,0,0.55)`, `margin-top: auto` (pushed to bottom)
-- Arrow (→): `position: absolute; top: 28px; right: 28px`, `22px`, `rgba(0,0,0,0.30)`
-- Hover: surface inverts to `--ink`, label/desc go white, arrow goes `--blue` + `translateX(4px)`
-- Per-option hover colors are a backlog item (all currently `--ink`)
+- No arrow (removed) — label + desc only
+- Hover: surface inverts to `--blue` (#2956E0, the Begin Practice blue), label/desc go white. Mobile `:active` matches (blue).
+- Per-option hover colors are a backlog item (all currently `--blue`)
 
 ### Design Comp Audit Fixes (2026-05-29)
 CSS values verified against handoff 4 comp and corrected:

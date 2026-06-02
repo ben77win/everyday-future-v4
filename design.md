@@ -23,13 +23,13 @@ A quiet, editorial coaching site. Type is the hero. Photography is full-bleed an
 
 | Token | Hex | Used in |
 |---|---|---|
-| `--ink` | `#000000` | All type, hairlines, S3 outcome cards, S2 hover, footer, hero gradient base |
+| `--ink` | `#000000` | All type, hairlines, S3 outcome cards, footer, hero gradient base |
 | `--paper` | `#FFFFFF` | Page default, S2 cards (on cream), S3 floor, S6 Taylor, Begin Step 3 panel |
 | `--paper-off-a` | `#FAFCFA` | Reserved — barely-warm paper variant |
 | `--paper-off-b` | `#F8FCF7` | S4 About |
 | `--paper-cream` | `#FFFCD1` | S2 Practice background, S5 Waymaker, Begin drawer/page |
 | `--paper-sage` | `#E9EDE7` | S3 testimonial cards (rotation), S7 FAQ |
-| `--blue` | `#2956E0` | Brush marks (default), interaction accent (CTA hover, link hover, focus ring) |
+| `--blue` | `#2956E0` | Brush marks (default), interaction accent (CTA hover, link hover, focus ring, S2 card hover) |
 
 ### Rules of color use
 - **Ink is type, hairlines, dark surfaces.** Pure #000.
@@ -132,10 +132,11 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Cream background
 - Header (full-width): h2 headline + supporting body copy ("Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.")
   - Body copy (`.s2__header-body`) uses the **same type treatment as the S4 body** (`.s4__body`): `--font-body`, weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, letter-spacing -0.010em, solid `--ink`. No reveal animation. Layout props specific to this header: `margin-top: 32px`, `max-width: 760px`. On mobile it keeps the 22px clamp floor (NOT reduced to the 16px body size that other paragraphs use).
-- **3 tier tiles** (Foundation / Calibration / Expansion): 880px max-width centered, 3-up grid, aspect-ratio 2/3.3, 4px gap, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left
+- **Order: option cards first, then tier tiles.** Spacing — option cards `margin-top: 24px` desktop / `16px` mobile; tier tiles `margin-top: 48px` desktop / `24px` mobile. NB: the visible header→cards gap is larger than the card margin because `.s2__header` itself adds `padding-bottom: 80px` desktop / `56px` mobile → actual gap ≈ 104px desktop / 72px mobile.
+- **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): 4-up grid, `aspect-ratio: 1/1` (square), paper on cream, padding `40px 28px 36px`, 16px gap, no border. Label (32px) top-left, desc (16px Light, `rgba(0,0,0,0.55)`) pushed to bottom via `margin-top: auto`. No arrow. Hover inverts surface to `--blue` (the Begin Practice blue) with white text; mobile `:active` matches. `margin: 24px auto 0`.
+- **3 tier tiles** (Foundation / Calibration / Expansion): centered row, `max-width: 660px` so each tile is 220px wide, gap 0 (flush), aspect-ratio 2/3.3, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left. `margin: 48px auto 0`.
   - Images: dunes.png / feather.png / lotus.png
-- **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): 4-up grid, `aspect-ratio: 1/1` (square), paper on cream, padding `40px 28px 36px`, 16px gap, no border. Label (32px) top-left, desc (16px Light, `rgba(0,0,0,0.55)`) pushed to bottom via `margin-top: auto`, `→` arrow `position: absolute; top/right: 28px`. Hover inverts surface to ink, arrow turns blue.
-- Mobile: tiles become horizontal scroll-snap (70vw cards), option cards stack to 1-up vertically at ≤640px, 2-up at ≤900px
+- Mobile: tiles become horizontal scroll-snap (72vw cards) and sit below the stacked option cards; option cards stack to 1-up vertically at ≤640px, 2-up at ≤900px
 
 ### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background
@@ -273,7 +274,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 
 ### Hover states
 - **Primary CTA:** hover background → `--blue` (was orange in staging)
-- **S2 option card:** hover surface inverts to ink, label/desc go white, top-right arrow goes blue
+- **S2 option card:** hover surface inverts to `--blue`, label/desc go white (no arrow)
 - **S3 rail:** drag-to-scroll + auto-advance every 4 seconds (pauses on hover)
 - **Nav link (scrolled):** hover text → `--blue`
 - **Footer link:** hover text → white at 0.86
