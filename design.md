@@ -74,8 +74,8 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 | Display headline (hero, S2–S5 heads, S6 name, Begin headings) | Helvetica Neue 55 Roman | **400** | clamp(46, 5.6vw, 84) | 1.0 | -0.030em |
 | Sub-display (S4 body, S5 first para, S7 question, form heading, offering name) | Helvetica Neue 55 Roman | 400 | clamp(22, 2.2vw, 32) | 1.2 | -0.010em |
 | S3 outcome / testimonial card body | Helvetica Neue / Roman + Light | 400 / 300 | clamp(15, 1.2vw, 19) | 1.35–1.5 | varies |
-| Body — bumped group (S2 card desc `.s2__card-desc`, S5 paragraphs `.s5__para` non-first, S6 bio `.s6__para`) | Helvetica Neue 45 Light | 300 | **16px desktop / 16px mobile** | 24px desktop / 26px mobile | +0.020em |
-| Body — base group (S7 answers, form fields, contact form `.s-contact__body`) | Helvetica Neue 45 Light | 300 | **14px desktop / 16px mobile** | 24px / 26px | +0.020em |
+| Body — **shared `.t-body-lg` class** (S2 card subheads `.s2__card-desc`, S5 paragraphs `.s5__para` non-first, S6 bio `.s6__para`, S7 FAQ answers `.s7__answer-inner`) | Helvetica Neue 45 Light | 300 | **17px desktop / 16px mobile** | 24px desktop / 26px mobile | +0.020em |
+| Body — base group (form fields, contact form `.s-contact__body`) | Helvetica Neue 45 Light | 300 | **14px desktop / 16px mobile** | 24px / 26px | +0.020em |
 | Mono UI (eyebrows, nav links, footer, tags, captions) | DM Mono Regular | 400 | **13px / 0.110em** uppercase | 1 | 0.110em |
 | CTA label (float CTA + form buttons) | DM Mono Regular | 400 | **14.4px / 0.110em** uppercase | 1 | 0.110em |
 
@@ -167,7 +167,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - 2-col grid: **two diagonal portraits** + bio
 - **Diagonal photo box** (`.s6__photos`): an implied box at the original portrait footprint — `position:relative`, `width:100%`, `max-width:420px`, `aspect-ratio:420/560`. Two `.s6__photo` images sized `calc(50% - 2px)` square-of-box, absolutely positioned at opposite corners: `.s6__photo--ul` (DSCF0172.jpg, brown blazer) top-left, `.s6__photo--lr` (DSCF0084.jpg, couch) bottom-right. Their inner corners meet at center with a **4px** gap (the `-2px` per side). Top-right & bottom-left quadrants are empty, implying the box. Layout is preserved on tablet/mobile (scales via aspect-ratio). Source JPGs downscaled to 900×1200 (~140–175 KB) from 6192×8256 originals.
 - Bio: name in Roman 400 (clamp(46, 5.6vw, 84)) + 5 paragraphs body. **No eyebrow** — the "Founder of Every Day Future" mono eyebrow (`.s6__eyebrow`) was removed; the name is now the first element in the bio column. `.s6__bio` padding-top set to 0 so the name top sits flush with the photo top (`align-items: start`).
-- **Show more / show less:** first 3 paragraphs always visible; paragraphs 4 & 5 wrapped in `.s6__more` (collapsed via `max-height:0` / `opacity:0`, expands to `max-height:600px` when `.s6__bio` gets `.more-open`). Toggle is `.s6__more-toggle` — underlined Helvetica Neue text link, 16px, ink → `--blue` on hover; label swaps "Show more" ⇄ "Show less". JS lives in `Layout.astro` (after the FAQ accordion), keyed off `#s6MoreToggle` / `#s6Bio`.
+- **Show more / show less:** first 3 paragraphs always visible; paragraphs 4 & 5 wrapped in `.s6__more` (collapsed via `max-height:0` / `opacity:0`, expands to `max-height:600px` when `.s6__bio` gets `.more-open`). Toggle is `.s6__more-toggle` — **Mono UI label** matching the nav "Client Portal" link (DM Mono 13px / 0.110em uppercase, ink → `--blue` on hover); label swaps "Show more" ⇄ "Show less" (CSS uppercases it). JS lives in `Layout.astro` (after the FAQ accordion), keyed off `#s6MoreToggle` / `#s6Bio`.
 - **Drop the photo scatter** (taylor-03.gif, taylor-02.jpg removed from scope)
 
 ### 5.9 S7 FAQ (`FAQ.astro`)
@@ -282,7 +282,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 - **Primary CTA:** hover background → `--blue` (was orange in staging)
 - **S2 option card:** hover surface inverts to `--blue`, label/desc go white (no arrow)
 - **S3 rail:** drag-to-scroll + auto-advance every 4 seconds (pauses on hover)
-- **Nav link (scrolled):** hover text → `--blue`
+- **Nav link ("Client Portal"):** hover text → `--blue` (`.nav__link:hover`, both hero and scrolled states) — same rollover as the bio "Show more" toggle
 - **Footer link:** hover text → white at 0.86
 - **Form field:** focus underline → `--blue`
 

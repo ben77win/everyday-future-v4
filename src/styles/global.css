@@ -77,6 +77,15 @@ a { color: inherit; text-decoration: none; }
   line-height: 24px;
   letter-spacing: 0.020em;
 }
+/* Shared body copy — S5 section paras, S6 bio, S2 card subheads, S7 FAQ answers.
+   Owns type only; each element keeps its own color + layout. Mobile floor 16px below. */
+.t-body-lg {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
+}
 .t-eyebrow {
   font-family: var(--font-mono);
   font-weight: 400;
@@ -207,6 +216,8 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.3s;
   text-shadow: 0 1px 10px rgba(0,0,0,0.35), 0 0px 4px rgba(0,0,0,0.18);
 }
+.nav__link:hover,
+.nav.scrolled .nav__link:hover { color: var(--blue); }
 .nav__cta {
   background: rgba(255,255,255,0.15);
   border: 0.5px solid rgba(255,255,255,0.4);
@@ -445,11 +456,6 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.05;
 }
 .s2__card-desc {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.55);
   margin-top: auto;
   transition: color 0.25s ease;
@@ -758,11 +764,6 @@ a { color: inherit; text-decoration: none; }
 .s5__body.revealed { opacity: 1; transform: translateY(0); }
 
 .s5__para {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.72);
   margin-bottom: 18px;
 }
@@ -837,11 +838,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 .s6__para {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.70);
   margin-bottom: 22px;
 }
@@ -862,17 +858,16 @@ a { color: inherit; text-decoration: none; }
 .s6__more .s6__para:last-child { margin-bottom: 0; }
 
 .s6__more-toggle {
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 16px;
-  letter-spacing: 0.020em;
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
   color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
   background: none;
   border: none;
   padding: 0;
-  margin-top: 18px;
+  margin-top: 24px;
   cursor: pointer;
   transition: color 0.25s ease;
 }
@@ -1190,11 +1185,6 @@ a { color: inherit; text-decoration: none; }
 
 .s7__answer-inner {
   padding: 0 0 36px;
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.62);
   max-width: 640px;
 }
@@ -1256,10 +1246,8 @@ a { color: inherit; text-decoration: none; }
   .s2__cards { grid-template-columns: 1fr; margin-top: 16px; }
   .s2__card { aspect-ratio: 1.74 / 1; padding: 28px; }
 
-  /* ── Body paragraphs — 16px mobile (iOS anti-zoom) */
-  .s5__para,
-  .s6__para,
-  .s7__answer-inner,
+  /* ── Body paragraphs — 16px mobile floor (iOS anti-zoom) */
+  .t-body-lg,
   .s-contact__body { font-size: 16px; line-height: 26px; }
 
   /* ── S3 RAIL — denser cards on mobile, 28vw peek */
