@@ -199,15 +199,23 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 ### 5.12 BeginFlow (`BeginFlow.astro`)
 - 3-step flow at `/begin` (page) and as drawer over homepage
+- **Consistency with the main site (2026-06-02 pass):** Step 1 cards and body copy were brought in line with the homepage conventions — see notes below.
 - Step 1: eyebrow "— · Begin your practice" + heading "Choose how you want to practice." + 4 option cards (1:1, Orgs & Teams, Group, Self-led)
+  - **Option cards (`.bf-option`)** mirror the S2 cards: **no arrow** (`.bf-option__arrow` removed), hover **and** `[aria-pressed]` selected state **invert to `--blue`** (was `--ink`) with white text, description uses the shared **`.t-body-lg`** class (17px / 16px mobile) and is **bottom-anchored** via `margin-top: auto` (like S2 — label top, desc bottom).
   - Auto-advance after 350ms on selection
   - URL param shortcut: `/begin?option=1on1|group|orgs|selflead`
-- Step 2: change-selection bar + selected badge + heading + offering detail block + form
+- Step 2: change-selection bar (with **× close → `/`** top-right, `.bf-close`, hover → `--blue`) + heading + offering detail block + form
+  - **Heading is the selected service name** (`#bfStep2Heading`, e.g. "1:1 Coaching" / "Orgs & Teams" / "Group" / "Self-led"), set by JS from `OPTION_LABELS[selectedOption]` — replaces the old static "Begin your practice."
+  - The old `.bf-step2-badge` ("• 1:1 COACHING") is **removed** — the service now lives in the heading instead of next to "Change selection"
   - Offering variants per option (1:1 / Orgs / Group / Self-led)
   - **Group offering copy** — see §7 below
-  - Form: First name / Email / Phone (optional) + "Begin Practice →"
+  - Form: First name / Email / Phone (optional) + "Begin Practice" submit (no arrow; same button as float CTA)
+  - **Form lines (matches Contact form):** inputs have `border: none` (no own underline); the single line per field is the `.bf-field` divider (0.5px / 0.18, `:first-of-type` adds a top divider). Focus/error feedback moved onto that divider — `.bf-field:focus-within` → `--blue`, `.bf-field:has(.bf-input--error)` → `--ink`. (Removed the old double line: input underline + field divider.)
 - Step 3: schedule heading + Calendly embed OR Self-led "You're on the list" confirmation
+  - Self-led "Return to Every Day Future" link — no arrow
   - Calendly URLs placeholder — Taylor to provide
+- **Body copy → `.t-body-lg`:** `.bf-subhead`, `.bf-step2-sub`, `.bf-offering-card__body`, `.bf-selflead__body` all use the shared body class (17px desktop / 16px mobile); their scoped type props were stripped so the class is the single source of truth.
+- **Link hovers → `--blue`:** `.bf-back` (change selection) and `.bf-selflead__home` hover to `--blue` (was `--ink`), matching the site's interaction convention.
 
 ---
 

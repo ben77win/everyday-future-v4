@@ -30,9 +30,8 @@ const optionLabelsJson = JSON.stringify(
             type="button"
             aria-pressed="false"
           >
-            <span class="bf-option__arrow" aria-hidden="true">→</span>
             <span class="bf-option__label">{opt.label}</span>
-            <span class="bf-option__desc">{opt.desc}</span>
+            <span class="bf-option__desc t-body-lg">{opt.desc}</span>
           </button>
         ))}
       </div>
@@ -44,20 +43,20 @@ const optionLabelsJson = JSON.stringify(
   <div class="bf-step bf-step--hidden" id="bfStep2">
     <div class="bf-step__inner bf-step2__inner">
 
-      <!-- Top nav bar: ← CHANGE SELECTION  • SELECTED · 1:1 COACHING -->
+      <!-- Top nav bar: ← CHANGE SELECTION ............ × (cancel to home) -->
       <div class="bf-step2-nav">
         <button class="bf-back" id="bfBack" type="button">
           <span class="bf-back__arrow" aria-hidden="true">←</span> Change selection
         </button>
-        <span class="bf-step2-badge" id="bfSelectedBadge"></span>
+        <a class="bf-close" href="/" aria-label="Cancel and return to Every Day Future">×</a>
       </div>
 
       <!-- 2-col: heading+body left, offering card right -->
       <div class="bf-step2-cols">
 
         <div class="bf-step2-left">
-          <h1 class="bf-step2-heading">Begin your<br>practice.</h1>
-          <p class="bf-step2-sub">A few details. You'll be on Taylor's calendar in less than a minute. There's no obligation — the first conversation is a fit-check, not a sales call.</p>
+          <h1 class="bf-step2-heading" id="bfStep2Heading">1:1 Coaching</h1>
+          <p class="bf-step2-sub t-body-lg">A few details. You'll be on Taylor's calendar in less than a minute. There's no obligation — the first conversation is a fit-check, not a sales call.</p>
         </div>
 
         <div class="bf-step2-right">
@@ -70,19 +69,19 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body">Monthly subscription. 60-minute virtual sessions. Three-month minimum arc, ongoing thereafter.</p>
+                  <p class="bf-offering-card__body t-body-lg">Monthly subscription. 60-minute virtual sessions. Three-month minimum arc, ongoing thereafter.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we work with</span>
-                  <p class="bf-offering-card__body">Whatever is alive in your work and life. Direction, ambition, transition, relationships, resistance, capacity.</p>
+                  <p class="bf-offering-card__body t-body-lg">Whatever is alive in your work and life. Direction, ambition, transition, relationships, resistance, capacity.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Between sessions</span>
-                  <p class="bf-offering-card__body">Ten to twenty minutes of daily practice. Reflection, exercises, intentional action.</p>
+                  <p class="bf-offering-card__body t-body-lg">Ten to twenty minutes of daily practice. Reflection, exercises, intentional action.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">AI-supported practice</span>
-                  <p class="bf-offering-card__body">Optional. Session transcripts and pattern recognition support continuity across the arc.</p>
+                  <p class="bf-offering-card__body t-body-lg">Optional. Session transcripts and pattern recognition support continuity across the arc.</p>
                 </div>
               </div>
             </div>
@@ -96,19 +95,19 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body">Custom workshops, offsites, and coaching engagements. Virtual or in-person depending on the engagement.</p>
+                  <p class="bf-offering-card__body t-body-lg">Custom workshops, offsites, and coaching engagements. Virtual or in-person depending on the engagement.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we practice</span>
-                  <p class="bf-offering-card__body">Conscious change in how teams work, relate, and create. Clarity, coherence, and aligned direction.</p>
+                  <p class="bf-offering-card__body t-body-lg">Conscious change in how teams work, relate, and create. Clarity, coherence, and aligned direction.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Engagement types</span>
-                  <p class="bf-offering-card__body">Executive coaching, team workshops, retreats and offsites, co-founder programs.</p>
+                  <p class="bf-offering-card__body t-body-lg">Executive coaching, team workshops, retreats and offsites, co-founder programs.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Facilitation &amp; support</span>
-                  <p class="bf-offering-card__body">Designed and facilitated directly by a coach. Practical frameworks integrated into real workflows.</p>
+                  <p class="bf-offering-card__body t-body-lg">Designed and facilitated directly by a coach. Practical frameworks integrated into real workflows.</p>
                 </div>
               </div>
             </div>
@@ -122,19 +121,19 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body">12-week guided group practice. Limited to 8 participants. 90-minute virtual sessions plus 3 individual coaching sessions.</p>
+                  <p class="bf-offering-card__body t-body-lg">12-week guided group practice. Limited to 8 participants. 90-minute virtual sessions plus 3 individual coaching sessions.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we practice</span>
-                  <p class="bf-offering-card__body">Conscious change in how we work, relate, and create. Expanding possibility through shared practice and accountability.</p>
+                  <p class="bf-offering-card__body t-body-lg">Conscious change in how we work, relate, and create. Expanding possibility through shared practice and accountability.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Experience</span>
-                  <p class="bf-offering-card__body">Community with waymakers navigating growth, change, and transition. Shared learning and supportive accountability.</p>
+                  <p class="bf-offering-card__body t-body-lg">Community with waymakers navigating growth, change, and transition. Shared learning and supportive accountability.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Facilitation &amp; support</span>
-                  <p class="bf-offering-card__body">Coach-led structure and facilitation. Practical frameworks, reflection, and AI-supported follow-ups.</p>
+                  <p class="bf-offering-card__body t-body-lg">Coach-led structure and facilitation. Practical frameworks, reflection, and AI-supported follow-ups.</p>
                 </div>
               </div>
             </div>
@@ -210,7 +209,7 @@ const optionLabelsJson = JSON.stringify(
 
         <div class="bf-form-footer">
           <button class="bf-submit" id="bfSubmit" type="button">
-            <span class="bf-submit__label" id="bfSubmitLabel">Begin Practice →</span>
+            <span class="bf-submit__label" id="bfSubmitLabel">Begin Practice</span>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
         </div>
@@ -227,7 +226,7 @@ const optionLabelsJson = JSON.stringify(
         <div class="bf-header">
           <span class="bf-eyebrow" id="bfCalendlyEyebrow"></span>
           <h2 class="bf-headline">Book your call</h2>
-          <p class="bf-subhead">Pick a time that works for you — Taylor will confirm shortly after.</p>
+          <p class="bf-subhead t-body-lg">Pick a time that works for you — Taylor will confirm shortly after.</p>
         </div>
         <div id="bfCalendlyMount"></div>
       </div>
@@ -237,12 +236,12 @@ const optionLabelsJson = JSON.stringify(
         <div class="bf-selflead">
           <span class="bf-eyebrow">Self-led practice</span>
           <h2 class="bf-headline bf-selflead__headline">You're on the list.</h2>
-          <p class="bf-selflead__body">
+          <p class="bf-selflead__body t-body-lg">
             Thank you for your interest. Our self-led practice will be available
             <strong>Winter 2026</strong> — we'll be in touch with everything you
             need to begin.
           </p>
-          <a href="/" class="bf-selflead__home t-cta">Return to Every Day Future →</a>
+          <a href="/" class="bf-selflead__home t-cta">Return to Every Day Future</a>
         </div>
       </div>
 
@@ -314,11 +313,6 @@ const optionLabelsJson = JSON.stringify(
 
 .bf-subhead {
   margin-top: 14px;
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.50);
 }
 
@@ -342,19 +336,22 @@ const optionLabelsJson = JSON.stringify(
   border-bottom: 0.5px solid rgba(0,0,0,0.12);
 }
 
-.bf-step2-badge {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
+/* Cancel / close → main site */
+.bf-close {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-family: var(--font-body);
+  font-size: 30px;
+  line-height: 1;
   color: rgba(0,0,0,0.40);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
-.bf-step2-badge:not(:empty)::before {
-  content: '•';
-  margin-right: 10px;
-  color: rgba(0,0,0,0.25);
-}
-.bf-step2-badge:empty { display: none; }
+.bf-close:hover { color: var(--blue); }
 
 /* ── Step 2 two-column layout */
 .bf-step2-cols {
@@ -376,11 +373,6 @@ const optionLabelsJson = JSON.stringify(
 }
 
 .bf-step2-sub {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.55);
 }
 
@@ -442,11 +434,6 @@ const optionLabelsJson = JSON.stringify(
 }
 
 .bf-offering-card__body {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.65);
 }
 
@@ -482,17 +469,6 @@ const optionLabelsJson = JSON.stringify(
   aspect-ratio: 1 / 1;
 }
 
-.bf-option__arrow {
-  position: absolute;
-  top: 28px;
-  right: 24px;
-  font-family: var(--font-body);
-  font-size: 22px;
-  color: rgba(0,0,0,0.30);
-  line-height: 1;
-  transition: color 0.22s ease, transform 0.22s ease;
-}
-
 .bf-option__label {
   font-family: var(--font-body);
   font-weight: 400;
@@ -504,29 +480,19 @@ const optionLabelsJson = JSON.stringify(
 }
 
 .bf-option__desc {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 13px;
-  line-height: 22px;
-  letter-spacing: 0.020em;
+  margin-top: auto;   /* anchor to bottom of the card, matching S2 */
   color: rgba(0,0,0,0.55);
   transition: color 0.22s ease;
 }
 
-/* Hover: full ink invert */
-.bf-option:hover { background: var(--ink); }
+/* Hover / selected: invert to --blue (matches S2 cards) */
+.bf-option:hover { background: var(--blue); }
 .bf-option:hover .bf-option__label { color: var(--paper); }
 .bf-option:hover .bf-option__desc  { color: rgba(255,255,255,0.62); }
-.bf-option:hover .bf-option__arrow {
-  color: var(--blue);
-  transform: translateX(4px);
-}
 
-/* Selected state */
-.bf-option[aria-pressed="true"] { background: var(--ink); }
+.bf-option[aria-pressed="true"] { background: var(--blue); }
 .bf-option[aria-pressed="true"] .bf-option__label { color: var(--paper); }
 .bf-option[aria-pressed="true"] .bf-option__desc  { color: rgba(255,255,255,0.62); }
-.bf-option[aria-pressed="true"] .bf-option__arrow { color: var(--blue); }
 
 /* ── Back button */
 .bf-back {
@@ -544,7 +510,7 @@ const optionLabelsJson = JSON.stringify(
   text-transform: uppercase;
   transition: color 0.2s ease;
 }
-.bf-back:hover { color: var(--ink); }
+.bf-back:hover { color: var(--blue); }
 .bf-back__arrow { font-size: 14px; }
 
 /* ── Offering block visibility */
@@ -568,9 +534,13 @@ const optionLabelsJson = JSON.stringify(
   display: flex;
   flex-direction: column;
   padding: 20px 0 22px;
-  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  transition: border-color 0.2s ease;
 }
-.bf-field:first-of-type { border-top: 0.5px solid rgba(0,0,0,0.12); }
+.bf-field:first-of-type { border-top: 0.5px solid rgba(0,0,0,0.18); }
+/* Focus / error feedback now lives on the single field divider */
+.bf-field:focus-within { border-bottom-color: var(--blue); }
+.bf-field:has(.bf-input--error) { border-bottom-color: var(--ink); }
 
 .bf-label {
   font-family: var(--font-mono);
@@ -592,7 +562,6 @@ const optionLabelsJson = JSON.stringify(
 .bf-input {
   background: transparent;
   border: none;
-  border-bottom: 0.5px solid rgba(0,0,0,0.30);
   outline: none;
   font-family: var(--font-body);
   font-weight: 300;
@@ -601,13 +570,10 @@ const optionLabelsJson = JSON.stringify(
   color: var(--ink);
   padding: 8px 0 10px;
   width: 100%;
-  transition: border-color 0.2s ease;
   -webkit-appearance: none;
   border-radius: 0;
 }
 .bf-input::placeholder { color: rgba(0,0,0,0.28); }
-.bf-input:focus { border-bottom-color: var(--blue); }
-.bf-input.bf-input--error { border-bottom-color: var(--ink); }
 
 .bf-field-error {
   display: none;
@@ -705,11 +671,6 @@ const optionLabelsJson = JSON.stringify(
 }
 
 .bf-selflead__body {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
   color: rgba(0,0,0,0.60);
   max-width: 460px;
   margin-bottom: 44px;
@@ -734,8 +695,8 @@ const optionLabelsJson = JSON.stringify(
   transition: color 0.2s, border-color 0.2s;
 }
 .bf-selflead__home:hover {
-  color: var(--ink);
-  border-bottom-color: rgba(0,0,0,0.30);
+  color: var(--blue);
+  border-bottom-color: rgba(41,86,224,0.40);
 }
 
 /* ── Tablet ≤ 900px */
@@ -823,7 +784,7 @@ const optionLabelsJson = JSON.stringify(
   var step3       = document.getElementById('bfStep3');
   var optionBtns  = document.querySelectorAll('.bf-option');
   var backBtn     = document.getElementById('bfBack');
-  var badge       = document.getElementById('bfSelectedBadge');
+  var step2Heading = document.getElementById('bfStep2Heading');
   var optionInput = document.getElementById('bfOptionInput');
   var form        = document.getElementById('bfForm');
   var submitBtn   = document.getElementById('bfSubmit');
@@ -852,7 +813,7 @@ const optionLabelsJson = JSON.stringify(
     });
     clearTimeout(advanceTimer);
     advanceTimer = setTimeout(function () {
-      badge.textContent = OPTION_LABELS[selectedOption] || '';
+      step2Heading.textContent = OPTION_LABELS[selectedOption] || '';
       optionInput.value = selectedOption;
       document.documentElement.classList.remove('bf-has-param');
 
