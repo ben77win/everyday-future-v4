@@ -183,7 +183,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.11 Contact (`Contact.astro` — NEW)
 - Anchored `#contact`, accessible from footer link
 - Paper background, padding 140px var(--gutter) 160px
-- 2-col layout: heading "In touch." + body + meta (Direct / Elsewhere) left, 4-field form right
+- 2-col layout: heading "Get in touch" + body + meta (Direct / Elsewhere) left, 4-field form right
 - Form: Name · Email · Subject · Message (textarea) + "Send a note →" submit
 - Submission: Netlify Forms → coach@everydayfuture.work + ben@wintersand.co
 - Mobile: single column, 80px padding
