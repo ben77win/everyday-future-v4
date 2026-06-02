@@ -359,7 +359,6 @@ a { color: inherit; text-decoration: none; }
   background: var(--paper-cream);
   margin: -100px calc(-1 * var(--gutter)) 0;
   padding: 100px max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter))) 80px;
-  border-bottom: 0.5px solid rgba(0,0,0,0.18);
   max-width: none;
 }
 .s2__header-body {
