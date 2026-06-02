@@ -172,8 +172,10 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 ### 5.9 S7 FAQ (`FAQ.astro`)
 - Sage background
+- **Heading "FAQ"** (`.s7__heading`) — display-headline type (Helvetica Neue 400, `clamp(46px, 5.6vw, 84px)`, line-height 1.0, -0.030em, ink), `margin-bottom: 56px`. Sits above the list; the Vector-10 mark overlaps its top-left like the S4/S5 heading marks. Section keeps the shared 120px / 72px top padding.
 - Accordion list, single-open behavior (clicking opens one, closes others)
 - Trigger: question (Roman 400) + plus icon (20x20, 0.5px crossbars)
+- **Hover rollover:** `.s7__trigger:hover` nudges the question `translateX(8px)` and turns the plus icon `--blue` (both ~0.25–0.3s ease) — signals the row is interactive / will expand
 - Open state: vertical bar fades, max-height 800px
 - Vector-10.svg brush mark top-left, rotated -2°
 - 6 real Q&As (already in staging build)

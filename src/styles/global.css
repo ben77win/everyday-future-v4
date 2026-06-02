@@ -1087,6 +1087,16 @@ a { color: inherit; text-decoration: none; }
 }
 .s7__eyebrow.revealed { opacity: 1; transform: translateY(0); }
 
+.s7__heading {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(46px, 5.6vw, 84px);
+  line-height: 1.0;
+  letter-spacing: -0.030em;
+  color: var(--ink);
+  margin-bottom: 56px;
+}
+
 .s7__list {
   border-top: 0.5px solid rgba(0,0,0,0.18);
 }
@@ -1120,7 +1130,13 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.2;
   letter-spacing: -0.010em;
   color: var(--ink);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s ease;
 }
+
+/* Subtle rollover — signals the row is interactive / will expand */
+.s7__trigger:hover .s7__question { transform: translateX(8px); }
+.s7__trigger:hover .s7__icon { color: var(--blue); }
 
 .s7__icon {
   flex-shrink: 0;
@@ -1128,7 +1144,8 @@ a { color: inherit; text-decoration: none; }
   height: 20px;
   position: relative;
   color: rgba(0,0,0,0.35);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s ease;
 }
 .s7__icon::before,
 .s7__icon::after {
