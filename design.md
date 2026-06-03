@@ -212,6 +212,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
   - `← Back`: Step 1 → exit, Step 2 → Step 1, Step 3 → Step 2.
   - `×`: always exit the flow.
   - **Wordmark is drawer-only** (`:global(.begin-page--drawer) .bf-nav__brand { display:block }`, `display:none` otherwise) — the full-screen drawer covers the homepage nav, so the logo lives in the flow row there; the standalone `/begin` page hides it because the site `<Nav>` already shows it (no duplication).
+  - **Items are pinned to explicit columns** (`.bf-back` → 1, `.bf-nav__brand` → 2, `.bf-close` → 3). Required because when the wordmark is `display:none` (the page), grid auto-placement would otherwise shift the × into the middle column; explicit columns keep it hard-right everywhere.
   - **Exit behavior** (`exitFlow` in BeginFlow JS): if in the homepage drawer (`#beginDrawer.open`) → `window.__closeBeginDrawer()` (smooth close); else the `<a href="/">` navigates home (standalone `/begin` page / no-JS fallback).
   - **In the drawer the row is `position: sticky` (`:global(.begin-page--drawer) .bf-nav`)** so Back/× stay reachable while scrolling — the drawer is full-screen with no tappable scrim, so this replaces the old fixed bar. On the standalone page it's static (site nav + browser back cover persistence).
 - Step 1: heading "Choose how you want to practice." + 4 option cards (1:1, Orgs & Teams, Group, Self-led).
