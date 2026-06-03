@@ -745,12 +745,12 @@ const optionLabelsJson = JSON.stringify(
     padding-bottom: 40px;
     min-height: 0;
   }
-  #bfStep1 .bf-header { margin-bottom: 16px; }
+  #bfStep1 .bf-header { margin-bottom: 12px; }
 
-  /* Step 1 cards: 1-up landscape on mobile, fixed 182px height (matches S2 mobile cards) */
+  /* Step 1 cards: 1-up, fixed 140px so all four + heading fit one mobile viewport (no scroll) */
   .bf-options { grid-template-columns: 1fr; gap: 8px; }
-  .bf-option { aspect-ratio: auto; height: 182px; padding: 28px; }
-  .bf-option__label { font-size: 28px; }
+  .bf-option { aspect-ratio: auto; height: 140px; padding: 20px 28px; }
+  .bf-option__label { font-size: 25px; }
 
   /* Step 2 */
   #bfStep2 .bf-step__inner {
