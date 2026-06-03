@@ -70,7 +70,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 | Use | Family | Weight | Size | Line | Tracking |
 |---|---|---|---|---|---|
 | Wordmark — **nav** | Helvetica Neue | **400** | **27.5px** | 1 | -0.020em |
-| Wordmark — footer | Helvetica Neue | 200 | 22px | 1 | -0.020em |
+| Wordmark — **footer** | Helvetica Neue | **400** | **24.2px** | 1 | -0.020em |
 | Cover wordmark | Inter (Formetica fallback) | 200 | 200px | 1 | -0.020em |
 | Display headline (hero, S2–S5 heads, S6 name, Begin headings) | Helvetica Neue 55 Roman | **400** | clamp(46, 5.6vw, 84) | 1.0 | -0.030em |
 | Sub-display (S4 body, S5 first para, S7 question, form heading, offering name) | Helvetica Neue 55 Roman | 400 | clamp(22, 2.2vw, 32) | 1.2 | -0.010em |
