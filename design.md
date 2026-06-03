@@ -126,7 +126,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **4px rectangle, NOT 100px pill** (matches the .fig GET IN TOUCH button)
 - 48px tall, padding 0 40px, DM Mono 14.4px / 0.110em, white on ink
 - **Hover:** background flips to `--blue`. No shadow.
-- Mobile: full-width bottom bar (no radius), 56px tall, env(safe-area-inset-bottom)
+- Mobile: **same as desktop** — centered floating 4px-radius button (48px tall, content-width, 32px from bottom). (Previously a full-width edge-to-edge bottom bar; the mobile geometry overrides were removed.) Mobile keeps a `:active` tap-feedback → `--blue` (incl. over-footer).
 - Label: "Begin Practice"
 
 ### 5.4 S2 Services (`Services.astro`)
@@ -136,9 +136,9 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
   - Body copy (`.s2__header-body`) uses the **same type treatment as the S4 body** (`.s4__body`): `--font-body`, weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, letter-spacing -0.010em, solid `--ink`. No reveal animation. Layout props specific to this header: `margin-top: 32px`, `max-width: 760px`. On mobile it keeps the 22px clamp floor (NOT reduced to the 16px body size that other paragraphs use).
 - **Order: option cards first, then tier tiles.** Spacing — option cards `margin-top: 24px` desktop / `16px` mobile; tier tiles `margin-top: 48px` desktop / `24px` mobile. NB: the visible header→cards gap is larger than the card margin because `.s2__header` itself adds `padding-bottom: 80px` desktop / `56px` mobile → actual gap ≈ 104px desktop / 72px mobile.
 - **4 option cards** (1:1 / Orgs & Teams / Group / Self-led): 4-up grid, `aspect-ratio: 1/1` (square), paper on cream, padding `40px 28px 36px`, 16px gap, no border. Label (32px) top-left, desc (16px Light, `rgba(0,0,0,0.55)`) pushed to bottom via `margin-top: auto`. No arrow. Hover inverts surface to `--blue` (the Begin Practice blue) with white text; mobile `:active` matches. `margin: 24px auto 0`.
-- **3 tier tiles** (Foundation / Calibration / Expansion): centered row, `max-width: 660px` so each tile is 220px wide, gap 0 (flush), aspect-ratio 2/3.3, with `— 01 / 02 / 03` Mono indices top-left + Mono labels bottom-left. `margin: 48px auto 0`.
+- **3 tier tiles** (Foundation / Calibration / Expansion): centered row, `max-width: 660px` so each tile is 220px wide, gap 0 (flush), aspect-ratio 2/3.3, with `01 / 02 / 03` Mono indices top-left + Mono labels bottom-left. `margin: 48px auto 0`. **Mobile (≤640px): the group sits ABOVE the option cards, inset to the gutter** (not full-bleed), no horizontal scroll/snap; the 3 tiles share the width via `flex: 1` at `aspect-ratio 2/3` (was a `72vw`-per-tile snap carousel). The reorder is done by making **`.s2` a `display: grid` (`grid-template-columns: minmax(0,1fr)`) on mobile only** and setting `order` (header 0, tiers 1, cards 2); the inner `.s2__cards` also uses `minmax(0,1fr)` + `min-width:0` so the card text can't blow out the track. **Desktop is unchanged** — `.s2` stays `display: block`, order header → cards → tiers, tiers centered at `max-width: 660px`. Mobile tier labels (`.s2__tier-label`) shrink to `11px` / `0.08em` so the longest ("CALIBRATION") fits the narrower tile.
   - Images: dunes.png / feather.png / lotus.png
-- Mobile: tiles become horizontal scroll-snap (72vw cards) and sit below the stacked option cards; option cards are 2-up at ≤900px, and at ≤640px stack 1-up full-width **landscape** (`aspect-ratio: 1.74/1` ≈ 331×190px at 375px, dropping the desktop square) with `28px` padding
+- Mobile: **tiles sit ABOVE the option cards** (gutter-inset group, `flex: 1` tiles, no scroll — see the tier-tiles note above; was a 72vw scroll-snap carousel below the cards); option cards are 2-up at ≤900px, and at ≤640px stack 1-up full-width **landscape** (`aspect-ratio: 1.74/1` ≈ 331×190px at 375px, dropping the desktop square) with `28px` padding
 
 ### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background

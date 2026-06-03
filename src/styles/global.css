@@ -1220,32 +1220,36 @@ a { color: inherit; text-decoration: none; }
   .hero__subhead  { font-size: 16px; margin-bottom: 24px; max-width: 100%; }
   .hero__tags     { flex-direction: column; align-items: flex-start; }
 
-  /* ── S2 */
-  .s2 { padding: 72px var(--gutter) 0; }
+  /* ── S2 — grid so we can reorder tiers above the option cards on mobile only.
+     minmax(0,1fr) + min-width:0 keep the option-card text from blowing out the track. */
+  .s2 {
+    padding: 72px var(--gutter) 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
 
   .s2__header {
+    order: 0;
     margin: -72px calc(-1 * var(--gutter)) 0;
     padding: 72px var(--gutter) 56px;
   }
 
-  /* Tier cards: horizontal scroll on mobile — one card visible at a time */
+  /* Tier group: ABOVE the option cards, inset to the gutter, 3 tiles fit the row */
   .s2__tiers {
-    margin: 24px calc(-1 * var(--gutter)) 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding: 0 var(--gutter);
+    order: 1;
+    margin: 24px 0 0;
     gap: 0;
     max-width: none;
   }
   .s2__tier {
-    flex: 0 0 72vw;
-    scroll-snap-align: start;
+    flex: 1;
     aspect-ratio: 2 / 3;
   }
+  /* Smaller tier label so the longest ("CALIBRATION") fits the narrower mobile tile */
+  .s2__tier-label { font-size: 11px; letter-spacing: 0.08em; }
 
-  /* Option cards: full-width landscape on mobile to conserve vertical space */
-  .s2__cards { grid-template-columns: 1fr; margin-top: 16px; }
+  /* Option cards: below the tiers, 1-up landscape to conserve vertical space */
+  .s2__cards { order: 2; min-width: 0; grid-template-columns: minmax(0, 1fr); margin-top: 16px; }
   .s2__card { aspect-ratio: 1.74 / 1; padding: 28px; }
 
   /* ── Body paragraphs — 16px mobile floor (iOS anti-zoom) */
@@ -1304,20 +1308,7 @@ a { color: inherit; text-decoration: none; }
   .site-footer__dot   { display: none; }
 
   /* ── CTA BAR — full-width, anchored to bottom on mobile */
-  .float-cta {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    transform: none;
-    padding: 0;
-  }
-  .float-cta__link {
-    width: 100%;
-    border-radius: 0;
-    height: 52px;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
+  /* Float CTA: same centered floating button as desktop (was a full-width bottom bar) */
   /* Tap feedback for CTA */
   .float-cta__link:active { background: var(--blue); color: var(--paper); }
   .float-cta.over-footer .float-cta__link:active { background: var(--blue); color: var(--paper); }
