@@ -114,7 +114,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **Eliminate the wordmark intro animation.** The staging build animates the wordmark from giant center to nav. Drop this — wordmark stays in nav from page load.
 
 ### 5.2 Hero (`Hero.astro`)
-- 100vh, min 640px, `#000` base
+- `100svh` (with `100vh` fallback), min 640px, `#000` base — **`svh` is deliberate**: a fixed small-viewport height so the hero doesn't resize when the mobile address bar collapses on scroll, which previously made the `cover` background zoom/scale. Desktop is unaffected (`svh` ≈ `vh`).
 - Rotating bg image at `opacity: 0.86`
 - 4-stop top-to-bottom gradient (`rgba(0,0,0,0.18 / 0.08 / 0.32 / 0.70)`)
 - Bottom-left copy block: `.hero__headline` (Roman 400, `clamp(46px, 6.8vw, 84px)`) + `.hero__subhead` (Light 300, 16px / 26px / max-width 520px) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)

@@ -232,7 +232,9 @@ a { color: inherit; text-decoration: none; }
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100vh;        /* fallback for browsers without svh */
+  height: 100svh;       /* fixed small-viewport height — avoids the mobile address-bar
+                           resize that made the cover background zoom on scroll */
   min-height: 640px;
   overflow: hidden;
   background: #0a0a0a;
