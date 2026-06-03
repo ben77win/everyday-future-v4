@@ -147,7 +147,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Horizontal drag-snap rail · 8 cards · **aspect-ratio 3/4, width clamp(280, 30vw, 420px), padding 40px** · no gap
 - Alternating: ink (outcome) / sage (testimonial) · ink / sage · ink / sage · ink / sage
 - Outcomes: white type `clamp(17px, 1.4vw, 21px)` Light 300, attribution block (Mono name + Light role)
-- Testimonials: ink type `clamp(20px, 1.7vw, 26px)` Roman 400, **italic**, wrapped in opening `"` (`::before`) + closing `"` (`::after`) glyphs at 0.30 opacity
+- Testimonials: ink type `clamp(20px, 1.7vw, 26px)` Roman 400, **italic**, **no quote glyphs** (the `::before`/`::after` curly-quote marks were removed)
 - Mouse drag-to-scroll + snap; touch is native
 - Mobile: 78vw cards, 28px padding, no gap
 
