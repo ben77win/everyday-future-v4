@@ -241,7 +241,14 @@ a { color: inherit; text-decoration: none; }
 }
 .hero__bg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Fixed to the LARGEST viewport height so `cover` resolves to a constant scale and
+     never re-zooms as the mobile toolbar collapses (Chromium/Brave handle the toolbar
+     differently than Safari). The hero clips the overflow. */
+  height: 100svh;   /* fallback */
+  height: 100lvh;
   background-size: cover;
   background-position: 50% 40%;
   opacity: 0.88;
