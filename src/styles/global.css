@@ -1246,8 +1246,10 @@ a { color: inherit; text-decoration: none; }
 
   /* Option cards: below the tiers, 1-up landscape to conserve vertical space */
   .s2__cards { order: 2; min-width: 0; grid-template-columns: minmax(0, 1fr); margin-top: 16px; }
-  /* Fixed height so all four cards match (Orgs & Teams' 3-line desc sets the height) */
-  .s2__card { aspect-ratio: auto; height: 182px; padding: 28px; }
+  /* Fixed height so all four cards match (Orgs & Teams' 3-line desc sets the height);
+     matches the Begin flow Step-1 cards so the options look identical everywhere on mobile */
+  .s2__card { aspect-ratio: auto; height: 140px; padding: 20px 28px; }
+  .s2__card-label { font-size: 25px; }
 
   /* ── Body paragraphs — 16px mobile floor (iOS anti-zoom) */
   .t-body-lg { font-size: 16px; line-height: 26px; }
