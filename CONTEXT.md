@@ -419,6 +419,9 @@ Calendly widgets are created dynamically in JS when step 3 appears. Script loade
 
 ## Open Items
 
+### ↩️ Deliberate spec departures (may revert)
+- [ ] **Wordmark made heavier + larger** — departs from the Figma-source ultralight wordmark. Commits (currently **local-only**, not pushed): `8d85620` (nav: weight 200→400, 25→27.5px) and `4cd61cf` (footer: weight 200→400, 22→24.2px). To revert to the original spec: `git revert 4cd61cf 8d85620` — or restore `.nav__wordmark` to `font-weight: 200; font-size: 25px;` and `.site-footer__wordmark` to `font-weight: 200; font-size: 22px;`.
+
 ### ⏳ Needs device verification (may roll back)
 - [ ] **Hero `.hero__bg` Chromium/Brave zoom fix** — commit `c4f1eb9` (staging) decoupled the hero background to a fixed `height: 100lvh` (was `inset: 0`) to stop the cover image re-zooming as the mobile toolbar collapses. `svh` (commit `f9ac889`) already fixed Safari; this targets Chromium/Brave. **Cannot be verified in the chromeless preview — must be tested on a real Brave/Android device.** If it doesn't help or regresses, roll back with: `git revert c4f1eb9 && git push origin staging`. Next thing to try if it persists: the bg's `opacity: 0.88` layer being re-rasterized during Brave's toolbar animation (move darkening to the gradient overlay, or force a stable compositing layer).
 
