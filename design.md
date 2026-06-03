@@ -94,7 +94,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 | S5 Waymaker | `--paper-cream` | Long-form prose, ink-blue brush mark on heading |
 | S6 Taylor | `--paper` | Single portrait (taylor-01.png) + bio |
 | S7 FAQ | `--paper-sage` | Accordion, single-open behavior |
-| Footer | `--ink` | Wordmark + Contact · Instagram · Login · Terms · Privacy |
+| Footer | `--ink` | Wordmark + Contact · Instagram · Terms · Privacy (+ Client Portal mobile-only) |
 | Contact | `--paper` | Anchored #contact, accessible from footer |
 | Begin drawer / /begin | `--paper-cream` | 4 option cards (Begin-style grid) |
 | Begin Step 2 | `--paper-cream` | Back nav + offering detail block (1:1 / Orgs / Group variants) + form |
@@ -184,7 +184,8 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.10 Footer (`Footer.astro`)
 - Ink background, padding 60px var(--gutter)
 - Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
-- Right: link row — **Contact · Instagram · Login · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)**
+- Right: link row — **Contact · Instagram · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)** (the "Login" link was removed)
+- **Client Portal link (`.site-footer__link--portal` → `/portal`): mobile only** — hidden on desktop (the nav already shows Client Portal, which is hidden at ≤640px). On mobile it sits 3rd, giving two rows: **Contact · Instagram · Client Portal** / **Terms & Conditions · Privacy Policy**. A mobile-only `.site-footer__break` (`flex-basis: 100%; height: 0`) forces the split; both it and the Client Portal link are `display: none` on desktop (single row: Contact · Instagram · Terms · Privacy).
 - Links: DM Mono 13px / 0.110em uppercase, white at 0.46, **hover → `--blue`**
 - **No orange dot separators** — just flat row with 28px gap
 - Mobile: stacks vertical, gap 14px 22px wrap
@@ -299,7 +300,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 ### Sticky float CTA
 - **Visible from first paint and persists throughout the scroll.** `.float-cta` base is `opacity: 1; pointer-events: auto` — the button shows immediately over the hero and never hides.
 - The hero IntersectionObserver (threshold 0.15) still drives the nav `.scrolled` glass state; it also toggles a now-redundant `.visible` class on the CTA (harmless — base is already visible).
-- **Over-footer behavior (all viewports — desktop + mobile).** A second IntersectionObserver on `.site-footer` (threshold 0) toggles `.over-footer` on the CTA. Instead of overlapping the footer, the CTA **parks 10px above it**: it switches to `position: absolute; bottom: calc(var(--footer-h) + 10px)` (anchored to `body`, which is `position: relative`; `--footer-h` is the footer height, published by JS in `Layout.astro` on load + resize). The button **stays black (`--ink`) the whole time** — there is no white over-footer inversion (removed). Base hover → `--blue` still applies; mobile keeps a `:active` tap-feedback → `--blue`. Mid-page (footer not in view) it's the normal `position: fixed; bottom: 32px` floating button.
+- **Over-footer behavior (all viewports — desktop + mobile).** A second IntersectionObserver on `.site-footer` (threshold 0) toggles `.over-footer` on the CTA. Instead of overlapping the footer, the CTA **parks 10px above it**: it switches to `position: absolute; bottom: calc(var(--footer-h) + 10px)` (anchored to `body`, which is `position: relative`; `--footer-h` is the footer height, published by JS in `Layout.astro` on load + resize **and via a `ResizeObserver` on the footer** so it stays accurate through font loading / footer-content changes — otherwise a stale value lets the CTA overlap the footer). The button **stays black (`--ink`) the whole time** — there is no white over-footer inversion (removed). Base hover → `--blue` still applies; mobile keeps a `:active` tap-feedback → `--blue`. Mid-page (footer not in view) it's the normal `position: fixed; bottom: 32px` floating button.
 
 ### Hover states
 - **Primary CTA:** hover background → `--blue` (was orange in staging)

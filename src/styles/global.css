@@ -1046,6 +1046,10 @@ a { color: inherit; text-decoration: none; }
 .site-footer__link:hover {
   color: var(--blue);
 }
+/* Client Portal footer link — mobile only (the nav's Client Portal is hidden on mobile) */
+.site-footer__link--portal { display: none; }
+/* Forces a row break after Client Portal on mobile (so T&C + Privacy sit on their own row) */
+.site-footer__break { display: none; }
 /* ════════════════════════════════════════════════════════════════
    S7 — FAQ
 ════════════════════════════════════════════════════════════════ */
@@ -1293,6 +1297,9 @@ a { color: inherit; text-decoration: none; }
   }
   .site-footer__links { gap: 18px; flex-wrap: wrap; }
   .site-footer__dot   { display: none; }
+  /* Mobile footer rows: Contact · Instagram · Client Portal / then T&C · Privacy */
+  .site-footer__link--portal { display: block; }
+  .site-footer__break { display: block; flex-basis: 100%; height: 0; }
 
   /* ── CTA BAR — same centered floating button as desktop. Over-footer parking
      (10px above) + always-black are handled in the base rules (all viewports). */
