@@ -88,7 +88,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 | Section | Background | Notes |
 |---|---|---|
-| S1 Hero | `#000` + rotating bg image at 0.86 opacity + four-stop dark gradient | 4-image rotation: horizon · rose · window-sunset · hero-red-sun |
+| S1 Hero | `#000` + rotating bg image at 0.86 opacity + four-stop dark gradient | 3-image rotation: horizon · window-sunset · hero-red-sun |
 | S2 Practice | `--paper-cream` | New layout: header + 3 tier tiles + 4 option cards |
 | S3 Outcomes | `--paper` | Drag-snap rail · 8 cards alternating ink (outcome) / sage (testimonial) · auto-advance 4s |
 | S4 About | `--paper-off-b` | Heading + body + 3-tag column |
@@ -121,7 +121,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - 4-stop top-to-bottom gradient (`rgba(0,0,0,0.18 / 0.08 / 0.32 / 0.70)`)
 - Bottom-left copy block: `.hero__headline` (Roman 400, `clamp(46px, 6.8vw, 84px)`) + `.hero__subhead` (Light 300, 16px / 26px / max-width 520px) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
 - Brush mark over "possibility" — Vector-5.svg, filtered white via mask
-- Rotation sequence (localStorage `edf_hero`): horizon · rose · window-sunset · hero-red-sun
+- Rotation sequence (localStorage `edf_hero`): horizon · window-sunset · hero-red-sun
 
 ### 5.3 Float CTA (`CTABar.astro`)
 - Fixed bottom, centered, fades in past hero (IntersectionObserver, threshold 0.15)
@@ -254,9 +254,10 @@ Stored in `public/images/`. **No grayscale-by-default treatment.** Full color th
 
 **Hero rotation** (sequential via `localStorage.edf_hero`):
 1. horizon.png — 50% 50%
-2. rose.png — 50% 35%
-3. window-sunset.png — 50% 60%
-4. hero-red-sun.jpg — 50% 40%
+2. window-sunset.png — 50% 60%
+3. hero-red-sun.jpg — 50% 40%
+
+(rose.png removed from the rotation per Ben — file kept in `public/images/`, just not cycled.)
 
 **S2 tier tiles:**
 - dunes.png — Foundation
@@ -334,7 +335,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 
 ### Hero rotation
 - Sequential cycle on each reload via localStorage
-- 4 images, position presets per image
+- 3 images, position presets per image
 - Fade-in via `background-image` transition
 
 ### S3 rail
