@@ -184,7 +184,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Ink background, padding 60px var(--gutter)
 - Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
 - Right: link row — **Contact · Instagram · Login · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)**
-- Links: DM Mono 13px / 0.110em uppercase, white at 0.46, hover to white at 0.86
+- Links: DM Mono 13px / 0.110em uppercase, white at 0.46, **hover → `--blue`**
 - **No orange dot separators** — just flat row with 28px gap
 - Mobile: stacks vertical, gap 14px 22px wrap
 
@@ -201,7 +201,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - 3-step flow at `/begin` (page) and as drawer over homepage
 - **Consistency with the main site (2026-06-02 pass):** Step 1 cards and body copy were brought in line with the homepage conventions — see notes below.
 - Step 1: eyebrow "— · Begin your practice" + heading "Choose how you want to practice." + 4 option cards (1:1, Orgs & Teams, Group, Self-led)
-  - **Option cards (`.bf-option`)** mirror the S2 cards: **no arrow** (`.bf-option__arrow` removed), hover **and** `[aria-pressed]` selected state **invert to `--blue`** (was `--ink`) with white text, description uses the shared **`.t-body-lg`** class (17px / 16px mobile) and is **bottom-anchored** via `margin-top: auto` (like S2 — label top, desc bottom).
+  - **Option cards (`.bf-option`)** mirror the S2 cards: **no arrow** (`.bf-option__arrow` removed), hover **and** `[aria-pressed]` selected state **invert to `--blue`** (was `--ink`) with white text, description uses the shared **`.t-body-lg`** class (17px / 16px mobile) and is **bottom-anchored** via `margin-top: auto` (like S2 — label top, desc bottom). **No border** (`border: none` — paper on cream like S2; separated by the grid gap). Desktop: 4-up square (`aspect-ratio 1/1`), gap 4px. **Mobile (≤640px): 1-up landscape `aspect-ratio 1.74/1`, padding 28px, gap 8px** (matches the S2 mobile card — conserves vertical space instead of tall squares).
   - Auto-advance after 350ms on selection
   - URL param shortcut: `/begin?option=1on1|group|orgs|selflead`
 - Step 2: change-selection bar (with **× close → `/`** top-right, `.bf-close`, hover → `--blue`) + heading + offering detail block + form
@@ -304,8 +304,8 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 - **Primary CTA:** hover background → `--blue` (was orange in staging)
 - **S2 option card:** hover surface inverts to `--blue`, label/desc go white (no arrow)
 - **S3 rail:** drag-to-scroll + auto-advance every 4 seconds (pauses on hover)
-- **Nav link ("Client Portal"):** hover text → `--blue` (`.nav__link:hover`, both hero and scrolled states) — same rollover as the bio "Show more" toggle
-- **Footer link:** hover text → white at 0.86
+- **Nav link ("Client Portal"):** hover text → `--blue` (`.nav__link:hover`, both hero and scrolled states) — same rollover as the bio "Show more" toggle. Persists on the ink-nav pages (legal + begin) via `.page-legal .nav__link:hover, .page-begin .nav__link:hover` (specificity 0,3,0 beats the 0,2,0 ink override).
+- **Footer link:** hover text → `--blue`
 - **Form field:** focus underline → `--blue`
 
 ### Tap states (mobile)

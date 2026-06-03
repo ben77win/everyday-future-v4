@@ -1059,7 +1059,7 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.2s ease;
 }
 .site-footer__link:hover {
-  color: rgba(255,255,255,0.86);
+  color: var(--blue);
 }
 /* ════════════════════════════════════════════════════════════════
    S7 — FAQ
@@ -1440,6 +1440,9 @@ a { color: inherit; text-decoration: none; }
 /* nav sits on a paper background here — force ink instead of white-on-hero */
 .page-legal .nav__wordmark,
 .page-legal .nav__link { color: var(--ink); text-shadow: none; }
+/* keep the Client Portal blue rollover on the ink-nav pages (legal + begin) */
+.page-legal .nav__link:hover,
+.page-begin .nav__link:hover { color: var(--blue); }
 
 @media (max-width: 640px) {
   .legal { padding: 96px var(--gutter) 96px; }

@@ -492,7 +492,7 @@ const optionLabelsJson = JSON.stringify(
   gap: 12px;
   padding: 28px 24px 32px;
   background: var(--paper);
-  border: 0.5px solid rgba(0,0,0,0.10);
+  border: none;
   cursor: pointer;
   text-align: left;
   transition: background 0.22s ease, color 0.22s ease;
@@ -747,8 +747,9 @@ const optionLabelsJson = JSON.stringify(
   }
   #bfStep1 .bf-header { margin-bottom: 16px; }
 
-  /* Step 1 cards: 1-up on mobile */
-  .bf-options { grid-template-columns: 1fr; }
+  /* Step 1 cards: 1-up landscape on mobile (matches S2 — conserves vertical space) */
+  .bf-options { grid-template-columns: 1fr; gap: 8px; }
+  .bf-option { aspect-ratio: 1.74 / 1; padding: 28px; }
   .bf-option__label { font-size: 28px; }
 
   /* Step 2 */
