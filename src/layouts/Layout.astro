@@ -48,6 +48,12 @@ import '../styles/global.css';
   // ── Float CTA: invert colors when over the footer
   var siteFooter = document.querySelector('.site-footer');
   if (siteFooter && floatCta) {
+    // Publish footer height so the CTA can park 10px above it (see .float-cta.over-footer)
+    var setFooterH = function () {
+      document.documentElement.style.setProperty('--footer-h', siteFooter.offsetHeight + 'px');
+    };
+    setFooterH();
+    window.addEventListener('resize', setFooterH);
     new IntersectionObserver(function(entries) {
       floatCta.classList.toggle('over-footer', entries[0].isIntersecting);
     }, { threshold: 0 }).observe(siteFooter);

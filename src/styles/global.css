@@ -38,6 +38,7 @@ body {
   font-family: var(--font-body);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+  position: relative; /* anchor for the float CTA parking above the footer */
 }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -1309,8 +1310,17 @@ a { color: inherit; text-decoration: none; }
   .site-footer__links { gap: 18px; flex-wrap: wrap; }
   .site-footer__dot   { display: none; }
 
-  /* ── CTA BAR — full-width, anchored to bottom on mobile */
-  /* Float CTA: same centered floating button as desktop (was a full-width bottom bar) */
+  /* ── CTA BAR — same centered floating button as desktop (was a full-width bottom bar) */
+  /* When the footer is revealed, park the CTA 10px above it (absolute, anchored to
+     the page bottom = footer bottom) so it stops overlapping the footer. */
+  .float-cta.over-footer {
+    position: absolute;
+    top: auto;
+    bottom: calc(var(--footer-h, 0px) + 10px);
+  }
+  /* Parked above the footer on the light bg → keep the normal ink button
+     (the white over-footer inversion is only for overlapping the dark footer). */
+  .float-cta.over-footer .float-cta__link { background: var(--ink); color: var(--paper); }
   /* Tap feedback for CTA */
   .float-cta__link:active { background: var(--blue); color: var(--paper); }
   .float-cta.over-footer .float-cta__link:active { background: var(--blue); color: var(--paper); }
