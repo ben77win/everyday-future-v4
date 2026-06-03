@@ -1245,12 +1245,14 @@ a { color: inherit; text-decoration: none; }
     flex: 1;
     aspect-ratio: 2 / 3;
   }
-  /* Smaller tier label so the longest ("CALIBRATION") fits the narrower mobile tile */
+  /* Smaller tier number + label (matched) so the longest ("CALIBRATION") fits the narrower mobile tile */
+  .s2__tier-num,
   .s2__tier-label { font-size: 11px; letter-spacing: 0.08em; }
 
   /* Option cards: below the tiers, 1-up landscape to conserve vertical space */
   .s2__cards { order: 2; min-width: 0; grid-template-columns: minmax(0, 1fr); margin-top: 16px; }
-  .s2__card { aspect-ratio: 1.74 / 1; padding: 28px; }
+  /* Fixed height so all four cards match (Orgs & Teams' 3-line desc sets the height) */
+  .s2__card { aspect-ratio: auto; height: 182px; padding: 28px; }
 
   /* ── Body paragraphs — 16px mobile floor (iOS anti-zoom) */
   .t-body-lg,

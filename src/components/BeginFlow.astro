@@ -747,9 +747,9 @@ const optionLabelsJson = JSON.stringify(
   }
   #bfStep1 .bf-header { margin-bottom: 16px; }
 
-  /* Step 1 cards: 1-up landscape on mobile (matches S2 — conserves vertical space) */
+  /* Step 1 cards: 1-up landscape on mobile, fixed 182px height (matches S2 mobile cards) */
   .bf-options { grid-template-columns: 1fr; gap: 8px; }
-  .bf-option { aspect-ratio: 1.74 / 1; padding: 28px; }
+  .bf-option { aspect-ratio: auto; height: 182px; padding: 28px; }
   .bf-option__label { font-size: 28px; }
 
   /* Step 2 */
