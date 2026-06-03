@@ -18,6 +18,10 @@ const optionLabelsJson = JSON.stringify(
   <div class="bf-step" id="bfStep1">
     <div class="bf-step__inner">
 
+      <div class="bf-step1-nav">
+        <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
+      </div>
+
       <div class="bf-header">
         <h1 class="bf-headline">Choose how you want to practice.</h1>
       </div>
@@ -363,6 +367,13 @@ const optionLabelsJson = JSON.stringify(
   transition: color 0.2s ease;
 }
 .bf-close:hover { color: var(--blue); }
+
+/* Step 1 close row — × to return home, top-right (Step 1 has no "back" since it's the first step) */
+.bf-step1-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
 
 /* ── Step 2 two-column layout — intro + form stack in the left column,
    offering card spans the right. (Flexible 5th row keeps the left items
