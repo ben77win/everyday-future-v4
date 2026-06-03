@@ -195,8 +195,8 @@ a { color: inherit; text-decoration: none; }
 .nav__wordmark {
   color: rgba(255,255,255,0.92);
   font-family: var(--font-body);
-  font-weight: 200;
-  font-size: 25px;
+  font-weight: 400;       /* heavier than the original 200 ultralight (Ben request) */
+  font-size: 27.5px;      /* ~10% larger than 25px */
   letter-spacing: -0.020em;
   transition: color 0.3s;
   text-shadow: 0 1px 12px rgba(0,0,0,0.20), 0 0px 4px rgba(0,0,0,0.10);
