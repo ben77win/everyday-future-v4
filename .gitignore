@@ -10,3 +10,5 @@ hero-concept.html
 node_modules
 dist
 .astro
+
+.claude/worktrees/

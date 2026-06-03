@@ -18,8 +18,8 @@ const optionLabelsJson = JSON.stringify(
   <div class="bf-step" id="bfStep1">
     <div class="bf-step__inner">
 
-      <div class="bf-step1-nav">
-        <a class="bf-back" href="/"><span class="bf-back__arrow" aria-hidden="true">←</span> Home</a>
+      <div class="bf-nav">
+        <a class="bf-back" href="/"><span class="bf-back__arrow" aria-hidden="true">←</span> Back</a>
         <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
       </div>
 
@@ -49,9 +49,9 @@ const optionLabelsJson = JSON.stringify(
     <div class="bf-step__inner bf-step2__inner">
 
       <!-- Top nav bar: ← CHANGE SELECTION ............ × (cancel to home) -->
-      <div class="bf-step2-nav">
+      <div class="bf-nav">
         <button class="bf-back" id="bfBack" type="button">
-          <span class="bf-back__arrow" aria-hidden="true">←</span> Change selection
+          <span class="bf-back__arrow" aria-hidden="true">←</span> Back
         </button>
         <a class="bf-close" href="/" aria-label="Cancel and return to Every Day Future">×</a>
       </div>
@@ -237,6 +237,13 @@ const optionLabelsJson = JSON.stringify(
   <div class="bf-step bf-step--hidden" id="bfStep3">
     <div class="bf-step__inner">
 
+      <div class="bf-nav">
+        <button class="bf-back" id="bfBack3" type="button">
+          <span class="bf-back__arrow" aria-hidden="true">←</span> Back
+        </button>
+        <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
+      </div>
+
       <!-- 3a: Calendly embed (shown for 1:1, group, orgs) -->
       <div class="bf-calendly-wrap" id="bfCalendlyWrap">
         <div class="bf-header">
@@ -343,13 +350,22 @@ const optionLabelsJson = JSON.stringify(
 }
 
 /* ── Step 2 nav bar */
-.bf-step2-nav {
+/* Consistent nav row on every step: ← Back (left) + × (right) */
+.bf-nav {
   display: flex;
   align-items: center;
   gap: 24px;
-  padding-bottom: 20px;
-  margin-bottom: 60px;
+  padding-bottom: 18px;
+  margin-bottom: 40px;
   border-bottom: 0.5px solid rgba(0,0,0,0.12);
+}
+/* In the homepage drawer (full-screen, no tappable scrim) keep the nav pinned so
+   Back/× stay reachable while scrolling — this replaces the old fixed drawer bar. */
+:global(.begin-page--drawer) .bf-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper-cream);
 }
 
 /* Cancel / close → main site */
@@ -369,13 +385,6 @@ const optionLabelsJson = JSON.stringify(
 }
 .bf-close:hover { color: var(--blue); }
 
-/* Step 1 nav row — "← Home" (left) + × (right), mirroring Step 2's bar.
-   Both go to "/" since Step 1 is the first step (no in-flow "back"). */
-.bf-step1-nav {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-}
 
 /* ── Step 2 two-column layout — intro + form stack in the left column,
    offering card spans the right. (Flexible 5th row keeps the left items
@@ -770,13 +779,13 @@ const optionLabelsJson = JSON.stringify(
   #bfStep2 .bf-step__inner { padding-top: 44px; padding-bottom: 40px; }
   #bfStep3 .bf-step__inner { padding-top: 44px; }
 
-  /* Page headline — drop to the Sub-display tier on mobile (was 34px): the
-     design-system clamp(22, 2.2vw, 32) / -0.010em / 1.2 (S7 question / form-heading scale) */
-  .bf-headline { font-size: clamp(22px, 2.2vw, 32px); letter-spacing: -0.010em; line-height: 1.2; }
-  .bf-step2-heading { font-size: 34px; }
+  /* All in-flow headlines (Step 1 "Choose…", Step 2 service name, Step 3 "Book your call")
+     match on mobile at the Sub-display tier — the flow is a distinct, smaller-headline state. */
+  .bf-headline,
+  .bf-step2-heading { font-size: clamp(22px, 2.2vw, 32px); letter-spacing: -0.010em; line-height: 1.2; }
 
   /* Step 2 nav */
-  .bf-step2-nav { margin-bottom: 32px; }
+  .bf-nav { margin-bottom: 24px; padding-bottom: 14px; }
 
   /* Step 2: single column, order heading → sub → card → about → form */
   .bf-step2-cols {
@@ -922,10 +931,28 @@ const optionLabelsJson = JSON.stringify(
     }, immediate ? 0 : 350);
   }
 
-  // ── Back → Step 1
+  // ── In-flow Back: Step 2 → Step 1, Step 3 → Step 2
   backBtn.addEventListener('click', function () {
     showStep(step1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  var backBtn3 = document.getElementById('bfBack3');
+  if (backBtn3) backBtn3.addEventListener('click', function () {
+    showStep(step2);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── Exit the flow (every × + the Step-1 Back link): close the drawer if we're
+  // in it, otherwise let the <a href="/"> navigate home (standalone /begin page).
+  function exitFlow(e) {
+    var dr = document.getElementById('beginDrawer');
+    if (dr && dr.classList.contains('open') && typeof window.__closeBeginDrawer === 'function') {
+      e.preventDefault();
+      window.__closeBeginDrawer();
+    }
+  }
+  document.querySelectorAll('.bf-close, .bf-nav a.bf-back').forEach(function (el) {
+    el.addEventListener('click', exitFlow);
   });
 
   // ── Offering accordion toggle

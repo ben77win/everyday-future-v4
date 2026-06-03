@@ -28,12 +28,6 @@ import BeginFlow from '../components/BeginFlow.astro';
 
   <!-- ── Begin drawer ── -->
   <div class="begin-drawer" id="beginDrawer" role="dialog" aria-modal="true" aria-label="Begin your practice" aria-hidden="true">
-    <div class="begin-drawer__bar">
-      <button class="begin-drawer__close" id="beginDrawerClose" type="button" aria-label="Close">
-        <span class="begin-drawer__close-arrow" aria-hidden="true">←</span>
-        <span class="t-cta">Back</span>
-      </button>
-    </div>
     <main class="begin-page begin-page--drawer">
       <BeginFlow />
     </main>
@@ -64,39 +58,7 @@ import BeginFlow from '../components/BeginFlow.astro';
   transform: translateY(0);
 }
 
-/* ── Top bar with close */
-.begin-drawer__bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 var(--gutter, 60px);
-  background: transparent;
-  border-bottom: 0.5px solid rgba(0,0,0,0.10);
-  flex-shrink: 0;
-}
-
-.begin-drawer__close {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: rgba(0,0,0,0.40);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  transition: color 0.2s ease;
-}
-.begin-drawer__close:hover { color: var(--ink, #000); }
-.begin-drawer__close:focus { outline: none; }
-.begin-drawer__close:focus-visible { outline: 1.5px solid rgba(0,0,0,0.30); outline-offset: 4px; border-radius: 2px; }
-.begin-drawer__close-arrow { font-size: 14px; }
+/* (Drawer top bar removed — the flow's own sticky .bf-nav now provides Back/close.) */
 
 /* ── Scrollable content */
 .begin-page--drawer {
@@ -123,19 +85,15 @@ import BeginFlow from '../components/BeginFlow.astro';
   pointer-events: auto;
 }
 
-@media (max-width: 640px) {
-  .begin-drawer__bar { padding: 0 22px; }
-}
 </style>
 
 <script is:inline>
 (function () {
   var drawer     = document.getElementById('beginDrawer');
   var scrim      = document.getElementById('beginDrawerScrim');
-  var closeBtn   = document.getElementById('beginDrawerClose');
   var scrollArea = drawer ? drawer.querySelector('.begin-page--drawer') : null;
 
-  if (!drawer || !scrim || !closeBtn || !scrollArea) return;
+  if (!drawer || !scrim || !scrollArea) return;
 
   var _origScrollTo = window.scrollTo.bind(window);
 
@@ -172,8 +130,8 @@ import BeginFlow from '../components/BeginFlow.astro';
   }
 
   window.__openBeginDrawer = openDrawer;
+  window.__closeBeginDrawer = closeDrawer;   // BeginFlow's in-flow × / Step-1 Back call this to close the drawer
 
-  closeBtn.addEventListener('click', closeDrawer);
   scrim.addEventListener('click', closeDrawer);
 
   window.addEventListener('popstate', function (e) {
