@@ -131,6 +131,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 ### 5.4 S2 Services (`Services.astro`)
 - **Section top padding (shared header rhythm):** `120px` desktop / `72px` mobile — standardized across S2, S3, S4, S5 so every section header sits at the same top gap. (S2 achieves this via three coupled rules: `.s2` padding-top, `.s2__header` negative margin-top, and `.s2__header` padding-top, all matched.)
+- **S2 bottom padding:** `140px` desktop / **`88px` mobile** (matches S5/S6/S7's mobile bottom) so the cream (`--paper-cream`) extends below the last option card before the next section — mobile was `0` previously (left over from the old bottom-bleeding tier carousel) which clipped the cream at the last card.
 - Cream background
 - Header (full-width): h2 headline + supporting body copy ("Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.")
   - Body copy (`.s2__header-body`) uses the **same type treatment as the S4 body** (`.s4__body`): `--font-body`, weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, letter-spacing -0.010em, solid `--ink`. No reveal animation. Layout props specific to this header: `margin-top: 32px`, `max-width: 760px`. On mobile it keeps the 22px clamp floor (NOT reduced to the 16px body size that other paragraphs use).
@@ -298,9 +299,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 ### Sticky float CTA
 - **Visible from first paint and persists throughout the scroll.** `.float-cta` base is `opacity: 1; pointer-events: auto` — the button shows immediately over the hero and never hides.
 - The hero IntersectionObserver (threshold 0.15) still drives the nav `.scrolled` glass state; it also toggles a now-redundant `.visible` class on the CTA (harmless — base is already visible).
-- **Over-footer behavior.** A second IntersectionObserver on `.site-footer` (threshold 0) toggles `.over-footer` on the CTA.
-  - **Desktop:** stays `position: fixed` and inverts to `--paper` (white) background with `--ink` text so it's legible *over* the ink footer (rollover stays `--blue` / white). Palette-compliant — not the dropped orange inversion.
-  - **Mobile (≤640px):** instead of overlapping, the CTA **parks 10px above the footer** — it switches to `position: absolute; bottom: calc(var(--footer-h) + 10px)` (anchored to `body`, which is `position: relative`; `--footer-h` is the footer's height, published by JS in `Layout.astro` on load + resize). Because it now sits on the light background above the footer, it **keeps the normal ink button** (the white inversion is overridden back to `--ink`). The `:active` tap-feedback stays `--blue`.
+- **Over-footer behavior (all viewports — desktop + mobile).** A second IntersectionObserver on `.site-footer` (threshold 0) toggles `.over-footer` on the CTA. Instead of overlapping the footer, the CTA **parks 10px above it**: it switches to `position: absolute; bottom: calc(var(--footer-h) + 10px)` (anchored to `body`, which is `position: relative`; `--footer-h` is the footer height, published by JS in `Layout.astro` on load + resize). The button **stays black (`--ink`) the whole time** — there is no white over-footer inversion (removed). Base hover → `--blue` still applies; mobile keeps a `:active` tap-feedback → `--blue`. Mid-page (footer not in view) it's the normal `position: fixed; bottom: 32px` floating button.
 
 ### Hover states
 - **Primary CTA:** hover background → `--blue` (was orange in staging)
