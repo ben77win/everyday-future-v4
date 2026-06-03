@@ -74,8 +74,8 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 | Display headline (hero, S2–S5 heads, S6 name, Begin headings) | Helvetica Neue 55 Roman | **400** | clamp(46, 5.6vw, 84) | 1.0 | -0.030em |
 | Sub-display (S4 body, S5 first para, S7 question, form heading, offering name) | Helvetica Neue 55 Roman | 400 | clamp(22, 2.2vw, 32) | 1.2 | -0.010em |
 | S3 outcome / testimonial card body | Helvetica Neue / Roman + Light | 400 / 300 | clamp(15, 1.2vw, 19) | 1.35–1.5 | varies |
-| Body — **shared `.t-body-lg` class** (S2 card subheads `.s2__card-desc`, S5 paragraphs `.s5__para` non-first, S6 bio `.s6__para`, S7 FAQ answers `.s7__answer-inner`) | Helvetica Neue 45 Light | 300 | **17px desktop / 16px mobile** | 24px desktop / 26px mobile | +0.020em |
-| Body — base group (form fields, contact form `.s-contact__body`) | Helvetica Neue 45 Light | 300 | **14px desktop / 16px mobile** | 24px / 26px | +0.020em |
+| Body — **shared `.t-body-lg` class** (S2 card subheads `.s2__card-desc`, S5 paragraphs `.s5__para` non-first, S6 bio `.s6__para`, S7 FAQ answers `.s7__answer-inner`, **Contact intro `.s-contact__body`**) | Helvetica Neue 45 Light | 300 | **17px desktop / 16px mobile** | 24px desktop / 26px mobile | +0.020em |
+| Body — base group (form fields) | Helvetica Neue 45 Light | 300 | **14px desktop / 16px mobile** | 24px / 26px | +0.020em |
 | Mono UI (eyebrows, nav links, footer, tags, captions) | DM Mono Regular | 400 | **13px / 0.110em** uppercase | 1 | 0.110em |
 | CTA label (float CTA + form buttons) | DM Mono Regular | 400 | **14.4px / 0.110em** uppercase | 1 | 0.110em |
 
@@ -194,7 +194,9 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Anchored `#contact`, accessible from footer link
 - Paper background, padding 140px var(--gutter) 160px
 - 2-col layout: heading "Get in touch" + body + meta (Direct / Elsewhere) left, 4-field form right
-- Form: Name · Email · Subject · Message (textarea) + "Send a note" submit (no arrow)
+- Intro body (`.s-contact__body`) uses the shared **`.t-body-lg`** (17px desktop / 16px mobile) — brought into line with the rest of the site's body copy.
+- Direct email shown is **info@everydayfuture.work** (was coach@).
+- Form: Name · Email · Subject · Message (textarea) + "Send a note" submit (no arrow). Inputs are borderless; the per-field divider line is the only rule, and **focus colors that divider `--blue` via `.s-contact__field:focus-within`** (the old `.s-contact__input:focus` did nothing because the input has no border). Same pattern as the Begin form.
 - **Submit button** (`.s-contact__submit`): same treatment as the float-CTA / Begin Practice button (48px tall, padding 0 40px, 4px radius, ink bg, DM Mono 14.4px / 0.110em uppercase, hover → `--blue`). `align-self: flex-end` so it sizes to content (not full-width stretch) and right-aligns — keeps it clear of the bottom-left float CTA.
 - Submission: Netlify Forms → coach@everydayfuture.work + ben@wintersand.co
 - Mobile: single column, 80px padding

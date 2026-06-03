@@ -891,11 +891,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .s-contact__body {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.020em;
+  /* type from shared .t-body-lg (17px desktop / 16px mobile); color + spacing here */
   color: rgba(0,0,0,0.60);
   margin-bottom: 32px;
 }
@@ -944,8 +940,11 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   border-bottom: 0.5px solid rgba(0,0,0,0.18);
   padding: 18px 0 14px;
+  transition: border-color 0.2s ease;
 }
 .s-contact__field:first-child { border-top: 0.5px solid rgba(0,0,0,0.18); }
+/* Focus indicator on the divider (the input has no border, so input:focus did nothing) */
+.s-contact__field:focus-within { border-bottom-color: var(--blue); }
 
 .s-contact__label {
   font-family: var(--font-mono);
@@ -972,8 +971,6 @@ a { color: inherit; text-decoration: none; }
 }
 .s-contact__input::placeholder,
 .s-contact__textarea::placeholder { color: rgba(0,0,0,0.28); }
-.s-contact__input:focus,
-.s-contact__textarea:focus { border-bottom-color: var(--blue); }
 
 .s-contact__textarea { min-height: 120px; }
 
@@ -1244,8 +1241,7 @@ a { color: inherit; text-decoration: none; }
   .s2__card { aspect-ratio: auto; height: 182px; padding: 28px; }
 
   /* ── Body paragraphs — 16px mobile floor (iOS anti-zoom) */
-  .t-body-lg,
-  .s-contact__body { font-size: 16px; line-height: 26px; }
+  .t-body-lg { font-size: 16px; line-height: 26px; }
 
   /* ── S3 RAIL — denser cards on mobile, 28vw peek */
   .s3 { padding: 72px 0 96px; }
