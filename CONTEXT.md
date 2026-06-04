@@ -185,49 +185,22 @@ CSS values verified against handoff 4 comp and corrected:
 .hero__tags { flex-direction: column; align-items: flex-start; }
 ```
 
-### S6 Taylor Photo Scatter
-Three photos in an absolute-positioned scatter within `.s6__photos` (position: relative):
+### S6 Taylor Bio Photos
+Two portraits **side-by-side** in the left column of the S6 bio grid (`#taylor` / `TaylorBio.astro`). _(This superseded the earlier 3-photo absolute-positioned parallax scatter — `taylor-01.png` / `taylor-02.jpg` / `taylor-03.gif`, grayscale + GIF — and, before that, a diagonal/absolute-positioned implied box. None of that is in the code anymore: no absolute positioning, no parallax, no grayscale.)_
 
-**Images:**
-| File | Description |
-|------|-------------|
-| `public/images/taylor-01.png` | Real Taylor portrait (PNG, 1.8MB) |
-| `public/images/taylor-03.gif` | Looping GIF (3MB, 220×293px) — first 4s of ski lift video at 0.5× speed. Shows chair lift with shadow cast on snow. Shadow composition at ~45–60% of frame height. |
-| `public/images/taylor-02.jpg` | Family photo (converted from HEIC). Displayed in grayscale via `filter: grayscale(100%)`. |
-
-**HTML order (determines z-stacking — later = on top):**
+**Markup:**
 ```html
-<img src="/images/taylor-01.png" class="s6__photo s6__photo--a" data-parallax="0.04" />
-<img src="/images/taylor-03.gif" class="s6__photo s6__photo--b" data-parallax="0.06" />
-<img src="/images/taylor-02.jpg" class="s6__photo s6__photo--c" data-parallax="0.08" />
+<div class="s6__photos" id="s6Photos">
+  <img src="/images/DSCF0172.jpg" class="s6__photo s6__photo--ul" alt="Taylor Winters" />  <!-- brown blazer -->
+  <img src="/images/DSCF0084.jpg" class="s6__photo s6__photo--lr" alt="Taylor Winters" />  <!-- couch -->
+</div>
 ```
 
-**Desktop CSS:**
-```css
-.s6__photos { height: 580px; position: relative; }
-.s6__photo  { position: absolute; object-fit: cover; will-change: transform; }
-
-.s6__photo--a { width: 300px; height: 420px; top: 0; left: 0; opacity: 0.82; }
-.s6__photo--b { width: 220px; height: 300px; bottom: 0; right: 20px; opacity: 0.76; }
-.s6__photo--c { width: 160px; height: 220px; top: 185px; right: 250px; opacity: 0.72; filter: grayscale(100%); }
-```
-
-**Mobile CSS (≤640px):**
-```css
-.s6__photos  { height: 340px; overflow: hidden; }
-.s6__photo--a { width: 200px; height: 280px; top: 0; left: 0; }
-.s6__photo--b { width: 145px; height: 195px; bottom: 0; right: 0; }
-.s6__photo--c { width: 105px; height: 145px; top: 130px; right: 165px; }
-```
-
-**Critical positioning constraint:** `right: 250px` (desktop) and `right: 165px` (mobile) keep the family photo (--c) sitting on the portrait (--a) and completely clear of the GIF (--b). The GIF shadow composition (45–60% of frame height) must remain fully unobstructed. Do NOT use `right` values smaller than 250px (desktop) or 165px (mobile) or the family photo will cover the GIF.
-
-**Parallax JS:**
-```js
-var centerOffset = (rect.top + rect.height / 2) - window.innerHeight / 2;
-img.style.transform = 'translateY(' + (centerOffset * speed) + 'px)';
-```
-All-positive speeds (0.04/0.06/0.08) keep photos moving together with minimal separation during scroll.
+**Layout (as built 2026-06-04):**
+- `.s6__inner` — 2-col grid **`1.1fr 1fr`** (photos left / bio right), `gap: 80px`, `align-items: start`, `max-width: var(--max-w)`. The `1.1fr` photo column mirrors S4's image-column-wider pattern; the 80px gutter matches S4/S5.
+- `.s6__photos` — side-by-side flex, `gap: 4px`, `width: 100%`, **`max-width: 580px`** so the pair fills the wider left column and the visible gutter reads as the standard 80px. _Was `max-width: 420px` inside a 540px column, which left ~120px dead space that read as an oversized ~200px gap (Ben flagged it). Fixed by `1.1fr 1fr` + `max-width: 580px`._
+- `.s6__photo` — each `width: calc(50% - 2px)`, `aspect-ratio: 3/4`, `object-fit: cover` (the `-2px` per side makes the 4px center gap). `.s6__photo--ul` = DSCF0172.jpg, `.s6__photo--lr` = DSCF0084.jpg.
+- Source JPGs downscaled to 900×1200 (~140–175 KB) from 6192×8256 originals. Layout scales on tablet/mobile via the aspect-ratio (the column stacks to 1-up at ≤900/≤640).
 
 ---
 

@@ -865,7 +865,7 @@ a { color: inherit; text-decoration: none; }
 
 .s6__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 80px;
   align-items: start;
   max-width: var(--max-w);
@@ -877,7 +877,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   gap: 4px;
   width: 100%;
-  max-width: 420px;
+  max-width: 580px;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.80s cubic-bezier(0.16, 1, 0.3, 1),
