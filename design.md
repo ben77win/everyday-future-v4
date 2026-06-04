@@ -98,7 +98,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 | S6 Taylor | `--paper` | Single portrait (taylor-01.png) + bio |
 | S7 FAQ | `--paper-sage` | Accordion, single-open behavior |
 | Footer | `--ink` | Wordmark + Contact · Instagram · Terms · Privacy (+ Client Portal mobile-only) |
-| Contact | `--paper` | Anchored #contact, accessible from footer |
+| Contact | `--paper` | **Standalone `/contact` page** (`src/pages/contact.astro`), linked from the footer |
 | Begin drawer / /begin | `--paper-cream` | 4 option cards (Begin-style grid) |
 | Begin Step 2 | `--paper-cream` | Back nav + offering detail block (1:1 / Orgs / Group variants) + form |
 | Begin Step 3 | `--paper-cream` + paper panel | Calendly embed or Self-led confirmation |
@@ -199,9 +199,11 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **No orange dot separators** — just flat row with 28px gap
 - Mobile: stacks vertical, gap 14px 22px wrap
 
-### 5.11 Contact (`Contact.astro` — NEW)
-- Anchored `#contact`, accessible from footer link
-- Paper background, padding 140px var(--gutter) 160px
+### 5.11 Contact (`Contact.astro` → standalone `/contact` page)
+- **Lives on its own page at `/contact`** (`src/pages/contact.astro` = `Layout > Nav > Contact > Footer`, mirroring `begin.astro`). _[2026-06-04: moved off the homepage — the `Contact.astro` component (self-contained: visible form + hidden Netlify static form + submit script) was removed from `index.astro` and now renders only on `/contact`. Footer "Contact" link `#contact` → `/contact`.]_ No float CTA on this page (the page IS the conversion endpoint — matches begin/legal).
+- **Nav forced to ink** via `.page-contact` (inline script in `contact.astro`) since the nav sits on the `--paper` background, not the hero — same override pattern as `.page-legal` / `.page-begin` (in `global.css`, with the Client Portal blue rollover preserved).
+- **"← Every Day Future" back link** (`.s-contact__back`) above the "Get in touch" heading — the same idiom as the legal pages' `.legal__back` (DM Mono 13px / 0.110em uppercase, `rgba(0,0,0,0.40)` → `--blue` hover, `href="/"`). Spans the top of the `.s-contact__inner` grid (`grid-column: 1 / -1`, `justify-self: start`; `margin-bottom: -48px` counteracts the 80px grid row-gap → ~32px above the heading). The nav wordmark also links home, but this gives a visible in-content way back. _[2026-06-04]_
+- Paper background, padding 140px var(--gutter) 160px (the 140px top clears the ~68px fixed nav)
 - 2-col layout: heading "Get in touch" + body + meta (Direct / Elsewhere) left, 4-field form right
 - Intro body (`.s-contact__body`) uses the shared **`.t-body-lg`** (17px desktop / 16px mobile) — brought into line with the rest of the site's body copy.
 - Direct email shown is **info@everydayfuture.work** (was coach@).
@@ -378,7 +380,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 | Form routing | Engineering | Netlify Forms → coach@everydayfuture.work, ben@wintersand.co |
 | Per-page SEO meta | Engineering | Titles, descriptions, OG images, structured data |
 | Cross-OS wordmark | Engineering | Helvetica Neue Ultralight falls back to Arial Regular on Windows/Android. Accept variation. |
-| /contact route | Engineering | New page using the Contact.astro component (or section anchored from homepage footer — choose one) |
+| ~~/contact route~~ | ~~Engineering~~ | ✅ Done 2026-06-04 — standalone `/contact` page (`src/pages/contact.astro`) using the Contact.astro component; removed from the homepage. |
 
 ---
 
