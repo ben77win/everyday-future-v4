@@ -402,7 +402,7 @@ a { color: inherit; text-decoration: none; }
 .s2__tier {
   position: relative;
   flex: 1;
-  aspect-ratio: 2 / 3.3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 .s2__tier img,
@@ -412,6 +412,7 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   display: block;
 }
+.s2__tier:nth-child(2) video { transform: scaleX(-1); }
 .s2__tier:nth-child(3) video { transform: scale(1.20); transform-origin: 50% 40%; }
 .s2__tier-num {
   position: absolute;
@@ -1319,11 +1320,13 @@ a { color: inherit; text-decoration: none; }
   }
   .s2__tier {
     flex: 1;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 1 / 1;
   }
   /* Smaller tier number + label (matched) so the longest ("CALIBRATION") fits the narrower mobile tile */
   .s2__tier-num,
   .s2__tier-label { font-size: 11px; letter-spacing: 0.08em; }
+  /* Nudge the label closer to the bottom edge (numbers stay put) */
+  .s2__tier-label { bottom: 4px; }
 
   /* Option cards: below the tiers, 1-up landscape to conserve vertical space */
   .s2__cards { order: 2; min-width: 0; grid-template-columns: minmax(0, 1fr); margin-top: 16px; }

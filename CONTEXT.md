@@ -436,6 +436,12 @@ Calendly widgets are created dynamically in JS when step 3 appears. Script loade
 ## Open Items
 
 ### ↩️ Deliberate spec departures (may revert)
+- [ ] **S2 tier tiles → square (`1/1`)** — _added 2026-06-04; we may want to go back to the tall version, so this is the rollback recipe._ The 3 tier tiles (Foundation / Calibration / Expansion) were changed from **tall** to **square**, plus the Calibration video mirrored and the mobile labels nudged down. **To roll back to the previous (tall) version, revert these 4 edits in `src/styles/global.css`:**
+  1. `.s2__tier` (desktop) `aspect-ratio: 1 / 1` → **`2 / 3.3`**
+  2. `.s2__tier` (mobile, ≤640px block) `aspect-ratio: 1 / 1` → **`2 / 3`**
+  3. **Remove** the mirror rule `.s2__tier:nth-child(2) video { transform: scaleX(-1); }` (Calibration flip — this was new, not a pre-existing value)
+  4. **Remove** the mobile label nudge `.s2__tier-label { bottom: 4px; }` (label reverts to the base `bottom: 14px`)
+  Everything else (full-width row, `Expansion scale(1.20)` zoom, `01/02/03` numbers at `top: 14px`, the 11px mobile num/label size) is unchanged by this departure and stays as-is on rollback.
 - [ ] **Wordmark enlarged (weight kept at spec)** — the heavier weight was tried (commits `8d85620`/`4cd61cf`) then **rolled back to the Figma-spec `200` ultralight**; only the **size** now departs from spec: nav `27.5px` (was 25), footer `24.2px` (was 22). To fully restore the Figma spec, also reset the sizes: `.nav__wordmark` → `font-size: 25px;` and `.site-footer__wordmark` → `font-size: 22px;`.
 
 ### ⏳ Needs device verification (may roll back)
