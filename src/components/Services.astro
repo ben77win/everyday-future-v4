@@ -15,6 +15,9 @@ import { practiceOptions } from '../data/options';
       <a href={`/begin?option=${opt.key}`} class="s2__card">
         <span class="s2__card-label">{opt.label}</span>
         <span class="s2__card-desc t-body-lg">{opt.desc}</span>
+        <span class="s2__card-arrow" aria-hidden="true">
+          <svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+        </span>
       </a>
     ))}
   </div>

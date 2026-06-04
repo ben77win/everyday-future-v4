@@ -463,6 +463,16 @@ a { color: inherit; text-decoration: none; }
 .s2__card:hover { background: var(--blue); color: var(--paper); }
 .s2__card:hover .s2__card-desc  { color: rgba(255,255,255,0.62); }
 
+/* Hairline-stroke arrow (on-brand — S3 chevron / S7 plus-icon idiom, not a glyph) */
+.s2__card-arrow {
+  align-self: flex-end;
+  line-height: 0;
+  color: rgba(0,0,0,0.40);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+.s2__card-arrow svg { display: block; }
+.s2__card:hover .s2__card-arrow { color: var(--paper); transform: translateX(6px); }
+
 .s2__card-label {
   font-family: var(--font-body);
   font-weight: 400;
