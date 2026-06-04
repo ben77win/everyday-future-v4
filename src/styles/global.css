@@ -379,7 +379,7 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   background: var(--paper-cream);
   margin: -120px calc(-1 * var(--gutter)) 0;
-  padding: 120px max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter))) 80px;
+  padding: 120px max(var(--gutter), calc((100vw - var(--max-w)) / 2 + var(--gutter))) 32px;
   max-width: none;
 }
 .s2__header-body {
@@ -396,7 +396,7 @@ a { color: inherit; text-decoration: none; }
 .s2__tiers {
   display: flex;
   gap: 0;
-  max-width: 660px;
+  max-width: var(--max-w);
   margin: 48px auto 0;
 }
 .s2__tier {
