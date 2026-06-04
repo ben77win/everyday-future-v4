@@ -41,7 +41,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
   - **14px desktop / 16px mobile:** form fields, contact-form body (`.s-contact__body`)
 - Display headings: `clamp(46px, 5.6vw, 84px)` weight 400, `-0.030em` — S2/S3/S4/S5 section heads
 - **Hero headline:** `clamp(46px, 6.8vw, 84px)` — exact comp spec (previous session had inflated override at 8.3vw/120px — reverted)
-- **Hero subhead:** `font-size: 16px` / `line-height: 26px` / `max-width: 520px` — exact comp spec
+- **Hero subhead:** `font-size: 19px` / `line-height: 30px` / `max-width: 520px` — **Ben-approved 2026-06-04 bump from the comp spec `16px`/`26px`** (the copy read too small at 16px); kept Light 300 + `+0.020em` tracking + 520px block (a size-only nudge, not a tier change)
 - **Hero copy block:** `max-width: 520px`
 - S2 header body (`.s2__header-body`): matches S4 body type — `--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, `-0.010em`, solid `--ink`; keeps 22px clamp floor on mobile (NOT reduced to 16px like other paragraphs)
 - S2 option cards: desktop `aspect-ratio: 1/1` (square) — `padding: 40px 28px 36px` — `gap: 16px` grid — no border — desktop square is locked. **Mobile (≤640px): 1-up full-width, fixed `height: 182px`, `padding: 28px`** — uniform across all four cards (square is dropped only at this breakpoint)
