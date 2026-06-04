@@ -94,10 +94,10 @@ See [`design.md`](design.md) — comprehensive as-built reference for all tokens
 Images cycle sequentially on each page reload via `localStorage`. Sequence (`Layout.astro`):
 1. `/images/rhododendron.jpg` — `50% 60%` (landscape — bottom-favored crop)
 2. `/images/rainleaves.jpg` — `50% 60%` (landscape — bottom-favored crop)
-3. `/images/silhouette-coast.jpg` — `50% 50%` (portrait — centered so the figure's head isn't clipped; favoring the bottom cut the head off)
+3. `/images/silhouette-coast.jpg` — `50% 50%` (landscape — centered) — **2026-06-04: swapped from the vertical 1080×1440 crop to the horizontal `BR23_NL_Harmony_Lifestyle_Talent_Medium_Close_2_230519_2160` source, optimized to 2000×1333 (~476KB). Centered crop frames the silhouette head with ocean/rocks opening to the right.**
 4. `/images/willow-pool.jpeg` — `50% 65%` (square — bottom-favored to show the pool/deck)
 
-Per-image `background-position` set in the rotation JS; CSS fallback on `.hero__bg` is `50% 60%` (only visible the split-second before JS runs). Positions tuned per-image because the photos differ in aspect ratio (2 landscape, 1 portrait, 1 square) and `background-size: cover` crops each differently. **Note:** on mobile (tall viewport) the *landscape* photos overflow left/right, so their vertical position has no effect there — the horizontal `50%` governs them. Mobile crops reviewed 2026-06-04 and left as-is (desktop values carry over acceptably). Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `background-position` on `.hero__bg`.
+Per-image `background-position` set in the rotation JS; CSS fallback on `.hero__bg` is `50% 60%` (only visible the split-second before JS runs). Positions tuned per-image because the photos differ in aspect ratio (3 landscape, 1 square) and `background-size: cover` crops each differently. **Note:** on mobile (tall viewport) the *landscape* photos overflow left/right, so their vertical position has no effect there — the horizontal `50%` governs them. Mobile crops reviewed 2026-06-04 and left as-is (desktop values carry over acceptably). Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `background-position` on `.hero__bg`.
 
 ### Begin Flow (`BeginFlow.astro`)
 
