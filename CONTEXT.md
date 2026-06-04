@@ -31,6 +31,8 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 **`design.md` at the repo root** is the canonical design reference — it is the as-built document updated through all prior sessions. Read it before touching any CSS.
 
+**🚫 No design drift — ever.** Never introduce a design element, value, or visual change — color, spacing, sizing, radius, border, shape, icon, hover, animation, or layout — unless it **(a)** comes directly from `design.md`, **or (b)** has been **expressly requested or approved by Ben.** When something is genuinely needed but not covered by `design.md` (e.g. a new control like the S3 carousel chevrons), do not invent and apply it: **propose it first**, grounded in existing `design.md` tokens and idioms, and wait for Ben's approval. A comp shown in the preview is a **proposal, not approval** — nothing becomes canon until Ben signs off, at which point it is added to `design.md` in the same batch.
+
 **Do not use files in `handoff 4/` as a design reference.** That folder contains the original deliverables and is kept for historical record only (`handoff 4/ARCHIVED.md` explains this). The repo `design.md` supersedes everything there.
 
 **Never change these CSS values without Ben's explicit approval:**

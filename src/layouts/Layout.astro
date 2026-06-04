@@ -137,6 +137,30 @@ import '../styles/global.css';
     rail.addEventListener('pointerleave', endDrag);
   })();
 
+  // ── S3 carousel — chevron prev/next, scroll by one card, disable at ends
+  (function () {
+    var rail = document.getElementById('s3Rail');
+    var prev = document.getElementById('s3Prev');
+    var next = document.getElementById('s3Next');
+    if (!rail || !prev || !next) return;
+    function step(dir) {
+      var card = rail.querySelector('.s3__card');
+      if (!card) return;
+      var w = card.getBoundingClientRect().width + 4;
+      rail.scrollBy({ left: dir * w, behavior: 'smooth' });
+    }
+    function updateDisabled() {
+      var max = rail.scrollWidth - rail.clientWidth;
+      prev.disabled = rail.scrollLeft <= 2;
+      next.disabled = rail.scrollLeft >= max - 2;
+    }
+    prev.addEventListener('click', function () { step(-1); });
+    next.addEventListener('click', function () { step(1); });
+    rail.addEventListener('scroll', updateDisabled);
+    window.addEventListener('resize', updateDisabled);
+    updateDisabled();
+  })();
+
   // ── FAQ accordion
   document.querySelectorAll('.s7__trigger').forEach(function(btn) {
     btn.addEventListener('click', function() {

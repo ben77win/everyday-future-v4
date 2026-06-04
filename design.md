@@ -7,6 +7,8 @@
 - `handoff/Tokens.css` — drop-in :root replacement for `src/styles/global.css`
 - This document — design system spec
 
+> **🚫 No design drift — ever.** Nothing visual (color, spacing, sizing, radius, border, shape, icon, hover, animation, layout) goes into the build unless it **comes from this document** or has been **expressly requested or approved by Ben.** If a need arises that this spec doesn't cover, **propose** a solution built from the tokens/idioms already here and wait for approval — never invent and ship. A preview comp is a proposal, not approval; once Ben approves, it is documented here in the same batch.
+
 ---
 
 ## 1. Voice in one line
@@ -146,12 +148,14 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background
 - Header: h2 "Practice makes progress" + sub-heading "Testimonials and outcomes" (`.s3__subhead`) — sub-heading uses the **same type treatment as the S2 header body** (`--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, -0.010em, solid `--ink`, `margin-top: 32px`, `max-width: 760px`; keeps the 22px clamp floor on mobile, NOT reduced to 16px)
-- Horizontal drag-snap rail · 8 cards · **aspect-ratio 3/4, width clamp(280, 30vw, 420px), padding 40px** · no gap
+- **Carousel (`.s3__carousel`):** the card track is **confined to the content column** (`max-width: var(--max-w)`, gutter padding) and **flanked by two chevrons** — `.s3__chev--prev` / `--next` sit outside the rail (`.s3__rail` is `flex: 1 1 auto; min-width: 0`), so 2–3 cards show with the next card **right-clipped**. (Replaced the old full-bleed rail that bled `padding-right: max(40vw, gutter)` off the viewport edge.)
+- **Chevrons — bare hairline, on-brand (Ben-approved 2026-06-04):** thin **1px stroke** SVG chevron (16×24, `stroke-linecap: square`, `currentColor`) — **no circle, fill, or border** (echoes the S7 plus-icon hairline idiom, NOT a typographic glyph). `--ink` default → **`--blue` on hover** with a **3px outward nudge** (`translateX(±3px)`, the S7 rollover gesture). Disabled at the track ends → `opacity: 0.2`. 24×24 box, transparent background.
+- 8 cards · **aspect-ratio 3/4, width clamp(280, 30vw, 420px), padding 40px** · 4px gap — card surfaces/dimensions/type unchanged by the carousel work
 - Alternating: ink (outcome) / sage (testimonial) · ink / sage · ink / sage · ink / sage
 - Outcomes: white type `clamp(17px, 1.4vw, 21px)` Light 300, attribution block (Mono name + Light role)
 - Testimonials: ink type `clamp(20px, 1.7vw, 26px)` Roman 400, **italic**, **no quote glyphs** (the `::before`/`::after` curly-quote marks were removed)
-- Mouse drag-to-scroll + snap; touch is native
-- Mobile: 78vw cards, 28px padding, no gap
+- **Controls:** chevron click scrolls by exactly one card (`scrollBy` card-width + 4px gap); buttons disable at each end; mouse drag-to-scroll + snap retained; 4s auto-advance retained; touch is native (JS in `Layout.astro`)
+- Mobile (≤640px): **chevrons hidden** (`display: none`), rail reverts to the full-bleed swipe behavior — 78vw cards, 28px padding, no gap, `padding-left: var(--gutter)` / `padding-right: 28vw`
 
 ### 5.6 S4 About (`About.astro`)
 - Off-b background
