@@ -166,7 +166,7 @@ Horizontal snap rail. 8 cards alternating ink (outcome) / sage (testimonial). Mo
 4-up grid, square (`aspect-ratio: 1/1`), paper on cream, padding `40px 28px 36px`, `gap: 16px`, no border.
 - Label: 32px Roman 400, `-0.020em`, top of card
 - Desc: 16px Light 300, `+0.020em`, `26px` line-height, `rgba(0,0,0,0.55)`, `margin-top: auto` (pushed to bottom)
-- **Hairline arrow** (`.s2__card-arrow`): thin 1px-stroke SVG `→` (S3-chevron / S7-plus-icon idiom, not a glyph), bottom-right via `align-self: flex-end`, `rgba(0,0,0,0.40)` at rest. _Ben-approved 2026-06-04 departure — cards were spec'd "no arrow"; this is the homepage S2 cards only (Begin `.bf-option` cards stay arrow-free)._
+- **Hairline arrow** (`.s2__card-arrow`): thin 1px-stroke SVG `→` (S3-chevron / S7-plus-icon idiom, not a glyph), `rgba(0,0,0,0.40)` at rest. **Desktop: bottom-right** (`align-self: flex-end`). **Mobile ≤640px: top-right, aligned with the label** (`position: absolute; top: 24px; right: 28px`). _Ben-approved 2026-06-04 departure — cards were spec'd "no arrow"; this is the homepage S2 cards only (Begin `.bf-option` cards stay arrow-free)._
 - Hover: surface inverts to `--blue` (#2956E0, the Begin Practice blue), label/desc go white; the arrow rides the invert → white + `translateX(6px)` (via `currentColor`). Mobile `:active` matches (blue).
 - Per-option hover colors are a backlog item (all currently `--blue`)
 

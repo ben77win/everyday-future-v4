@@ -1354,6 +1354,8 @@ a { color: inherit; text-decoration: none; }
      matches the Begin flow Step-1 cards so the options look identical everywhere on mobile */
   .s2__card { aspect-ratio: auto; height: 140px; padding: 20px 28px; }
   .s2__card-label { font-size: 25px; }
+  /* Mobile: arrow moves to the top-right, aligned with the label (was bottom-right) */
+  .s2__card-arrow { position: absolute; top: 24px; right: 28px; }
 
   /* ── Body paragraphs — 16px mobile floor (iOS anti-zoom) */
   .t-body-lg { font-size: 16px; line-height: 26px; }
