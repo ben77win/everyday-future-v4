@@ -96,82 +96,95 @@ import '../styles/global.css';
     });
   }
 
-  // ── S3 rail auto-advance every 4s, pauses on hover/touch
-  (function () {
-    var rail = document.getElementById('s3Rail');
-    if (!rail) return;
-    var paused = false;
-    rail.addEventListener('pointerdown', function() { paused = true; });
-    rail.addEventListener('mouseenter',  function() { paused = true; });
-    rail.addEventListener('mouseleave',  function() { paused = false; });
-    setInterval(function() {
-      if (paused) return;
-      var cards = rail.querySelectorAll('.s3__card');
-      if (!cards.length) return;
-      var w = cards[0].getBoundingClientRect().width + 4;
-      var max = rail.scrollWidth - rail.clientWidth;
-      var next = rail.scrollLeft + w;
-      if (next > max - 8) next = 0;
-      rail.scrollTo({ left: next, behavior: 'smooth' });
-    }, 4000);
-  })();
-
-  // ── S3 rail — mouse drag-to-scroll (touch is native)
-  (function () {
-    var rail = document.getElementById('s3Rail');
-    if (!rail) return;
-    var isDown = false, startX = 0, startScroll = 0;
-    rail.addEventListener('pointerdown', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      isDown = true;
-      startX = e.pageX;
-      startScroll = rail.scrollLeft;
-      rail.classList.add('is-dragging');
-      try { rail.setPointerCapture(e.pointerId); } catch (_) {}
-    });
-    rail.addEventListener('pointermove', function (e) {
-      if (!isDown) return;
-      var dx = e.pageX - startX;
-      rail.scrollLeft = startScroll - dx;
-    });
-    function endDrag() {
-      if (!isDown) return;
-      isDown = false;
-      rail.classList.remove('is-dragging');
-      // Re-snap to nearest card
-      var cards = rail.querySelectorAll('.s3__card');
-      if (!cards.length) return;
-      var cardW = cards[0].getBoundingClientRect().width;
-      var nearest = Math.round(rail.scrollLeft / cardW) * cardW;
-      rail.scrollTo({ left: nearest, behavior: 'smooth' });
-    }
-    rail.addEventListener('pointerup', endDrag);
-    rail.addEventListener('pointercancel', endDrag);
-    rail.addEventListener('pointerleave', endDrag);
-  })();
-
-  // ── S3 carousel — chevron prev/next, scroll by one card, disable at ends
+  // ── S3 carousel — infinite seamless loop (4s auto-advance + chevrons + drag).
+  //    The track is tripled — [clones][originals][clones] — and scrollLeft is kept
+  //    within the middle set's band; jumps land on identical content so it never
+  //    visibly resets to card 1.
   (function () {
     var rail = document.getElementById('s3Rail');
     var prev = document.getElementById('s3Prev');
     var next = document.getElementById('s3Next');
-    if (!rail || !prev || !next) return;
-    function step(dir) {
-      var card = rail.querySelector('.s3__card');
-      if (!card) return;
-      var w = card.getBoundingClientRect().width + 4;
-      rail.scrollBy({ left: dir * w, behavior: 'smooth' });
+    if (!rail) return;
+
+    var originals = Array.prototype.slice.call(rail.querySelectorAll('.s3__card'));
+    var n = originals.length;
+    if (n < 2) return;
+
+    // Clone a full set before AND after the originals so the loop works both ways.
+    var before = document.createDocumentFragment();
+    var after  = document.createDocumentFragment();
+    originals.forEach(function (card) {
+      var a = card.cloneNode(true); a.setAttribute('aria-hidden', 'true'); a.classList.add('s3__card--clone'); after.appendChild(a);
+      var b = card.cloneNode(true); b.setAttribute('aria-hidden', 'true'); b.classList.add('s3__card--clone'); before.appendChild(b);
+    });
+    rail.appendChild(after);
+    rail.insertBefore(before, rail.firstChild);
+
+    var cardStep = 0, setWidth = 0;
+    function measure() {
+      var c = rail.querySelectorAll('.s3__card');
+      cardStep = c[1].offsetLeft - c[0].offsetLeft;   // one card + gap
+      setWidth = c[n].offsetLeft - c[0].offsetLeft;    // one full set (n cards)
     }
-    function updateDisabled() {
-      var max = rail.scrollWidth - rail.clientWidth;
-      prev.disabled = rail.scrollLeft <= 2;
-      next.disabled = rail.scrollLeft >= max - 2;
+    measure();
+    rail.scrollLeft = setWidth;   // start on the middle (original) set
+
+    // Keep scrollLeft inside [setWidth, 2*setWidth): a ±setWidth jump lands on
+    // identical content (the sets are clones), so it's invisible. Direct
+    // scrollLeft assignment is instant (ignores scroll-behavior: smooth).
+    function wrap() {
+      if (setWidth <= 0) return;
+      if (rail.scrollLeft >= 2 * setWidth) rail.scrollLeft -= setWidth;
+      else if (rail.scrollLeft < setWidth) rail.scrollLeft += setWidth;
     }
-    prev.addEventListener('click', function () { step(-1); });
-    next.addEventListener('click', function () { step(1); });
-    rail.addEventListener('scroll', updateDisabled);
-    window.addEventListener('resize', updateDisabled);
-    updateDisabled();
+    function step(dir) { if (!cardStep) return; wrap(); rail.scrollBy({ left: dir * cardStep, behavior: 'smooth' }); }
+
+    // Wrap once a smooth scroll (auto-advance / chevron) settles; drag wraps live below.
+    var dragging = false, settleTimer = null;
+    rail.addEventListener('scroll', function () {
+      if (dragging) return;
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(wrap, 120);
+    });
+    window.addEventListener('resize', function () { measure(); wrap(); });
+
+    // Auto-advance every 4s, pause on hover/touch
+    var paused = false;
+    rail.addEventListener('pointerdown', function () { paused = true; });
+    rail.addEventListener('mouseenter',  function () { paused = true; });
+    rail.addEventListener('mouseleave',  function () { paused = false; });
+    setInterval(function () { if (!paused) step(1); }, 4000);
+
+    // Chevrons — no ends (infinite). Throttled so each advance completes + wraps
+    // before the next (rapid mashing otherwise overlaps smooth scrolls and accumulates).
+    var lastChev = 0;
+    function chev(dir) { var t = Date.now(); if (t - lastChev < 550) return; lastChev = t; step(dir); }
+    if (prev) prev.addEventListener('click', function () { chev(-1); });
+    if (next) next.addEventListener('click', function () { chev(1); });
+
+    // Mouse drag-to-scroll (incremental, so live wrapping stays seamless; touch is native)
+    var lastX = 0;
+    rail.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; lastX = e.pageX;
+      rail.classList.add('is-dragging');
+      try { rail.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    rail.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      rail.scrollLeft -= (e.pageX - lastX);
+      lastX = e.pageX;
+      wrap();
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      rail.classList.remove('is-dragging');
+      if (cardStep) rail.scrollTo({ left: Math.round(rail.scrollLeft / cardStep) * cardStep, behavior: 'smooth' });
+    }
+    rail.addEventListener('pointerup', endDrag);
+    rail.addEventListener('pointercancel', endDrag);
+    rail.addEventListener('pointerleave', endDrag);
   })();
 
   // ── FAQ accordion

@@ -155,12 +155,13 @@ Nav text has a soft `text-shadow` for readability over the hero image — no gra
 
 ### S3 — Practice Makes Progress
 
-Horizontal snap rail. 8 cards alternating ink (outcome) / sage (testimonial). Mouse drag + touch scroll.
+Horizontal carousel, confined to the content column with flanking hairline chevrons. 8 cards alternating ink (outcome) / sage (testimonial). Mouse drag + touch scroll.
 
-- Card: `width: clamp(280px, 30vw, 420px)` · `aspect-ratio: 3/4` · `padding: 40px`
+- Card: `width: clamp(280px, 30vw, 420px)` · **`aspect-ratio: 1/1` (square)** · `padding: 40px` _(squared from `3/4` on 2026-06-04 to match the S2 tier tiles)_
 - Outcome body: `clamp(17px, 1.4vw, 21px)` Light 300
-- Testimonial quote: `clamp(20px, 1.7vw, 26px)` Roman 400, NOT italic, `"` glyph prefix
-- Mobile (≤640px): `78vw` cards, `28px` padding, no gap
+- Testimonial quote: `clamp(20px, 1.7vw, 26px)` Roman 400, italic
+- **Infinite seamless loop** (2026-06-04): cards cloned into 3 sets (`[clones][originals][clones]`, clones `aria-hidden`); `scrollLeft` wraps by exactly one set onto identical content — never visibly resets to card 1. 4s auto-advance + chevrons + drag all retained (drag wraps live; chevrons throttled 550ms; no disable-at-ends). JS in `Layout.astro`.
+- Mobile (≤640px): `78vw` **square** cards, `28px` padding, no gap (scales down proportionally)
 
 ### S2 Option Cards
 4-up grid, square (`aspect-ratio: 1/1`), paper on cream, padding `40px 28px 36px`, `gap: 16px`, no border.
