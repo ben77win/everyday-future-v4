@@ -247,18 +247,18 @@ All SVGs in `public/marks/` (served as `/marks/`) — fill `#2956e0`, variable s
 | File | Dimensions | Used in |
 |---|---|---|
 | `Vector.svg` | 72×218 | Unused |
-| `Vector-1.svg` | 243×194 | S3 Q2 — bottom-left of quote (`Testimonials.astro`) |
+| `Vector-1.svg` | 243×194 | Unused (was S3 quote — no longer rendered) |
 | `Vector-2.svg` | 313×68 | Unused |
 | `Vector-3.svg` | 93×189 | Unused |
-| `Vector-4.svg` | 344×318 | S2 header — top-right of subhead area (`Services.astro`) |
-| `Vector-5.svg` | 348×181 | S1 Hero — under "now." (inverted white) + S6 Taylor bio — under "speaks to you" |
-| `Vector-6.svg` | — | S2 free strip — above "Free discovery call" title (`Services.astro`) |
+| `Vector-4.svg` | 344×318 | Unused (was S2 header — no longer rendered) |
+| `Vector-5.svg` | 348×181 | S1 Hero — circles "possibility" (inverted white, inline-styled in `Hero.astro`) |
+| `Vector-6.svg` | — | Unused (was S2 "Free discovery call" strip — no longer exists) |
 | `Vector-7.svg` | — | Unused |
 | `Vector-8.svg` | 438×173 | S4 About — top-left of section (`About.astro`) |
 | `Vector-9.svg` | — | Unused |
 | `Vector-10.svg` | 180×140 | S5 Waymaker — left of word (`Waymaker.astro`) + S7 FAQ — top-left of section (`FAQ.astro`) |
 | `Vector-11.svg` | — | Unused |
-| `Vector-12.svg` | — | S1 Hero — underline on "future" (inverted white, `Hero.astro`) |
+| `Vector-12.svg` | — | Unused (was S1 Hero underline on "future") |
 
 ---
 
