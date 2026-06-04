@@ -28,7 +28,7 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 | Opp #2 — Person/ProfessionalService schema | ✅ done | `@graph` (ProfessionalService + Person) on homepage — legalName LTW Coaching LLC, areaServed US+Europe, Seattle/WA base, founder Taylor Winters ("Founder & Conscious Executive Coach"), Berkeley Haas credential, LinkedIn+Instagram `sameAs` |
 | Opp #3 — Search Console + analytics | 🟡 noted | add to launch checklist (measure, don’t fly blind) |
 | Opp #4 — Google Business Profile | 🟡 noted | the real local/Seattle lever (free, non-code) |
-| Opp #5 — LinkedIn + `sameAs` | 🟡 mostly done | LinkedIn (`/in/ltaylorwinters/`) now in the schema `sameAs` ✅. Optional remaining (non-code-blocking): add a visible LinkedIn link to the site footer. |
+| Opp #5 — LinkedIn + `sameAs` | ✅ done | LinkedIn (`/in/ltaylorwinters/`) in schema `sameAs` + **visible footer link** added (Contact · Instagram · LinkedIn · Terms · Privacy) |
 
 ### To-dos (need Ben / Taylor)
 - [x] ~~**Get “conscious executive coaching” into homepage visible copy**~~ — ✅ done 2026-06-04 (approved): clause added to Taylor bio (`TaylorBio.astro:15`).
@@ -40,6 +40,28 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 - **2026-06-04 (favicon)** — A4 favicon provided (stacked EDF wordmark, 512px white-on-black). Placed `public/favicon.png`; generated `favicon-32.png` + `apple-touch-icon.png` (180) via sharp; wired `<link>` tags in Layout. Build clean, icon serves 200. **B6 done → launch SEO code set (B1–B9) complete.** Remaining = non-code only (Search Console/analytics, GBP, LinkedIn) + optional Person/Service schema.
 - **2026-06-04 (build)** — Shipped the launch SEO set (verified via `npm run build`): B1 `site` config, B2 per-page titles/descriptions, B3 canonicals, B4 OG/Twitter, B5 og:image (og-image.png), B7 robots.txt (allow), B8 sitemap (5 URLs; **sitemap pinned 3.7.3→3.2.1** for Astro-4 compat), B9 FAQPage JSON-LD. Bio copy edit applied (approved). A2 = allow. **Remaining: B6 favicon (needs A4 source).** Not committed/pushed yet.
 - **2026-06-04** — Domain locked: `everydayfuture.work`. Share image provided + placed (`og-image.png`). **A1 LOCKED → Option B: lead with “conscious executive coaching”** (calculated adjacency; “conscious leadership coaching” ruled out as an owned CLG/15-Commitments niche). Head terms executive/leadership coaching; audience leaders & founders navigating change; methods neuroscience-informed (IPNB), NLP/DBT; geo remote-first, Seattle-based. **B carries a dependency:** the phrase must land in homepage copy (Taylor bio) — added to To-dos, pending Taylor approval. **Open:** A2 crawler policy, A4 favicon.
+
+---
+
+# 🚀 Domain Cutover Checklist (Squarespace → Netlify)
+
+> **Context:** `everydayfuture.work` currently points to **Squarespace**. Plan: finish the site on staging → merge to `main` (production on the Netlify URL) → repoint DNS last. All our canonical/og:url/sitemap values are already `https://everydayfuture.work`, so they become correct the instant DNS flips.
+
+### Order of operations
+1. **Finish + verify on staging** — run the live link-preview (LinkedIn/X inspectors) + Google Rich Results Test on the staging URL.
+2. **`staging → main`** (needs Ben's explicit go-ahead) → production live on the Netlify URL.
+3. **Add `everydayfuture.work` to Netlify as a custom domain _first_** (Netlify → Domain settings) so SSL (Let's Encrypt) can pre-provision before traffic arrives.
+4. **Build 301 redirects** from old Squarespace URLs → new Astro paths (`public/_redirects` or `netlify.toml`). _Audit the Squarespace site's URL structure first_ (export its sitemap). **Most-missed step — preserves existing backlinks/rankings, avoids 404s.**
+5. **`www` → apex 301** — our canonical is non-www (`https://everydayfuture.work`); make Netlify redirect `www.` → apex so they don't compete.
+6. **Lower DNS TTL** ~24h before the switch (faster cutover).
+7. **Repoint DNS** Squarespace → Netlify (apex + www).
+8. **After DNS is live:** verify SSL/HTTPS; re-test OG + Rich Results on the *production* domain; **submit sitemap to Search Console**; set up **analytics**; update **Google Business Profile** website URL.
+
+### Gotchas
+- **Don't set up Search Console / GBP until DNS is live** on Netlify — otherwise you'd verify the old Squarespace site.
+- **301 redirects** are the SEO-equity preserver — don't skip the URL audit.
+- If a Squarespace **Search Console / analytics** property already exists for the domain, its history carries over (same domain); otherwise set up fresh post-cutover.
+- Keep the Squarespace site live until DNS fully propagates, then decommission.
 
 ---
 
