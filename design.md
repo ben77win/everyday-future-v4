@@ -121,9 +121,10 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **`.hero__bg` is decoupled from the hero height** to also fix Chromium/Brave (which handle the toolbar differently than Safari): instead of `inset: 0`, the bg is `top/left/right: 0` + a **fixed `height: 100lvh`** (largest-viewport, with `100svh` fallback). `cover` then resolves to a constant scale regardless of toolbar collapse, so it never re-zooms; the hero's `overflow: hidden` clips the extra.
 - Rotating bg image at `opacity: 0.86`
 - 4-stop top-to-bottom gradient (`rgba(0,0,0,0.18 / 0.08 / 0.32 / 0.70)`)
-- Bottom-left copy block: `.hero__headline` (Roman 400, `clamp(46px, 6.8vw, 84px)`) + `.hero__subhead` (Light 300, 19px / 30px / max-width 520px — bumped from comp `16px`/`26px` per Ben 2026-06-04) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
+- Bottom-left copy block: `.hero__headline` (Roman 400, `clamp(46px, 6.8vw, 84px)`) + `.hero__subhead` (Light 300, 19px / 30px / max-width 520px — bumped from comp `16px`/`26px` per Ben 2026-06-04; **mobile keeps 16px / 26px**) + `.hero__tags` (3 outlined chips, 4px radius, 13px Mono)
+- **Mobile (≤640px): `.hero__content` reserves the floating CTA** — `padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px))` (was 56px) so the copy block sits ≥20px above the BEGIN PRACTICE button + clears the home indicator. (The CTA is `position: fixed; bottom: 32px`, 48px tall → top ~80px from the bottom; the content was overlapping the last tag on devices with a home indicator.)
 - Brush mark over "possibility" — Vector-5.svg, filtered white via mask
-- Rotation sequence (localStorage `edf_hero`): horizon · window-sunset · hero-red-sun
+- Rotation sequence (localStorage `edf_hero`): rhododendron · rainleaves · silhouette-coast · rose-sky (see CONTEXT.md "Hero Image Rotation" for per-image positions)
 
 ### 5.3 Float CTA (`CTABar.astro`)
 - Fixed bottom, centered, fades in past hero (IntersectionObserver, threshold 0.15)
