@@ -54,6 +54,16 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 ---
 
+## 📄 Documentation Rule — stale docs are bugs
+
+**Keep ALL context files current — an out-of-date document is a bug.** Every change must leave `CONTEXT.md`, `SESSION.md`, `design.md`, `SEO.md`, and any other context/doc file accurate **in the same session/batch** as the work it describes. Docs are not allowed to drift behind the code.
+
+- **Treat staleness like a bug:** when you notice a doc that no longer matches reality (a section describing removed images, superseded values, or old behavior — e.g. a "Hero Image Rotation" list naming images that were swapped out), **fix it as part of the work**, not "later."
+- **Scan before finishing:** before wrapping any task, re-read the context files you touched — and adjacent ones — for drift, and correct what's stale.
+- This is the enforcement arm of the same-batch doc-sync rule and the "No design drift" rule: code, design.md, and the context files move together, every time.
+
+---
+
 ## Design System
 
 See [`design.md`](design.md) — comprehensive as-built reference for all tokens, type scale, marks library, imagery rules, components, mobile, animation, and open decisions. Sourced directly from the repo by Claude Design on 2026-05-27. Supersedes all prior versions. The original Figma source is `Every Day Futures - Visual Identity.fig` by Form (Alice / designbyform.com).
@@ -81,13 +91,13 @@ See [`design.md`](design.md) — comprehensive as-built reference for all tokens
 ## Implemented Features
 
 ### Hero Image Rotation
-Images cycle sequentially on each page reload via `localStorage`. Sequence:
-1. `/images/hero-rose.png` — `50% 30%`
-2. `/images/hero-red-sun.jpg` — `50% 40%`
-3. `/images/feather.png` — `50% 50%`
-4. `/images/lotus.png` — `50% 60%`
+Images cycle sequentially on each page reload via `localStorage`. Sequence (`Layout.astro`):
+1. `/images/rhododendron.jpg` — `50% 60%` (landscape — bottom-favored crop)
+2. `/images/rainleaves.jpg` — `50% 60%` (landscape — bottom-favored crop)
+3. `/images/silhouette-coast.jpg` — `50% 50%` (portrait — centered so the figure's head isn't clipped; favoring the bottom cut the head off)
+4. `/images/willow-pool.jpeg` — `50% 65%` (square — bottom-favored to show the pool/deck)
 
-Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `background-position` on `.hero__bg`.
+Per-image `background-position` set in the rotation JS; CSS fallback on `.hero__bg` is `50% 60%` (only visible the split-second before JS runs). Positions tuned per-image because the photos differ in aspect ratio (2 landscape, 1 portrait, 1 square) and `background-size: cover` crops each differently. **Note:** on mobile (tall viewport) the *landscape* photos overflow left/right, so their vertical position has no effect there — the horizontal `50%` governs them. Mobile crops reviewed 2026-06-04 and left as-is (desktop values carry over acceptably). Key: `edf_hero`. JS runs before nav observer, sets `background-image` and `background-position` on `.hero__bg`.
 
 ### Begin Flow (`BeginFlow.astro`)
 

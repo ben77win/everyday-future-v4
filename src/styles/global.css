@@ -250,7 +250,7 @@ a { color: inherit; text-decoration: none; }
   height: 100svh;   /* fallback */
   height: 100lvh;
   background-size: cover;
-  background-position: 50% 40%;
+  background-position: 50% 60%;
   opacity: 0.88;
 }
 /* Subtle gradient overlay — darkens bottom so text reads over the image */
