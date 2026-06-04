@@ -157,9 +157,10 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **Controls:** chevron click scrolls by exactly one card (`scrollBy` card-width + 4px gap); buttons disable at each end; mouse drag-to-scroll + snap retained; 4s auto-advance retained; touch is native (JS in `Layout.astro`)
 - Mobile (≤640px): **chevrons hidden** (`display: none`), rail reverts to the full-bleed swipe behavior — 78vw cards, 28px padding, no gap, `padding-left: var(--gutter)` / `padding-right: 28vw`
 
-### 5.6 S4 About (`About.astro`)
+### 5.6 S4 About (`About.astro`) — "Someday already started"
 - Off-b background
-- 2-col grid: heading + body left, 3-tag column right
+- 2-col grid (`.s4__inner`, `1fr 1.1fr`, `gap: 80px`, `align-items: start`): **left** (`.s4__left`) = heading + body + 3 tags; **right** = photo collage (`.s4__photos`)
+- **Photo collage** (`.s4__photos`: 2×2 grid, `aspect-ratio: 1/1.1`, `gap: 4px`): `.s4__photo-main` = `waymaker-threshold.jpg` spanning the **full-height left column** (`grid-row: 1/3`) with a "THE THRESHOLD" Mono caption (11px, bottom-left, white 0.80); `.s4__photo-stack` = `waymaker-horizon.jpg` pinned to the **bottom-right** cell (`grid-column: 2; grid-row: 2/3`), leaving the **top-right open** as negative space. _[2026-06-04: removed `waymaker-pool.jpg` (it was the top-right image in the stack) per Ben; horizon kept at its original bottom-right size — `grid-row` changed from `1/3` to `2/3`.]_
 - Vector-8.svg brush mark anchored to the heading (top-left, inside a `position:relative` inline-block wrapper around the `<h2>`, like S5's mark), `.s4__mark` top -48px / left -6px / 125px wide, filtered `--blue` at 0.55 opacity, rotated 4°
 - Tags: 36px tall, 4px radius, 0.5px ink/30 border, DM Mono 13px
 
