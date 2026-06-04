@@ -1,5 +1,44 @@
 ---
+// FAQPage structured data — mirrors the visible Q&As below for rich results + AI extraction.
+const faqs = [
+  {
+    q: "What kind of coaching is this?",
+    a: "The EDF Practice is an intersection of executive and leadership coaching, mindfulness, and psychology designed to expand possibility, reduce resistance, and increase meaningful progress in how you work, relate, and create. Unlike many coaching approaches that focus primarily on performance or outcomes, this practice works with the underlying patterns influencing attention, behavior, relationships, decision-making, and what is possible in your work and beyond. Coaching can be individual, at the level of a team or organization, or in a group community. You can also coach yourself through the practice.",
+  },
+  {
+    q: "Who is the practice for?",
+    a: "The EDF Practice is designed for individuals, teams, organizations, and groups seeking greater clarity, coherence, courage, connection, curiosity, and possibility through change. This often includes waymakers of industry, ideas, and influence: founders, executives, leaders, artists, independent creators, and teams navigating growth, uncertainty, creativity, leadership, transition, and transformation. Whether practiced individually or collectively, the work is designed to expand what becomes possible through conscious change and meaningful progress.",
+  },
+  {
+    q: "How is the practice structured?",
+    a: "The EDF Practice is structured through four dimensions of conscious change: Awareness, AIM, Action, and Analysis. It also unfolds across three levels: Foundation, Calibration, and Expansion. Foundation develops awareness and core practices. Calibration works with alignment, resistance, relationships, and intentional change in real life. Expansion focuses on increasing capacity, possibility, and meaningful progress toward the future you want to create. Rather than following a rigid formula, the practice works with your real situations, goals, relationships, challenges, and opportunities in work and life, combining reflection, conversation, practical frameworks, exercises, and intentional action between meetings.",
+  },
+  {
+    q: "What techniques and tools are used?",
+    a: "The EDF Practice integrates executive and leadership coaching, mindfulness, psychology, systems thinking, behavior change, communication practices, and conscious awareness training. Influences include mindfulness practice, Neuro-Linguistic Programming (NLP), Dialectical Behavior Therapy (DBT), Interpersonal Neurobiology, leadership development, and relational and behavioral frameworks that support conscious change in real life. The practice also leverages AI-supported session recording, reflection, and pattern interpretation to help identify themes, behaviors, actions, and shifts over time.",
+  },
+  {
+    q: "What is the time and cost commitment?",
+    a: "The EDF Practice is offered through a monthly subscription model that varies depending on the type of engagement, including individual, group, team, and organizational coaching. Coaching sessions are typically a minimum of 60 minutes, held virtually, and designed to integrate directly into your real work. Daily practice is encouraged at approximately 10–20 minutes through reflection, awareness, exercises, and intentional action. While meaningful insight can happen quickly, lasting behavioral change tends to emerge through consistent practice over time, often within an average arc of approximately 90 days.",
+  },
+  {
+    q: "What results can I expect?",
+    a: "People often experience greater clarity, coherence, courage, connection, curiosity, and possibility in how they work, relate, and create. This can look like clearer direction, more intentional decisions, reduced resistance and overwhelm, stronger communication, healthier relationships, creative breakthroughs, increased leadership capacity, and more meaningful progress toward the future you want. While every person and situation is different, the practice is designed to create lasting shifts in awareness, behavior, relationships, and what feels possible through conscious change.",
+  },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
+
 <section class="s7" id="faq">
   <div class="s7__inner" style="position:relative;">
     <img src="/marks/Vector-10.svg" style="position:absolute;top:-24px;left:-4px;width:80px;opacity:0.45;pointer-events:none;transform:rotate(-2deg);filter:brightness(0) saturate(100%) invert(27%) sepia(90%) saturate(700%) hue-rotate(207deg) brightness(95%);" alt="" aria-hidden="true" />

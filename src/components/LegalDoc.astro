@@ -3,10 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 
-const { title, intro } = Astro.props;
+const { title, intro, description } = Astro.props;
 ---
 
-<Layout>
+<Layout title={`${title} — Every Day Future`} description={description}>
   <Nav />
 
   <main class="legal">
@@ -17,7 +17,7 @@ const { title, intro } = Astro.props;
 
       <slot />
 
-      <p class="legal__footer">LTW Coaching LLC DBA Every Day Future · Washington State · info@everydayfuture.work</p>
+      <p class="legal__footer">LTW Coaching LLC DBA Every Day Future · Washington State · coach@everydayfuture.work</p>
     </div>
   </main>
 

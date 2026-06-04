@@ -206,7 +206,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Paper background, padding 140px var(--gutter) 160px (the 140px top clears the ~68px fixed nav)
 - 2-col layout: heading "Get in touch" + body + meta (Direct / Elsewhere) left, 4-field form right
 - Intro body (`.s-contact__body`) uses the shared **`.t-body-lg`** (17px desktop / 16px mobile) — brought into line with the rest of the site's body copy.
-- Direct email shown is **info@everydayfuture.work** (was coach@).
+- Direct email shown is **coach@everydayfuture.work** (reverted from info@ on 2026-06-04).
 - Form: Name · Email · Subject · Message (textarea) + "Send a note" submit (no arrow). Inputs are borderless; the per-field divider line is the only rule, and **focus colors that divider `--blue` via `.s-contact__field:focus-within`** (the old `.s-contact__input:focus` did nothing because the input has no border). Same pattern as the Begin form.
 - **Submit button** (`.s-contact__submit`): same treatment as the float-CTA / Begin Practice button (48px tall, padding 0 40px, 4px radius, ink bg, DM Mono 14.4px / 0.110em uppercase, hover → `--blue`). `align-self: flex-end` so it sizes to content (not full-width stretch) and right-aligns — keeps it clear of the bottom-left float CTA.
 - Submission: Netlify Forms → coach@everydayfuture.work + ben@wintersand.co
@@ -249,7 +249,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - Routes: `src/pages/privacy.astro` + `src/pages/terms.astro`, both rendered through the shared **`LegalDoc.astro`** component (Layout + Nav + Footer chrome; takes `title` / `intro` props + a `<slot>` for sections). Privacy = 13 sections; Terms = 13 sections.
 - Linked from the footer (Terms → `/terms`, Privacy → `/privacy`); Terms §5 cross-links to `/privacy`.
 - **No metadata strip:** there is intentionally NO "Effective Date / Governing Law / Contact" sup line under the title (removed), and no "Last updated" date in the page footer line. Intro paragraph sits directly under the title.
-- **Contact email is `info@everydayfuture.work`** throughout (not coach@).
+- **Contact email is `coach@everydayfuture.work`** throughout (reverted from info@ on 2026-06-04).
 - **No section numbers:** the "01 / 02 / …" labels above each heading were removed (per Ben); in-body cross-references that pointed to them were reworded to name the section instead. Headings sit at the top of each section.
 - **Styling (`.legal*` in global.css):** paper background, 760px column. Title = display (`clamp(44,5.2vw,76)`/400/-0.030em); page footer line in DM Mono 13px uppercase; section `h2` `clamp(24,2.4vw,34)`/400; body 17px / line-height 1.7 / ink 0.68; lists use a blue dash bullet (`::before`), bold lead terms in ink; `--caps` modifier for the all-caps legal clauses. Email/cross-links in `--blue`. A "← Every Day Future" back link (Mono, hover → `--blue`) sits above the title.
 - Nav forced to ink on these pages via `.page-legal` (set by an inline script), since the nav sits on a paper background instead of the hero.

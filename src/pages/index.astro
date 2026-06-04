@@ -11,8 +11,60 @@ import TaylorBio from '../components/TaylorBio.astro';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
 import BeginFlow from '../components/BeginFlow.astro';
+
+// Organization + Person structured data (entity / AI citation). Facts traceable to site copy.
+const orgPersonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://everydayfuture.work/#business",
+      "name": "Every Day Future",
+      "legalName": "LTW Coaching LLC",
+      "url": "https://everydayfuture.work",
+      "image": "https://everydayfuture.work/images/og-image.png",
+      "description": "Conscious executive coaching for leaders and founders navigating change.",
+      "founder": { "@id": "https://everydayfuture.work/#taylor" },
+      "areaServed": ["United States", "Europe"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Seattle",
+        "addressRegion": "WA",
+        "addressCountry": "US",
+      },
+      "email": "coach@everydayfuture.work",
+      "sameAs": [
+        "https://www.linkedin.com/in/ltaylorwinters/",
+        "https://instagram.com/everydayfuture",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": "https://everydayfuture.work/#taylor",
+      "name": "Taylor Winters",
+      "jobTitle": "Founder & Conscious Executive Coach",
+      "worksFor": { "@id": "https://everydayfuture.work/#business" },
+      "knowsAbout": [
+        "Executive coaching",
+        "Leadership coaching",
+        "Conscious change",
+        "Mindfulness",
+        "Interpersonal Neurobiology",
+      ],
+      "hasCredential": "Executive Coaching Certification — UC Berkeley Haas School of Business",
+      "sameAs": [
+        "https://www.linkedin.com/in/ltaylorwinters/",
+        "https://instagram.com/everydayfuture",
+      ],
+    },
+  ],
+};
 ---
-<Layout>
+<Layout
+  title="Conscious Executive Coaching — Every Day Future"
+  description="Conscious executive coaching for leaders and founders navigating change — reduce resistance, expand possibility, and grow with intention. Remote, Seattle-based."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(orgPersonLd)} is:inline />
   <Nav />
   <Hero />
   <CTABar />

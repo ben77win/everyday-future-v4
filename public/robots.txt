@@ -1,0 +1,8 @@
+# Every Day Future — robots.txt
+# Policy: allow all crawlers, including AI engines (GPTBot, ClaudeBot,
+# PerplexityBot, Google-Extended) — discoverability + citation is desired.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://everydayfuture.work/sitemap-index.xml
