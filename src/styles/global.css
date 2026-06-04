@@ -1331,10 +1331,10 @@ a { color: inherit; text-decoration: none; }
     padding: 72px var(--gutter) 0;
   }
 
-  /* Tier group: ABOVE the option cards, inset to the gutter, 3 tiles fit the row */
+  /* Tier group: BELOW the option cards, inset to the gutter, 3 tiles fit the row */
   .s2__tiers {
-    order: 1;
-    margin: 32px 0 0;
+    order: 2;
+    margin: 16px 0 0;
     gap: 4px;
     max-width: none;
   }
@@ -1348,8 +1348,8 @@ a { color: inherit; text-decoration: none; }
   /* Nudge the label closer to the bottom edge (numbers stay put) */
   .s2__tier-label { bottom: 4px; }
 
-  /* Option cards: below the tiers, 1-up landscape to conserve vertical space */
-  .s2__cards { order: 2; min-width: 0; grid-template-columns: minmax(0, 1fr); margin-top: 16px; }
+  /* Option cards: ABOVE the tiers (32px header gap), 1-up landscape to conserve vertical space */
+  .s2__cards { order: 1; min-width: 0; grid-template-columns: minmax(0, 1fr); margin-top: 32px; }
   /* Fixed height so all four cards match (Orgs & Teams' 3-line desc sets the height);
      matches the Begin flow Step-1 cards so the options look identical everywhere on mobile */
   .s2__card { aspect-ratio: auto; height: 140px; padding: 20px 28px; }
