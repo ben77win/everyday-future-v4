@@ -211,46 +211,14 @@ Two portraits **side-by-side** in the left column of the S6 bio grid (`#taylor` 
 - Mobile: `@media (max-width: 640px)`
 
 ### Key Mobile Rules (≤640px)
-```css
-:root { --gutter: 22px; }
 
-/* S2 */
-.s2__header { flex-direction: column; gap: 28px; }
-.s2__option { grid-template-columns: 1fr auto; }
-.s2__option-desc { display: none; }
-/* Tier images: horizontal scroll, snap, no gap */
-.s2__tiers { overflow-x: auto; scroll-snap-type: x mandatory; gap: 0; padding: 0 var(--gutter); }
-.s2__tier { flex: 0 0 72vw; scroll-snap-align: start; }
-/* Hover reset + active tap state */
-.s2__option:hover { background: transparent; }
-.s2__option:active { background: var(--paper-bone); }
+`--gutter: 22px`. **Authoritative source: the `@media (max-width: 640px)` block in `src/styles/global.css`** — this is a current summary, not a verbatim copy. (The previous version of this block was stale — it described a removed mobile tier *carousel*, the old `.s2__option` rows, the `.s6__photo--a/b/c` scatter, a full-width bottom CTA bar, and removed tokens `--paper-bone` / `--orange`. None of that exists anymore.)
 
-/* S3 — one card per screen, no gaps */
-.s3__rail { gap: 0; padding-right: 0; }
-.s3__card { width: 100vw; }
-
-/* S4 */
-.s4 { padding: 72px var(--gutter) 72px; }
-.s4__inner { grid-template-columns: 1fr; }
-
-/* S5 */
-.s5__inner { grid-template-columns: 1fr; }
-
-/* S6 — portrait only */
-.s6__inner { grid-template-columns: 1fr; }
-.s6__photos { height: auto; }
-.s6__photo--a { position: relative; width: 100%; height: auto; top: auto; left: auto; }
-.s6__photo--b, .s6__photo--c { display: none; }
-
-/* CTA bar — full-width anchored to bottom */
-.float-cta { bottom: 0; left: 0; right: 0; width: 100%; transform: none; }
-.float-cta__link { width: 100%; border-radius: 0; height: 52px; }
-.float-cta__link:active { background: var(--orange); }
-
-/* Footer — clears fixed CTA bar */
-.site-footer { padding-bottom: calc(52px + env(safe-area-inset-bottom, 16px)); }
-.site-footer__inner { flex-direction: column; align-items: flex-start; gap: 28px; }
-```
+- **S2:** header stacks (`flex-direction: column`). The section becomes `display: grid` and reorders via `order` to **header → tier tiles → option cards**. **Tier tiles** sit ABOVE the cards, gutter-inset, `flex: 1`, **square `aspect-ratio: 1/1`**, **`gap: 4px`** (no scroll/snap — replaced the old 72vw snap carousel); tier number + label shrink to 11px/0.08em, label nudged to `bottom: 4px`. **Option cards** (`.s2__card`) are 1-up, fixed `height: 140px`, `padding: 20px 28px`, label 25px; `:active` → `--blue`. Section bottom padding 88px.
+- **S3:** carousel chevrons hidden (`.s3__chev display: none`); rail is the full-bleed swipe (`gap: 0`, `padding-left: var(--gutter)`, `padding-right: 28vw`); cards `width: 78vw`, `padding: 28px`.
+- **S4 / S5 / S6:** two-column grids collapse to single column (`grid-template-columns: 1fr`); S4 gap 40px (its photo collage stays a 2×2 grid), S5 gap 40px, S6 gap 48px (the two bio portraits scale via their aspect-ratio).
+- **Float CTA:** same centered floating 4px button as desktop (NOT a full-width bar); parks 10px above the footer when revealed (handled in the base `.float-cta` rules, all viewports); `:active` → `--blue`.
+- **Footer:** `.site-footer__inner` stacks (`flex-direction: column`, gap 28px); links wrap to two rows via `.site-footer__break`; mobile-only "Client Portal" link shown; bottom padding clears the floating CTA.
 
 ### Hero Wordmark (mobile)
 Animation is skipped on mobile (`window.innerWidth < 641` early return in Layout.astro JS). Wordmark stays in nav — no risk of clipping at small viewports.
