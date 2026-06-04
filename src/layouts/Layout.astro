@@ -21,11 +21,10 @@ import '../styles/global.css';
     var bg = document.querySelector('.hero__bg');
     if (!bg) return;
     var images = [
-      { src: '/images/horizon.png',       pos: '50% 50%' },
-      { src: '/images/window-sunset.png', pos: '50% 60%' },
       { src: '/images/hero-red-sun.jpg',  pos: '50% 40%' },
       { src: '/images/rhododendron.jpg',  pos: '50% 50%' },
-      { src: '/images/rainleaves.png',    pos: '50% 50%' }
+      { src: '/images/rainleaves.png',    pos: '50% 50%' },
+      { src: '/images/coastal-tree.jpeg', pos: '50% 50%' }
     ];
     var idx  = (parseInt(localStorage.getItem('edf_hero') || '0') + 1) % images.length;
     localStorage.setItem('edf_hero', idx);
