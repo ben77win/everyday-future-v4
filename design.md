@@ -129,8 +129,9 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.3 Float CTA (`CTABar.astro`)
 - Fixed bottom, centered, fades in past hero (IntersectionObserver, threshold 0.15)
 - **4px rectangle, NOT 100px pill** (matches the .fig GET IN TOUCH button)
-- 48px tall, padding 0 40px, DM Mono 14.4px / 0.110em, white on ink
-- **Hover:** background flips to `--blue`. No shadow.
+- 48px tall, padding 0 40px, DM Mono 14.4px / 0.110em, white on ink (default)
+- **Over the hero (S1): inverted** — white surface / ink label (`.float-cta.over-hero`). Toggled by a scroll handler in `Layout.astro` when `heroBottom > ctaLink.top` (the hero is the section behind the button); reverts to the default black-on-ink from S2 onward. 0.25s background+color transition. _Ben-approved 2026-06-04 — a deliberate reintroduction of a white-CTA state; distinct from the old over-footer white inversion that was removed (the over-footer CTA still stays black)._
+- **Hover:** background flips to `--blue` (white label) in **both** states. No shadow.
 - Mobile: **same as desktop** — centered floating 4px-radius button (48px tall, content-width, 32px from bottom). (Previously a full-width edge-to-edge bottom bar; the mobile geometry overrides were removed.) Mobile keeps a `:active` tap-feedback → `--blue` (incl. over-footer).
 - Label: "Begin Practice"
 
@@ -325,6 +326,7 @@ Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and
 
 ### Hover states
 - **Primary CTA:** hover background → `--blue` (was orange in staging)
+- **Float CTA over-hero inversion:** white surface / ink label while the hero is the section behind the button; reverts to black from S2 onward (`.over-hero`, scroll handler in `Layout.astro`). Over-footer parking stays black (see Over-footer behavior above).
 - **S2 option card:** hover surface inverts to `--blue`, label/desc go white; hairline `.s2__card-arrow` (bottom-right) rides the invert → white + `translateX(6px)`
 - **S3 rail:** drag-to-scroll + auto-advance every 4 seconds (pauses on hover)
 - **Nav link ("Client Portal"):** hover text → `--blue` (`.nav__link:hover`, both hero and scrolled states) — same rollover as the bio "Show more" toggle. Persists on the ink-nav pages (legal + begin) via `.page-legal .nav__link:hover, .page-begin .nav__link:hover` (specificity 0,3,0 beats the 0,2,0 ink override).

@@ -43,6 +43,19 @@ import '../styles/global.css';
       nav.classList.toggle('scrolled', !heroVisible);
       floatCta.classList.toggle('visible', !heroVisible);
     }, { threshold: 0.15 }).observe(hero);
+
+    // ── Float CTA: inverted (white surface / ink label) while the hero is the
+    //    section behind it; reverts to the default black once S2 scrolls behind it.
+    var ctaLink = floatCta.querySelector('.float-cta__link');
+    var updateCtaOverHero = function () {
+      if (!ctaLink) return;
+      var heroBottom = hero.getBoundingClientRect().bottom;
+      var ctaTop = ctaLink.getBoundingClientRect().top;
+      floatCta.classList.toggle('over-hero', heroBottom > ctaTop);
+    };
+    updateCtaOverHero();
+    window.addEventListener('scroll', updateCtaOverHero, { passive: true });
+    window.addEventListener('resize', updateCtaOverHero);
   }
 
   // ── Float CTA: invert colors when over the footer
