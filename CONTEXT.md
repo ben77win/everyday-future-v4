@@ -27,7 +27,9 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 
 ## ⚠️ Design Authority + CSS Lock Rule
 
-**Handoff 4** (`/Users/agentcomputer/Desktop/Claude Workspace/handoff 4/`) is the canonical design reference. Read those files before touching any CSS. Within handoff 4, component-specific spec files (e.g. `S3 Practice Makes Progress.md`) override the general `design.md` for that section.
+**`design.md` at the repo root** is the canonical design reference — it is the as-built document updated through all prior sessions. Read it before touching any CSS.
+
+**Do not use files in `handoff 4/` as a design reference.** That folder contains the original deliverables and is kept for historical record only (`handoff 4/ARCHIVED.md` explains this). The repo `design.md` supersedes everything there.
 
 **Never change these CSS values without Ben's explicit approval:**
 - Body font-size — `+0.020em` tracking, `24px`/`26px` line-height. Two groups (Ben-approved 2026-06-02):
