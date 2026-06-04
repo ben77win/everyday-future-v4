@@ -396,7 +396,14 @@ Calendly widgets are created dynamically in JS when step 3 appears. Script loade
 - [x] **Contact section** — `Contact.astro` at `#contact`, Netlify Forms wiring (routing to Netlify dashboard)
 - [ ] **Formetica license** — currently using Helvetica Neue (falls back to Arial on Windows/Android)
 - [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch
-- [ ] **Netlify Forms routing — route ALL inquiries into Netlify** — in the Netlify dashboard, configure both forms (`contact` + `begin`) so every inquiry is captured in Netlify and notifications go to **`info@everydayfuture.work`** (was `coach@`). The site now displays `info@`, but the dashboard notification routing still needs updating. (Dashboard config — not changeable from code.)
+- [ ] **Netlify Forms — verify capture + route notifications to `info@`** (dashboard only — the form *code* is confirmed correctly wired: `contact` + `begin`, both with hidden static form + `netlify` + honeypot + AJAX `POST /`, present in the deployed HTML). Checklist:
+  1. **Confirm detection** — Netlify → site `everyday-future-v4` → latest deploy log shows "Detected 2 forms" (`contact`, `begin`); or Site config → **Forms** lists both. _If NOT detected:_ Site config → Forms → enable **Form detection**, then Deploys → **Trigger deploy → Clear cache and deploy site** so detection re-runs.
+  2. **Test submit** — submit each form once on the live site (staging or prod), then confirm the entry appears under Forms → `contact` (name/email/subject/message) and `begin` (first-name/email/phone/option).
+  3. **Notifications → `info@everydayfuture.work`** — Forms → notifications → add an **Email notification** for BOTH forms (was `coach@`; the site already *displays* `info@`). Optionally add Slack/webhook.
+  4. **Spam** — honeypot (`bot-field`) is already wired; enable reCAPTCHA in form settings only if spam appears.
+  5. **Production** — re-confirm on `main` after merge (the Forms store + notifications are site-level, so detection on either branch registers the form).
+  - ⚠️ Reliability note: both forms submit **fire-and-forget** (no response check) — a rejected/undetected POST shows the user success but is lost silently. Consider adding a success/failure check if capture must be guaranteed.
+  - Note: Calendly (Begin step 3, for 1:1/Group/Orgs) captures booking data in **Calendly**, separate from Netlify; the `begin` form still captures the lead before step 3.
 - [x] **Begin page: pushed to main** — Live at https://everyday-future-v4.netlify.app (2026-05-28)
 
 ### Mobile (ideas not yet implemented)
