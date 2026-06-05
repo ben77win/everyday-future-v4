@@ -228,6 +228,7 @@ const optionLabelsJson = JSON.stringify(
             <span class="bf-submit__label" id="bfSubmitLabel">Begin Practice</span>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
+          <span class="bf-field-error" id="bfSubmitError" role="alert">That didn't send — please try again.</span>
         </div>
       </form>
 
@@ -991,9 +992,11 @@ const optionLabelsJson = JSON.stringify(
   });
 
   // ── Form submission
-  submitBtn.addEventListener('click', function () {
+  var submitError = document.getElementById('bfSubmitError');
+  submitBtn.addEventListener('click', async function () {
     if (!validateForm()) return;
 
+    if (submitError) submitError.classList.remove('visible');
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
 
@@ -1004,16 +1007,24 @@ const optionLabelsJson = JSON.stringify(
     data.append('phone',      document.getElementById('bfPhone').value.trim());
     data.append('option',     selectedOption);
 
-    // Fire and forget — don't block the user on the network outcome
+    // Confirm Netlify accepted the submission before advancing — don't silently lose the lead
+    var ok = false;
     try {
-      fetch('/', {
+      var res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: data.toString(),
       });
-    } catch (e) {}
+      ok = res.ok;
+    } catch (e) { ok = false; }
 
-    advanceToStep3();
+    if (ok) {
+      advanceToStep3();
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('loading');
+      if (submitError) submitError.classList.add('visible');
+    }
   });
 
   function validateForm() {

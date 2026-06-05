@@ -125,7 +125,7 @@ Three-step flow at `/begin` (standalone page) and as a bottom-sheet drawer on th
   - Self-led: no offering block (no detail needed)
 - `.bf-offering--hidden` (CSS `display: none`) toggled by `selectOption()` JS
 - When offering is visible, the standalone "About you" h2 (`.bf-headline--form`) is hidden via CSS sibling selector; the offering block ends with its own "About you" h2 before the form
-- Netlify Forms — hidden static form + AJAX POST; advances immediately regardless of network outcome
+- Netlify Forms — hidden static form + AJAX POST; **awaits the response and only advances to Step 3 on `res.ok`** (2026-06-05 reliability check). On failure: re-enables the submit button, removes the loading spinner, and shows `#bfSubmitError` ("That didn't send — please try again."); stays on Step 2 so the lead isn't silently lost.
 - Mobile: flex-push submit button (margin-top: auto), `font-size: 16px` prevents iOS zoom, `env(safe-area-inset-bottom)` for home bar
 
 **Step 3 — Downstream**
@@ -340,7 +340,7 @@ Three-step inline flow. No page navigation between steps — JS shows/hides.
 
 - **Step 1 → Step 2:** Clicking an option auto-advances after **350ms** (no Continue button). The selected option is stored in `selectedOption` variable.
 - **Step 2 → Step 1:** "← Change selection" back button.
-- **Step 2 → Step 3:** Clicking BEGIN validates the form, fires a Netlify Forms AJAX POST (fire-and-forget), then immediately calls `advanceToStep3()`.
+- **Step 2 → Step 3:** Clicking BEGIN validates the form, `await`s the Netlify Forms AJAX POST, and calls `advanceToStep3()` **only if `res.ok`** (2026-06-05). On failure it shows `#bfSubmitError` and re-enables the button (no advance).
 
 ### URL Param Shortcut
 
@@ -358,7 +358,7 @@ Homepage CTAs link to `/begin?option=1on1` (or `group`, `orgs`, `selflead`). Whe
 
 ### Netlify Forms
 
-A hidden static form (with `netlify` attribute) is included for build-time form registration. The visible AJAX form POSTs to `/` with `form-name: begin` and `Content-Type: application/x-www-form-urlencoded`. Response is ignored (fire-and-forget in try/catch).
+A hidden static form (with `netlify` attribute) is included for build-time form registration. The visible AJAX form POSTs to `/` with `form-name: begin` and `Content-Type: application/x-www-form-urlencoded`. **The response is now awaited and checked (`res.ok`)** — advance on success, show `#bfSubmitError` on failure (2026-06-05; the Contact form's `#contactForm` got the same treatment via `#contactError`).
 
 ### Calendly Integration
 
@@ -439,7 +439,7 @@ Calendly widgets are created dynamically in JS when step 3 appears. Script loade
   3. **Notifications → `coach@everydayfuture.work`** — Forms → notifications → add an **Email notification** for BOTH forms (the site displays `coach@` as of 2026-06-04). Optionally add Slack/webhook.
   4. **Spam** — honeypot (`bot-field`) is already wired; enable reCAPTCHA in form settings only if spam appears.
   5. **Production** — re-confirm on `main` after merge (the Forms store + notifications are site-level, so detection on either branch registers the form).
-  - ⚠️ Reliability note: both forms submit **fire-and-forget** (no response check) — a rejected/undetected POST shows the user success but is lost silently. Consider adding a success/failure check if capture must be guaranteed.
+  - ✅ Reliability check ADDED (2026-06-05): both forms now `await` the POST and only succeed on `res.ok` — a rejected/undetected POST shows an inline error instead of false success (`#contactError` / `#bfSubmitError`). ⚠️ **Sequencing:** this means a failed submit now *blocks* (contact won't confirm; begin won't reach Step 3). So **Netlify form detection must be enabled/confirmed** (step 1 below) before relying on the live flow — otherwise every submit errors. The check actually helps surface a misconfigured form during launch verification.
   - Note: Calendly (Begin step 3, for 1:1/Group/Orgs) captures booking data in **Calendly**, separate from Netlify; the `begin` form still captures the lead before step 3.
 - [x] **Begin page: pushed to main** — Live at https://everyday-future-v4.netlify.app (2026-05-28)
 

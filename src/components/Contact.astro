@@ -93,6 +93,7 @@
 
         <button type="submit" class="s-contact__submit">Send a note</button>
         <p class="s-contact__confirm" id="contactConfirm">Got it — we'll be in touch soon.</p>
+        <p class="s-contact__confirm" id="contactError" role="alert">That didn't send — please try again, or email coach@everydayfuture.work directly.</p>
       </form>
     </div>
 
@@ -103,17 +104,30 @@
 (function () {
   var form    = document.getElementById('contactForm');
   var confirm = document.getElementById('contactConfirm');
+  var error   = document.getElementById('contactError');
   if (!form) return;
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    if (error) error.classList.remove('visible');
+    var submitBtn = form.querySelector('.s-contact__submit');
+    if (submitBtn) submitBtn.disabled = true;
     var data = new URLSearchParams(new FormData(form)).toString();
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data
-    }).catch(function () {});
-    form.style.display = 'none';
-    if (confirm) confirm.classList.add('visible');
+    var ok = false;
+    try {
+      var res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+      });
+      ok = res.ok;
+    } catch (err) { ok = false; }
+    if (ok) {
+      form.style.display = 'none';
+      if (confirm) confirm.classList.add('visible');
+    } else {
+      if (submitBtn) submitBtn.disabled = false;
+      if (error) error.classList.add('visible');
+    }
   });
 })();
 </script>
