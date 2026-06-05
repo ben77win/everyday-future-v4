@@ -6,7 +6,9 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 
 # 📊 Status Board  (the dashboard — updated every working session)
 
-> States: 🔒 locked · ✅ done · 🟡 in progress / asset ready · ⬜ open · ⛔ blocked. _Last updated 2026-06-04._
+> States: 🔒 locked · ✅ done · 🟡 in progress / asset ready · ⬜ open · ⛔ blocked. _Last updated 2026-06-04 (session 4 closed)._
+>
+> **All on-site SEO is shipped to `staging`** (tip `8d442a9`, 93 ahead of main). Remaining is **off-site only** (Search Console, analytics, Google Business Profile) + the **domain cutover** (see checklist below). Production/`main` still stale — needs a `staging → main` merge.
 
 | Item | Status | Current decision / note |
 |---|---|---|
@@ -36,9 +38,10 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 - [x] ~~**A4 — Favicon**~~ — ✅ done 2026-06-04 (stacked EDF wordmark icon; 32px + 180px generated, wired). **Launch SEO code set complete (B1–B9).**
 
 ### Decisions log
+- **2026-06-04 (session 4 closed)** — Email reverted info@ → **`coach@everydayfuture.work`** site-wide (7 occurrences); LinkedIn **footer link** added (`/in/ltaylorwinters/`); **Domain Cutover Checklist** (Squarespace → Netlify) added. **All committed + pushed to staging:** `27af93e` (SEO batch) + `8d442a9` (footer + checklist). Tip `8d442a9`, **93 ahead of main**. Next: verify on staging → 301 redirect map (needs Squarespace URLs) → `staging → main` merge (Ben's go-ahead) → DNS repoint → post-cutover Search Console/analytics/GBP.
 - **2026-06-04 (entity schema)** — Built Person + ProfessionalService JSON-LD (`@graph`) on the homepage (`index.astro`). Verified facts only: legalName LTW Coaching LLC, areaServed **United States + Europe** (Seattle/WA base via `address`), founder "Taylor Winters — Founder & Conscious Executive Coach", credential UC Berkeley Haas exec-coaching cert (`hasCredential`, not a degree), `sameAs` = verified LinkedIn (`/in/ltaylorwinters/`) + Instagram. Both JSON-LD blocks valid; build clean. (Opp #2 done; Opp #5 schema part done — optional footer LinkedIn link remains.)
 - **2026-06-04 (favicon)** — A4 favicon provided (stacked EDF wordmark, 512px white-on-black). Placed `public/favicon.png`; generated `favicon-32.png` + `apple-touch-icon.png` (180) via sharp; wired `<link>` tags in Layout. Build clean, icon serves 200. **B6 done → launch SEO code set (B1–B9) complete.** Remaining = non-code only (Search Console/analytics, GBP, LinkedIn) + optional Person/Service schema.
-- **2026-06-04 (build)** — Shipped the launch SEO set (verified via `npm run build`): B1 `site` config, B2 per-page titles/descriptions, B3 canonicals, B4 OG/Twitter, B5 og:image (og-image.png), B7 robots.txt (allow), B8 sitemap (5 URLs; **sitemap pinned 3.7.3→3.2.1** for Astro-4 compat), B9 FAQPage JSON-LD. Bio copy edit applied (approved). A2 = allow. **Remaining: B6 favicon (needs A4 source).** Not committed/pushed yet.
+- **2026-06-04 (build)** — Shipped the launch SEO set (verified via `npm run build`): B1 `site` config, B2 per-page titles/descriptions, B3 canonicals, B4 OG/Twitter, B5 og:image (og-image.png), B7 robots.txt (allow), B8 sitemap (5 URLs; **sitemap pinned 3.7.3→3.2.1** for Astro-4 compat), B9 FAQPage JSON-LD. Bio copy edit applied (approved). A2 = allow. (Shipped in `27af93e`.)
 - **2026-06-04** — Domain locked: `everydayfuture.work`. Share image provided + placed (`og-image.png`). **A1 LOCKED → Option B: lead with “conscious executive coaching”** (calculated adjacency; “conscious leadership coaching” ruled out as an owned CLG/15-Commitments niche). Head terms executive/leadership coaching; audience leaders & founders navigating change; methods neuroscience-informed (IPNB), NLP/DBT; geo remote-first, Seattle-based. **B carries a dependency:** the phrase must land in homepage copy (Taylor bio) — added to To-dos, pending Taylor approval. **Open:** A2 crawler policy, A4 favicon.
 
 ---
