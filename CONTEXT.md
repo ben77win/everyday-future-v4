@@ -194,20 +194,20 @@ CSS values verified against handoff 4 comp and corrected:
 ```
 
 ### S6 Taylor Bio Photos
-Two portraits **side-by-side** in the left column of the S6 bio grid (`#taylor` / `TaylorBio.astro`). _(This superseded the earlier 3-photo absolute-positioned parallax scatter — `taylor-01.png` / `taylor-02.jpg` / `taylor-03.gif`, grayscale + GIF — and, before that, a diagonal/absolute-positioned implied box. None of that is in the code anymore: no absolute positioning, no parallax, no grayscale.)_
+Two portraits in a **diagonal "implied box"** in the left column of the S6 bio grid (`#taylor` / `TaylorBio.astro`) — `--ur` pinned upper-right, `--ll` pinned lower-left (the "/" anti-diagonal), inner corners meeting at center with the 4px gap (upper-left + lower-right left open). _(Restored 2026-06-05 per Ben — this is the same layout originally shipped in `e027470`. It had been changed to a side-by-side flex pair in `3f4291d` (2026-06-03); Ben asked to bring the diagonal back. The even-earlier 3-photo absolute parallax scatter — `taylor-01.png` / `taylor-02.jpg` / `taylor-03.gif`, grayscale + GIF — is gone: no parallax, no grayscale.)_
 
 **Markup:**
 ```html
 <div class="s6__photos" id="s6Photos">
-  <img src="/images/DSCF0172.jpg" class="s6__photo s6__photo--ul" alt="Taylor Winters" />  <!-- brown blazer -->
-  <img src="/images/DSCF0084.jpg" class="s6__photo s6__photo--lr" alt="Taylor Winters" />  <!-- couch -->
+  <img src="/images/DSCF0084.jpg" class="s6__photo s6__photo--ll" alt="Taylor Winters" />  <!-- couch (lower-left) -->
+  <img src="/images/DSCF0184.jpg" class="s6__photo s6__photo--ur" alt="Taylor Winters" />  <!-- brown blazer, smiling — upper-right (DSCF0184 retouched: warm wood column extended over the pale ceiling block; 900×1200) -->
 </div>
 ```
 
-**Layout (as built 2026-06-04):**
-- `.s6__inner` — 2-col grid **`1.1fr 1fr`** (photos left / bio right), `gap: 80px`, `align-items: start`, `max-width: var(--max-w)`. The `1.1fr` photo column mirrors S4's image-column-wider pattern; the 80px gutter matches S4/S5.
-- `.s6__photos` — side-by-side flex, `gap: 4px`, `width: 100%`, **`max-width: 580px`** so the pair fills the wider left column and the visible gutter reads as the standard 80px. _Was `max-width: 420px` inside a 540px column, which left ~120px dead space that read as an oversized ~200px gap (Ben flagged it). Fixed by `1.1fr 1fr` + `max-width: 580px`._
-- `.s6__photo` — each `width: calc(50% - 2px)`, `aspect-ratio: 3/4`, `object-fit: cover` (the `-2px` per side makes the 4px center gap). `.s6__photo--ul` = DSCF0172.jpg, `.s6__photo--lr` = DSCF0084.jpg.
+**Layout (as built 2026-06-05 — diagonal restored):**
+- `.s6__inner` — 2-col grid **`1.1fr 1fr`** (photos left / bio right), `gap: 80px`, `align-items: start`, `max-width: var(--max-w)`. (Grid unchanged from the side-by-side era; the 420px box left-aligns in the 1.1fr column.)
+- `.s6__photos` — **`position: relative`, `max-width: 420px`, `aspect-ratio: 420/560`** (the implied-box frame). _Ben chose 420px (the original size) over a scaled-up variant; the photos read smaller and the column carries open space to the right._
+- `.s6__photo` — `position: absolute`, `width: calc(50% - 2px)`, `height: calc(50% - 2px)`, `object-fit: cover` (the `-2px` per side makes the 4px diagonal gap). **`.s6__photo--ur { top:0; right:0 }`** = DSCF0184.jpg (smiling; the retouched DSCF0184 — warm wood column extended up over the pale ceiling block, replaced DSCF0172.jpg); **`.s6__photo--ll { bottom:0; left:0; transform: scaleX(-1) }`** = DSCF0084.jpg (couch, **mirrored horizontally** — same `scaleX(-1)` idiom as the S2 Calibration video). _Positions iterated 2026-06-05 per Ben: first swapped (couch UL / portrait LR), then moved to the anti-diagonal — couch straight down to lower-left, portrait straight up to upper-right; then the couch photo flipped horizontally._
 - Source JPGs downscaled to 900×1200 (~140–175 KB) from 6192×8256 originals. Layout scales on tablet/mobile via the aspect-ratio (the column stacks to 1-up at ≤900/≤640).
 
 ---
