@@ -1,5 +1,5 @@
 # Every Day Future — Site Context
-_Last updated: 2026-06-05 (session 5) — **Launch checklist consolidated + portal link wired.** Added `LAUNCH.md` at repo root as the **single tracked source of truth** for launch (merges Ben's to-do list with the open items from CONTEXT.md + SEO.md; SEO status folded in as §0). **Client Portal link repointed** from the dead relative `/portal` to `https://portal.everydayfuture.work` (`target="_blank" rel="noopener"`) in `Nav.astro` + `Footer.astro` — verified in preview (both nav + footer resolve). Build clean. **3 launch decisions still pending Ben/Taylor:** (1) real Calendly URLs — `options.ts` still placeholders; (2) Taylor bio images — keep current `DSCF0172`/`DSCF0084` or swap; (3) Waymaker (S5) images — section has NO photos today, adding them is a design change needing approval + spec. Committed + pushed to `staging`._
+_Last updated: 2026-06-05 (session 5) — **Launch checklist consolidated + portal link wired.** Added `LAUNCH.md` at repo root as the **single tracked source of truth** for launch (merges Ben's to-do list with the open items from CONTEXT.md + SEO.md; SEO status folded in as §0). **Client Portal link repointed** from the dead relative `/portal` to `https://portal.everydayfuture.work` (`target="_blank" rel="noopener"`) in `Nav.astro` + `Footer.astro` — verified in preview (both nav + footer resolve). Build clean. **3 launch decisions still pending Ben/Taylor:** (1) real Calendly URLs — `options.ts` still placeholders; (2) Taylor bio images — keep current `DSCF0172`/`DSCF0084` or swap; (3) Waymaker (S5) images — section has NO photos today, adding them is a design change needing approval + spec. Portal + LAUNCH.md committed/pushed to `staging` (`7c12878`). **Later in session 5:** S6 bio reworked — new retouched `DSCF0184.jpg`, diagonal implied-box restored (420px), couch lower-left (mirrored) + portrait upper-right (committed/pushed `b78052b`). **Then: Section Slugs / Deep Links added** (see that subsection) — `#results` (S3 id renamed from `quotes`) + 4 Begin deep links (`#1-1coaching`/`#orgcoaching`/`#groupcoaching`/`#selfcoaching` → open homepage drawer, skip to Step 2); `#practice`/`#waymaker`/`#taylor`/`#faq` already existed. Verified in preview, build clean. **Deep-links work is local/uncommitted (awaiting Ben's push approval).**_
 
 _Last updated: 2026-06-04 (session 4) — **Launch SEO implemented (most of it).** Positioning locked (Option B: lead "conscious executive coaching"; head terms executive/leadership coaching; remote-first, Seattle-based). `Layout.astro` now takes `title`/`description`/`image` props and emits per-page `<title>`, meta description, canonical, full Open Graph + Twitter `summary_large_image` (og:image = `/images/og-image.png`, the supplied 1200×630 brand card). Unique title/description wired on home/contact/begin + via `LegalDoc` for privacy/terms. `astro.config.mjs` sets `site: 'https://everydayfuture.work'` + `@astrojs/sitemap` (**pinned 3.2.1** — 3.7.3 needs Astro 5; we're on 4.16 → generates `/sitemap-index.xml`, 5 URLs). `public/robots.txt` allows all incl. AI crawlers + Sitemap line. `FAQ.astro` now emits FAQPage JSON-LD. Bio gained the approved clause "— a conscious executive coaching practice —" (`TaylorBio.astro`). `FAQ.astro` now emits FAQPage JSON-LD. **Favicon (B6) done** — stacked EDF wordmark icon (`public/favicon.png` 512 + generated `favicon-32.png` + `apple-touch-icon.png`), `<link>` tags in Layout. Bio gained the approved clause "— a conscious executive coaching practice —" (`TaylorBio.astro`). **Person + ProfessionalService JSON-LD** added on the homepage (`index.astro` `@graph`): legalName LTW Coaching LLC, areaServed United States + Europe (Seattle/WA base), founder "Taylor Winters — Founder & Conscious Executive Coach", UC Berkeley Haas exec-coaching credential, `sameAs` LinkedIn (`/in/ltaylorwinters/`) + Instagram. Verified via `npm run build` (both JSON-LD blocks valid). **Launch SEO code set (B1–B9) + entity schema complete;** remaining is non-code only (Search Console + analytics, Google Business Profile) + optional visible footer LinkedIn link. **Contact email reverted info@ → `coach@everydayfuture.work` site-wide** (Contact page, both legal pages, LegalDoc footer, homepage schema) per Ben; design.md §5.11/§5.13 + the Netlify-notifications checklist synced. **LinkedIn footer link added** (`Footer.astro` → `/in/ltaylorwinters/`; Contact · Instagram · LinkedIn · Terms · Privacy). **Domain Cutover Checklist** (Squarespace → Netlify) added to `SEO.md`. **All committed + pushed to `staging`:** `27af93e` (SEO batch) + `8d442a9` (footer LinkedIn + cutover checklist) → tip `8d442a9`, **93 ahead of main** (production stale, needs merge). Domain currently points to Squarespace; plan = finish on staging → merge to main → repoint DNS. Full plan/status in `SEO.md` (Status Board + Cutover Checklist)._
 
@@ -26,6 +26,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 **Rollback tags:**
 - `pre-astro-migration` — last single-file HTML state on staging
 - `pre-session-2026-05-27` — staging tip before this session (`f3468b1`)
+- `pre-slugs` — staging tip **before** the Section Slugs / Deep Links change (`b78052b`). To roll the slugs back: `git revert <slugs-commit>` (or `git reset --hard pre-slugs` if nothing newer depends on it) → push `staging`.
 
 **Archived HTML:** `_archive/index-pre-astro.html`
 
@@ -209,6 +210,31 @@ Two portraits in a **diagonal "implied box"** in the left column of the S6 bio g
 - `.s6__photos` — **`position: relative`, `max-width: 420px`, `aspect-ratio: 420/560`** (the implied-box frame). _Ben chose 420px (the original size) over a scaled-up variant; the photos read smaller and the column carries open space to the right._
 - `.s6__photo` — `position: absolute`, `width: calc(50% - 2px)`, `height: calc(50% - 2px)`, `object-fit: cover` (the `-2px` per side makes the 4px diagonal gap). **`.s6__photo--ur { top:0; right:0 }`** = DSCF0184.jpg (smiling; the retouched DSCF0184 — warm wood column extended up over the pale ceiling block, replaced DSCF0172.jpg); **`.s6__photo--ll { bottom:0; left:0; transform: scaleX(-1) }`** = DSCF0084.jpg (couch, **mirrored horizontally** — same `scaleX(-1)` idiom as the S2 Calibration video). _Positions iterated 2026-06-05 per Ben: first swapped (couch UL / portrait LR), then moved to the anti-diagonal — couch straight down to lower-left, portrait straight up to upper-right; then the couch photo flipped horizontally._
 - Source JPGs downscaled to 900×1200 (~140–175 KB) from 6192×8256 originals. Layout scales on tablet/mobile via the aspect-ratio (the column stacks to 1-up at ≤900/≤640).
+
+### Section Slugs / Deep Links (added 2026-06-05)
+
+Shareable fragment links into the homepage. **Fragments only — no SEO/canonical/sitemap impact; the SEO schema `#taylor` `@id` was deliberately left untouched.**
+
+**Section anchors** (native browser scroll — section `id`s):
+| Slug | Section |
+|---|---|
+| `#practice` | S2 — Choose how you practice (pre-existing) |
+| `#results` | S3 — Practice makes progress _(renamed from `id="quotes"` 2026-06-05)_ |
+| `#waymaker` | S5 — Who this practice is for (pre-existing) |
+| `#taylor` | S6 — Taylor's bio (pre-existing; kept over `#coach` so the SEO Person `@id` stays valid) |
+| `#faq` | S7 — FAQ (pre-existing) |
+
+No `scroll-margin-top` needed — each section's top padding already clears the 78px fixed nav (verified on `#results`).
+
+**Begin deep links** (JS-handled — NOT element ids): open the homepage Begin **drawer** and skip to **Step 2** with the option preselected.
+| Slug | Option key |
+|---|---|
+| `#1-1coaching` | `1on1` |
+| `#orgcoaching` | `orgs` |
+| `#groupcoaching` | `group` |
+| `#selfcoaching` | `selflead` |
+
+Mechanism: `BeginFlow.astro` exposes `window.__beginSelectOption(key)` (calls its `selectOption(key, true)` → immediate skip to Step 2); an inline `is:inline` script in `index.astro` reads `location.hash` on load + `hashchange`, maps the slug, then calls `window.__openBeginDrawer()` + `__beginSelectOption(key)`. Opening the drawer `pushState`s to `/begin`, which drops the hash (clean URL, no re-trigger). Digit-leading `#1-1coaching` is safe because these are read as hash strings, never used as CSS selectors / element ids.
 
 ---
 

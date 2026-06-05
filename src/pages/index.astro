@@ -198,3 +198,34 @@ const orgPersonLd = {
   });
 })();
 </script>
+
+<script is:inline>
+/* Begin deep links: #1-1coaching / #orgcoaching / #groupcoaching / #selfcoaching
+   open the homepage Begin drawer and skip to Step 2 with that option preselected.
+   (Fragments only — no SEO/canonical impact; section anchors like #faq are native.) */
+(function () {
+  var BEGIN_SLUGS = {
+    '1-1coaching':  '1on1',
+    'orgcoaching':  'orgs',
+    'groupcoaching':'group',
+    'selfcoaching': 'selflead'
+  };
+
+  function handleHash() {
+    var slug = (location.hash || '').replace(/^#/, '').toLowerCase();
+    var key  = BEGIN_SLUGS[slug];
+    if (!key) return;
+
+    function go() {
+      if (typeof window.__openBeginDrawer === 'function') window.__openBeginDrawer();
+      if (typeof window.__beginSelectOption === 'function') window.__beginSelectOption(key);
+    }
+    if (window.__openBeginDrawer && window.__beginSelectOption) go();
+    else window.addEventListener('load', go, { once: true });
+  }
+
+  if (document.readyState !== 'loading') handleHash();
+  else document.addEventListener('DOMContentLoaded', handleHash);
+  window.addEventListener('hashchange', handleHash);
+})();
+</script>

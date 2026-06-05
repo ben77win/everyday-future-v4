@@ -909,6 +909,11 @@ const optionLabelsJson = JSON.stringify(
     selectOption(paramOption, true);
   }
 
+  // Expose for hash-based deep links (homepage Begin drawer) — open + skip to Step 2
+  window.__beginSelectOption = function (key) {
+    if (OPTION_LABELS[key]) selectOption(key, true);
+  };
+
   // ── Option selection
   optionBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
