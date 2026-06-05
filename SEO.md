@@ -1,5 +1,7 @@
 # SEO & AI Discoverability — Plan
 
+> 📋 **The single launch checklist is [`LAUNCH.md`](LAUNCH.md)** — work from there. This file is the detailed SEO plan + the Domain Cutover playbook that `LAUNCH.md` links to. On-site SEO (B1–B9 + entity schema) is **done and on `staging`**; remaining SEO work is off-site (Search Console, analytics, GBP) and is tracked in `LAUNCH.md` §3.
+
 _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 2026-06-04 (domain locked: `everydayfuture.work`). This is a plan/backlog — no SEO code shipped yet._
 
 ---
