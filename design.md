@@ -192,6 +192,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 ### 5.10 Footer (`Footer.astro`)
 - Ink background, padding 60px var(--gutter)
+- **Sticky footer (2026-06-05):** `body` is a `min-height: 100svh` (100vh fallback) flex column and `.site-footer` has `margin-top: auto`, so on short pages (e.g. the Contact "Thank you" state) the footer pins to the bottom of the viewport instead of floating mid-page. Tall pages (home, legal) are unaffected (no free space → `auto` resolves to 0). `body` keeps `position: relative` so the float-CTA over-footer parking still anchors to it; the parking observer is unaffected. Note: the footer is `display: none` on `/begin` (full-screen flow).
 - Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
 - Right: link row — **Contact · Instagram · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)** (the "Login" link was removed)
 - **Client Portal link (`.site-footer__link--portal` → `/portal`): mobile only** — hidden on desktop (the nav already shows Client Portal, which is hidden at ≤640px). On mobile it sits 3rd, giving two rows: **Contact · Instagram · Client Portal** / **Terms & Conditions · Privacy Policy**. A mobile-only `.site-footer__break` (`flex-basis: 100%; height: 0`) forces the split; both it and the Client Portal link are `display: none` on desktop (single row: Contact · Instagram · Terms · Privacy).

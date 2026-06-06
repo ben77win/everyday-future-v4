@@ -15,9 +15,9 @@
 
     <!-- Left: heading + info -->
     <div class="s-contact__left">
-      <h2 class="s-contact__heading">Get in touch</h2>
-      <p class="s-contact__body t-body-lg">Reach out directly with questions, ideas, or to learn more about working with Every Day Future.</p>
-      <div class="s-contact__meta">
+      <h2 class="s-contact__heading" id="contactHeading">Get in touch</h2>
+      <p class="s-contact__body t-body-lg" id="contactIntro">Reach out directly with questions, ideas, or to learn more about working with Every Day Future.</p>
+      <div class="s-contact__meta" id="contactMeta">
         <div class="s-contact__meta-item">
           <span class="s-contact__meta-label">Direct</span>
           <span class="s-contact__meta-value">
@@ -31,6 +31,8 @@
           </span>
         </div>
       </div>
+      <!-- Success state: replaces intro + meta, heading swaps to "Thank you" -->
+      <p class="s-contact__body t-body-lg" id="contactConfirm" hidden>Thanks so much for your interest and someone from Every Day Future will be in touch shortly.</p>
     </div>
 
     <!-- Right: form -->
@@ -92,7 +94,6 @@
         </div>
 
         <button type="submit" class="s-contact__submit">Send a note</button>
-        <p class="s-contact__confirm" id="contactConfirm">Got it — we'll be in touch soon.</p>
         <p class="s-contact__confirm" id="contactError" role="alert">That didn't send — please try again, or email coach@everydayfuture.work directly.</p>
       </form>
     </div>
@@ -102,9 +103,13 @@
 
 <script is:inline>
 (function () {
-  var form    = document.getElementById('contactForm');
-  var confirm = document.getElementById('contactConfirm');
-  var error   = document.getElementById('contactError');
+  var form     = document.getElementById('contactForm');
+  var formWrap = document.querySelector('.s-contact__form-wrap');
+  var heading  = document.getElementById('contactHeading');
+  var intro    = document.getElementById('contactIntro');
+  var meta     = document.getElementById('contactMeta');
+  var confirm  = document.getElementById('contactConfirm');
+  var error    = document.getElementById('contactError');
   if (!form) return;
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -122,8 +127,12 @@
       ok = res.ok;
     } catch (err) { ok = false; }
     if (ok) {
-      form.style.display = 'none';
-      if (confirm) confirm.classList.add('visible');
+      // Success state: heading → "Thank you", intro + meta + form replaced by the message
+      if (heading) heading.textContent = 'Thank you';
+      if (intro) intro.style.display = 'none';
+      if (meta) meta.style.display = 'none';
+      if (formWrap) formWrap.style.display = 'none';
+      if (confirm) confirm.hidden = false;
     } else {
       if (submitBtn) submitBtn.disabled = false;
       if (error) error.classList.add('visible');

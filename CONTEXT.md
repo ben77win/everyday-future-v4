@@ -27,6 +27,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 - `pre-astro-migration` — last single-file HTML state on staging
 - `pre-session-2026-05-27` — staging tip before this session (`f3468b1`)
 - `pre-slugs` — staging tip **before** the Section Slugs / Deep Links change (`b78052b`). To roll the slugs back: `git revert <slugs-commit>` (or `git reset --hard pre-slugs` if nothing newer depends on it) → push `staging`.
+- `pre-testing` — staging tip (`2e7e4ca`) **before** the Contact "Thank you" success state + sticky-footer change (the work tested at the end of session 5, pre-push). Roll back with `git revert <commit>` or `git reset --hard pre-testing` → push `staging`.
 
 **Archived HTML:** `_archive/index-pre-astro.html`
 
@@ -358,7 +359,7 @@ Homepage CTAs link to `/begin?option=1on1` (or `group`, `orgs`, `selflead`). Whe
 
 ### Netlify Forms
 
-A hidden static form (with `netlify` attribute) is included for build-time form registration. The visible AJAX form POSTs to `/` with `form-name: begin` and `Content-Type: application/x-www-form-urlencoded`. **The response is now awaited and checked (`res.ok`)** — advance on success, show `#bfSubmitError` on failure (2026-06-05; the Contact form's `#contactForm` got the same treatment via `#contactError`).
+A hidden static form (with `netlify` attribute) is included for build-time form registration. The visible AJAX form POSTs to `/` with `form-name: begin` and `Content-Type: application/x-www-form-urlencoded`. **The response is now awaited and checked (`res.ok`)** — advance on success, show `#bfSubmitError` on failure (2026-06-05; the Contact form's `#contactForm` got the same treatment via `#contactError`). **Contact success state (2026-06-05):** on `res.ok` the whole page transforms — the heading `#contactHeading` swaps "Get in touch" → **"Thank you"** (same `.s-contact__heading` style), the intro `#contactIntro` + meta `#contactMeta` (Direct/Elsewhere) are hidden (`style.display='none'` — inline, since `.s-contact__meta` sets its own `display` and the `hidden` attr wouldn't win), the form column `.s-contact__form-wrap` is hidden, and `#contactConfirm` (in the **left** column, styled `.s-contact__body t-body-lg`, `hidden` by default) reveals: "Thanks so much for your interest and someone from Every Day Future will be in touch shortly." (Earlier `#contactConfirm` lived *inside* the form, so it was hidden with the form and never showed — that's the bug this fixed.) `#contactError` stays inside the form (the form stays visible on failure).
 
 ### Calendly Integration
 
