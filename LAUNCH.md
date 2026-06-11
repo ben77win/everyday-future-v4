@@ -54,7 +54,16 @@ _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checkli
 
 ---
 
+## 4 — Content infrastructure (independent of launch — can build anytime)
+
+| # | Item | Status | Note |
+|---|------|--------|------|
+| 10 | **Article CMS — Keystatic** | ⬜ | Browser-based git CMS so articles can be published without Claude/terminal. Architecture: Astro **Content Collections** (`src/content/articles/`, typed frontmatter, `/articles` index + per-article page reusing the Layout/SEO machinery) + **Keystatic** editor mounted at `/keystatic` with GitHub auth → commits markdown to the repo → Netlify rebuilds. Free, file-based, content stays canonical on `everydayfuture.work` (per the publish-on-own-site decision in `SEO.md`). **Decisions before build:** (a) which branch the CMS commits to — `staging` pre-launch, but post-launch pointing at `main` = articles publish straight to prod with no review (content-only; CMS can't touch code); (b) Taylor needs a GitHub account added as a repo collaborator if she'll publish, else it stays Ben's job. Article page **design needs approval** (no-drift) — propose grounded in the legal-page long-form-text idiom. First article through the pipe = the "What is conscious executive coaching?" definitional page (the #1 content priority in `SEO.md`). |
+
+---
+
 ## Decisions needed from Ben / Taylor
 1. **Calendly** (#1) — the 3 real URLs.
 2. **Bio images** (#2) — keep current two or swap?
 3. **Waymaker images** (#3) — section has none today; adding them is a design change needing approval + spec.
+4. **Article CMS** (#10) — (a) which branch Keystatic commits to post-launch (`main` = articles straight to prod); (b) whether Taylor gets a GitHub collaborator seat to publish herself, or it stays Ben's job; (c) approve the article-page design.
