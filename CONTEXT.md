@@ -1,4 +1,14 @@
 # Every Day Future — Site Context
+_Last updated: 2026-06-11 (**session 7 — OPEN**). **Writing section shipped to `staging`** (handoff 6, part 1 of 2; Begin Step 2 redesign is part 2, comps next). **Rollback: tag `pre-handoff-6` = `7edbba8`** (the pre-handoff-6 staging tip) — `git reset --hard pre-handoff-6` (or revert the Writing commits) → push `staging`. Session 7 shipped:_
+_1. **`/writing` thought-leadership section** (handoff 6 `Writing Section - Spec.md` + comps; design.md §5.14) — Astro content collections (`src/content/writing/*.mdx`) + one reusable `ArticleLayout.astro`; index with topic filter, featured lead + editorial rows; article template with Figure/PullQuote/Chart(SVG)/Note/KeyTakeaways/ArticleTable/Faq/Sources blocks; author card + related grid. CSS scoped `wx__`/`ar`-prefixed; **Writing-only departures (Ben-approved): 0.5px hairlines + 11/12px mono** (site rules unchanged elsewhere). New deps `@astrojs/mdx@3.1.9` + `@astrojs/rss@4.0.18` (Astro-4-compatible)._
+_2. **Published articles (Ben 2026-06-11): "The future is created in the present" (featured) + "How Conscious Executive Coaching Sharpens Decision-Making"** — live on `/writing`, in the sitemap (8 URLs now) + `/rss.xml`, Article JSON-LD + canonicals + OG. **4 placeholder stubs stay `draft: true`** = dev-preview only, excluded from build/sitemap/RSS (the `import.meta.env.DEV || !draft` filter — localhost shows drafts by design)._
+_3. **Writing imagery via Astro `<Image>`** — article images in `src/assets/writing/` (responsive srcset/WebP/lazy/no-CLS; the `public/images` copies still serve the main site; schema `image()` enforces processed assets)._
+_4. **"Writing" link added to Nav (before Client Portal) + Footer (first link)**; blue 0.5px underline active state on Writing pages only (`.page-writing`); nav reuses the `.nav.scrolled` glass state via a scroll toggle on the hero-less Writing pages._
+_5. **Handoff 6 intake:** only 3 files are current (`Begin Flow Redesign - Spec.md`, `Writing Section - Spec.md`, `Writing Section - design.md` + `comps/`) — **the rest of the zip is stale handoff-4-era material (ignore; would re-break approved work)**. Ben's calls logged: repo copy beats Claude-Design copy rewrites; spec over comp; mono → 13px in the Begin redesign (Writing keeps the comped 11/12); 0.5px hairlines Writing-only; the Begin spec supersedes the session-6 Step 2 layout incl. the context-note-in-panel reversal._
+_**Next: Begin flow Step 2 redesign** (step indicator, anchored split, waitlist variant — comps first, Ben approves before commit). Deferred to-do: LAUNCH.md §4 #11 (article OG polish: og:type=article + per-article og:image dims — cosmetic)._
+
+---
+
 _Last updated: 2026-06-11 (**session 6 — CLOSED**). All work committed + pushed to `staging`, verified (preview + live staging checks); build clean; production/`main` still stale. Session 6 shipped, in order:_
 _1. **Docs pass** — design.md §4/§6 imagery synced to as-built (stale hero/S2/S6 lists); commit-count fixes. (`3c81e9c`)_
 _2. **SEO keyword strategy** — deep-research pass written into `SEO.md` (🔑 section): "conscious executive coaching" is contested (Inductive, Boulder CO — no Seattle presence, no trademark) but winnable; keyword→page map; GBP setup notes (Seattle address + worldwide service area — two channels, no conflict); **decision: articles publish on `everydayfuture.work`, never Substack** (no canonical control, no publishing API, AI-citation strategy requires own domain). Priorities: definitional "What is conscious executive coaching?" page → GBP post-cutover → problem-framed long-tail articles. (`3c81e9c`)_
@@ -50,6 +60,7 @@ Redesign and build of `everydayfuture.work` — Taylor Winters' coaching practic
 - `pre-session-2026-05-27` — staging tip before this session (`f3468b1`)
 - `pre-slugs` — staging tip **before** the Section Slugs / Deep Links change (`b78052b`). To roll the slugs back: `git revert <slugs-commit>` (or `git reset --hard pre-slugs` if nothing newer depends on it) → push `staging`.
 - `pre-testing` — staging tip (`2e7e4ca`) **before** the Contact "Thank you" success state + sticky-footer change (the work tested at the end of session 5, pre-push). Roll back with `git revert <commit>` or `git reset --hard pre-testing` → push `staging`.
+- `pre-handoff-6` — staging tip (`7edbba8`) **before** the handoff 6 work (Writing section + Begin Step 2 redesign). Roll back with `git reset --hard pre-handoff-6` (or revert the handoff-6 commits) → push `staging`.
 
 **Archived HTML:** `_archive/index-pre-astro.html`
 
