@@ -17,7 +17,7 @@ All on-site SEO shipped to `staging` (tip `8d442a9`): B1 `site` config, B2 per-p
 
 | # | Item | Status | Note |
 |---|------|--------|------|
-| 1 | **Calendly links** | ❌ | `src/data/options.ts` still has placeholders — `placeholder-60` (1:1, orgs), `placeholder-15` (group), empty (self-led). **Needs Taylor's 3 real URLs.** Edit `options.ts` only. |
+| 1 | **Calendly links** | 🟡 | **1:1 done** (`coach-everydayfuture/1-1-discovery-session`, 2026-06-11). Still placeholder: `orgs` (`placeholder-60`), `group` (`placeholder-15`); self-led has none by design. **Needs Taylor's 2 remaining URLs** (orgs, group). Edit `options.ts` only. |
 | 2 | **Taylor bio images** | ⚠️ | Two already wired in S6 (`DSCF0172.jpg` + `DSCF0084.jpg`). **Decision needed:** keep these as final, or swap? |
 | 3 | **Waymaker (S5) images** | ⚠️ | The Waymaker section currently has **no photos** — only the Vector-10 brush mark. Adding images is a **new design element → needs spec + Ben approval** (no-drift rule). What images, and approved? |
 | 4 | **Begin flow verification** | ⬜ | Run all 4 options end-to-end on staging (Step 1 → form → Calendly / self-led confirmation). Full booking path is blocked by #1. |
@@ -63,7 +63,7 @@ _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checkli
 ---
 
 ## Decisions needed from Ben / Taylor
-1. **Calendly** (#1) — the 3 real URLs.
+1. **Calendly** (#1) — 1:1 done; still need the 2 remaining URLs (orgs, group).
 2. **Bio images** (#2) — keep current two or swap?
 3. **Waymaker images** (#3) — section has none today; adding them is a design change needing approval + spec.
 4. **Article CMS** (#10) — (a) which branch Keystatic commits to post-launch (`main` = articles straight to prod); (b) whether Taylor gets a GitHub collaborator seat to publish herself, or it stays Ben's job; (c) approve the article-page design.

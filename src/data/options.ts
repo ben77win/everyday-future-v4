@@ -25,7 +25,7 @@ export const practiceOptions: PracticeOption[] = [
     key: '1on1',
     label: '1:1 Coaching',
     desc: 'Dedicated practice to work on what matters for you with a coach',
-    calendlyUrl: 'https://calendly.com/placeholder-60',
+    calendlyUrl: 'https://calendly.com/coach-everydayfuture/1-1-discovery-session',
   },
   {
     key: 'orgs',
