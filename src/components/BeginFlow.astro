@@ -8,9 +8,12 @@ const calendlyUrlsJson = JSON.stringify(
 const optionLabelsJson = JSON.stringify(
   Object.fromEntries(practiceOptions.map((o) => [o.key, o.label]))
 );
+const optionDeksJson = JSON.stringify(
+  Object.fromEntries(practiceOptions.map((o) => [o.key, o.dek]))
+);
 ---
 
-<div id="bfData" data-labels={optionLabelsJson} data-urls={calendlyUrlsJson} hidden></div>
+<div id="bfData" data-labels={optionLabelsJson} data-urls={calendlyUrlsJson} data-deks={optionDeksJson} hidden></div>
 
 <div class="begin-flow" id="beginFlow">
 
@@ -23,6 +26,8 @@ const optionLabelsJson = JSON.stringify(
         <span class="bf-nav__brand" aria-hidden="true">Every Day Future</span>
         <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
       </div>
+
+      <div class="bf-steps" id="bfSteps1" aria-hidden="true"></div>
 
       <div class="bf-header">
         <h1 class="bf-headline">Choose how you want to practice.</h1>
@@ -58,19 +63,22 @@ const optionLabelsJson = JSON.stringify(
         <a class="bf-close" href="/" aria-label="Cancel and return to Every Day Future">×</a>
       </div>
 
-      <!-- 2-col: heading+body left, offering card right -->
+      <div class="bf-steps" id="bfSteps2" aria-hidden="true"></div>
+
+      <!-- Anchored split: chip + service name + dek + offering detail LEFT,
+           white form panel RIGHT (2026-06-11 Step 2 redesign, handoff 6) -->
       <div class="bf-step2-cols">
 
-        <h1 class="bf-step2-heading" id="bfStep2Heading">1:1 Coaching</h1>
-        <p class="bf-step2-sub t-body-lg" id="bfStep2Sub">A few details about you to get connected with a coach. You'll be scheduled for a free discovery fit-check, not a sales call.</p>
+        <div class="bf-step2-left">
+          <span class="bf-chip" id="bfChip">Selected · 1:1 Coaching</span>
+          <h1 class="bf-step2-heading" id="bfStep2Heading">1:1 Coaching</h1>
+          <p class="bf-step2-dek" id="bfStep2Dek">{optionByKey['1on1'].dek}</p>
 
-        <div class="bf-step2-right">
+          <div class="bf-step2-offerings">
 
           <!-- 1:1 -->
           <div class="bf-offering bf-offering--hidden" id="bfOffering1on1">
             <div class="bf-offering-card">
-              <span class="bf-offering-card__eyebrow">01 / The 1:1 Practice</span>
-              <h3 class="bf-offering-card__title">Dedicated practice of what's possible, only for you.</h3>
               <button class="bf-offering__toggle" type="button" aria-expanded="false">
                 <span>What's included</span>
                 <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
@@ -78,19 +86,19 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body t-body-lg">Monthly subscription. 2x 60-minute virtual sessions. 3-month arcs.</p>
+                  <p class="bf-offering-card__body">Monthly subscription. 2x 60-minute virtual sessions. 3-month arcs.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we practice</span>
-                  <p class="bf-offering-card__body t-body-lg">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
+                  <p class="bf-offering-card__body">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Between sessions</span>
-                  <p class="bf-offering-card__body t-body-lg">Suggested daily practice integrated with your work. Awareness building, practical exercises, intentional action, reflection and accountability.</p>
+                  <p class="bf-offering-card__body">Suggested daily practice integrated with your work. Awareness building, practical exercises, intentional action, reflection and accountability.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">AI-supported practice</span>
-                  <p class="bf-offering-card__body t-body-lg">Optional. Session transcripts and pattern recognition support continuity across the arc.</p>
+                  <p class="bf-offering-card__body">Optional. Session transcripts and pattern recognition support continuity across the arc.</p>
                 </div>
               </div>
             </div>
@@ -99,8 +107,6 @@ const optionLabelsJson = JSON.stringify(
           <!-- Orgs & Teams -->
           <div class="bf-offering bf-offering--hidden" id="bfOfferingOrgs">
             <div class="bf-offering-card">
-              <span class="bf-offering-card__eyebrow">02 / Orgs &amp; Teams</span>
-              <h3 class="bf-offering-card__title">Custom coaching and practice experiences for organizations, leadership teams, and cohorts.</h3>
               <button class="bf-offering__toggle" type="button" aria-expanded="false">
                 <span>What's included</span>
                 <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
@@ -108,19 +114,19 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body t-body-lg">Breadth and depth of engagement is designed by a coach to meet your leadership needs for the health of your organization. Virtual or in-person.</p>
+                  <p class="bf-offering-card__body">Breadth and depth of engagement is designed by a coach to meet your leadership needs for the health of your organization. Virtual or in-person.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we practice</span>
-                  <p class="bf-offering-card__body t-body-lg">Conscious change in how individuals and teams work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
+                  <p class="bf-offering-card__body">Conscious change in how individuals and teams work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Engagement types</span>
-                  <p class="bf-offering-card__body t-body-lg">Co-founder coaching, leadership team and small cohort coaching, half or full day workshops, retreats and offsites.</p>
+                  <p class="bf-offering-card__body">Co-founder coaching, leadership team and small cohort coaching, half or full day workshops, retreats and offsites.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Facilitation &amp; support</span>
-                  <p class="bf-offering-card__body t-body-lg">Designed and facilitated by a trained, experienced, and certified coach. Practical frameworks, engaging participation, and useful skill-building.</p>
+                  <p class="bf-offering-card__body">Designed and facilitated by a trained, experienced, and certified coach. Practical frameworks, engaging participation, and useful skill-building.</p>
                 </div>
               </div>
             </div>
@@ -129,8 +135,6 @@ const optionLabelsJson = JSON.stringify(
           <!-- Group -->
           <div class="bf-offering bf-offering--hidden" id="bfOfferingGroup">
             <div class="bf-offering-card">
-              <span class="bf-offering-card__eyebrow">03 / Group</span>
-              <h3 class="bf-offering-card__title">A shared practice in community with structure, support, and coach facilitation.</h3>
               <button class="bf-offering__toggle" type="button" aria-expanded="false">
                 <span>What's included</span>
                 <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
@@ -138,19 +142,19 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body t-body-lg">12-week guided group practice. Limited to 8 participants. 90-minute virtual sessions plus 3 individual coaching sessions.</p>
+                  <p class="bf-offering-card__body">12-week guided group practice. Limited to 8 participants. 90-minute virtual sessions plus 3 individual coaching sessions.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we practice</span>
-                  <p class="bf-offering-card__body t-body-lg">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
+                  <p class="bf-offering-card__body">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Experience</span>
-                  <p class="bf-offering-card__body t-body-lg">Community navigation of growth, change, and transition. Shared learning and supportive accountability.</p>
+                  <p class="bf-offering-card__body">Community navigation of growth, change, and transition. Shared learning and supportive accountability.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Facilitation &amp; support</span>
-                  <p class="bf-offering-card__body t-body-lg">Coach-led structure and facilitation. Practical frameworks, reflection, and AI-supported follow-ups.</p>
+                  <p class="bf-offering-card__body">Coach-led structure and facilitation. Practical frameworks, reflection, and AI-supported follow-ups.</p>
                 </div>
               </div>
             </div>
@@ -159,8 +163,6 @@ const optionLabelsJson = JSON.stringify(
           <!-- Self-led -->
           <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead">
             <div class="bf-offering-card">
-              <span class="bf-offering-card__eyebrow">04 / Self-led</span>
-              <h3 class="bf-offering-card__title">Practical guidance for leading yourself through conscious change.</h3>
               <button class="bf-offering__toggle" type="button" aria-expanded="false">
                 <span>What's included</span>
                 <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
@@ -168,17 +170,18 @@ const optionLabelsJson = JSON.stringify(
               <div class="bf-offering-card__grid">
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Structure</span>
-                  <p class="bf-offering-card__body t-body-lg">Guided frameworks, exercises, reflections as a repeatable independent practice. Available Winter 2026.</p>
+                  <p class="bf-offering-card__body">Guided frameworks, exercises, reflections as a repeatable independent practice. Available Winter 2026.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What you practice</span>
-                  <p class="bf-offering-card__body t-body-lg">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
+                  <p class="bf-offering-card__body">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
                 </div>
               </div>
             </div>
           </div>
 
-        </div>
+          </div><!-- /.bf-step2-offerings -->
+        </div><!-- /.bf-step2-left -->
 
       <!-- Netlify Forms — hidden form for build-time detection -->
       <form name="begin" netlify netlify-honeypot="bot-field" hidden>
@@ -188,10 +191,11 @@ const optionLabelsJson = JSON.stringify(
         <input type="hidden" name="option" />
       </form>
 
-      <!-- Right column (desktop): About you + form. Stacks under the box on mobile.
-           For self-led (no box) the whole grid reverts to a single left stack. -->
+      <!-- Right column: the anchored white form panel ("About you" + note + form).
+           Top-aligned with the left column; stacks below the offering on mobile. -->
       <div class="bf-step2-formcol">
       <h2 class="bf-about-heading" id="bfAboutHeading">About you</h2>
+      <p class="bf-form-note" id="bfFormNote">A few details about you to get connected with a coach. You'll be scheduled for a free discovery fit-check, not a sales call.</p>
 
       <form class="bf-form" id="bfForm" novalidate>
         <input type="hidden" name="form-name" value="begin" />
@@ -229,7 +233,7 @@ const optionLabelsJson = JSON.stringify(
           <span class="bf-field-error" id="bfEmailError">Please enter a valid email address</span>
         </div>
 
-        <div class="bf-field">
+        <div class="bf-field bf-field--phone">
           <label class="bf-label" for="bfPhone">
             Phone <span class="bf-optional">(optional)</span>
           </label>
@@ -246,10 +250,12 @@ const optionLabelsJson = JSON.stringify(
 
         <div class="bf-form-footer">
           <button class="bf-submit" id="bfSubmit" type="button">
-            <span class="bf-submit__label" id="bfSubmitLabel">Begin Practice</span>
+            <span class="bf-submit__label" id="bfSubmitLabel">Continue to scheduling</span>
+            <svg class="bf-submit__arrow" id="bfSubmitArrow" width="22" height="11" viewBox="0 0 22 11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 5.5h20M16 1l4 4.5-4 4.5" /></svg>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
           <span class="bf-field-error" id="bfSubmitError" role="alert">That didn't send — please try again.</span>
+          <p class="bf-reassure" id="bfReassure">No obligation. Your details are never shared.</p>
         </div>
       </form>
       </div><!-- /.bf-step2-formcol -->
@@ -270,7 +276,10 @@ const optionLabelsJson = JSON.stringify(
         <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
       </div>
 
-      <!-- 3a: Calendly embed (shown for 1:1, group, orgs) -->
+      <div class="bf-steps" id="bfSteps3" aria-hidden="true"></div>
+
+      <!-- 3a: Calendly embed (shown for 1:1, group, orgs) — paper panel
+           mirroring the Step-2 form panel so the surface reads continuous -->
       <div class="bf-calendly-wrap" id="bfCalendlyWrap">
         <div class="bf-header">
           <span class="bf-eyebrow" id="bfCalendlyEyebrow"></span>
@@ -382,8 +391,57 @@ const optionLabelsJson = JSON.stringify(
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding-bottom: 18px;
-  margin-bottom: 40px;
+  margin-bottom: 18px;   /* the step indicator sits directly under the nav */
   border-bottom: 0.5px solid rgba(0,0,0,0.12);
+}
+
+/* ── Step indicator — quiet DM Mono progress row on every step (2026-06-11).
+   Booking: Choose → Your details → Schedule · Self-led: Choose → Join the list.
+   Items rendered by JS (renderSteps) so the count/labels follow the option.
+   Mono 13px (site floor — normalized from the comp's 12) + 1px lines (site hairline). */
+.bf-steps {
+  display: flex;
+  align-items: center;
+  margin-bottom: 48px;
+}
+/* Items are injected by JS (renderSteps) — they carry no Astro scope attribute,
+   so style them via :global under the scoped .bf-steps container. */
+.bf-steps :global(.bf-step-item) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+  white-space: nowrap;
+}
+.bf-steps :global(.bf-step-item__num) {
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex: 0 0 auto;
+}
+.bf-steps :global(.bf-step-item--done) { color: rgba(0,0,0,0.55); }
+.bf-steps :global(.bf-step-item--done .bf-step-item__num) { border-color: rgba(0,0,0,0.4); }
+.bf-steps :global(.bf-step-item--on) { color: var(--ink); }
+.bf-steps :global(.bf-step-item--on .bf-step-item__num) {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+.bf-steps :global(.bf-step-line) {
+  width: 48px;
+  height: 1px;
+  background: rgba(0,0,0,0.2);
+  margin: 0 18px;
+  flex: 0 0 auto;
 }
 /* Explicit columns so the × stays hard-right even when the wordmark is hidden
    (display:none removes it from grid auto-placement, which otherwise pushed × to the middle column) */
@@ -429,49 +487,67 @@ const optionLabelsJson = JSON.stringify(
 .bf-close:hover { color: var(--blue); }
 
 
-/* ── Step 2 two-column layout — heading + sub + offering box stack in the LEFT
-   column; About-you + form move to the RIGHT column (.bf-step2-formcol spans the
-   rows so "About you" top-aligns with the service heading regardless of box height). */
+/* ── Step 2 — anchored split (2026-06-11 redesign): chip + service-name H1 +
+   dek + offering detail in the LEFT column on the cream; the white form panel
+   RIGHT, top-aligned with the left column's first line. */
 .bf-step2-cols {
   display: grid;
-  grid-template-columns: 3fr 2fr;   /* box (left) wider, form (right) narrower */
-  grid-template-areas:
-    "heading ."
-    "sub     ."
-    "card    formcol";
-  column-gap: 80px;
-  row-gap: 0;
-  margin-bottom: 72px;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 72px;
   align-items: start;
 }
-.bf-step2-heading { grid-area: heading; }
-.bf-step2-sub     { grid-area: sub; }
-.bf-step2-right   { grid-area: card; margin-top: 40px; }    /* sits below heading + sub */
-.bf-step2-formcol {
-  grid-area: formcol;
-  margin-top: 40px;            /* top-aligns with the offering detail block */
-  background: var(--paper);    /* the white box now wraps About you + the form */
-  padding: 32px;
+#bfStep2 .bf-step__inner { padding-bottom: 96px; }
+
+/* Selected chip */
+.bf-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 14px;
+  border: 1px solid rgba(0,0,0,0.30);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.60);
+  margin-bottom: 28px;
+}
+.bf-chip--soon {
+  border-color: var(--blue);
+  color: var(--blue);
 }
 
-/* (Self-led now has its own offering card — the former --nobox single-column
-   fallback was removed 2026-06-11; all four options share this layout.) */
-
+/* Service name — the single H1, display tier */
 .bf-step2-heading {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(46px, 5.2vw, 80px);
+  font-size: clamp(46px, 5.6vw, 84px);
   letter-spacing: -0.030em;
-  line-height: 1.0;
+  line-height: 0.98;
   color: var(--ink);
-  margin-bottom: 28px;
 }
 
-.bf-step2-sub {
-  color: rgba(0,0,0,0.55);
+/* Dek — one supporting line under the name (the approved offering title copy) */
+.bf-step2-dek {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -0.010em;
+  color: var(--ink);
+  margin-top: 24px;
+  max-width: 520px;
 }
 
-/* ── Offering detail (left column) — sits directly on the cream, no white card */
+/* ── Offering detail — on the cream under a top hairline */
+.bf-step2-offerings { margin-top: 48px; }
+
+.bf-offering {
+  padding-top: 36px;
+  border-top: 1px solid rgba(0,0,0,0.18);
+}
+
 .bf-offering-card {
   background: transparent;
   padding: 0;
@@ -480,45 +556,10 @@ const optionLabelsJson = JSON.stringify(
 /* "What's included" toggle — mobile only (desktop always shows the grid) */
 .bf-offering__toggle { display: none; }
 
-.bf-offering-card__eyebrow {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.40);
-  margin-bottom: 16px;
-}
-
-.bf-offering-card__title {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: clamp(18px, 1.8vw, 26px);
-  line-height: 1.25;
-  letter-spacing: -0.010em;
-  color: var(--ink);
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 0.5px solid rgba(0,0,0,0.12);
-}
-
 .bf-offering-card__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
-
-.bf-offering-card__section {
-  padding: 20px 20px 20px 0;
-  border-bottom: 0.5px solid rgba(0,0,0,0.10);
-}
-.bf-offering-card__section:nth-child(even) {
-  padding-left: 20px;
-  padding-right: 0;
-  border-left: 0.5px solid rgba(0,0,0,0.10);
-}
-.bf-offering-card__section:nth-last-child(-n+2) {
-  border-bottom: none;
+  gap: 36px 48px;
 }
 
 .bf-offering-card__label {
@@ -527,23 +568,36 @@ const optionLabelsJson = JSON.stringify(
   font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.40);
-  margin-bottom: 10px;
+  color: rgba(0,0,0,0.50);
+  margin-bottom: 12px;
 }
 
 .bf-offering-card__body {
-  color: rgba(0,0,0,0.65);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.020em;
+  color: rgba(0,0,0,0.66);
 }
 
-/* ── "About you" heading */
+/* ── Form panel (right) — anchored paper surface */
+.bf-step2-formcol {
+  background: var(--paper);
+  padding: 48px 44px 44px;
+  align-self: start;
+}
+
 .bf-about-heading {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(32px, 3.4vw, 48px);
-  line-height: 1.1;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.05;
   letter-spacing: -0.020em;
   color: var(--ink);
-  margin-top: 0;       /* top of the right column now — aligns with the service heading */
+  margin-top: 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.14);
   margin-bottom: 8px;
 }
 
@@ -636,7 +690,10 @@ const optionLabelsJson = JSON.stringify(
   border-bottom: 0.5px solid rgba(0,0,0,0.18);
   transition: border-color 0.2s ease;
 }
-.bf-field:first-of-type { border-top: 0.5px solid rgba(0,0,0,0.18); }
+/* (No border-top on the first field — the "About you" hairline + note sit above.) */
+
+/* Hide the optional phone field in the Self-led waitlist variant */
+.bf-form--waitlist .bf-field--phone { display: none; }
 /* Focus / error feedback now lives on the single field divider */
 .bf-field:focus-within { border-bottom-color: var(--blue); }
 .bf-field:has(.bf-input--error) { border-bottom-color: var(--ink); }
@@ -688,28 +745,29 @@ const optionLabelsJson = JSON.stringify(
 
 /* ── Form footer */
 .bf-form-footer {
-  margin-top: 40px;
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 16px;
 }
 
-/* ── Submit button */
+/* ── Submit button — full panel width, names the next step */
 .bf-submit {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  padding: 0 40px;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 24px;
   background: var(--ink);
   color: var(--paper);
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.25s ease;
-  min-width: 140px;
 }
 .bf-submit:hover { background: var(--blue); }
 .bf-submit:disabled { opacity: 0.50; cursor: default; background: var(--ink); }
@@ -722,6 +780,24 @@ const optionLabelsJson = JSON.stringify(
   transition: opacity 0.2s;
 }
 .bf-submit.loading .bf-submit__label { opacity: 0; }
+
+.bf-submit__arrow {
+  flex: 0 0 auto;
+  transition: opacity 0.2s;
+}
+.bf-submit.loading .bf-submit__arrow { opacity: 0; }
+.bf-form--waitlist .bf-submit__arrow { display: none; }
+
+/* Reassurance line under the submit */
+.bf-reassure {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(0,0,0,0.45);
+  text-align: center;
+  margin: 0;
+}
 
 .bf-submit__spinner {
   display: none;
@@ -739,22 +815,28 @@ const optionLabelsJson = JSON.stringify(
   to { transform: rotate(360deg); }
 }
 
+/* Context note under the "About you" heading */
 .bf-form-note {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 1.5;
   letter-spacing: 0.020em;
-  color: rgba(0,0,0,0.38);
+  color: rgba(0,0,0,0.55);
+  margin-bottom: 8px;
 }
 
-/* ── Step 3: Calendly */
+/* ── Step 3: Calendly — paper panel mirroring the Step-2 form panel geometry */
+.bf-calendly-wrap {
+  background: var(--paper);
+  padding: 48px 44px 44px;
+}
 .bf-calendly-wrap .bf-header {
   margin-bottom: 36px;
 }
 
 #bfCalendlyMount {
-  margin: 0 calc(-1 * var(--gutter));
+  margin: 0;
 }
 
 /* ── Step 3: Self-led */
@@ -832,26 +914,32 @@ const optionLabelsJson = JSON.stringify(
   .bf-step2-heading { font-size: clamp(22px, 2.2vw, 32px); letter-spacing: -0.010em; line-height: 1.2; }
 
   /* Step 2 nav */
-  .bf-nav { margin-bottom: 24px; padding-bottom: 14px; }
+  .bf-nav { margin-bottom: 14px; padding-bottom: 14px; }
 
-  /* Step 2: single column, order heading → sub → card → about → form */
+  /* Step indicator: connectors shrink; only the CURRENT step keeps its label
+     (the spec'd all-labels row measures ~420px at 13px mono — wider than the
+     viewport at 375px, so the off steps collapse to their numbered circles) */
+  .bf-steps { margin-bottom: 28px; }
+  .bf-steps :global(.bf-step-line) { width: 24px; margin: 0 12px; }
+  .bf-steps :global(.bf-step-item) { font-size: 0; gap: 0; }
+  .bf-steps :global(.bf-step-item__num) { font-size: 12px; }
+  .bf-steps :global(.bf-step-item--on) { font-size: 13px; gap: 12px; }
+
+  /* Step 2: single column — indicator → chip → name → dek → offering → form panel */
   .bf-step2-cols {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
-    grid-template-areas:
-      "heading"
-      "sub"
-      "card"
-      "formcol";
-    row-gap: 0;
-    margin-bottom: 40px;
+    gap: 0;
   }
-  .bf-step2-right { margin: 32px 0; }     /* breathing room around the card when stacked */
-  .bf-step2-formcol { margin-top: 0; padding: 20px; }  /* white box keeps the old card's mobile padding */
-  .bf-about-heading { margin-top: 0; }    /* card already provides the gap above */
+  #bfStep2 .bf-step__inner { padding-bottom: 56px; }
+  .bf-chip { margin-bottom: 20px; }
+  .bf-step2-dek { margin-top: 16px; }
+  .bf-step2-offerings { margin-top: 28px; }
+  .bf-offering { padding-top: 20px; }
+  .bf-step2-formcol { margin-top: 32px; padding: 20px; }  /* panel keeps the mobile card padding */
 
   /* Offering detail grid: 1-col on mobile, collapsed behind a toggle (no card bg) */
   .bf-offering-card { padding: 0; }
+  .bf-offering-card__grid { gap: 0; }
   .bf-offering__toggle {
     display: flex;
     align-items: center;
@@ -882,15 +970,14 @@ const optionLabelsJson = JSON.stringify(
     opacity: 1;
     margin-top: 20px;
   }
-  .bf-offering-card__section:nth-child(even) {
-    padding-left: 0;
-    border-left: none;
-  }
-  .bf-offering-card__section:nth-last-child(-n+2) {
+  /* Stacked cells separated by hairlines (desktop uses the open 36×48 gap grid) */
+  .bf-offering-card__section {
+    padding: 16px 0;
     border-bottom: 0.5px solid rgba(0,0,0,0.10);
   }
   .bf-offering-card__section:last-child {
     border-bottom: none;
+    padding-bottom: 0;
   }
 
   /* About heading */
@@ -912,6 +999,7 @@ const optionLabelsJson = JSON.stringify(
   var bfData = document.getElementById('bfData');
   var OPTION_LABELS = JSON.parse(bfData.dataset.labels);
   var CALENDLY_URLS = JSON.parse(bfData.dataset.urls);
+  var OPTION_DEKS   = JSON.parse(bfData.dataset.deks);
 
   // ── State
   var selectedOption = null;
@@ -923,14 +1011,44 @@ const optionLabelsJson = JSON.stringify(
   var optionBtns  = document.querySelectorAll('.bf-option');
   var backBtn     = document.getElementById('bfBack');
   var step2Heading = document.getElementById('bfStep2Heading');
-  var step2Sub     = document.getElementById('bfStep2Sub');
+  var step2Dek     = document.getElementById('bfStep2Dek');
+  var chipEl       = document.getElementById('bfChip');
+  var aboutHeading = document.getElementById('bfAboutHeading');
+  var formNote     = document.getElementById('bfFormNote');
+  var reassureEl   = document.getElementById('bfReassure');
   var SUB_DEFAULT  = "A few details about you to get connected with a coach. You'll be scheduled for a free discovery fit-check, not a sales call.";
   var SUB_SELFLEAD = "A few details to get connected. Be the first to learn about the self-led practice, coming soon.";
+  var REASSURE_DEFAULT  = 'No obligation. Your details are never shared.';
+  var REASSURE_SELFLEAD = "We'll only email you about the self-led practice.";
   var optionInput = document.getElementById('bfOptionInput');
   var form        = document.getElementById('bfForm');
   var submitBtn   = document.getElementById('bfSubmit');
 
   var advanceTimer = null;
+
+  // ── Step indicator — booking shows 3 steps, the Self-led waitlist shows 2.
+  // Each step's container has a fixed "current" position; only the labels/count
+  // change with the selected option.
+  var STEPS_BOOKING  = ['Choose', 'Your details', 'Schedule'];
+  var STEPS_WAITLIST = ['Choose', 'Join the list'];
+  function renderSteps() {
+    var labels = selectedOption === 'selflead' ? STEPS_WAITLIST : STEPS_BOOKING;
+    [['bfSteps1', 1], ['bfSteps2', 2], ['bfSteps3', 3]].forEach(function (pair) {
+      var el = document.getElementById(pair[0]);
+      if (!el) return;
+      var current = pair[1];
+      var html = '';
+      labels.forEach(function (label, i) {
+        var n = i + 1;
+        var cls = 'bf-step-item' + (n < current ? ' bf-step-item--done' : n === current ? ' bf-step-item--on' : '');
+        var num = n < current ? '✓' : String(n);
+        if (i) html += '<span class="bf-step-line"></span>';
+        html += '<span class="' + cls + '"><span class="bf-step-item__num">' + num + '</span>' + label + '</span>';
+      });
+      el.innerHTML = html;
+    });
+  }
+  renderSteps();
 
   // ── Read URL param on load
   var params = new URLSearchParams(window.location.search);
@@ -959,10 +1077,22 @@ const optionLabelsJson = JSON.stringify(
     });
     clearTimeout(advanceTimer);
     advanceTimer = setTimeout(function () {
-      step2Heading.textContent = OPTION_LABELS[selectedOption] || '';
-      if (step2Sub) step2Sub.textContent = selectedOption === 'selflead' ? SUB_SELFLEAD : SUB_DEFAULT;
+      var isWaitlist = selectedOption === 'selflead';
+      var label = OPTION_LABELS[selectedOption] || '';
+
+      step2Heading.textContent = label;
+      if (step2Dek) step2Dek.textContent = OPTION_DEKS[selectedOption] || '';
+      if (chipEl) {
+        chipEl.textContent = isWaitlist ? 'Coming Winter 2026' : 'Selected · ' + label;
+        chipEl.classList.toggle('bf-chip--soon', isWaitlist);
+      }
+      if (aboutHeading) aboutHeading.textContent = isWaitlist ? 'Join the waitlist' : 'About you';
+      if (formNote) formNote.textContent = isWaitlist ? SUB_SELFLEAD : SUB_DEFAULT;
+      if (reassureEl) reassureEl.textContent = isWaitlist ? REASSURE_SELFLEAD : REASSURE_DEFAULT;
       var submitLabel = document.getElementById('bfSubmitLabel');
-      if (submitLabel) submitLabel.textContent = selectedOption === 'selflead' ? 'Notify me' : 'Begin Practice';
+      if (submitLabel) submitLabel.textContent = isWaitlist ? 'Notify me' : 'Continue to scheduling';
+      if (form) form.classList.toggle('bf-form--waitlist', isWaitlist);
+      renderSteps();
       optionInput.value = selectedOption;
       document.documentElement.classList.remove('bf-has-param');
 

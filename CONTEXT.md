@@ -5,7 +5,8 @@ _2. **Published articles (Ben 2026-06-11): "The future is created in the present
 _3. **Writing imagery via Astro `<Image>`** — article images in `src/assets/writing/` (responsive srcset/WebP/lazy/no-CLS; the `public/images` copies still serve the main site; schema `image()` enforces processed assets)._
 _4. **"Writing" link added to Nav (before Client Portal) + Footer (first link)**; blue 0.5px underline active state on Writing pages only (`.page-writing`); nav reuses the `.nav.scrolled` glass state via a scroll toggle on the hero-less Writing pages._
 _5. **Handoff 6 intake:** only 3 files are current (`Begin Flow Redesign - Spec.md`, `Writing Section - Spec.md`, `Writing Section - design.md` + `comps/`) — **the rest of the zip is stale handoff-4-era material (ignore; would re-break approved work)**. Ben's calls logged: repo copy beats Claude-Design copy rewrites; spec over comp; mono → 13px in the Begin redesign (Writing keeps the comped 11/12); 0.5px hairlines Writing-only; the Begin spec supersedes the session-6 Step 2 layout incl. the context-note-in-panel reversal._
-_**Next: Begin flow Step 2 redesign** (step indicator, anchored split, waitlist variant — comps first, Ben approves before commit). Deferred to-do: LAUNCH.md §4 #11 (article OG polish: og:type=article + per-article og:image dims — cosmetic)._
+_6. **Begin flow Step 2 redesign (handoff 6 part 2, Ben-approved comp)** — design.md §5.12 fully resynced. Step indicator on all steps (booking `Choose → Your details → Schedule`; Self-led 2-step `Choose → Join the list`; Mono 13px + 1px lines per Ben's normalization; mobile = circles + current label only — approved deviation, the spec'd full row overflows 375px). Step 2 = anchored split `1.15fr/0.85fr` gap 72: LEFT chip ("Selected · {label}"; Self-led = blue "Coming Winter 2026") + service-name H1 (display 46–84) + dek (= the approved offering titles, now `options.ts` `dek` field; `01 /` eyebrows removed) + offering grid (1px top hairline, open 2-col 36×48, cells 16/24); RIGHT white panel 48/44/44 ("About you" + hairline, note = the approved sub copy, fields, **full-width 52px "Continue to scheduling →"** + reassurance line). Self-led waitlist variant: "Join the waitlist", no Phone, "Notify me" (no arrow). Step 3: Calendly on a paper panel (continuous surface). Flow logic/Netlify/deep links untouched; **regression-proven via full prod-build diff: only `begin/index.html`, `index.html` (drawer markup only), and BeginFlow's hashed CSS differ — every other page byte-identical.**_
+_**Next:** push to staging on Ben's word; then remaining launch items (Waymaker images, bio images, cutover). Deferred to-do: LAUNCH.md §4 #11 (article OG polish: og:type=article + per-article og:image dims — cosmetic)._
 
 ---
 
@@ -150,9 +151,9 @@ Three-step flow at `/begin` (standalone page) and as a bottom-sheet drawer on th
 - Auto-advances after 350ms on click (no Continue button)
 
 **Step 2 — Contact form**
-- Fields: First name (required), Email (required), Phone (optional)
-- Unified `.bf-nav` row (← Back · wordmark · ×) above the heading; heading = the selected service name
-- **Layout (reworked 2026-06-11, see design.md §5.12):** desktop = heading + sub + offering detail in the LEFT column **on the cream (no white card)**, with "About you" + form in a **white box** (`.bf-step2-formcol`) on the RIGHT, top-aligned with the offering block. Mobile = single column, offering above the white form box ("What's included" toggle). **All four options share this layout** (Self-led gained its own offering card 2026-06-11; the former `--nobox` single-column fallback was removed). Self-led also swaps the Step 2 sub ("…the self-led practice, coming soon.") and the submit label to **"Notify me"** via JS (`SUB_SELFLEAD` / `bfSubmitLabel` in `selectOption()`).
+- Fields: First name (required), Email (required), Phone (optional — hidden for Self-led)
+- Unified `.bf-nav` row (← Back · wordmark · ×) + **step indicator** above the content
+- **Layout (anchored split — 2026-06-11 redesign, handoff 6; full spec in design.md §5.12):** grid `1.15fr/0.85fr` gap 72. LEFT on the cream: `Selected · {label}` **chip** → **service name as the single display-size H1** → **dek** (the approved offering-title copy, from `options.ts` `dek`) → offering grid (1px top hairline, open 2-col). RIGHT: **white form panel** (48/44/44) with "About you" + hairline, context note (the approved sub copy), fields, **full-width "Continue to scheduling →"** submit + reassurance line. Mobile = single column (indicator → chip → name → dek → offering w/ "What's included" toggle → panel at 20px padding). **Self-led waitlist variant** (JS, `.bf-form--waitlist`): blue "Coming Winter 2026" chip, 2-step indicator, "Join the waitlist" heading + coming-soon note, no Phone, submit **"Notify me"** (no arrow), waitlist reassurance.
 - **Offering detail block** shown when a relevant option is selected:
   - `#bfOffering1on1` — shown for `1on1`; sections: Structure, What we work with, Between sessions, AI-supported practice
   - `#bfOfferingOrgs` — shown for `orgs`; sections: Structure, What we practice, Engagement types, Facilitation & support
@@ -163,8 +164,8 @@ Three-step flow at `/begin` (standalone page) and as a bottom-sheet drawer on th
 - Mobile: flex-push submit button (margin-top: auto), `font-size: 16px` prevents iOS zoom, `env(safe-area-inset-bottom)` for home bar
 
 **Step 3 — Downstream**
-- For 1:1, Group, Orgs: Calendly widget loaded dynamically
-- For Self-led: Confirmation screen ("You're on the list — Winter 2026")
+- For 1:1, Group, Orgs: Calendly widget loaded dynamically, on a **paper panel** mirroring the Step-2 form panel (2026-06-11)
+- For Self-led: Confirmation screen ("You're on the list — Winter 2026"), on the cream
 
 **URL param shortcut:** `/begin?option=1on1|group|orgs|selflead` skips step 1 — inline script adds `bf-has-param` to `<html>` before paint.
 
