@@ -128,12 +128,12 @@ Three-step flow at `/begin` (standalone page) and as a bottom-sheet drawer on th
 **Step 2 — Contact form**
 - Fields: First name (required), Email (required), Phone (optional)
 - Unified `.bf-nav` row (← Back · wordmark · ×) above the heading; heading = the selected service name
-- **Layout (reworked 2026-06-11, see design.md §5.12):** desktop = heading + sub + offering detail in the LEFT column **on the cream (no white card)**, with "About you" + form in a **white box** (`.bf-step2-formcol`) on the RIGHT, top-aligned with the offering block. Mobile = single column, offering above the white form box ("What's included" toggle). Self-led (no offering) toggles `.bf-step2-cols--nobox` → single stack, no empty column.
+- **Layout (reworked 2026-06-11, see design.md §5.12):** desktop = heading + sub + offering detail in the LEFT column **on the cream (no white card)**, with "About you" + form in a **white box** (`.bf-step2-formcol`) on the RIGHT, top-aligned with the offering block. Mobile = single column, offering above the white form box ("What's included" toggle). **All four options share this layout** (Self-led gained its own offering card 2026-06-11; the former `--nobox` single-column fallback was removed). Self-led also swaps the Step 2 sub ("…the self-led practice, coming soon.") and the submit label to **"Notify me"** via JS (`SUB_SELFLEAD` / `bfSubmitLabel` in `selectOption()`).
 - **Offering detail block** shown when a relevant option is selected:
   - `#bfOffering1on1` — shown for `1on1`; sections: Structure, What we work with, Between sessions, AI-supported practice
   - `#bfOfferingOrgs` — shown for `orgs`; sections: Structure, What we practice, Engagement types, Facilitation & support
   - `#bfOfferingGroup` — shown for `group`; sections: Structure, What we practice, Experience, Facilitation & support
-  - Self-led: no offering block (no detail needed)
+  - `#bfOfferingSelflead` — shown for `selflead` (added 2026-06-11); sections: Structure ("Available Winter 2026"), What you practice
 - `.bf-offering--hidden` (CSS `display: none`) toggled by `selectOption()` JS
 - Netlify Forms — hidden static form + AJAX POST; **awaits the response and only advances to Step 3 on `res.ok`** (2026-06-05 reliability check). On failure: re-enables the submit button, removes the loading spinner, and shows `#bfSubmitError` ("That didn't send — please try again."); stays on Step 2 so the lead isn't silently lost.
 - Mobile: flex-push submit button (margin-top: auto), `font-size: 16px` prevents iOS zoom, `env(safe-area-inset-bottom)` for home bar
