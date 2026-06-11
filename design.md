@@ -90,12 +90,12 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 | Section | Background | Notes |
 |---|---|---|
-| S1 Hero | `#000` + rotating bg image at 0.86 opacity + four-stop dark gradient | 3-image rotation: horizon · window-sunset · hero-red-sun |
+| S1 Hero | `#000` + rotating bg image at 0.86 opacity + four-stop dark gradient | 4-image rotation: rhododendron · rainleaves · silhouette-coast · rose-sky |
 | S2 Practice | `--paper-cream` | New layout: header + 3 tier tiles + 4 option cards |
 | S3 Outcomes | `--paper` | Drag-snap rail · 8 cards alternating ink (outcome) / sage (testimonial) · auto-advance 4s |
 | S4 About | `--paper-off-b` | Heading + body + 3-tag column |
 | S5 Waymaker | `--paper-cream` | Long-form prose, ink-blue brush mark on heading |
-| S6 Taylor | `--paper` | Single portrait (taylor-01.png) + bio |
+| S6 Taylor | `--paper` | Two portraits in a diagonal implied box (DSCF0184 upper-right · DSCF0084 lower-left, mirrored) + bio |
 | S7 FAQ | `--paper-sage` | Accordion, single-open behavior |
 | Footer | `--ink` | Wordmark + Contact · Instagram · Terms · Privacy (+ Client Portal mobile-only) |
 | Contact | `--paper` | **Standalone `/contact` page** (`src/pages/contact.astro`), linked from the footer |
@@ -149,7 +149,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 ### 5.5 S3 Practice Makes Progress (`Testimonials.astro`)
 - Paper background
-- Header: h2 "Practice makes progress" + sub-heading "Testimonials and outcomes" (`.s3__subhead`) — sub-heading uses the **same type treatment as the S2 header body** (`--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, -0.010em, solid `--ink`, `margin-top: 32px`, `max-width: 760px`; keeps the 22px clamp floor on mobile, NOT reduced to 16px)
+- Header: h2 "Practice makes progress" + sub-heading **"Outcomes from conscious executive coaching"** (`.s3__subhead`, an `<h3>` — _2026-06-11, Ben-approved SEO change: was a `<p>` reading "Testimonials and outcomes"; tag + copy changed to put the positioning phrase in a visible heading. Zero visual change — all type props live on the class, global reset zeroes heading margins_) — sub-heading uses the **same type treatment as the S2 header body** (`--font-body` weight 400, `clamp(22px, 2.2vw, 32px)`, line-height 1.2, -0.010em, solid `--ink`, `margin-top: 32px`, `max-width: 760px`; keeps the 22px clamp floor on mobile, NOT reduced to 16px)
 - **Carousel (`.s3__carousel`):** the card track is **confined to the content column** (`max-width: var(--max-w)`, gutter padding) and **flanked by two chevrons** — `.s3__chev--prev` / `--next` sit outside the rail (`.s3__rail` is `flex: 1 1 auto; min-width: 0`), so 2–3 cards show with the next card **right-clipped**. (Replaced the old full-bleed rail that bled `padding-right: max(40vw, gutter)` off the viewport edge.)
 - **Chevrons — bare hairline, on-brand (Ben-approved 2026-06-04):** thin **1px stroke** SVG chevron (16×24, `stroke-linecap: square`, `currentColor`) — **no circle, fill, or border** (echoes the S7 plus-icon hairline idiom, NOT a typographic glyph). `--ink` default → **`--blue` on hover** with a **3px outward nudge** (`translateX(±3px)`, the S7 rollover gesture). Disabled at the track ends → `opacity: 0.2`. 24×24 box, transparent background.
 - 8 cards · **`aspect-ratio: 1/1` (square), width clamp(280, 30vw, 420px), padding 40px** · 4px gap _[2026-06-04 — squared from `3/4` to match the S2 tier tiles' desktop dimensions; mobile scales down proportionally to 78vw square]_
@@ -262,25 +262,24 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 
 Stored in `public/images/`. **No grayscale-by-default treatment.** Full color throughout. **No hover-color-from-grayscale signature move.** (The staging build's "Digital Curator" gesture is dropped.)
 
-**Hero rotation** (sequential via `localStorage.edf_hero`):
-1. horizon.png — 50% 50%
-2. window-sunset.png — 50% 60%
-3. hero-red-sun.jpg — 50% 40%
-
-(rose.png removed from the rotation per Ben — file kept in `public/images/`, just not cycled.)
+**Hero rotation** (sequential via `localStorage.edf_hero`) — see CONTEXT.md "Hero Image Rotation" for per-image crop notes:
+1. rhododendron.jpg — 50% 60% (landscape)
+2. rainleaves.jpg — 50% 60% (landscape)
+3. silhouette-coast.jpg — 50% 50% (landscape, horizontal crop)
+4. rose-sky.jpg — 50% 40% (portrait)
 
 **S2 tier tiles:**
-- dunes.png — Foundation
-- feather.png — Calibration
-- lotus.png — Expansion
+- foundation01.jpg — Foundation (rock still)
+- calibration.mp4 — Calibration (video, mirrored `scaleX(-1)`)
+- expansion.mp4 — Expansion (video, `scale(1.20)` slow-mo)
 
 **S6 Taylor:**
-- taylor-01.png — single full portrait (no scatter)
+- DSCF0184.jpg (upper-right) + DSCF0084.jpg (lower-left, mirrored `scaleX(-1)`) — two portraits in a diagonal "implied box" (no scatter, no parallax, no grayscale)
 
 **Treatment rules:**
 - Hero bg at `opacity: 0.86` with dark gradient overlay
-- S2 tier images at full opacity (no overlay needed — they sit in cards)
-- S6 portrait at full opacity
+- S2 tier media at full opacity — stills and videos, `object-fit: cover` in the cards
+- S6 portraits at full opacity
 - No grayscale filters anywhere
 
 ---

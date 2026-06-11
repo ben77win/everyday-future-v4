@@ -40,11 +40,104 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 - [x] ~~**A4 — Favicon**~~ — ✅ done 2026-06-04 (stacked EDF wordmark icon; 32px + 180px generated, wired). **Launch SEO code set complete (B1–B9).**
 
 ### Decisions log
+- **2026-06-11 (publishing home)** — **Decided: all articles publish on `everydayfuture.work`, not Substack** (domain authority, canonical control, AI citations, no Substack publishing API — full rationale in the Keyword Strategy section). Also: H1/H2 options for getting "conscious executive coaching" into a visible homepage heading — **Option A approved + implemented same day** (S3 subhead → `<h3>` "Outcomes from conscious executive coaching"; verified zero visual change in preview).
+- **2026-06-11 (keyword research)** — Deep-research pass on the keyword landscape → new **"🔑 Keyword Strategy"** section below. Headline: "conscious executive coaching" is contested (Inductive, Boulder CO targets the exact phrase) but winnable — no trademark, no Seattle competitor, CLG doesn't target "executive coaching." Priorities: (1) definitional "What is conscious executive coaching?" page, (2) GBP post-cutover (Seattle address + worldwide service area), (3) problem-framed long-tail articles. Don't chase: "conscious leadership coaching" (CLG-owned), national head terms, modality keywords.
 - **2026-06-04 (session 4 closed)** — Email reverted info@ → **`coach@everydayfuture.work`** site-wide (7 occurrences); LinkedIn **footer link** added (`/in/ltaylorwinters/`); **Domain Cutover Checklist** (Squarespace → Netlify) added. **All committed + pushed to staging:** `27af93e` (SEO batch) + `8d442a9` (footer + checklist). Tip `8d442a9`, **93 ahead of main**. Next: verify on staging → 301 redirect map (needs Squarespace URLs) → `staging → main` merge (Ben's go-ahead) → DNS repoint → post-cutover Search Console/analytics/GBP.
 - **2026-06-04 (entity schema)** — Built Person + ProfessionalService JSON-LD (`@graph`) on the homepage (`index.astro`). Verified facts only: legalName LTW Coaching LLC, areaServed **United States + Europe** (Seattle/WA base via `address`), founder "Taylor Winters — Founder & Conscious Executive Coach", credential UC Berkeley Haas exec-coaching cert (`hasCredential`, not a degree), `sameAs` = verified LinkedIn (`/in/ltaylorwinters/`) + Instagram. Both JSON-LD blocks valid; build clean. (Opp #2 done; Opp #5 schema part done — optional footer LinkedIn link remains.)
 - **2026-06-04 (favicon)** — A4 favicon provided (stacked EDF wordmark, 512px white-on-black). Placed `public/favicon.png`; generated `favicon-32.png` + `apple-touch-icon.png` (180) via sharp; wired `<link>` tags in Layout. Build clean, icon serves 200. **B6 done → launch SEO code set (B1–B9) complete.** Remaining = non-code only (Search Console/analytics, GBP, LinkedIn) + optional Person/Service schema.
 - **2026-06-04 (build)** — Shipped the launch SEO set (verified via `npm run build`): B1 `site` config, B2 per-page titles/descriptions, B3 canonicals, B4 OG/Twitter, B5 og:image (og-image.png), B7 robots.txt (allow), B8 sitemap (5 URLs; **sitemap pinned 3.7.3→3.2.1** for Astro-4 compat), B9 FAQPage JSON-LD. Bio copy edit applied (approved). A2 = allow. (Shipped in `27af93e`.)
 - **2026-06-04** — Domain locked: `everydayfuture.work`. Share image provided + placed (`og-image.png`). **A1 LOCKED → Option B: lead with “conscious executive coaching”** (calculated adjacency; “conscious leadership coaching” ruled out as an owned CLG/15-Commitments niche). Head terms executive/leadership coaching; audience leaders & founders navigating change; methods neuroscience-informed (IPNB), NLP/DBT; geo remote-first, Seattle-based. **B carries a dependency:** the phrase must land in homepage copy (Taylor bio) — added to To-dos, pending Taylor approval. **Open:** A2 crawler policy, A4 favicon.
+
+---
+
+# 🔑 Keyword Strategy — "Conscious Executive Coaching" (researched 2026-06-11)
+
+_Deep-research pass (18 sources, 87 claims extracted, 25 adversarially fact-checked → 14 confirmed). Validates the locked Option B positioning with two refinements. Caveat: specific search-volume numbers mostly failed verification (tools disagree wildly) — treat volumes as directional._
+
+## The big picture
+
+**"Conscious executive coaching" is contested but winnable.** It is not virgin territory — one boutique competitor, **Inductive** (inductive.work, Boulder CO), already targets the exact phrase in their page title. But one competitor is very different from an owned category. Key facts, all verified:
+
+- **"Conscious leadership coaching" is confirmed off-limits** — anchored to the Conscious Leadership Group (conscious.is, the "15 Commitments" book). They actively sell coaching (individual, group, intensives, org cohorts), and even Inductive's method derives from CLG's toolkit. Avoiding that phrase was the right call.
+- **CLG does not target "executive coaching"** as a term — the conscious + executive intersection sits between their territory and generic executive-coaching results, with only Inductive squarely on it.
+- **Inductive is not in Seattle** (Boulder, CO — no WA presence). Locally, the term is open.
+- **No legal obstacle:** no USPTO registration for the exact phrase; Inductive uses no ™/®. The closest mark ("THE CONSCIOUS EXECUTIVE") is a pending application stuck in an office action. It's a descriptive phrase — hard for anyone to trademark. Owning it is an SEO/brand race, not a legal one. _(Not legal advice; consult a WA attorney if Taylor ever wants to file.)_
+
+## How people actually search (verified patterns)
+
+1. **Two query classes:** *lead-generating* (near a hiring decision — converts, short journey) vs *traffic-generating* (research-stage). Target the first; use the second only to feed the first.
+2. **Buyer-intent modifiers** mark the money queries: "best," "top," "near me," "in Seattle" → **"executive coach near me," "Seattle executive coach"** are where buyers are.
+3. **Long-tail beats head terms for a solo practice** — specific service + audience phrases bring more qualified leads than bare "executive coach."
+4. **Nobody searches modality terms.** Competitors in this niche frame in value/outcome language, not IPNB/NLP/DBT. Keep modalities as credibility copy (bio, schema), never as keyword targets.
+5. **Volume (directional):** "leadership coaching" ≈ 18k/mo, slightly above "executive coaching." Both unrankable nationally for a new solo site — they're supporting terms, not targets.
+6. **Seattle is populated but not saturated** (~32 firms on Clutch). "Seattle executive coach" is a realistic mid-term target; national head terms are not.
+
+## The strategy, in priority order
+
+**Tier 1 — own the niche term.**
+The homepage already leads with "conscious executive coaching" (title, bio clause, schema — shipped session 4). To beat Inductive: get the phrase into a visible H1/H2, and publish **one definitional page — "What is conscious executive coaching?"** Whoever defines a term this young owns it in search *and* gets cited by AI answer engines (our robots.txt already invites them). This single page is the highest-leverage content we can create; every future article links back to it.
+
+**Tier 2 — capture Seattle buyer intent.**
+**Google Business Profile** (post-DNS-cutover, see LAUNCH.md §3) is the highest-ROI move per hour invested — it's what serves "near me" / map-pack queries. The Seattle address does **not** conflict with serving clients everywhere — local and national are two separate channels that never compete. The mental model: someone in Seattle searching "executive coach near me" finds Taylor through the map pack; someone in New York searching "conscious executive coaching" finds her through the homepage and the definitional page. Two doors, one practice.
+
+> **GBP setup notes (when we set it up, post-cutover):**
+> - Verify at the Seattle address, but configure as a **service-area business** ("I serve customers at their locations") — list Seattle + broader areas.
+> - Description breaks the local frame: _"Conscious executive coaching for leaders and founders navigating change. Based in Seattle — sessions are remote, serving clients across the US and Europe."_
+> - Category: "Executive coaching" (or the closest GBP offers, e.g. "Business management consultant").
+> - Website URL → `everydayfuture.work` **only after DNS is live** (already flagged in LAUNCH.md — otherwise it points at the old Squarespace site).
+> - A GBP never *prevents* remote clients from finding the site — it only adds the local surface. Costs nothing nationally.
+
+The site already handles the national half correctly: schema `areaServed` = US + Europe with Seattle only as the `address`; copy leads "remote-first, Seattle-based" (geography as credibility, not a boundary); titles target the *term*, not the city. Keep content geo-neutral too — "Seattle" should appear prominently only in the GBP listing, the schema address, and at most one line on the bio/contact page. Never write site copy that implies Taylor *only* works locally.
+
+**Tier 3 — long-tail content (post-launch).**
+Problem/outcome-framed articles, one intent each, all linking to the definitional page and ending at `/begin`:
+- "executive coach for founders" / "coaching for leaders navigating change"
+- "burnout coaching for executives"
+- "how to choose an executive coach" (classic decision-stage query)
+Precision over cadence — 4–6 strong evergreen pieces beat weekly thin ones.
+
+**Don't chase:** "conscious leadership coaching" (CLG-owned) · bare national head terms · modality keywords (IPNB/NLP/DBT explainers) · generic "leadership tips" content (traffic without leads).
+
+## Keyword → page map
+
+_Which term lives where. One primary keyword per page — supporting terms appear naturally in body copy, never as competing titles. Pages marked ✦ don't exist yet (the content plan)._
+
+| Keyword | Intent | Target page / asset | Status |
+|---|---|---|---|
+| **conscious executive coaching** | niche-defining (own it) | Homepage — title, bio clause, schema, S3 `<h3>` "Outcomes from conscious executive coaching" | ✅ done |
+| **what is conscious executive coaching** | definitional / AI-citable | ✦ Definitional page (the #1 content priority) | not built |
+| executive coaching · leadership coaching | head terms (supporting only) | Homepage title/description as modifiers ("— executive coaching for…") | ✅ done |
+| **Seattle executive coach** · executive coach near me | local buyer-intent | **GBP listing** (not a site page) + schema `address` | post-cutover |
+| executive coach for founders · coaching for leaders navigating change | mid-tail buyer-intent | ✦ Long-tail article #1 | not built |
+| burnout coaching for executives | problem-framed long-tail | ✦ Long-tail article #2 | not built |
+| how to choose an executive coach | decision-stage research | ✦ Long-tail article #3 (ends at `/begin`) | not built |
+| begin coaching / book a session | conversion | `/begin` — title already targets this | ✅ done |
+| contact executive coach | conversion | `/contact` | ✅ done |
+
+_Internal-link rule: every ✦ article links to the definitional page and ends with a CTA to `/begin`. The definitional page links to the homepage and `/begin`._
+
+## On-page H1/H2 — getting the phrase into a visible heading
+
+The homepage has "conscious executive coaching" in the title, bio body copy, and schema — but **not in any heading**, which is the strongest remaining on-page signal. Current headings are all poetic brand voice (H1 hero "A practice of possibility +coaching"; H2s "Choose how you practice" / "Practice makes progress" / "Someday already started" / "Who this practice is for" / "Taylor Winters" / "FAQ") — none should be sacrificed wholesale. Options, in recommended order (visible copy → each needs Ben's approval, no-drift rule):
+
+- **Option A — ✅ DONE 2026-06-11 (Ben-approved): the S3 subhead.** "Testimonials and outcomes" (`Testimonials.astro` — was a `<p class="s3__subhead">`) → an `<h3>` reading **"Outcomes from conscious executive coaching."** Rationale: the tag swap is visually invisible (styles live on the class, global reset zeroes heading margins — verified in preview, computed styles identical), the copy change is small and factual, and the phrase lands directly above the social proof — where the term gets contextualized by results. Lowest drift.
+- **Option B: the S5 heading.** "Who this practice is for" → "Who conscious executive coaching is for." Stronger signal (already an H2) but a heavier intrusion into the Waymaker section's deliberately spare voice.
+- **Option C: homepage untouched** — let the future definitional page carry the H1 ("What is conscious executive coaching?"). Defensible, but concedes the homepage signal.
+
+Plan: **A now, C when the definitional page ships** (they stack). Status: **A implemented 2026-06-11** (verified in preview — zero visual change, console clean); C pending the definitional page.
+
+## Where to publish content — own site, not Substack (decided 2026-06-11)
+
+**Decision: all articles publish on `everydayfuture.work`.** Substack (or similar) only ever as an email-delivery layer linking back to the site — never as the publishing home.
+
+**Rationale:**
+1. **Domain authority accrues to us, not them.** Substack posts live on a substack.com subdomain; every backlink and ranking signal builds Substack's asset. Leave the platform and none of it comes with you.
+2. **No canonical control.** Substack doesn't support canonical tags pointing at an external domain — cross-posting risks the Substack copy outranking our own.
+3. **AI citation requires it.** AI engines (Overviews, Perplexity, ChatGPT, Claude) prefer citing primary-source URLs on the author's own domain over platform mirrors. The entire "own the definitional term + get cited" strategy depends on the content living on everydayfuture.work — our robots.txt already invites the AI crawlers.
+4. **No automation path anyway.** Substack has **no official publishing API** (the official Developer API, April 2026, is read-only profile data); only ToS-gray unofficial clients exist. It can't even be cleanly mirrored.
+5. **Trivial on our stack.** Each article is just a new Astro page — same Layout/SEO machinery (title, description, canonical, OG), auto-included in the sitemap.
+
+Substack's one real advantage — built-in distribution/email — is a newsletter channel, not an SEO channel. If Taylor wants a newsletter later, use Substack/Buttondown/Beehiiv purely for delivery, with each issue linking to the canonical article on the site.
 
 ---
 
