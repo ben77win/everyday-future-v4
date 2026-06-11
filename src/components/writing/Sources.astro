@@ -1,0 +1,20 @@
+---
+// Sources & editorial standards block (sample-article comp, .ar__sources).
+// items: [{ source: 'Gallup', title: 'State of the Global Workplace', href? }]
+const { heading = 'Sources & editorial standards', items = [] } = Astro.props as {
+  heading?: string;
+  items: { source: string; title: string; href?: string }[];
+};
+---
+<div class="ar-sources">
+  <div class="ar-sources__h">{heading}</div>
+  <slot name="intro" />
+  <ul>
+    {items.map((item) => (
+      <li>
+        <b>{item.source}</b> — {item.href ? <a href={item.href} target="_blank" rel="noopener">{item.title}</a> : item.title}
+      </li>
+    ))}
+  </ul>
+  <slot name="standards" />
+</div>

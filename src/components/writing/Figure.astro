@@ -1,0 +1,24 @@
+---
+// Captioned image for articles. width="inset" (reading measure, default),
+// "content" (1280 content column), or "bleed" (full viewport width).
+// Pass an imported src/assets image for responsive variants (preferred);
+// string paths (public/) fall back to a plain <img>.
+import { Image } from 'astro:assets';
+
+const { src, alt = '', caption, width = 'inset', aspect } = Astro.props;
+const isAsset = typeof src === 'object';
+const SIZES: Record<string, string> = {
+  inset: '(max-width: 680px) 100vw, 680px',
+  content: '(max-width: 1280px) 100vw, 1280px',
+  bleed: '100vw',
+};
+const style = aspect ? `aspect-ratio:${aspect};object-fit:cover;height:auto` : undefined;
+---
+<figure class={`ar-figure ar-figure--${width}`}>
+  {isAsset ? (
+    <Image src={src} alt={alt} widths={[640, 1024, 1600, 2000]} sizes={SIZES[width]} loading="lazy" style={style} />
+  ) : (
+    <img src={src} alt={alt} loading="lazy" style={style} />
+  )}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

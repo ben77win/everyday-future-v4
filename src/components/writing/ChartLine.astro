@@ -1,0 +1,45 @@
+---
+// Data-driven SVG line chart in the brand chart vocabulary (handoff 6):
+// axes ink/25 @1px · gridlines ink/08 @1px · primary series blue 2px with
+// 3.5px dots · secondary series ink/45 @1.5px · DM Mono axis labels.
+//
+// props:
+//   labels  — x-axis tick labels, e.g. ['Day 0', 'Day 45', 'Day 90']
+//   series  — [{ values: number[], color?: 'blue' | 'ink' }] (first = blue primary)
+//   max     — optional y max (defaults to data max)
+//   ariaLabel — accessible description of the chart
+const { labels = [], series = [], max, ariaLabel = '' } = Astro.props;
+
+const W = 880, H = 360;
+const L = 60, R = 850, T = 20, B = 310; // plot bounds (comp geometry)
+
+const allValues = series.flatMap((s: { values: number[] }) => s.values);
+const yMax = max ?? Math.max(...allValues, 1);
+const n = Math.max(...series.map((s: { values: number[] }) => s.values.length), 2);
+
+const x = (i: number) => L + (i / (n - 1)) * (R - L);
+const y = (v: number) => B - (v / yMax) * (B - T);
+const points = (values: number[]) => values.map((v, i) => `${x(i)},${y(v)}`).join(' ');
+
+const COLORS: Record<string, string> = { blue: '#2956E0', ink: 'rgba(0,0,0,0.45)' };
+const gridYs = [240, 170, 100];
+---
+<svg class="ar-chart__svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={ariaLabel}>
+  <line x1={L} y1={T} x2={L} y2={B} stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+  <line x1={L} y1={B} x2={R} y2={B} stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+  {gridYs.map((gy) => <line x1={L} y1={gy} x2={R} y2={gy} stroke="rgba(0,0,0,0.08)" stroke-width="1" />)}
+  {series.map((s: { values: number[]; color?: string }, si: number) => {
+    const color = COLORS[s.color ?? (si === 0 ? 'blue' : 'ink')];
+    const primary = (s.color ?? (si === 0 ? 'blue' : 'ink')) === 'blue';
+    return (
+      <>
+        <polyline points={points(s.values)} fill="none" stroke={color} stroke-width={primary ? 2 : 1.5} />
+        {primary && s.values.map((v, i) => <circle cx={x(i)} cy={y(v)} r="3.5" fill={color} />)}
+      </>
+    );
+  })}
+  {labels.map((label: string, i: number) => {
+    const lx = L + (i / Math.max(labels.length - 1, 1)) * (R - L);
+    return <text x={lx} y={B + 22} font-family="DM Mono, monospace" font-size="12" fill="rgba(0,0,0,0.45)" text-anchor="middle">{label}</text>;
+  })}
+</svg>

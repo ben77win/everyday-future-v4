@@ -1,0 +1,42 @@
+---
+// Data-driven SVG bar chart in the brand chart vocabulary (handoff 6):
+// axes ink/25 @1px · gridlines ink/08 @1px · primary bars blue · secondary
+// bars ink/45 · DM Mono axis labels.
+//
+// props:
+//   labels  — one label per group, e.g. ['Q1', 'Q2', 'Q3']
+//   series  — [{ values: number[], color?: 'blue' | 'ink' }]
+//   max     — optional y max (defaults to data max)
+//   ariaLabel — accessible description of the chart
+const { labels = [], series = [], max, ariaLabel = '' } = Astro.props;
+
+const W = 880, H = 360;
+const L = 60, R = 850, T = 20, B = 310;
+
+const allValues = series.flatMap((s: { values: number[] }) => s.values);
+const yMax = max ?? Math.max(...allValues, 1);
+const groups = labels.length || Math.max(...series.map((s: { values: number[] }) => s.values.length));
+
+const groupW = (R - L) / groups;
+const barW = Math.min(48, (groupW * 0.6) / series.length);
+const y = (v: number) => B - (v / yMax) * (B - T);
+
+const COLORS: Record<string, string> = { blue: '#2956E0', ink: 'rgba(0,0,0,0.45)' };
+const gridYs = [240, 170, 100];
+---
+<svg class="ar-chart__svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={ariaLabel}>
+  <line x1={L} y1={T} x2={L} y2={B} stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+  <line x1={L} y1={B} x2={R} y2={B} stroke="rgba(0,0,0,0.25)" stroke-width="1" />
+  {gridYs.map((gy) => <line x1={L} y1={gy} x2={R} y2={gy} stroke="rgba(0,0,0,0.08)" stroke-width="1" />)}
+  {series.map((s: { values: number[]; color?: string }, si: number) => {
+    const color = COLORS[s.color ?? (si === 0 ? 'blue' : 'ink')];
+    return s.values.map((v, i) => {
+      const cx = L + groupW * (i + 0.5);
+      const offset = (si - (series.length - 1) / 2) * (barW + 6);
+      return <rect x={cx + offset - barW / 2} y={y(v)} width={barW} height={B - y(v)} fill={color} />;
+    });
+  })}
+  {labels.map((label: string, i: number) => (
+    <text x={L + groupW * (i + 0.5)} y={B + 22} font-family="DM Mono, monospace" font-size="12" fill="rgba(0,0,0,0.45)" text-anchor="middle">{label}</text>
+  ))}
+</svg>

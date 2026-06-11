@@ -1,0 +1,20 @@
+---
+// Chart wrapper — off-b panel with eyebrow ("FIGURE N"), title, slotted SVG
+// chart (ChartLine / ChartBar), legend, and source caption.
+const { eyebrow, title, caption, legend = [] } = Astro.props;
+---
+<div class="ar-chart">
+  <figure class="ar-chart__panel">
+    {eyebrow && <div class="ar-chart__eyebrow">{eyebrow}</div>}
+    {title && <div class="ar-chart__title">{title}</div>}
+    <slot />
+    {legend.length > 0 && (
+      <div class="ar-chart__legend">
+        {legend.map((key: { label: string; color: string }) => (
+          <span class="ar-chart__key"><span class="ar-chart__swatch" style={`background:${key.color}`}></span>{key.label}</span>
+        ))}
+      </div>
+    )}
+    {caption && <figcaption class="ar-chart__cap">{caption}</figcaption>}
+  </figure>
+</div>

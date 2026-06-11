@@ -1,0 +1,261 @@
+---
+// ArticleLayout — the one reusable template every Writing entry renders
+// through (handoff 6 Writing spec, 2026-06-11). Pixel source:
+// comps/Sample-Article-Conscious-Executive-Coaching.html +
+// Writing-Index-and-Article-Comp.html (screen B).
+//
+// All Writing CSS is scoped by the ar/ar- class prefixes — no global.css
+// edits beyond the shared .page-writing nav-ink override. Mono sizes follow
+// the comp (11/12px) per Ben 2026-06-11 — a Writing-only departure from the
+// site's 13px mono floor, as are the 0.5px hairlines.
+import { Image } from 'astro:assets';
+import Layout from './Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import authorPortrait from '../assets/writing/DSCF0184.jpg';
+
+const { frontmatter, related = [] } = Astro.props;
+const {
+  title, dek, category, publishDate, readingTime,
+  author = 'Taylor Winters', heroImage, heroAlt = '', heroCaption, ogImage,
+} = frontmatter;
+
+const dateISO = publishDate.toISOString().split('T')[0];
+const dateDisplay = publishDate.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+});
+
+const site = Astro.site ?? new URL('https://everydayfuture.work');
+const canonical = new URL(Astro.url.pathname, site).href;
+
+const AUTHOR_BIOS: Record<string, string> = {
+  'Taylor Winters':
+    'Founder of Every Day Future. Coaches executives and founders through change with a daily, repeating practice.',
+  'Every Day Future':
+    'A leadership practice for conscious change — helping founders and executives move from reacting to working with what comes.',
+};
+const authorBio = AUTHOR_BIOS[author] ?? AUTHOR_BIOS['Taylor Winters'];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: dek,
+  datePublished: dateISO,
+  dateModified: dateISO,
+  author:
+    author === 'Every Day Future'
+      ? { '@type': 'Organization', name: 'Every Day Future', url: site.href }
+      : { '@type': 'Person', name: author, url: `${site.href}#taylor` },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Every Day Future',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.png', site).href },
+  },
+  image: new URL(ogImage ?? heroImage?.src ?? '/images/og-image.png', site).href,
+  mainEntityOfPage: canonical,
+};
+---
+<Layout title={`${title} — Every Day Future`} description={dek} image={ogImage ?? heroImage?.src ?? '/images/og-image.png'}>
+  <Nav />
+
+  <article class="ar">
+    <header class="ar__head">
+      <a href="/writing" class="ar__back">← Writing</a>
+      <div class="ar__cat">{category}</div>
+      <h1 class="ar__title">{title}</h1>
+      <p class="ar__dek">{dek}</p>
+      <div class="ar__byline">
+        <span>By <b>{author}</b></span>
+        <span class="dot">·</span>
+        <span><time datetime={dateISO}>{dateDisplay}</time></span>
+        <span class="dot">·</span>
+        <span>{readingTime}</span>
+      </div>
+    </header>
+
+    {heroImage && (
+      <div class="ar__hero">
+        <figure>
+          <Image src={heroImage} alt={heroAlt} widths={[640, 1024, 1600, 2000]} sizes="(max-width: 1280px) 100vw, 1280px" loading="eager" />
+          {heroCaption && <figcaption>{heroCaption}</figcaption>}
+        </figure>
+      </div>
+    )}
+
+    <div class="ar__content">
+      <slot />
+    </div>
+
+    <div class="ar__end">
+      <div class="ar__author">
+        <Image class="ar__author-img" src={authorPortrait} alt={author} width={144} densities={[1, 2]} />
+        <div>
+          <div class="ar__author-name">{author}</div>
+          <p class="ar__author-bio">{authorBio}</p>
+        </div>
+      </div>
+    </div>
+
+    {related.length > 0 && (
+      <div class="ar__related">
+        <div class="ar__related-h">More writing</div>
+        <div class="ar__related-grid">
+          {related.map((entry: any) => (
+            <a class="ar__related-card" href={`/writing/${entry.slug}/`}>
+              {entry.data.heroImage && <Image src={entry.data.heroImage} alt={entry.data.heroAlt ?? ''} widths={[400, 800]} sizes="(max-width: 900px) 100vw, 405px" loading="lazy" />}
+              <div class="ar__related-cat">{entry.data.category}</div>
+              <div class="ar__related-title">{entry.data.title}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+
+  <Footer />
+</Layout>
+
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+<script is:inline>
+  document.documentElement.classList.add('page-writing');
+  // No hero on this page, so the homepage observer never fires — reuse the
+  // existing .nav.scrolled glass state once the reader scrolls.
+  (function () {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
+<style is:global>
+  /* ════ Writing — article template (ar/ar- prefix, scoped by convention) ════
+     0.5px hairlines + 11/12px mono are Writing-only departures (Ben 2026-06-11). */
+  .ar { background: var(--paper); --ar-measure: 680px; }
+
+  /* masthead — reading-measure column */
+  .ar__head { max-width: var(--ar-measure); margin: 0 auto; padding: 120px var(--gutter) 0; }
+  .ar__back { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.110em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-bottom: 48px; display: inline-block; transition: color 0.2s; }
+  .ar__back:hover { color: var(--blue); }
+  .ar__cat { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.110em; text-transform: uppercase; color: var(--blue); margin-bottom: 24px; }
+  .ar__title { font-family: var(--font-body); font-weight: 400; font-size: clamp(38px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.030em; color: var(--ink); }
+  .ar__dek { font-family: var(--font-body); font-weight: 400; font-size: clamp(20px, 2vw, 26px); line-height: 1.25; letter-spacing: -0.010em; color: rgba(0,0,0,0.62); margin-top: 28px; }
+  .ar__byline { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-top: 40px; padding-top: 28px; border-top: 0.5px solid rgba(0,0,0,0.14); }
+  .ar__byline .dot { color: rgba(0,0,0,0.3); }
+  .ar__byline b { color: var(--ink); font-weight: 400; }
+
+  /* hero figure — content width, 21:9 */
+  .ar__hero { max-width: var(--max-w); margin: 56px auto 0; padding: 0 var(--gutter); }
+  .ar__hero figure { margin: 0; }
+  .ar__hero img { width: 100%; height: auto; aspect-ratio: 21/9; object-fit: cover; display: block; }
+  .ar__hero figcaption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-top: 12px; }
+
+  /* body prose — every direct child sits in the measure column; breakout
+     blocks (.ar-figure--content/--bleed, .ar-chart, .ar-table) override */
+  .ar__content { padding: 64px 0 0; }
+  .ar__content > * { max-width: var(--ar-measure); margin-left: auto; margin-right: auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+  .ar__content > p { font-family: var(--font-body); font-weight: 300; font-size: 19px; line-height: 1.65; letter-spacing: 0.010em; color: rgba(0,0,0,0.82); margin-bottom: 28px; }
+  .ar__content > p:first-of-type::first-letter { font-weight: 400; }
+  .ar__content > h2 { font-family: var(--font-body); font-weight: 400; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -0.020em; color: var(--ink); margin: 56px auto 24px; }
+  .ar__content > h2:first-child { margin-top: 0; }
+  .ar__content > h3 { font-family: var(--font-body); font-weight: 400; font-size: 22px; line-height: 1.25; letter-spacing: -0.010em; color: var(--ink); margin: 40px auto 16px; }
+  .ar__content > ul, .ar__content > ol { list-style: none; margin: 0 auto 28px; }
+  .ar__content > ul li, .ar__content > ol li { position: relative; padding-left: 24px; margin-bottom: 12px; font-family: var(--font-body); font-weight: 300; font-size: 19px; line-height: 1.6; color: rgba(0,0,0,0.82); }
+  .ar__content > ul li::before, .ar__content > ol li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 1.5px; background: var(--blue); }
+  .ar__content li strong { font-weight: 400; color: var(--ink); }
+  .ar__content a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* author note callout */
+  .ar-note { margin: 8px auto 0; }
+  .ar-note__inner { background: var(--paper-off-b); padding: 28px 32px; border-left: 2px solid var(--blue); }
+  .ar-note__inner p { font-family: var(--font-body); font-weight: 300; font-size: 15px; line-height: 1.6; letter-spacing: 0.010em; color: rgba(0,0,0,0.6); margin: 0; }
+  .ar-note__inner b, .ar-note__inner strong { color: var(--ink); font-weight: 400; }
+
+  /* key takeaways panel */
+  .ar-kt { margin: 56px auto 0 !important; }
+  .ar-kt__inner { background: var(--paper-sage); padding: 44px 48px; }
+  .ar-kt__h { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.110em; text-transform: uppercase; color: var(--ink); margin-bottom: 24px; }
+  .ar-kt__inner ul { list-style: none; margin: 0; padding: 0; }
+  .ar-kt__inner li { position: relative; padding-left: 24px; margin-bottom: 16px; font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.55; color: rgba(0,0,0,0.8); }
+  .ar-kt__inner li:last-child { margin-bottom: 0; }
+  .ar-kt__inner li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 1.5px; background: var(--blue); }
+
+  /* pull quote */
+  .ar-pull { margin: 56px auto !important; }
+  .ar-pull blockquote { font-family: var(--font-body); font-weight: 400; font-size: clamp(26px, 2.8vw, 38px); line-height: 1.2; letter-spacing: -0.020em; color: var(--ink); padding-left: 28px; border-left: 2px solid var(--blue); margin: 0; }
+
+  /* captioned figure — three widths */
+  .ar__content > .ar-figure { margin: 56px auto !important; }
+  .ar-figure img { width: 100%; height: auto; display: block; }
+  .ar-figure figcaption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-top: 12px; }
+  .ar__content > .ar-figure--content { max-width: var(--max-w); }
+  .ar__content > .ar-figure--bleed { max-width: none; padding-left: 0; padding-right: 0; }
+  .ar__content > .ar-figure--bleed figcaption { padding: 0 var(--gutter); }
+
+  /* chart block — off-b panel, brand chart vocabulary */
+  .ar__content > .ar-chart { max-width: var(--max-w); margin: 56px auto !important; }
+  .ar-chart__panel { background: var(--paper-off-b); padding: 48px 48px 40px; margin: 0; }
+  .ar-chart__eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.45); margin-bottom: 8px; }
+  .ar-chart__title { font-family: var(--font-body); font-weight: 400; font-size: 22px; letter-spacing: -0.010em; color: var(--ink); margin-bottom: 32px; }
+  .ar-chart__svg { width: 100%; height: auto; display: block; }
+  .ar-chart__legend { display: flex; gap: 24px; margin-top: 18px; }
+  .ar-chart__key { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(0,0,0,0.55); }
+  .ar-chart__swatch { width: 14px; height: 2px; }
+  .ar-chart__cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-top: 20px; }
+
+  /* table block — content width, hairline rows, mono header */
+  .ar__content > .ar-table { max-width: var(--max-w); margin: 56px auto !important; }
+  .ar-table__eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.45); margin-bottom: 8px; }
+  .ar-table__title { font-family: var(--font-body); font-weight: 400; font-size: 22px; letter-spacing: -0.010em; color: var(--ink); margin-bottom: 28px; }
+  .ar-table table { width: 100%; border-collapse: collapse; }
+  .ar-table thead th { font-family: var(--font-mono); font-weight: 400; font-size: 11px; letter-spacing: 0.110em; text-transform: uppercase; color: rgba(0,0,0,0.5); text-align: left; padding: 0 20px 14px 0; border-bottom: 0.5px solid rgba(0,0,0,0.25); vertical-align: bottom; }
+  .ar-table tbody td { font-family: var(--font-body); font-weight: 300; font-size: 15px; line-height: 1.5; letter-spacing: 0.010em; color: rgba(0,0,0,0.78); padding: 18px 20px 18px 0; border-bottom: 0.5px solid rgba(0,0,0,0.12); vertical-align: top; }
+  .ar-table tbody td:first-child { font-weight: 400; color: var(--ink); }
+  .ar-table thead th:last-child, .ar-table tbody td:last-child { padding-right: 0; }
+
+  /* FAQ — static-open S7 idiom */
+  .ar-faq { margin: 56px auto 0 !important; }
+  .ar-faq__item { border-bottom: 0.5px solid rgba(0,0,0,0.18); }
+  .ar-faq__item:first-child { border-top: 0.5px solid rgba(0,0,0,0.18); }
+  .ar-faq__q { font-family: var(--font-body); font-weight: 400; font-size: clamp(20px, 2vw, 24px); line-height: 1.2; letter-spacing: -0.010em; color: var(--ink); padding: 28px 0 14px; }
+  .ar-faq__a { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.6; letter-spacing: 0.010em; color: rgba(0,0,0,0.72); padding-bottom: 28px; }
+
+  /* sources */
+  .ar-sources { margin: 64px auto 0 !important; }
+  .ar-sources__h { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.110em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-bottom: 24px; padding-top: 36px; border-top: 0.5px solid rgba(0,0,0,0.14); }
+  .ar-sources ul { list-style: none; margin: 0; padding: 0; }
+  .ar-sources li { font-family: var(--font-body); font-weight: 300; font-size: 15px; line-height: 1.5; color: rgba(0,0,0,0.7); padding: 10px 0; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+  .ar-sources li b { color: var(--ink); font-weight: 400; }
+  .ar-sources p { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.65; color: rgba(0,0,0,0.72); margin: 0 0 24px; }
+  .ar-sources ul + p { font-size: 15px; line-height: 1.6; color: rgba(0,0,0,0.6); margin: 24px 0 0; }
+
+  /* end matter — author card + related grid */
+  .ar__end { max-width: var(--ar-measure); margin: 64px auto 0; padding: 0 var(--gutter); }
+  .ar__author { display: flex; gap: 24px; align-items: center; padding: 36px 0; border-top: 0.5px solid rgba(0,0,0,0.14); border-bottom: 0.5px solid rgba(0,0,0,0.14); }
+  .ar__author-img { width: 72px; height: 72px; object-fit: cover; flex: 0 0 auto; }
+  .ar__author-name { font-family: var(--font-body); font-weight: 400; font-size: 18px; letter-spacing: -0.010em; margin-bottom: 6px; }
+  .ar__author-bio { font-family: var(--font-body); font-weight: 300; font-size: 14px; line-height: 1.5; color: rgba(0,0,0,0.6); margin: 0; }
+
+  .ar__related { max-width: var(--max-w); margin: 0 auto; padding: 80px var(--gutter) 120px; }
+  .ar__related-h { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.110em; text-transform: uppercase; color: rgba(0,0,0,0.4); margin-bottom: 40px; }
+  .ar__related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .ar__related-card { display: block; }
+  .ar__related-card img { aspect-ratio: 3/2; object-fit: cover; width: 100%; height: auto; margin-bottom: 20px; display: block; }
+  .ar__related-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.110em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .ar__related-title { font-family: var(--font-body); font-weight: 400; font-size: 20px; line-height: 1.15; letter-spacing: -0.015em; color: var(--ink); transition: color 0.2s; }
+  .ar__related-card:hover .ar__related-title { color: var(--blue); }
+
+  /* no related → keep bottom breathing room before the footer */
+  .ar > .ar__end:last-child { padding-bottom: 120px; }
+
+  @media (max-width: 760px) {
+    .ar__content > .ar-table { overflow-x: auto; }
+    .ar-table table { min-width: 560px; }
+  }
+  @media (max-width: 900px) {
+    .ar__related-grid { grid-template-columns: 1fr; }
+  }
+</style>

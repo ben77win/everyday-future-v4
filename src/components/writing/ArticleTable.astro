@@ -1,0 +1,10 @@
+---
+// Table block — content-width (1280) with eyebrow ("TABLE N") + title;
+// slot a markdown table (sample-article comp, .ar__table).
+const { eyebrow, title } = Astro.props;
+---
+<div class="ar-table">
+  {eyebrow && <div class="ar-table__eyebrow">{eyebrow}</div>}
+  {title && <div class="ar-table__title">{title}</div>}
+  <slot />
+</div>

@@ -1,0 +1,24 @@
+---
+// Static-open FAQ block for articles (sample-article comp, .ar__faq —
+// the S7 accordion idiom, non-interactive). Also emits FAQPage JSON-LD.
+const { items = [] } = Astro.props as { items: { q: string; a: string }[] };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+<div class="ar-faq">
+  {items.map((item) => (
+    <div class="ar-faq__item">
+      <div class="ar-faq__q">{item.q}</div>
+      <div class="ar-faq__a">{item.a}</div>
+    </div>
+  ))}
+</div>
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

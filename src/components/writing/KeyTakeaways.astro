@@ -1,0 +1,11 @@
+---
+// Key takeaways panel — sage surface, blue-dash list
+// (sample-article comp, .ar__kt). Slot a markdown list.
+const { heading = 'Key takeaways' } = Astro.props;
+---
+<div class="ar-kt">
+  <div class="ar-kt__inner">
+    <div class="ar-kt__h">{heading}</div>
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,27 @@
+---
+// /writing/[slug] — renders each Writing entry through ArticleLayout.
+// Drafts build in DEV ONLY (preview/comps); production excludes them.
+import { getCollection } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('writing', ({ data }) => import.meta.env.DEV || !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.slug }, props: { entry, entries } }));
+}
+
+const { entry, entries } = Astro.props;
+const { Content } = await entry.render();
+
+// Related: same category first, then most recent — 3 max, never self
+const related = entries
+  .filter((other) => other.slug !== entry.slug)
+  .sort((a, b) => {
+    const sameCatA = a.data.category === entry.data.category ? 1 : 0;
+    const sameCatB = b.data.category === entry.data.category ? 1 : 0;
+    return sameCatB - sameCatA || b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+  })
+  .slice(0, 3);
+---
+<ArticleLayout frontmatter={entry.data} related={related}>
+  <Content />
+</ArticleLayout>
