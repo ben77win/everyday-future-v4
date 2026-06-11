@@ -62,7 +62,7 @@ const optionLabelsJson = JSON.stringify(
       <div class="bf-step2-cols">
 
         <h1 class="bf-step2-heading" id="bfStep2Heading">1:1 Coaching</h1>
-        <p class="bf-step2-sub t-body-lg">A few details about you to get connected with a coach. You'll be scheduled for a free discovery fit-check, not a sales call.</p>
+        <p class="bf-step2-sub t-body-lg" id="bfStep2Sub">A few details about you to get connected with a coach. You'll be scheduled for a free discovery fit-check, not a sales call.</p>
 
         <div class="bf-step2-right">
 
@@ -130,7 +130,7 @@ const optionLabelsJson = JSON.stringify(
           <div class="bf-offering bf-offering--hidden" id="bfOfferingGroup">
             <div class="bf-offering-card">
               <span class="bf-offering-card__eyebrow">03 / Group</span>
-              <h3 class="bf-offering-card__title">A shared practice in community with structure and coach facilitation.</h3>
+              <h3 class="bf-offering-card__title">A shared practice in community with structure, support, and coach facilitation.</h3>
               <button class="bf-offering__toggle" type="button" aria-expanded="false">
                 <span>What's included</span>
                 <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
@@ -142,11 +142,11 @@ const optionLabelsJson = JSON.stringify(
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">What we practice</span>
-                  <p class="bf-offering-card__body t-body-lg">Conscious change in how we work, relate, and create. Expanding possibility through shared practice and accountability.</p>
+                  <p class="bf-offering-card__body t-body-lg">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Experience</span>
-                  <p class="bf-offering-card__body t-body-lg">Community with waymakers navigating growth, change, and transition. Shared learning and supportive accountability.</p>
+                  <p class="bf-offering-card__body t-body-lg">Community navigation of growth, change, and transition. Shared learning and supportive accountability.</p>
                 </div>
                 <div class="bf-offering-card__section">
                   <span class="bf-offering-card__label">Facilitation &amp; support</span>
@@ -156,8 +156,27 @@ const optionLabelsJson = JSON.stringify(
             </div>
           </div>
 
-          <!-- Self-led: no offering card -->
-          <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead"></div>
+          <!-- Self-led -->
+          <div class="bf-offering bf-offering--hidden" id="bfOfferingSelflead">
+            <div class="bf-offering-card">
+              <span class="bf-offering-card__eyebrow">04 / Self-led</span>
+              <h3 class="bf-offering-card__title">Practical guidance for leading yourself through conscious change.</h3>
+              <button class="bf-offering__toggle" type="button" aria-expanded="false">
+                <span>What's included</span>
+                <span class="bf-offering__toggle-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="bf-offering-card__grid">
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">Structure</span>
+                  <p class="bf-offering-card__body t-body-lg">Guided frameworks, exercises, reflections as a repeatable independent practice. Available Winter 2026.</p>
+                </div>
+                <div class="bf-offering-card__section">
+                  <span class="bf-offering-card__label">What you practice</span>
+                  <p class="bf-offering-card__body t-body-lg">Conscious change in how you work, relate, and create to reduce resistance, increase progress, and expand possibility.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
 
@@ -435,16 +454,8 @@ const optionLabelsJson = JSON.stringify(
   padding: 32px;
 }
 
-/* Self-led has no offering box → revert to the original single left-column stack */
-.bf-step2-cols--nobox {
-  grid-template-columns: 2fr 3fr;
-  grid-template-areas:
-    "heading ."
-    "sub     ."
-    "formcol .";
-}
-.bf-step2-cols--nobox .bf-step2-right   { display: none; }
-.bf-step2-cols--nobox .bf-step2-formcol { margin-top: 32px; }
+/* (Self-led now has its own offering card — the former --nobox single-column
+   fallback was removed 2026-06-11; all four options share this layout.) */
 
 .bf-step2-heading {
   font-family: var(--font-body);
@@ -912,7 +923,9 @@ const optionLabelsJson = JSON.stringify(
   var optionBtns  = document.querySelectorAll('.bf-option');
   var backBtn     = document.getElementById('bfBack');
   var step2Heading = document.getElementById('bfStep2Heading');
-  var step2Cols    = document.querySelector('.bf-step2-cols');
+  var step2Sub     = document.getElementById('bfStep2Sub');
+  var SUB_DEFAULT  = "A few details about you to get connected with a coach. You'll be scheduled for a free discovery fit-check, not a sales call.";
+  var SUB_SELFLEAD = "A few details to get connected. Be the first to learn about the self-led practice, coming soon.";
   var optionInput = document.getElementById('bfOptionInput');
   var form        = document.getElementById('bfForm');
   var submitBtn   = document.getElementById('bfSubmit');
@@ -947,6 +960,9 @@ const optionLabelsJson = JSON.stringify(
     clearTimeout(advanceTimer);
     advanceTimer = setTimeout(function () {
       step2Heading.textContent = OPTION_LABELS[selectedOption] || '';
+      if (step2Sub) step2Sub.textContent = selectedOption === 'selflead' ? SUB_SELFLEAD : SUB_DEFAULT;
+      var submitLabel = document.getElementById('bfSubmitLabel');
+      if (submitLabel) submitLabel.textContent = selectedOption === 'selflead' ? 'Notify me' : 'Begin Practice';
       optionInput.value = selectedOption;
       document.documentElement.classList.remove('bf-has-param');
 
@@ -967,9 +983,6 @@ const optionLabelsJson = JSON.stringify(
           if (icon) icon.textContent = '+';
         }
       });
-
-      // Self-led has no offering box → revert Step 2 to the single left-column stack
-      if (step2Cols) step2Cols.classList.toggle('bf-step2-cols--nobox', selectedOption === 'selflead');
 
       showStep(step2);
       window.scrollTo({ top: 0, behavior: 'smooth' });

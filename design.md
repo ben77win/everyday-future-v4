@@ -286,36 +286,13 @@ Stored in `public/images/`. **No grayscale-by-default treatment.** Full color th
 
 ## 7. Begin offering detail copy
 
-### Group Coaching (provided)
+**As-built copy lives in `BeginFlow.astro`** (`#bfOffering1on1` / `#bfOfferingOrgs` / `#bfOfferingGroup`); Self-led has no offering block by design. **All three offerings re-copywritten by Ben 2026-06-11** — the component is the source of truth for the exact text. Current titles:
 
-> A shared practice in curated community with structure, support, and coach facilitation.
+- **1:1** — "Dedicated practice of what's possible, only for you." (Structure / What we practice / Between sessions / AI-supported practice)
+- **Orgs & Teams** — "Custom coaching and practice experiences for organizations, leadership teams, and cohorts." (Structure / What we practice / Engagement types / Facilitation & support)
+- **Group** — "A shared practice in community with structure, support, and coach facilitation." (Structure / What we practice / Experience / Facilitation & support)
 
-**Structure**
-- 12-week guided group practice
-- Limited to 8 participants
-- 90-minute virtual group sessions
-- 3 individual coaching sessions included during the program
-- Structured around the EDF Practice and dimensions of conscious change
-
-**What we practice**
-- Conscious change in how we work, relate, and create
-- Expanding possibility and reducing resistance
-- Greater clarity, coherence, courage, connection, and curiosity
-- Meaningful progress through shared practice and accountability
-
-**Experience**
-- Community with other waymakers navigating growth, change, creativity, leadership, and transition
-- Shared learning, reflection, and perspective
-- Practices integrated into real work between sessions
-- Supportive accountability and continuity through ongoing participation
-
-**Facilitation & Support**
-- Coach-led structure and facilitation
-- Practical frameworks, exercises, reflection, and discussion
-- AI-supported notes, reflections, and follow-ups available depending on the group format
-
-### 1:1 Coaching, Orgs & Teams, Self-led
-Already in staging build (`src/components/BeginFlow.astro` `#bfOffering1on1` and `#bfOfferingOrgs`). Self-led has no offering block by design.
+_The longer bullet-list Group copy that previously lived in this section (the 2026-06 "provided" draft) was condensed into the four card sections above; superseded._
 
 ---
 
