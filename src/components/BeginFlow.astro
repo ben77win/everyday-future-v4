@@ -161,9 +161,6 @@ const optionLabelsJson = JSON.stringify(
 
         </div>
 
-      <!-- Form — sits in the left grid column on desktop, stacks on mobile -->
-      <h2 class="bf-about-heading" id="bfAboutHeading">About you</h2>
-
       <!-- Netlify Forms — hidden form for build-time detection -->
       <form name="begin" netlify netlify-honeypot="bot-field" hidden>
         <input type="text" name="first-name" />
@@ -171,6 +168,11 @@ const optionLabelsJson = JSON.stringify(
         <input type="tel" name="phone" />
         <input type="hidden" name="option" />
       </form>
+
+      <!-- Right column (desktop): About you + form. Stacks under the box on mobile.
+           For self-led (no box) the whole grid reverts to a single left stack. -->
+      <div class="bf-step2-formcol">
+      <h2 class="bf-about-heading" id="bfAboutHeading">About you</h2>
 
       <form class="bf-form" id="bfForm" novalidate>
         <input type="hidden" name="form-name" value="begin" />
@@ -231,6 +233,7 @@ const optionLabelsJson = JSON.stringify(
           <span class="bf-field-error" id="bfSubmitError" role="alert">That didn't send — please try again.</span>
         </div>
       </form>
+      </div><!-- /.bf-step2-formcol -->
 
       </div><!-- /.bf-step2-cols -->
     </div>
@@ -407,19 +410,16 @@ const optionLabelsJson = JSON.stringify(
 .bf-close:hover { color: var(--blue); }
 
 
-/* ── Step 2 two-column layout — intro + form stack in the left column,
-   offering card spans the right. (Flexible 5th row keeps the left items
-   from spreading when the card is taller.) */
+/* ── Step 2 two-column layout — heading + sub + offering box stack in the LEFT
+   column; About-you + form move to the RIGHT column (.bf-step2-formcol spans the
+   rows so "About you" top-aligns with the service heading regardless of box height). */
 .bf-step2-cols {
   display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-template-rows: auto auto auto auto 1fr;
+  grid-template-columns: 3fr 2fr;   /* box (left) wider, form (right) narrower */
   grid-template-areas:
-    "heading card"
-    "sub     card"
-    "about   card"
-    "form    card"
-    ".       card";
+    "heading ."
+    "sub     ."
+    "card    formcol";
   column-gap: 80px;
   row-gap: 0;
   margin-bottom: 72px;
@@ -427,9 +427,24 @@ const optionLabelsJson = JSON.stringify(
 }
 .bf-step2-heading { grid-area: heading; }
 .bf-step2-sub     { grid-area: sub; }
-.bf-step2-right   { grid-area: card; }
-.bf-about-heading { grid-area: about; }
-.bf-form          { grid-area: form; }
+.bf-step2-right   { grid-area: card; margin-top: 40px; }    /* sits below heading + sub */
+.bf-step2-formcol {
+  grid-area: formcol;
+  margin-top: 40px;            /* top-aligns with the offering detail block */
+  background: var(--paper);    /* the white box now wraps About you + the form */
+  padding: 32px;
+}
+
+/* Self-led has no offering box → revert to the original single left-column stack */
+.bf-step2-cols--nobox {
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas:
+    "heading ."
+    "sub     ."
+    "formcol .";
+}
+.bf-step2-cols--nobox .bf-step2-right   { display: none; }
+.bf-step2-cols--nobox .bf-step2-formcol { margin-top: 32px; }
 
 .bf-step2-heading {
   font-family: var(--font-body);
@@ -445,10 +460,10 @@ const optionLabelsJson = JSON.stringify(
   color: rgba(0,0,0,0.55);
 }
 
-/* ── Offering card (right column) */
+/* ── Offering detail (left column) — sits directly on the cream, no white card */
 .bf-offering-card {
-  background: var(--paper);
-  padding: 32px;
+  background: transparent;
+  padding: 0;
 }
 
 /* "What's included" toggle — mobile only (desktop always shows the grid) */
@@ -517,7 +532,7 @@ const optionLabelsJson = JSON.stringify(
   line-height: 1.1;
   letter-spacing: -0.020em;
   color: var(--ink);
-  margin-top: 48px;
+  margin-top: 0;       /* top of the right column now — aligns with the service heading */
   margin-bottom: 8px;
 }
 
@@ -816,16 +831,16 @@ const optionLabelsJson = JSON.stringify(
       "heading"
       "sub"
       "card"
-      "about"
-      "form";
+      "formcol";
     row-gap: 0;
     margin-bottom: 40px;
   }
-  .bf-step2-right { margin: 32px 0; }   /* breathing room around the card when stacked */
-  .bf-about-heading { margin-top: 0; }  /* card already provides the gap above */
+  .bf-step2-right { margin: 32px 0; }     /* breathing room around the card when stacked */
+  .bf-step2-formcol { margin-top: 0; padding: 20px; }  /* white box keeps the old card's mobile padding */
+  .bf-about-heading { margin-top: 0; }    /* card already provides the gap above */
 
-  /* Offering card grid: 1-col on mobile, collapsed behind a toggle */
-  .bf-offering-card { padding: 20px; }
+  /* Offering detail grid: 1-col on mobile, collapsed behind a toggle (no card bg) */
+  .bf-offering-card { padding: 0; }
   .bf-offering__toggle {
     display: flex;
     align-items: center;
@@ -897,6 +912,7 @@ const optionLabelsJson = JSON.stringify(
   var optionBtns  = document.querySelectorAll('.bf-option');
   var backBtn     = document.getElementById('bfBack');
   var step2Heading = document.getElementById('bfStep2Heading');
+  var step2Cols    = document.querySelector('.bf-step2-cols');
   var optionInput = document.getElementById('bfOptionInput');
   var form        = document.getElementById('bfForm');
   var submitBtn   = document.getElementById('bfSubmit');
@@ -951,6 +967,9 @@ const optionLabelsJson = JSON.stringify(
           if (icon) icon.textContent = '+';
         }
       });
+
+      // Self-led has no offering box → revert Step 2 to the single left-column stack
+      if (step2Cols) step2Cols.classList.toggle('bf-step2-cols--nobox', selectedOption === 'selflead');
 
       showStep(step2);
       window.scrollTo({ top: 0, behavior: 'smooth' });
