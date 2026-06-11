@@ -10,7 +10,8 @@
  * Keys are used in URLs (/begin?option=<key>) — do not change them without updating
  * Netlify redirects and any marketing links that reference them.
  *
- * Calendly URLs: update before launch. Replace placeholder-* with real Taylor URLs.
+ * Calendly URLs: real discovery-session links wired 2026-06-11 (1:1, orgs, group).
+ * Self-led has no Calendly by design (waitlist confirmation instead).
  */
 
 export interface PracticeOption {
@@ -37,7 +38,7 @@ export const practiceOptions: PracticeOption[] = [
     key: 'group',
     label: 'Group',
     desc: 'Shared practice in community with structure, support, and a coach',
-    calendlyUrl: 'https://calendly.com/placeholder-15',
+    calendlyUrl: 'https://calendly.com/coach-everydayfuture/group-coaching-discovery',
   },
   {
     key: 'selflead',
