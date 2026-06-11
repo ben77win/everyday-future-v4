@@ -31,7 +31,7 @@ export const practiceOptions: PracticeOption[] = [
     key: 'orgs',
     label: 'Orgs & Teams',
     desc: 'Workshops, offsites, and team programs designed and facilitated by a coach',
-    calendlyUrl: 'https://calendly.com/placeholder-60',
+    calendlyUrl: 'https://calendly.com/coach-everydayfuture/orgs-teams-discovery',
   },
   {
     key: 'group',
