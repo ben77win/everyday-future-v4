@@ -1,4 +1,17 @@
 # Every Day Future — Site Context
+_Last updated: 2026-06-11 (**session 6 — CLOSED**). All work committed + pushed to `staging`, verified (preview + live staging checks); build clean; production/`main` still stale. Session 6 shipped, in order:_
+_1. **Docs pass** — design.md §4/§6 imagery synced to as-built (stale hero/S2/S6 lists); commit-count fixes. (`3c81e9c`)_
+_2. **SEO keyword strategy** — deep-research pass written into `SEO.md` (🔑 section): "conscious executive coaching" is contested (Inductive, Boulder CO — no Seattle presence, no trademark) but winnable; keyword→page map; GBP setup notes (Seattle address + worldwide service area — two channels, no conflict); **decision: articles publish on `everydayfuture.work`, never Substack** (no canonical control, no publishing API, AI-citation strategy requires own domain). Priorities: definitional "What is conscious executive coaching?" page → GBP post-cutover → problem-framed long-tail articles. (`3c81e9c`)_
+_3. **S3 subhead → `<h3>` "Outcomes from conscious executive coaching"** — the positioning phrase now in a visible heading (was `<p>` "Testimonials and outcomes"); zero visual change (class owns the type, reset zeroes margins). (`66d9f77`)_
+_4. **Keystatic article CMS** added to `LAUNCH.md` §4 (item #10) — Astro Content Collections + Keystatic at `/keystatic`, GitHub auth → commits markdown → Netlify rebuilds; decisions pending (branch target, Taylor's GitHub seat, article-page design). (`6174aa3`)_
+_5. **Begin flow copy + Calendly (launch #1 ✅):** Step 2 sub reworded (`9eab2c6`); **all 3 real Calendly discovery URLs wired** (`6d9aa59`, `a914418`, `97b21c6`) — events verified live on Taylor's account._
+_6. **Step 2 layout rework (Ben-approved comps):** heading + sub + offering detail LEFT **on the cream (offering card lost its white bg)**; "About you" + form in a **white box** right (`.bf-step2-formcol`, top-aligned with the offering). Known: Begin Practice label wraps ~641–1000px (accepted). (`6c6232f`)_
+_7. **Offering copy re-write, all four options** (`ea7ff7c`, `efb621a`, `3979bbc`): 1:1 ("Dedicated practice of what's possible, only for you."), Orgs ("Custom coaching and practice experiences…"), Group ("…structure, support, and coach facilitation."); all four say "reduce resistance". **Self-led now has its own offering card** (04 / Self-led, "Available Winter 2026") + conditional Step 2 sub ("…coming soon.") + submit button "**Notify me**"; the `--nobox` single-column fallback was removed — all four options share one layout._
+_8. **Launch #4 Begin-flow verification ✅** — on live staging (deploy `e366162`): deployed HTML carries all 4 cards + real URLs (zero placeholders); form detection active (hidden form rewritten); test POSTs all 4 options → HTTP 200; all 3 Calendly events confirmed real (OG titles + bogus-slug control). No bookings made._
+_**Open for launch (next session):** (1) **Waymaker (S5) images** — needs Ben's spec + approval; (2) **bio images decision** (keep/swap); (3) SEO verify on staging (Rich Results + link inspectors) → 301 redirect map → **`staging → main` merge + DNS cutover**. Housekeeping: delete the "Claude Test" entries from Netlify Forms (**now incl. 4 new "launch #4 verify" entries**); unused `DSCF0172.jpg` still on disk (left per Ben)._
+
+---
+
 _Last updated: 2026-06-05 (**session 5 — CLOSED**). All work below is committed + pushed to `staging` and verified in preview; build clean; production/`main` still stale (needs the eventual `staging → main` merge). Session 5 shipped, in order:_
 _1. **`LAUNCH.md`** — single tracked source of truth for launch (merges Ben's to-do list + the CONTEXT/SEO open items; SEO folded in as §0). (`7c12878`)_
 _2. **Client Portal link** repointed `/portal` → `https://portal.everydayfuture.work` (`_blank`/`noopener`) in `Nav.astro` + `Footer.astro`. (`7c12878`)_
@@ -372,14 +385,14 @@ A hidden static form (with `netlify` attribute) is included for build-time form 
 
 ### Calendly Integration
 
-Calendly widgets are created dynamically in JS when step 3 appears. Script loaded lazily on first use. URLs currently use placeholders — **Taylor must supply real Calendly links before launch.**
+Calendly widgets are created dynamically in JS when step 3 appears. Script loaded lazily on first use. **All real URLs wired 2026-06-11 (launch #1 ✅); events verified live on Taylor's account.**
 
 | Option | Calendly URL |
 |--------|-------------|
-| `1on1` | `https://calendly.com/placeholder-60` ← replace |
-| `group` | `https://calendly.com/placeholder-15` ← replace |
-| `orgs` | `https://calendly.com/placeholder-60` ← replace |
-| `selflead` | No Calendly — shows "You're on the list" confirmation screen |
+| `1on1` | `https://calendly.com/coach-everydayfuture/1-1-discovery-session` |
+| `orgs` | `https://calendly.com/coach-everydayfuture/orgs-teams-discovery` |
+| `group` | `https://calendly.com/coach-everydayfuture/group-coaching-discovery` |
+| `selflead` | No Calendly — shows "You're on the list" confirmation screen (submit button reads "Notify me") |
 
 ### Design Decisions (Begin page)
 
@@ -442,7 +455,7 @@ Calendly widgets are created dynamically in JS when step 3 appears. Script loade
 - [x] **Group Coaching offering detail** — implemented in BeginFlow Step 2 (`#bfOfferingGroup`)
 - [x] **Contact section** — `Contact.astro` at `#contact`, Netlify Forms wiring (routing to Netlify dashboard)
 - [ ] **Formetica license** — currently using Helvetica Neue (falls back to Arial on Windows/Android)
-- [ ] **Calendly URLs** — Taylor must provide real URLs for 1:1, Group, and Orgs options before launch
+- [x] **Calendly URLs** — ✅ all three real discovery URLs wired + events verified 2026-06-11 (launch #1 done; see `options.ts`)
 - [x] **Netlify Forms — capture + email notifications VERIFIED end-to-end (2026-06-05).** Detection ran on staging deploy `ec42beb` (Netlify rewrote `<form … netlify>` → `<form … method='post'>`); test POSTs to `contact` + `begin` returned HTTP 200 (accepted); reliability check live (success-only advance/confirm); **email notifications → `coach@everydayfuture.work` confirmed arriving.** Remaining: delete test entries; re-verify on `main` after merge (Forms store + notifications are site-level → already registered). Original checklist kept below for reference: (dashboard only — the form *code* is confirmed correctly wired: `contact` + `begin`, both with hidden static form + `netlify` + honeypot + AJAX `POST /`, present in the deployed HTML).
   1. **Confirm detection** — Netlify → site `everyday-future-v4` → latest deploy log shows "Detected 2 forms" (`contact`, `begin`); or Site config → **Forms** lists both. _If NOT detected:_ Site config → Forms → enable **Form detection**, then Deploys → **Trigger deploy → Clear cache and deploy site** so detection re-runs.
   2. **Test submit** — submit each form once on the live site (staging or prod), then confirm the entry appears under Forms → `contact` (name/email/subject/message) and `begin` (first-name/email/phone/option).

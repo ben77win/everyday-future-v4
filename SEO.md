@@ -8,9 +8,9 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 
 # 📊 Status Board  (the dashboard — updated every working session)
 
-> States: 🔒 locked · ✅ done · 🟡 in progress / asset ready · ⬜ open · ⛔ blocked. _Last updated 2026-06-04 (session 4 closed)._
+> States: 🔒 locked · ✅ done · 🟡 in progress / asset ready · ⬜ open · ⛔ blocked. _Last updated 2026-06-11 (session 6 closed)._
 >
-> **All on-site SEO is shipped to `staging`** (tip `8d442a9`, 93 ahead of main). Remaining is **off-site only** (Search Console, analytics, Google Business Profile) + the **domain cutover** (see checklist below). Production/`main` still stale — needs a `staging → main` merge.
+> **All on-site SEO is shipped to `staging`** (113+ ahead of main as of 2026-06-11; the positioning phrase is now also in a visible `<h3>` — see Keyword Strategy below). Remaining is **off-site only** (Search Console, analytics, Google Business Profile) + the **domain cutover** (see checklist below). Production/`main` still stale — needs a `staging → main` merge.
 
 | Item | Status | Current decision / note |
 |---|---|---|

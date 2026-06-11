@@ -1,6 +1,6 @@
 # Launch Checklist — Every Day Future
 
-_The **single tracked source of truth** for shipping `everydayfuture.work` (Squarespace → Netlify cutover). Merges Ben's launch to-do list with the open items from `CONTEXT.md` and `SEO.md`. Last updated 2026-06-05._
+_The **single tracked source of truth** for shipping `everydayfuture.work` (Squarespace → Netlify cutover). Merges Ben's launch to-do list with the open items from `CONTEXT.md` and `SEO.md`. Last updated 2026-06-11._
 
 > States: ✅ done · 🟡 in progress / needs dashboard or external action · ⚠️ needs a decision · ⬜ open · ❌ not started.
 > `SEO.md` holds the detailed SEO plan + cutover playbook; this file is the one list to work from. Status here is authoritative.
@@ -20,8 +20,8 @@ All on-site SEO shipped to `staging` (tip `8d442a9`): B1 `site` config, B2 per-p
 | 1 | **Calendly links** | ✅ | **All three real URLs wired 2026-06-11** (`coach-everydayfuture/` → `1-1-discovery-session`, `orgs-teams-discovery`, `group-coaching-discovery`); self-led has none by design. Unblocks #4 (full Begin-flow verification). |
 | 2 | **Taylor bio images** | ⚠️ | Two already wired in S6 (`DSCF0172.jpg` + `DSCF0084.jpg`). **Decision needed:** keep these as final, or swap? |
 | 3 | **Waymaker (S5) images** | ⚠️ | The Waymaker section currently has **no photos** — only the Vector-10 brush mark. Adding images is a **new design element → needs spec + Ben approval** (no-drift rule). What images, and approved? |
-| 4 | **Begin flow verification** | ⬜ | Run all 4 options end-to-end on staging (Step 1 → form → Calendly / self-led confirmation). Full booking path is blocked by #1. |
-| 5 | **Client portal link** | ✅ | Repointed `/portal` → `https://portal.everydayfuture.work` in `Nav.astro` + `Footer.astro` (`target="_blank" rel="noopener"`). Verified in preview 2026-06-05. **Not yet committed.** |
+| 4 | **Begin flow verification** | ✅ | **Verified on staging 2026-06-11** (deploy `e366162`): all 4 offering cards + real Calendly URLs in the deployed HTML (zero placeholders); Netlify rewrote the hidden form (detection active); test POSTs for **all 4 options returned HTTP 200**; all 3 Calendly events confirmed real on Taylor's account (OG titles checked + bogus-slug control); flow mechanics (steps, deep links, self-led sub/"Notify me" swap) verified in preview at the same commit. No bookings made. _Cleanup: 4 new "Claude Test (launch #4 verify — delete me)" Forms entries to delete._ Optional: a 2-min human click-through on a phone as final sanity. |
+| 5 | **Client portal link** | ✅ | Repointed `/portal` → `https://portal.everydayfuture.work` in `Nav.astro` + `Footer.astro` (`target="_blank" rel="noopener"`). Verified in preview 2026-06-05; committed + pushed in `7c12878`. |
 | 6 | **Confirm data → Netlify + email** | ✅ | **Verified end-to-end 2026-06-05.** Form detection ON → staging deploy `ec42beb` processed both forms (Netlify rewrote `<form … netlify>` → `<form … method='post'>`). Reliability check added (both forms `await` the POST; success-only advance, inline error on failure). Test submissions to `contact` + `begin` returned **HTTP 200** (accepted; 404 would mean undetected) — plus Ben's own browser tests. **Email notifications live** → `coach@everydayfuture.work` (Ben confirmed emails arriving). _Cleanup: delete the "Claude Test" / test entries from the Forms store before launch. Re-verify on `main` after merge (Forms store + notifications are site-level, so already registered)._ |
 
 ---
