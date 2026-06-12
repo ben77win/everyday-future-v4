@@ -6,4 +6,285 @@
     <a href="/writing" class="nav__link nav__link--writing">Writing</a>
     <a href="https://portal.everydayfuture.work" class="nav__link" target="_blank" rel="noopener">Client Portal</a>
   </div>
+  <button class="nav__link mmenu-trigger" id="mmenuTrigger" aria-expanded="false" aria-controls="mmenu" aria-haspopup="dialog">Menu</button>
 </nav>
+
+<!-- Mobile menu curtain — sibling of .nav (a fixed child would be trapped by the
+     scrolled nav's backdrop-filter containing block). Mobile-only (≤640px). -->
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="mmenu__nav">
+    <span class="mmenu__wordmark">Every Day Future</span>
+    <button class="mmenu__close" id="mmenuClose" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="mmenu__links">
+    <a class="mmenu__link" href="/" data-mkey="home">Home <span class="mmenu__num">01</span></a>
+    <a class="mmenu__link" href="/writing" data-mkey="writing">Writing <span class="mmenu__num">02</span></a>
+    <a class="mmenu__link" href="/contact" data-mkey="contact">Contact <span class="mmenu__num">03</span></a>
+    <a class="mmenu__link" href="https://portal.everydayfuture.work" target="_blank" rel="noopener">Client Portal <span class="mmenu__num">04</span></a>
+  </div>
+  <a class="mmenu__cta" href="/begin" id="mmenuBegin">Begin Practice</a>
+  <div class="mmenu__foot">
+    <a href="https://instagram.com/everydayfuture" target="_blank" rel="noopener">Instagram</a>
+    <a href="/terms">Terms</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+</div>
+
+<style is:global>
+/* ════════ MOBILE MENU (mmenu) — mobile-only (≤640px), see design.md §5.15 ════════
+   The trigger reuses .nav__link (hero white / scrolled+page-* ink / text-shadow)
+   so it tracks every existing nav color state with no new color logic. */
+.mmenu-trigger { display: none; }
+.mmenu { display: none; }
+
+@media (max-width: 640px) {
+  .mmenu-trigger {
+    display: block;
+    position: absolute;
+    right: var(--gutter);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 0;
+    /* The UA button stylesheet forces font-weight 400, beating the inherited
+       body 300 that the nav <a> links (and the comp's MENU) render at */
+    font-weight: 300;
+  }
+  .mmenu-trigger:active { color: var(--blue); text-shadow: none; }
+
+  /* ── The curtain */
+  .mmenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    z-index: 500; /* above nav (100) + float CTA (90); below the Begin drawer (600) */
+    background: var(--ink);
+    color: #fff;
+    /* Safety valve for very short viewports (<~550px): content scrolls instead
+       of clipping; no effect at normal heights (content fits, no overflow) */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(-101%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    transition-property: transform, visibility;
+  }
+  .mmenu.open { transform: translateY(0); visibility: visible; }
+  .mmenu:not(.open) { transition-delay: 0s, 0.45s; } /* keep visible while lifting */
+
+  /* ── Top row — mirrors the real mobile nav (18px / gutter padding, 27.5px wordmark) */
+  .mmenu__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 18px var(--gutter);
+  }
+  .mmenu__wordmark {
+    font-family: var(--font-body);
+    font-weight: 200;
+    font-size: 27.5px;
+    letter-spacing: -0.020em;
+    white-space: nowrap;
+    color: rgba(255,255,255,0.92);
+  }
+  .mmenu__close {
+    position: absolute;
+    right: var(--gutter);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 4px;
+    font-family: var(--font-body);
+    font-weight: 200;
+    font-size: 26px;
+    line-height: 1;
+    color: rgba(255,255,255,0.70);
+    transition: color 0.2s;
+  }
+  .mmenu__close:active { color: var(--blue); }
+
+  /* ── Links — vertically centered hairline list
+     (0.5px hairlines + 11px mono numerals are menu-only departures, per the
+      approved handoff 7 comp — same precedent as the Writing section) */
+  .mmenu__links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--gutter);
+  }
+  .mmenu__link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 24px 0;
+    border-top: 0.5px solid rgba(255,255,255,0.18);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 36px;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.15s ease;
+  }
+  .mmenu__link:last-of-type { border-bottom: 0.5px solid rgba(255,255,255,0.18); }
+  .mmenu__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.110em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    transition: color 0.15s ease;
+  }
+  .mmenu__link:active,
+  .mmenu__link:active .mmenu__num { color: var(--blue); }
+  .mmenu__link--here .mmenu__num { color: var(--blue); }
+
+  /* ── Begin Practice — paper/ink (the over-hero CTA inversion, correct on ink) */
+  .mmenu__cta {
+    margin: 24px var(--gutter) 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 14.4px;
+    letter-spacing: 0.110em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.15s, color 0.15s;
+  }
+  .mmenu__cta:active { background: var(--blue); color: var(--paper); }
+
+  /* ── Foot row */
+  .mmenu__foot {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 22px var(--gutter) calc(26px + env(safe-area-inset-bottom, 0px));
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .mmenu__foot a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.110em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.46);
+  }
+  .mmenu__foot a:active { color: var(--blue); }
+
+  /* ── Stagger in as the curtain lands (top to bottom), fade together on close */
+  .mmenu.open .mmenu__link,
+  .mmenu.open .mmenu__cta,
+  .mmenu.open .mmenu__foot { opacity: 1; transform: translateY(0); }
+  .mmenu.open .mmenu__link:nth-of-type(1) { transition-delay: 0.15s, 0.15s, 0s; }
+  .mmenu.open .mmenu__link:nth-of-type(2) { transition-delay: 0.21s, 0.21s, 0s; }
+  .mmenu.open .mmenu__link:nth-of-type(3) { transition-delay: 0.27s, 0.27s, 0s; }
+  .mmenu.open .mmenu__link:nth-of-type(4) { transition-delay: 0.33s, 0.33s, 0s; }
+  .mmenu.open .mmenu__cta  { transition-delay: 0.40s, 0.40s, 0s, 0s; }
+  .mmenu.open .mmenu__foot { transition-delay: 0.46s, 0.46s; }
+  .mmenu:not(.open) .mmenu__link,
+  .mmenu:not(.open) .mmenu__cta,
+  .mmenu:not(.open) .mmenu__foot { transition-delay: 0s; transition-duration: 0.15s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mmenu {
+      transform: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, visibility 0s 0.2s;
+    }
+    .mmenu.open { opacity: 1; transition-delay: 0s; }
+    .mmenu__link, .mmenu__cta, .mmenu__foot { transform: none; transition-delay: 0s !important; }
+  }
+}
+</style>
+
+<script is:inline>
+(function () {
+  var menu    = document.getElementById('mmenu');
+  var trigger = document.getElementById('mmenuTrigger');
+  var closeBtn = document.getElementById('mmenuClose');
+  var beginCta = document.getElementById('mmenuBegin');
+  if (!menu || !trigger || !closeBtn) return;
+
+  var lastFocus = null;
+
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    trigger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    /* Exactly one Begin affordance while the menu is open.
+       Looked up per-call: this script runs before CTABar renders. */
+    var floatCta = document.getElementById('floatCta');
+    if (floatCta) {
+      floatCta.style.opacity = open ? '0' : '';
+      floatCta.style.pointerEvents = open ? 'none' : '';
+    }
+    if (open) {
+      lastFocus = document.activeElement;
+      var first = menu.querySelector('.mmenu__link');
+      if (first) setTimeout(function () { first.focus(); }, 480);
+    } else if (lastFocus && typeof lastFocus.focus === 'function') {
+      lastFocus.focus();
+    }
+  }
+
+  trigger.addEventListener('click', function () { setOpen(true); });
+  closeBtn.addEventListener('click', function () { setOpen(false); });
+
+  /* If the viewport leaves mobile while open (e.g. phone rotates to landscape),
+     the curtain display:none's away but the body scroll lock would persist — close. */
+  var mq = window.matchMedia('(min-width: 641px)');
+  var onMq = function (e) { if (e.matches && menu.classList.contains('open')) setOpen(false); };
+  if (mq.addEventListener) mq.addEventListener('change', onMq);
+  else if (mq.addListener) mq.addListener(onMq);
+
+  document.addEventListener('keydown', function (e) {
+    if (!menu.classList.contains('open')) return;
+    if (e.key === 'Escape') { setOpen(false); return; }
+    /* Focus trap */
+    if (e.key === 'Tab') {
+      var items = menu.querySelectorAll('a, button');
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* On the homepage, Begin Practice opens the Begin drawer (matching the float
+     CTA); elsewhere the <a href="/begin"> navigates. Close-then-open keeps the
+     body scroll lock correct (close clears it, the drawer re-locks). */
+  if (beginCta) {
+    beginCta.addEventListener('click', function (e) {
+      if (typeof window.__openBeginDrawer === 'function') {
+        e.preventDefault();
+        setOpen(false);
+        window.__openBeginDrawer();
+      }
+    });
+  }
+
+  /* Current page → blue numeral */
+  var path = location.pathname;
+  var key = path === '/' ? 'home'
+    : path.indexOf('/writing') === 0 ? 'writing'
+    : path.indexOf('/contact') === 0 ? 'contact'
+    : null;
+  if (key) {
+    var here = menu.querySelector('[data-mkey="' + key + '"]');
+    if (here) here.classList.add('mmenu__link--here');
+  }
+})();
+</script>

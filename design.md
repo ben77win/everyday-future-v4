@@ -110,8 +110,9 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ## 5. Components
 
 ### 5.1 Nav (`Nav.astro`)
-- Fixed top, padding `22px var(--gutter)`
-- Centered wordmark + right-anchored "Client Portal" link
+- Fixed top, padding `22px var(--gutter)` (18px on mobile)
+- Centered wordmark + right-anchored "Writing" + "Client Portal" links (`.nav__right`, hidden ≤640px)
+- **Mobile (≤640px): a "MENU" trigger** (`.mmenu-trigger`, a `<button>` reusing `.nav__link` so it tracks every nav color state) renders in the right slot and opens the mobile menu curtain — see §5.15
 - **Over hero:** transparent background, white wordmark + link with soft text-shadow
 - **Scrolled:** `rgba(255,255,255,0.36)` glass + `backdrop-filter: blur(8px)`, ink text
 - **Eliminate the wordmark intro animation.** The staging build animates the wordmark from giant center to nav. Drop this — wordmark stays in nav from page load.
@@ -195,7 +196,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 - **Sticky footer (2026-06-05):** `body` is a `min-height: 100svh` (100vh fallback) flex column and `.site-footer` has `margin-top: auto`, so on short pages (e.g. the Contact "Thank you" state) the footer pins to the bottom of the viewport instead of floating mid-page. Tall pages (home, legal) are unaffected (no free space → `auto` resolves to 0). `body` keeps `position: relative` so the float-CTA over-footer parking still anchors to it; the parking observer is unaffected. Note: the footer is `display: none` on `/begin` (full-screen flow).
 - Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
 - Right: link row — **Contact · Instagram · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)** (the "Login" link was removed)
-- **Client Portal link (`.site-footer__link--portal` → `/portal`): mobile only** — hidden on desktop (the nav already shows Client Portal, which is hidden at ≤640px). On mobile it sits 3rd, giving two rows: **Contact · Instagram · Client Portal** / **Terms & Conditions · Privacy Policy**. A mobile-only `.site-footer__break` (`flex-basis: 100%; height: 0`) forces the split; both it and the Client Portal link are `display: none` on desktop (single row: Contact · Instagram · Terms · Privacy).
+- ~~Client Portal link (mobile only)~~ — **retired 2026-06-11 (handoff 7):** the mobile-only `.site-footer__link--portal` + `.site-footer__break` were removed when the mobile menu (§5.15) took over Client Portal on mobile (one home per destination, per Ben). Footer links now wrap naturally on mobile.
 - Links: DM Mono 13px / 0.110em uppercase, white at 0.46, **hover → `--blue`**
 - **No orange dot separators** — just flat row with 28px gap
 - Mobile: stacks vertical, gap 14px 22px wrap
@@ -267,6 +268,19 @@ Thought-leadership publishing section on Astro **content collections** (`src/con
 - **Content blocks (components in `src/components/writing/`):** `Figure` (width=`inset|content|bleed`), `PullQuote` (2px blue left rule, `clamp(26,2.8vw,38)`), `Chart`+`ChartLine`+`ChartBar` (off-b panel 48px; brand chart vocabulary: axes ink/25 1px, gridlines ink/08, blue 2px primary w/ 3.5px dots, ink/45 1.5px secondary, Mono 12 axis labels; data-driven SVG, no libraries), `Note` (off-b, 2px blue rule, 15px), `KeyTakeaways` (sage panel 44/48, 17px blue-dash list), `ArticleTable` (content-width; Mono 11 thead, 15px cells, hairline rows), `Faq` (static-open S7 idiom + FAQPage JSON-LD), `Sources` (intro 17/0.72, list 15, standards note 15/0.6). End matter: author card (72px portrait, 18/400 name, 14 bio) + 3-up related grid (3:2 image, blue Mono 11 cat, 20/400 title hover→blue).
 - **Imagery:** article images live in **`src/assets/writing/`** and render via Astro `<Image>` (responsive srcset/WebP, lazy, intrinsic dims; heroes eager). The `public/images` copies still serve the main site. Schema enforces processed assets (`image()` helper).
 - **SEO:** per-article title/description/canonical/OG/Twitter + `Article` JSON-LD; `CollectionPage` on the index; `/rss.xml`; sitemap includes Writing. Drafts (`draft: true`) render in dev only — excluded from build/sitemap/RSS.
+
+### 5.15 Mobile menu (`Nav.astro` — `.mmenu*`, added 2026-06-11, handoff 7)
+Full-screen ink "curtain" menu, **mobile-only (≤640px)**. Spec source: `handoff 7/Mobile Menu - design.md` + the two comps (`Mobile-Menu-Comp.html` pixels, `Mobile-Menu-Live-Demo.html` timing). Lives entirely in `Nav.astro` (trigger + curtain markup + `is:global` CSS + inline JS); the curtain is a **sibling of `.nav`**, not a child (the scrolled nav's `backdrop-filter` creates a containing block that would trap a fixed child).
+
+- **Trigger:** the word **"MENU"** (uppercase via the `.nav__link` `text-transform`, per comp), not a hamburger — `<button class="nav__link mmenu-trigger">` with `aria-expanded`/`aria-controls`. Reusing `.nav__link` gives it every existing color state free: white/0.78 + shadow over hero, ink when scrolled / on `.page-*` ink-nav pages. `:active` → `--blue`, shadow dropped. Hidden >640px.
+- **Curtain:** `position: fixed; inset: 0; z-index: 500` (above nav 100 + float CTA 90, **below the Begin drawer 600**), `background: var(--ink)`, `role="dialog" aria-modal`, focus trapped, focus returns to the trigger on close, body scroll locked, Esc/× close.
+- **Top row** mirrors the real mobile nav (18px/gutter padding): centered wordmark (Helvetica Neue 200, **27.5px** — the site nav size, per Ben over the comp's 22px) + × right (HN 200 26px, white 0.70, `:active` blue).
+- **Links** (Home `/` · Writing `/writing` · Contact `/contact` · Client Portal, external): vertically centered hairline list — HN Roman 400 36px / -0.025em white, 24px row padding, right-aligned DM Mono **11px** numerals `01–04` (white 0.45). **Current page's numeral = `--blue`** (set by JS from `location.pathname`). `:active` flashes the whole row blue (0.15s).
+- **Begin Practice:** full-width 52px button, `--paper`/`--ink` (the over-hero CTA inversion — correct on ink), 4px radius, Mono 14.4px; `:active` → blue/white. **On the homepage it opens the Begin drawer** (`window.__openBeginDrawer`, matching the float CTA) — menu closes first so the body scroll lock hands off cleanly; elsewhere the `<a href="/begin">` navigates.
+- **Foot row:** Instagram · Terms · Privacy, centered Mono 11px white 0.46, `:active` blue; bottom padding includes `env(safe-area-inset-bottom)`.
+- **Reveal:** curtain descends `translateY(-101%) → 0` over 0.45s `cubic-bezier(0.16,1,0.3,1)` — the mirror image of the Begin drawer (drawer rises, cream, conversion; menu descends, ink, wayfinding). Links stagger in (0.35s, delays 0.15s + 60ms/row), CTA +0.40s, foot +0.46s; on close everything fades together (0.15s) and the curtain lifts (a `visibility` transition-delay keeps it visible while lifting). **While open the float CTA hides** (inline opacity/pointer-events — one Begin affordance at a time). `prefers-reduced-motion`: 0.2s opacity fade, no travel, no stagger (same fallback as the drawer).
+- **Menu-only departures (Ben-approved 2026-06-11, handoff 7 comp):** `0.5px` white hairlines (`rgba(255,255,255,0.18)`) + **11px** DM Mono numerals/foot links — the same class of departure as the Writing section (§5.14); the site-wide 13px mono floor + 1px hairlines hold everywhere else.
+- **Isolation:** all new CSS is `.mmenu*`-scoped inside a ≤640px media query. The only existing-CSS changes: the footer's mobile Client Portal link/break retired (§5.10) + a comment update on the `.nav__right` mobile rule. Renders on every page incl. `/begin` (coexists with the flow's own `.bf-nav` Back/× row).
 
 ---
 
