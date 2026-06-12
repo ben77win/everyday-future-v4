@@ -67,4 +67,4 @@ _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checkli
 1. ~~**Calendly** (#1)~~ — ✅ all three URLs wired 2026-06-11.
 2. **Bio images** (#2) — keep current two or swap?
 3. **Waymaker images** (#3) — section has none today; adding them is a design change needing approval + spec.
-4. **Article CMS** (#10) — (a) which branch Keystatic commits to post-launch (`main` = articles straight to prod); (b) whether Taylor gets a GitHub collaborator seat to publish herself, or it stays Ben's job; (c) approve the article-page design.
+4. **Article CMS** (#10) — (a) which branch Keystatic commits to post-launch (`main` = articles straight to prod); (b) whether Taylor gets a GitHub collaborator seat to publish herself, or it stays Ben's job. _(The article-page design decision is resolved — shipped 2026-06-11 as the Writing section, per the approved handoff 6 comps.)_
