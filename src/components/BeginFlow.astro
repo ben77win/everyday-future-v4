@@ -251,6 +251,7 @@ const optionDeksJson = JSON.stringify(
         <div class="bf-form-footer">
           <button class="bf-submit" id="bfSubmit" type="button">
             <span class="bf-submit__label" id="bfSubmitLabel">Continue to scheduling</span>
+            <span class="bf-submit__label bf-submit__label--short" aria-hidden="true">Schedule</span>
             <svg class="bf-submit__arrow" id="bfSubmitArrow" width="22" height="11" viewBox="0 0 22 11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 5.5h20M16 1l4 4.5-4 4.5" /></svg>
             <span class="bf-submit__spinner" aria-hidden="true"></span>
           </button>
@@ -781,6 +782,10 @@ const optionDeksJson = JSON.stringify(
 }
 .bf-submit.loading .bf-submit__label { opacity: 0; }
 
+/* Short booking label ("Schedule →") — swapped in ≤900 where the panel is
+   narrow (see the tablet media block); waitlist keeps "Notify me" everywhere. */
+.bf-submit__label--short { display: none; }
+
 .bf-submit__arrow {
   flex: 0 0 auto;
   transition: opacity 0.2s;
@@ -884,6 +889,12 @@ const optionDeksJson = JSON.stringify(
 @media (max-width: 900px) {
   .bf-options { grid-template-columns: repeat(2, 1fr); }
   #bfStep1 .bf-step__inner { max-width: 100%; }
+
+  /* Step 2 keeps the 2-col anchored split down to 640 (per Ben 2026-06-11);
+     the narrow panel gets the short booking label instead (see
+     .bf-submit__label--short) so the submit never wraps to 3 lines. */
+  .bf-form:not(.bf-form--waitlist) .bf-submit__label { display: none; }
+  .bf-form:not(.bf-form--waitlist) .bf-submit__label--short { display: inline; }
 }
 
 /* ── Mobile ≤ 640px */
