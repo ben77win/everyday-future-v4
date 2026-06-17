@@ -50,7 +50,7 @@ _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checkli
 | # | Item | Status | Note |
 |---|------|--------|------|
 | 7 | **Apply v4 design to client portal** | ⬜ | Reskin `edf-portal-updated_3/` to the v4 design system. |
-| 8 | **Google Analytics claim** | 🟡 | Set up *after* DNS is live, or you'd measure the old Squarespace site. |
+| 8 | **Google Analytics (GA4)** | ✅ | **Installed 2026-06-17** — `gtag.js` for property **`G-05G2PBBWW1`** in `src/layouts/Layout.astro` `<head>` (`is:inline`, site-wide). `page_view` verified firing (preview network → `google-analytics.com/g/collect?tid=G-05G2PBBWW1`). Separate GA account "Every Day Future". Confirm Realtime shows traffic on the live site. _Later: link GA4 ↔ Search Console; set up conversion events (Begin/booking, contact)._ |
 | 9 | **Google Business Profile + data** | ✅ | **Created + verified 2026-06-17** (under `ben@wintersand.co`). SAB (address hidden — confirm via incognito), PNW service areas, primary category Business management consultant + secondaries, website → `everydayfuture.work`, description, services (1:1 / Group / Orgs & Teams), photos (logo/cover/portraits/brand — `~/Desktop/EDF-GBP-photos/`). **Ongoing lever: client reviews** (request message drafted; no incentives / no review-gating per Google policy). Self-Led service to add closer to Winter 2026. Setup sheet: `SEO.md`. |
 | — | **Search Console** | ✅ | **Done 2026-06-17:** Domain property `everydayfuture.work` verified + `https://everydayfuture.work/sitemap-index.xml` submitted (8 URLs); indexing requested for homepage + both essays; Live Test = "URL is available to Google." Owned under `benjamin.winters@gmail.com`. Crawl/indexing now on Google's timeline (~days–2 wks). |
 
@@ -64,7 +64,7 @@ _No credentials stored here — ownership only. Both are transferable to an EDF 
 |---|---|---|
 | **Google Business Profile** (Every Day Future) | `ben@wintersand.co` | ✅ Yes — transfer Primary Ownership to EDF Workspace acct |
 | **Google Search Console** (`everydayfuture.work` domain property) | `benjamin.winters@gmail.com` | ✅ Yes — add EDF email as verified Owner anytime |
-| **Google Analytics** (when set up) | _TBD_ | Set up under / share to the EDF Workspace acct for consistency |
+| **Google Analytics (GA4)** — property `G-05G2PBBWW1`, separate account "Every Day Future" | _confirm email_ | Share to the EDF Workspace acct; add `benjamin.winters@gmail.com` (or whichever owns SC) so GA4 ↔ Search Console can link |
 
 _Best practice: eventually align GBP + Search Console + GA all under (or shared to) the EDF Google Workspace account so the SEO stack is business-owned and cross-linkable._
 
