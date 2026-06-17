@@ -64,7 +64,7 @@ _No credentials stored here — ownership only. Both are transferable to an EDF 
 |---|---|---|
 | **Google Business Profile** (Every Day Future) | `ben@wintersand.co` | ✅ Yes — transfer Primary Ownership to EDF Workspace acct |
 | **Google Search Console** (`everydayfuture.work` domain property) | `benjamin.winters@gmail.com` | ✅ Yes — add EDF email as verified Owner anytime |
-| **Google Analytics (GA4)** — property `G-05G2PBBWW1`, separate account "Every Day Future" | _confirm email_ | Share to the EDF Workspace acct; add `benjamin.winters@gmail.com` (or whichever owns SC) so GA4 ↔ Search Console can link |
+| **Google Analytics (GA4)** — property `G-05G2PBBWW1`, separate account "Every Day Future" | `ben@wintersand.co` | Share to the EDF Workspace acct; add `benjamin.winters@gmail.com` (the SC owner) as a user so GA4 ↔ Search Console can link |
 
 _Best practice: eventually align GBP + Search Console + GA all under (or shared to) the EDF Google Workspace account so the SEO stack is business-owned and cross-linkable._
 
