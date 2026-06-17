@@ -30,16 +30,18 @@ All on-site SEO shipped to `staging` (tip `8d442a9`): B1 `site` config, B2 per-p
 
 _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checklist." Summary:_
 
+> **Cutover started 2026-06-17 (session 9).** DNS facts confirmed via `dig`: **email = Google Workspace** (`aspmx.l.google.com` + alts, on MX); **DNS hosted at Squarespace** (NS `ns0X.squarespacedns.com` + `nsone.net`); registrar Tucows/OpenSRS. **Email-safe strategy (locked): keep nameservers at Squarespace, change ONLY the apex `A` + `www` CNAME to Netlify — never touch MX/TXT.** Old Squarespace site = 3 pages (`/home`, `/rei-internal`, `/client-referral`), all → `/`.
+
 | # | Item | Status |
 |---|------|--------|
-| — | Verify on staging (Google Rich Results + LinkedIn/X inspectors) | ⬜ |
-| — | **`staging → main` merge** — needs Ben's explicit go-ahead | ⬜ |
-| — | Add `everydayfuture.work` to Netlify as custom domain first (pre-provision SSL) | ⬜ |
-| — | **301 redirects** from old Squarespace URLs (audit Squarespace sitemap first) | ⬜ |
-| — | `www` → apex 301 (canonical is non-www) | ⬜ |
-| — | Lower DNS TTL ~24h before switch | ⬜ |
-| — | **Repoint DNS** Squarespace → Netlify (apex + www) | ⬜ |
-| — | Keep Squarespace live until DNS propagates, then decommission | ⬜ |
+| — | **301 redirects** from old Squarespace URLs | ✅ `public/_redirects` built 2026-06-17 — `/home`, `/rei-internal`, `/client-referral` → `/` (301). Build-verified in `dist/`. |
+| — | **`staging → main` merge** | ✅ **approved by Ben 2026-06-17 ("merge as-is now")** — merging current staging build to production. |
+| — | Add `everydayfuture.work` + `www` to Netlify as custom domains first (apex = primary; pre-provision SSL) | ⬜ Ben (Netlify dashboard) |
+| — | `www` → apex 301 (canonical is non-www) | ⬜ Auto-handled by Netlify once apex is primary + `www` CNAME points to Netlify |
+| — | Lower DNS TTL ~300s ~24h before switch (apex `A` + `www`) | ⬜ Ben (Squarespace DNS panel) |
+| — | **Repoint web records** in Squarespace DNS: apex `A` → Netlify IP (per Netlify UI, currently `75.2.60.5`); `www` CNAME `ext-sq.squarespace.com` → `everyday-future-v4.netlify.app`. **Leave all 5 MX + TXT records untouched.** | ⬜ Ben (Squarespace DNS panel); Claude dig-verifies MX unchanged after |
+| — | Verify on the live domain (Rich Results + LinkedIn/X inspectors; HTTPS; 301s; `dig MX`) | ⬜ |
+| — | Keep Squarespace live until DNS propagates (rollback = revert the 2 records), then decommission | ⬜ |
 
 ---
 

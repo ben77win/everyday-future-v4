@@ -1,0 +1,7 @@
+# 301 redirects — Squarespace → Netlify domain cutover (2026-06-17)
+# Old Squarespace pages (from its sitemap) → new homepage.
+# Permanent (301) to preserve any inbound link equity.
+# Note: www → apex is handled by Netlify domain settings (apex set as primary), not here.
+/home              /    301
+/rei-internal      /    301
+/client-referral   /    301
