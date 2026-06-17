@@ -194,7 +194,7 @@ Webfonts loaded from Google: `Inter:wght@200&family=DM+Mono:wght@300;400`.
 ### 5.10 Footer (`Footer.astro`)
 - Ink background, padding 60px var(--gutter)
 - **Sticky footer (2026-06-05):** `body` is a `min-height: 100svh` (100vh fallback) flex column and `.site-footer` has `margin-top: auto`, so on short pages (e.g. the Contact "Thank you" state) the footer pins to the bottom of the viewport instead of floating mid-page. Tall pages (home, legal) are unaffected (no free space → `auto` resolves to 0). `body` keeps `position: relative` so the float-CTA over-footer parking still anchors to it; the parking observer is unaffected. Note: the footer is `display: none` on `/begin` (full-screen flow).
-- Left: wordmark (Helvetica Neue Ultralight 200, 22px, white at 0.72)
+- Left: wordmark (Helvetica Neue Ultralight 200, 24.2px, white at 0.72)
 - Right: link row — **Contact · Instagram · Terms & Conditions (`/terms`) · Privacy Policy (`/privacy`)** (the "Login" link was removed)
 - ~~Client Portal link (mobile only)~~ — **retired 2026-06-11 (handoff 7):** the mobile-only `.site-footer__link--portal` + `.site-footer__break` were removed when the mobile menu (§5.15) took over Client Portal on mobile (one home per destination, per Ben). Footer links now wrap naturally on mobile.
 - Links: DM Mono 13px / 0.110em uppercase, white at 0.46, **hover → `--blue`**
@@ -348,13 +348,13 @@ _The longer bullet-list Group copy that previously lived in this section (the 20
 
 ### Hero rotation
 - Sequential cycle on each reload via localStorage
-- 3 images, position presets per image
+- 4 images (rhododendron · rainleaves · silhouette-coast · rose-sky), position presets per image
 - Fade-in via `background-image` transition
 
 ### S3 rail
 - Drag-to-scroll (mouse): pointer events, captures pointer, snaps to nearest card on release
 - Touch: native scroll-snap (no JS needed)
-- **Auto-advance:** `setInterval(4000)` scrolls one card width forward, loops to start at end
+- **Auto-advance:** `setInterval(4000)` scrolls one card width forward; the rail is an **infinite seamless loop** (8 cards cloned ×3, `scrollLeft` wraps onto identical content — never resets to card 1)
 - Pauses on `pointerdown` and `mouseenter`, resumes on `mouseleave`
 
 ---

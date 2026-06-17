@@ -2,15 +2,15 @@
 
 > 📋 **The single launch checklist is [`LAUNCH.md`](LAUNCH.md)** — work from there. This file is the detailed SEO plan + the Domain Cutover playbook that `LAUNCH.md` links to. On-site SEO (B1–B9 + entity schema) is **done and on `staging`**; remaining SEO work is off-site (Search Console, analytics, GBP) and is tracked in `LAUNCH.md` §3.
 
-_Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 2026-06-04 (domain locked: `everydayfuture.work`). This is a plan/backlog — no SEO code shipped yet._
+_Status: **DONE + live on production.** On-site SEO shipped; **domain cutover complete 2026-06-17** (`everydayfuture.work` on Netlify); Search Console, Google Business Profile, and GA4 all set up. Captured 2026-06-03; this file is now the as-shipped record + the cutover/keyword playbooks._
 
 ---
 
 # 📊 Status Board  (the dashboard — updated every working session)
 
-> States: 🔒 locked · ✅ done · 🟡 in progress / asset ready · ⬜ open · ⛔ blocked. _Last updated 2026-06-11 (session 6 closed)._
+> States: 🔒 locked · ✅ done · 🟡 in progress / asset ready · ⬜ open · ⛔ blocked. _Last updated 2026-06-17 (session 9 — cutover + off-site SEO complete)._
 >
-> **All on-site SEO is shipped to `staging`** (113+ ahead of main as of 2026-06-11; the positioning phrase is now also in a visible `<h3>` — see Keyword Strategy below). Remaining is **off-site only** (Search Console, analytics, Google Business Profile) + the **domain cutover** (see checklist below). Production/`main` still stale — needs a `staging → main` merge.
+> **All SEO is live on production.** On-site SEO + the positioning `<h3>` shipped; **domain cutover complete 2026-06-17** — `everydayfuture.work` on Netlify, `staging` = `main`. Off-site set up: **Search Console** (domain property + sitemap), **Google Business Profile** (SAB, PNW), **GA4** (`G-05G2PBBWW1` + `generate_lead` conversion). Remaining = ongoing only (client reviews, indexing maturing over days/weeks, optional definitional content page).
 
 | Item | Status | Current decision / note |
 |---|---|---|
@@ -30,8 +30,8 @@ _Status: not started. Captured 2026-06-03 to revisit. Minimum Launch Plan added 
 | B9 — FAQPage JSON-LD | ✅ done | 6 Q&As in `FAQ.astro` as JSON-LD |
 | **Homepage copy — “conscious executive coaching”** | ✅ done | **Approved + applied** 2026-06-04 — clause added to the Taylor bio (`TaylorBio.astro:15`): “— a conscious executive coaching practice —”. Exact phrase now in visible homepage copy; Option B supported. |
 | Opp #2 — Person/ProfessionalService schema | ✅ done | `@graph` (ProfessionalService + Person) on homepage — legalName LTW Coaching LLC, areaServed US+Europe, Seattle/WA base, founder Taylor Winters ("Founder & Conscious Executive Coach"), Berkeley Haas credential, LinkedIn+Instagram `sameAs` |
-| Opp #3 — Search Console + analytics | 🟡 noted | add to launch checklist (measure, don’t fly blind) |
-| Opp #4 — Google Business Profile | 🟡 noted | the real local/Seattle lever (free, non-code) |
+| Opp #3 — Search Console + analytics | ✅ done | SC domain property verified + `sitemap-index.xml` submitted (2026-06-17, owner `benjamin.winters@gmail.com`); GA4 `G-05G2PBBWW1` live + `generate_lead` conversion (owner `ben@wintersand.co`) |
+| Opp #4 — Google Business Profile | ✅ done | Created + verified 2026-06-17 — Service-Area Business (address hidden), PNW areas, full profile (owner `ben@wintersand.co`). Ongoing: client reviews |
 | Opp #5 — LinkedIn + `sameAs` | ✅ done | LinkedIn (`/in/ltaylorwinters/`) in schema `sameAs` + **visible footer link** added (Contact · Instagram · LinkedIn · Terms · Privacy) |
 
 ### To-dos (need Ben / Taylor)

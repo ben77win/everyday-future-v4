@@ -367,9 +367,8 @@ All SVGs in `public/marks/` (served as `/marks/`) — fill `#2956e0`, variable s
 `dunes.png`, `feather.png`, `hero-coast.jpg`, `hero-red-sun.jpg`, `hero-rose.png`, `horizon.png`, `lotus.png`, `mountain-card.png`, `painting.png`, `rose.png`, `window-sunset.png`
 
 **Taylor portraits** (`public/images/`):
-- `taylor-01.png` — **Active** — Real portrait (PNG)
-- `taylor-02.jpg` — **Active** — Family photo (grayscale)
-- `taylor-03.gif` — **Active** — Ski lift looping GIF
+- **Active S6 bio portraits: `DSCF0184.jpg` + `DSCF0084.jpg`** (diagonal implied box — see "S6 Taylor Bio Photos"; 900×1200)
+- `taylor-01.png`, `taylor-02.jpg`, `taylor-03.gif` — **Unused** (former parallax-scatter portraits; replaced)
 - `taylor-03.jpg`, `taylor-04.jpg`, `taylor-04b.jpg`, `taylor-05.jpg`, `taylor-05b.jpg`, `taylor-06.jpg`, `taylor-07.jpg` — Unused placeholder JPGs
 
 ---
