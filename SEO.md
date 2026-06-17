@@ -98,6 +98,13 @@ Precision over cadence — 4–6 strong evergreen pieces beat weekly thin ones.
 
 **Don't chase:** "conscious leadership coaching" (CLG-owned) · bare national head terms · modality keywords (IPNB/NLP/DBT explainers) · generic "leadership tips" content (traffic without leads).
 
+## West Coast / multi-city reach beyond Seattle — non-GBP (added 2026-06-17)
+
+EDF realistically serves the whole West Coast (Portland, SF, LA), but **GBP stays a single Seattle/PNW profile** — Google prohibits multiple/unstaffed listings, and fake city profiles risk suspending the entire profile network (see the GBP setup notes). Reach those other cities through the site instead, two legitimate paths:
+
+- **Organic/national SEO (already the plan)** — the homepage, content, and `areaServed` schema reach Portland/SF/LA founders searching "conscious executive coaching" without any local listing.
+- **City-targeted landing pages on the site, if there's real demand** — e.g. a substantive "Executive coaching for Portland founders" page. This is the allowed, non-GBP path to other-city intent. **Caveat:** only with genuine, unique content — thin "doorway" pages cloned per city get penalized. Hold this until actual demand shows up.
+
 ## Keyword → page map
 
 _Which term lives where. One primary keyword per page — supporting terms appear naturally in body copy, never as competing titles. Pages marked ✦ don't exist yet (the content plan)._
