@@ -51,7 +51,7 @@ _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checkli
 |---|------|--------|------|
 | 7 | **Apply v4 design to client portal** | ⬜ | Reskin `edf-portal-updated_3/` to the v4 design system. |
 | 8 | **Google Analytics claim** | 🟡 | Set up *after* DNS is live, or you'd measure the old Squarespace site. |
-| 9 | **Google Business Profile + data** | 🟡 | The real local/Seattle lever. **Full fill-in-order setup sheet in `SEO.md` → "Google Business Profile — setup sheet."** SAB (address hidden), PNW-only service areas, website → `everydayfuture.work`. To be created under `ben@wintersand.co` (transferable to EDF Workspace later). |
+| 9 | **Google Business Profile + data** | ✅ | **Created + verified 2026-06-17** (under `ben@wintersand.co`). SAB (address hidden — confirm via incognito), PNW service areas, primary category Business management consultant + secondaries, website → `everydayfuture.work`, description, services (1:1 / Group / Orgs & Teams), photos (logo/cover/portraits/brand — `~/Desktop/EDF-GBP-photos/`). **Ongoing lever: client reviews** (request message drafted; no incentives / no review-gating per Google policy). Self-Led service to add closer to Winter 2026. Setup sheet: `SEO.md`. |
 | — | **Search Console** | ✅ | **Done 2026-06-17:** Domain property `everydayfuture.work` verified + `https://everydayfuture.work/sitemap-index.xml` submitted (8 URLs); indexing requested for homepage + both essays; Live Test = "URL is available to Google." Owned under `benjamin.winters@gmail.com`. Crawl/indexing now on Google's timeline (~days–2 wks). |
 
 ---
