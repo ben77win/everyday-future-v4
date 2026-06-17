@@ -51,8 +51,22 @@ _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checkli
 |---|------|--------|------|
 | 7 | **Apply v4 design to client portal** | ⬜ | Reskin `edf-portal-updated_3/` to the v4 design system. |
 | 8 | **Google Analytics claim** | 🟡 | Set up *after* DNS is live, or you'd measure the old Squarespace site. |
-| 9 | **Google Business Profile + data** | 🟡 | The real local/Seattle lever. Update the website URL *after* DNS is live. |
-| — | Submit sitemap to Search Console | 🟡 | Post-cutover (see `SEO.md`). |
+| 9 | **Google Business Profile + data** | 🟡 | The real local/Seattle lever. **Full fill-in-order setup sheet in `SEO.md` → "Google Business Profile — setup sheet."** SAB (address hidden), PNW-only service areas, website → `everydayfuture.work`. To be created under `ben@wintersand.co` (transferable to EDF Workspace later). |
+| — | **Search Console** | ✅ | **Done 2026-06-17:** Domain property `everydayfuture.work` verified + `https://everydayfuture.work/sitemap-index.xml` submitted (8 URLs); indexing requested for homepage + both essays; Live Test = "URL is available to Google." Owned under `benjamin.winters@gmail.com`. Crawl/indexing now on Google's timeline (~days–2 wks). |
+
+---
+
+## Accounts & ownership (record)
+
+_No credentials stored here — ownership only. Both are transferable to an EDF Google Workspace account later with **zero loss of history/reviews** (GBP: add EDF account as Owner → transfer Primary Ownership, 7-day hold; Search Console: add EDF email as a verified Owner — data lives with the domain property, not the account)._
+
+| Asset | Currently owned by | Migrate to EDF later? |
+|---|---|---|
+| **Google Business Profile** (Every Day Future) | `ben@wintersand.co` | ✅ Yes — transfer Primary Ownership to EDF Workspace acct |
+| **Google Search Console** (`everydayfuture.work` domain property) | `benjamin.winters@gmail.com` | ✅ Yes — add EDF email as verified Owner anytime |
+| **Google Analytics** (when set up) | _TBD_ | Set up under / share to the EDF Workspace acct for consistency |
+
+_Best practice: eventually align GBP + Search Console + GA all under (or shared to) the EDF Google Workspace account so the SEO stack is business-owned and cross-linkable._
 
 ---
 

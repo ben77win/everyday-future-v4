@@ -105,6 +105,34 @@ EDF realistically serves the whole West Coast (Portland, SF, LA), but **GBP stay
 - **Organic/national SEO (already the plan)** — the homepage, content, and `areaServed` schema reach Portland/SF/LA founders searching "conscious executive coaching" without any local listing.
 - **City-targeted landing pages on the site, if there's real demand** — e.g. a substantive "Executive coaching for Portland founders" page. This is the allowed, non-GBP path to other-city intent. **Caveat:** only with genuine, unique content — thin "doorway" pages cloned per city get penalized. Hold this until actual demand shows up.
 
+## Google Business Profile — setup sheet (fill-in order, added 2026-06-17)
+
+_The actionable checklist that expands the GBP setup notes above. Do it in one sitting. **Ownership:** create while signed in as `ben@wintersand.co` (transfer to the EDF Workspace account later — see LAUNCH.md "Accounts & ownership"). **Prereq:** Taylor's real Seattle address available to verify._
+
+1. **Start** — [business.google.com](https://business.google.com) → "Manage now," signed in as the intended owner account.
+2. **Business name** — `Every Day Future` (exact — **no** appended keywords/city; name-stuffing risks suspension).
+3. **Primary category** — `Business management consultant` (best executive-coaching fit for a leaders/founders/orgs practice; primary category is the biggest GBP ranking lever). **Secondary categories** (add after): `Career guidance service`, `Life coach`, `Coaching center` — add whichever GBP surfaces.
+4. **Storefront? → No.** When asked "Do you want to add a location customers can visit?" answer **No** → this makes it a **Service-Area Business (SAB)** and **hides the street address**. Enter Taylor's Seattle address for verification only (stays private).
+5. **Service areas — PNW only** (up to ~20; **not** the whole US, **not** other states): Seattle, Bellevue, Kirkland, Redmond, Shoreline, Bothell, Renton, Issaquah, Tacoma, Everett (+ "King County" / "Seattle metro" if offered).
+6. **Contact** — business phone; **Website → `https://everydayfuture.work`**; (optional) appointment link → `/begin`.
+7. **Verify** — choose **video verification** if offered (nothing mailed to the home); else postcard.
+8. **Confirm address is hidden** — after going live, open the profile in **incognito** + on Google Maps; only the service area should show, no street address. (This is the 100% self-check.)
+9. **Complete the profile** — description (below), hours = "By appointment," Services (below), photos (logo, Taylor portrait, brand imagery), attributes (e.g. "Online appointments").
+10. **Then, ongoing — the real local levers:** request **Google reviews** from clients + reply to each (biggest lever by far); keep NAP (name/phone) consistent across site + LinkedIn; post occasional GBP updates.
+
+**Name:** `Every Day Future`
+
+**Description** (≤750 chars — breaks the local frame while staying locally relevant):
+> Conscious executive coaching for leaders and founders navigating change. Based in Seattle, Every Day Future works remotely with clients across the US and Europe. Through 1:1, group, and organizational coaching, Taylor Winters helps leaders reduce resistance to the unknown, expand what's possible, and grow their capacity for change. A practice of possibility for the way you lead.
+
+**Services** (add under "Services" — titles + descriptions, aligned with the site offerings for NAP/message consistency):
+| Service | Description |
+|---|---|
+| 1:1 Executive Coaching | A dedicated one-on-one practice of what's possible, built only for you — to navigate change and lead with greater capacity. |
+| Group Coaching | A shared practice in community, with structure, support, and coach facilitation. |
+| Coaching for Orgs & Teams | Custom coaching and practice experiences for organizations, leadership teams, and cohorts. |
+| Self-Led Practice _(coming Winter 2026)_ | Practical guidance for leading yourself through conscious change. _(Optional — add when closer to launch.)_ |
+
 ## Keyword → page map
 
 _Which term lives where. One primary keyword per page — supporting terms appear naturally in body copy, never as competing titles. Pages marked ✦ don't exist yet (the content plan)._
