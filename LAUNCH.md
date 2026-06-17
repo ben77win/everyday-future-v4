@@ -79,6 +79,39 @@ _Best practice: eventually align GBP + Search Console + GA all under (or shared 
 
 ---
 
+## 5 — Squarespace decommission + (optional) registrar move (added 2026-06-17)
+
+_The three domain layers are decoupled and can live anywhere: **registration** (Squarespace/Tucows), **DNS hosting** (Squarespace nameservers), **website** (Netlify ✅), **email** (Google Workspace MX). They do not have to be at one provider. The current split is normal and stable._
+
+**Verdict:** Do **not** move the domain or DNS to Netlify (Netlify is a weak registrar and moving DNS there would force recreating the Google Workspace MX → email risk for no benefit). Decommission the Squarespace *site* now; leave the domain + DNS at Squarespace for now; optionally transfer the *registration* to **Cloudflare** (or Porkbun/Namecheap) later — never to Netlify.
+
+### 5a — Cancel the Squarespace *site* safely (keep domain + email) — do now
+> Goal: stop paying for the unused old site without touching the domain, DNS, or email.
+
+1. **Export anything worth keeping from the old Squarespace site first** (content, images, blog posts, any stored form submissions) — access is lost after cancellation.
+2. **Confirm the new site is live + propagated** — ✅ already verified (apex 200, email MX intact). The old site no longer serves the domain (DNS points to Netlify), so cancelling it has no public effect.
+3. **Confirm domain billing is SEPARATE from the site plan.** In Squarespace → Settings → Billing/Subscriptions, the **domain** and the **website plan** are billed separately. Cancelling the website plan must NOT cancel the domain.
+4. **Confirm Google Workspace billing is NOT tied to the Squarespace site plan.** EDF email is standard Google Workspace (MX → `aspmx.l.google.com`); it almost certainly bills directly with Google. Verify it's not a Squarespace-resold Workspace before cancelling anything.
+5. **Set the DOMAIN to auto-renew ON** so it can't lapse (a lapsed domain = lost domain + email outage).
+6. **Cancel only the website subscription** — Squarespace → Settings → Billing & Account → Subscriptions → the **website** plan → Cancel / turn off auto-renew. **Do NOT delete the domain or any DNS records** (the Netlify A/CNAME + the 5 Google MX + `portal` CNAME + `subdomain-ownership` TXT must all stay).
+7. **Verify after:** site still loads from Netlify (DNS unchanged), send a **test email** to/from `coach@everydayfuture.work` (confirms MX intact), and the domain shows active with auto-renew on.
+
+### 5b — (Optional, low priority) Transfer registration to Cloudflare — future
+> Goal: fully exit Squarespace, cheaper renewals + better DNS. Not urgent. Same email-preservation care as the cutover.
+
+**Prereqs:** domain >60 days since registration/last transfer (ICANN lock); confirm **Cloudflare Registrar supports `.work`** — if not, use **Porkbun** or **Namecheap** (both support `.work`, cheap). Cloudflare Registrar *requires* Cloudflare DNS, so the DNS host moves to Cloudflare as part of this.
+
+1. **Replicate ALL DNS records at the new host FIRST** (before any nameserver/registrar change), exactly: apex `A` → `75.2.60.5`; `www` CNAME → `everyday-future-v4.netlify.app`; **5 Google MX** (priorities 1/5/5/10/10); `portal` CNAME → `benevolent-frangipane-ac9c76.netlify.app`; `subdomain-ownership` TXT; the Search Console verification TXT; plus any SPF/DKIM/DMARC TXT.
+2. **Move DNS:** add the domain as a zone in Cloudflare, recreate the records (step 1), change the nameservers at Squarespace → Cloudflare's, and **verify resolution + send a test email** before going further.
+3. **At Squarespace (losing registrar):** unlock the domain + request the **auth/EPP code**.
+4. **At Cloudflare:** initiate the transfer, enter the auth code, pay (transfer adds +1 year at wholesale).
+5. **Confirm** the transfer email; transfers take ~5 days.
+6. **Verify post-transfer:** domain active at the new registrar, auto-renew on, DNS intact (MX/web), email + site working.
+
+**Rule throughout:** keep MX + web records identical and verify before each cutover step — zero downtime if DNS is replicated first.
+
+---
+
 ## Decisions needed from Ben / Taylor
 1. ~~**Calendly** (#1)~~ — ✅ all three URLs wired 2026-06-11.
 2. **Bio images** (#2) — keep current two or swap?
