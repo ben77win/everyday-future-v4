@@ -1192,6 +1192,8 @@ const optionDeksJson = JSON.stringify(
     } catch (e) { ok = false; }
 
     if (ok) {
+      // GA4 lead conversion — fires only on a confirmed Netlify submit
+      if (window.gtag) window.gtag('event', 'generate_lead', { form_name: 'begin', option: selectedOption });
       advanceToStep3();
     } else {
       submitBtn.disabled = false;
