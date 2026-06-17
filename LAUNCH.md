@@ -30,18 +30,18 @@ All on-site SEO shipped to `staging` (tip `8d442a9`): B1 `site` config, B2 per-p
 
 _Full order-of-operations + gotchas live in `SEO.md` → "Domain Cutover Checklist." Summary:_
 
-> **Cutover started 2026-06-17 (session 9).** DNS facts confirmed via `dig`: **email = Google Workspace** (`aspmx.l.google.com` + alts, on MX); **DNS hosted at Squarespace** (NS `ns0X.squarespacedns.com` + `nsone.net`); registrar Tucows/OpenSRS. **Email-safe strategy (locked): keep nameservers at Squarespace, change ONLY the apex `A` + `www` CNAME to Netlify — never touch MX/TXT.** Old Squarespace site = 3 pages (`/home`, `/rei-internal`, `/client-referral`), all → `/`.
+> **✅ CUTOVER COMPLETE — 2026-06-17 (session 9).** `everydayfuture.work` now serves the new Netlify site over HTTPS; email never affected. DNS facts (via `dig`): **email = Google Workspace** (`aspmx.l.google.com` + alts, on MX); DNS hosted at Squarespace (NS `squarespacedns.com` + `nsone.net`); registrar Tucows/OpenSRS. **Email-safe method used: kept nameservers at Squarespace, changed ONLY the apex `A` + `www` CNAME to Netlify — MX/TXT never touched.** Old Squarespace site = 3 pages (`/home`, `/rei-internal`, `/client-referral`), all → `/`.
 
 | # | Item | Status |
 |---|------|--------|
-| — | **301 redirects** from old Squarespace URLs | ✅ `public/_redirects` built 2026-06-17 — `/home`, `/rei-internal`, `/client-referral` → `/` (301). Build-verified in `dist/`. |
-| — | **`staging → main` merge** | ✅ **approved by Ben 2026-06-17 ("merge as-is now")** — merging current staging build to production. |
-| — | Add `everydayfuture.work` + `www` to Netlify as custom domains first (apex = primary; pre-provision SSL) | ⬜ Ben (Netlify dashboard) |
-| — | `www` → apex 301 (canonical is non-www) | ⬜ Auto-handled by Netlify once apex is primary + `www` CNAME points to Netlify |
-| — | Lower DNS TTL ~300s ~24h before switch (apex `A` + `www`) | ⬜ Ben (Squarespace DNS panel) |
-| — | **Repoint web records** in Squarespace DNS: apex `A` → Netlify IP (per Netlify UI, currently `75.2.60.5`); `www` CNAME `ext-sq.squarespace.com` → `everyday-future-v4.netlify.app`. **Leave all 5 MX + TXT records untouched.** | ⬜ Ben (Squarespace DNS panel); Claude dig-verifies MX unchanged after |
-| — | Verify on the live domain (Rich Results + LinkedIn/X inspectors; HTTPS; 301s; `dig MX`) | ⬜ |
-| — | Keep Squarespace live until DNS propagates (rollback = revert the 2 records), then decommission | ⬜ |
+| — | **301 redirects** from old Squarespace URLs | ✅ `public/_redirects` — `/home`, `/rei-internal`, `/client-referral` → `/` (301). **Live-verified: all 301 → `/`.** |
+| — | **`staging → main` merge** | ✅ approved by Ben ("merge as-is now"); fast-forwarded `efcb338..c4b2a19`, production rebuilt. |
+| — | Add domains to Netlify (apex primary, www redirect) | ✅ `everydayfuture.work` = ★ primary; `www` auto-redirects to apex. |
+| — | Repoint web records in Squarespace DNS | ✅ Deleted "Squarespace Defaults" block; added `A @ → 75.2.60.5` + `CNAME www → everyday-future-v4.netlify.app` (Custom records). **Google Workspace MX block + `portal`/`subdomain-ownership` records untouched.** |
+| — | **Email preserved** | ✅ All 5 Google MX records verified identical (authoritative + public resolvers) before, during, and after. |
+| — | SSL / propagation | ✅ Propagated to Google/Cloudflare/Quad9; Netlify Let's Encrypt cert **issued** (apex HTTPS = 200, TLS OK). |
+| — | Live-domain verification | ✅ Apex 200, `/writing/` 200, homepage title "Conscious Executive Coaching — Every Day Future", `www`→apex 301, old-URL 301s. _Optional follow-up: re-run Google Rich Results + LinkedIn/X inspectors on the production domain (was done on staging)._ |
+| — | Keep Squarespace live until propagation confirmed, then decommission | 🟡 **Safe to decommission Squarespace site now** (propagated + verified). Rollback recipe retained in CONTEXT.md if needed. **Do NOT delete the domain/DNS or the Google Workspace MX — those stay at Squarespace.** |
 
 ---
 
