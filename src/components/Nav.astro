@@ -3,7 +3,8 @@
 <nav class="nav" id="nav">
   <a href="/" class="nav__wordmark t-wordmark">Every Day Future</a>
   <div class="nav__right">
-    <a href="/writing" class="nav__link nav__link--writing">Writing</a>
+    {/* Writing link hidden 2026-06-22 — section kept live + indexed; reintroduce when more essays publish:
+        <a href="/writing" class="nav__link nav__link--writing">Writing</a> */}
     <a href="https://portal.everydayfuture.work" class="nav__link" target="_blank" rel="noopener">Client Portal</a>
   </div>
   <button class="nav__link mmenu-trigger" id="mmenuTrigger" aria-expanded="false" aria-controls="mmenu" aria-haspopup="dialog">Menu</button>
@@ -18,9 +19,11 @@
   </div>
   <div class="mmenu__links">
     <a class="mmenu__link" href="/" data-mkey="home">Home <span class="mmenu__num">01</span></a>
-    <a class="mmenu__link" href="/writing" data-mkey="writing">Writing <span class="mmenu__num">02</span></a>
-    <a class="mmenu__link" href="/contact" data-mkey="contact">Contact <span class="mmenu__num">03</span></a>
-    <a class="mmenu__link" href="https://portal.everydayfuture.work" target="_blank" rel="noopener">Client Portal <span class="mmenu__num">04</span></a>
+    {/* Writing link hidden 2026-06-22 — section kept live + indexed. To reintroduce: un-comment below
+        (numeral 02) and renumber Contact → 03 and Client Portal → 04.
+        <a class="mmenu__link" href="/writing" data-mkey="writing">Writing <span class="mmenu__num">02</span></a> */}
+    <a class="mmenu__link" href="/contact" data-mkey="contact">Contact <span class="mmenu__num">02</span></a>
+    <a class="mmenu__link" href="https://portal.everydayfuture.work" target="_blank" rel="noopener">Client Portal <span class="mmenu__num">03</span></a>
   </div>
   <a class="mmenu__cta" href="/begin" id="mmenuBegin">Begin Practice</a>
   <div class="mmenu__foot">

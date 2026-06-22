@@ -1,4 +1,8 @@
 # Every Day Future — Site Context
+_Last updated: 2026-06-22 (**session 10 — Writing link hidden from nav (temporary)**). Per Ben, the **Writing** link was hidden from all site chrome — **desktop nav, mobile menu, and footer** (`Nav.astro` ×2, `Footer.astro`) — until more essays are ready to publish (~2 weeks). **Links-only hide, "keep indexed" (Ben's call):** the `/writing` index + 2 published essays stay **live, in `sitemap-index.xml`, in `/rss.xml`, and indexed in Google** — only the on-site links are removed, so the freshly-indexed pages aren't disturbed before reintroduction. Implemented as Astro `{/* */}` comments (stripped from output — not even in page source) with a dated reintroduce note in each spot; mobile-menu numerals re-sequenced **Home 01 / Contact 02 / Client Portal 03** (Writing was 02). **To reintroduce:** un-comment the three links and renumber the mobile menu back (Writing 02, Contact 03, Client Portal 04). No changes to sitemap/RSS/robots/pages. Verified on preview: 0 Writing links in chrome, `/writing` still 200, prod-build sitemap still lists the 3 writing URLs, console clean. Pushed to `staging`._
+
+---
+
 _Last updated: 2026-06-17 (**session 9 — domain cutover ✅ COMPLETE + verified live**). **`everydayfuture.work` now serves the new Netlify site over HTTPS; email never affected.** Ben approved `staging → main` "as-is" (bio/Waymaker image decisions deferred, non-blocking). Email-safe method: DNS stayed at Squarespace, only the web records moved. Session 9 work:_
 _1. **301 redirects** — `public/_redirects`: `/home`, `/rei-internal`, `/client-referral` → `/` (301). Live-verified all three 301 → `/`._
 _2. **`staging → main` merge** — fast-forward `efcb338..c4b2a19`; production rebuilt + verified healthy._
@@ -156,7 +160,7 @@ See [`design.md`](design.md) — comprehensive as-built reference for all tokens
 | — | **Mobile menu** (`Nav.astro` `.mmenu*`) | ✅ Complete — **staging only** (2026-06-11, handoff 7; design.md §5.15; ≤640px ink curtain) |
 | — | Floating CTA (`CTABar.astro`) | ✅ Complete |
 | — | **Begin flow** (`BeginFlow.astro`, `begin.astro`) | ✅ Complete — **live on main** (Step 2 anchored-split redesign + step indicator on staging, 2026-06-11) |
-| — | **Writing** (`/writing` — `ArticleLayout.astro`, `src/pages/writing/`, `src/content/writing/`) | ✅ Complete — **staging only** (2026-06-11, handoff 6; design.md §5.14; 2 published essays + 4 dev-only draft stubs) |
+| — | **Writing** (`/writing` — `ArticleLayout.astro`, `src/pages/writing/`, `src/content/writing/`) | ✅ Complete — **link hidden from nav/footer/mobile 2026-06-22** (temporary; section still live + indexed). 2026-06-11, handoff 6; design.md §5.14; 2 published essays + 4 dev-only draft stubs |
 
 ---
 
