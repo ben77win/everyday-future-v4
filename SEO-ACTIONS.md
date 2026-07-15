@@ -28,6 +28,7 @@ _Working checklist from the 2026-07-15 live SEO audit. Goal: rank for **"Taylor 
 | B3 | **Build the definitional page — "What is conscious executive coaching?"** | ⬜ | Still the #1 content lever (SEO.md 🔑, verified research 6/11): whoever defines the young term owns it in search + AI answers. The decision-making essay is adjacent, not definitional. Publishes in the Writing section; every future article links to it. |
 | B4 | **Long-tail articles (3–4)** | ⬜ | Per the keyword→page map: "executive coach for founders / leaders navigating change," "burnout coaching for executives," "how to choose an executive coach." One intent each; all link to B3 and end at `/begin`. |
 | B5 | _(Optional polish)_ `llms.txt` + article `og:type` fix | ⬜ | Low priority: `public/llms.txt` for AI crawlers; LAUNCH.md #11 og:type=`article` on `/writing/[slug]`. |
+| B6 | **Add MCC + UPenn credentials to homepage schema (± visible bio)** | ⬜ | Surfaced 2026-07-15 from Taylor's old LinkedIn About (backup: `linkedin-about-backup.md`): **ICF Master Certified Coach (MCC)** — top-tier trust signal — + **UPenn Positive Psychology**. Site's Person schema (`index.astro` `@graph` `hasCredential`) currently lists Berkeley Haas only. Add both to schema; visible-bio mention needs Ben/Taylor approval (copy change). |
 
 ---
 
