@@ -4,6 +4,8 @@
 
 _Status: **DONE + live on production.** On-site SEO shipped; **domain cutover complete 2026-06-17** (`everydayfuture.work` on Netlify); Search Console, Google Business Profile, and GA4 all set up. Captured 2026-06-03; this file is now the as-shipped record + the cutover/keyword playbooks._
 
+> 🎯 **Active ranking push (July 2026): work from [`SEO-ACTIONS.md`](SEO-ACTIONS.md)** — the live checklist from the 2026-07-15 audit (ltw.coach 301 fix, LinkedIn/entity consolidation, indexing requests, GBP reviews, Writing un-hide, definitional page). This file stays the strategy reference.
+
 ---
 
 # 📊 Status Board  (the dashboard — updated every working session)
