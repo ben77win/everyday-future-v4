@@ -1,0 +1,100 @@
+---
+/* v5 — "The Process" (NEW section per Figma V3; promoted from the v4 S2 tier tiles).
+   Reuses the existing repo assets (foundation01.jpg rock still, calibration.mp4
+   clouds, expansion.mp4 lake — same sources as the comp). Body copy is Lorem
+   ipsum per the comp, shipped as-is (Ben 2026-08-05). */
+---
+<section class="procv5" id="process">
+  <h2 class="procv5__headline">The Process</h2>
+  <div class="procv5__grid">
+    <div class="procv5__step">
+      <div class="procv5__media">
+        <span class="procv5__num">01</span>
+        <img src="/images/foundation01.jpg" alt="" />
+      </div>
+      <h3 class="procv5__label">Foundation</h3>
+      <p class="procv5__body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.</p>
+    </div>
+    <div class="procv5__step">
+      <div class="procv5__media">
+        <span class="procv5__num">02</span>
+        <video src="/videos/calibration.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <h3 class="procv5__label">Calibration</h3>
+      <p class="procv5__body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.</p>
+    </div>
+    <div class="procv5__step">
+      <div class="procv5__media">
+        <span class="procv5__num">03</span>
+        <video src="/videos/expansion.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <h3 class="procv5__label">Expansion</h3>
+      <p class="procv5__body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.</p>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+.procv5 {
+  padding: 120px 24px 120px 30px;
+  background: var(--paper-off-b);
+}
+.procv5__headline {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 46px;
+  letter-spacing: -0.020em;
+  color: var(--ink);
+  margin-bottom: 56px;
+}
+.procv5__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+.procv5__media {
+  position: relative;
+  aspect-ratio: 437 / 420;
+  overflow: hidden;
+}
+.procv5__media img,
+.procv5__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.procv5__num {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 44px;
+  color: var(--paper);
+}
+.procv5__label {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 28px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 28px 0 16px;
+}
+.procv5__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 340px;
+}
+@media (max-width: 900px) {
+  .procv5__grid { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 640px) {
+  .procv5 { padding: 88px var(--gutter); }
+  .procv5__headline { font-size: 34px; }
+}
+</style>
