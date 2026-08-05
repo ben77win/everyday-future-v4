@@ -1,12 +1,16 @@
 
 /* ─── TOKENS ─────────────────────────────────────────────────── */
 :root {
-  /* — Surface (5) — */
-  --paper:        #FFFFFF;   /* page default · S2 cards · S3 floor · S6 · Begin step 3 panel */
+  /* — Surface (v5: ivory ground per design-v5.md; V3 comp frame fill #F8FCF7) — */
+  --paper:        #FFFFFF;   /* white panels (Begin form panel, cards) */
   --paper-off-a:  #FAFCFA;   /* (reserved — barely-warm paper) */
-  --paper-off-b:  #F8FCF7;   /* S4 About */
-  --paper-cream:  #FFFCD1;   /* S2 · S5 Waymaker · Begin drawer/page */
-  --paper-sage:   #E9EDE7;   /* S3 testimonial cards · S7 FAQ */
+  --paper-off-b:  #F8FCF7;   /* v5 GROUND — whole-site ivory */
+  --paper-cream:  #F8FCF7;   /* v5: re-pointed from v4 cream #FFFCD1 to the ivory ground */
+  --paper-sage:   #E9EDE7;   /* S3 testimonial cards · S7 FAQ (v4 leftover, replaced in Phase 2) */
+  /* — v5 yellows (measured from Home Page - Desktop comp 2026-08-05) — */
+  --card-yellow-a: #F2EC94;  /* Choose How card, bright (1:1 Coaching) */
+  --card-yellow-b: #F7F3C6;  /* Choose How card, pale (Orgs/Group/Self-led) */
+  --pale-yellow:   #FDFCE8;  /* testimonial band · footer gradient end */
 
   /* — Ink — */
   --ink:          #000000;   /* type · hairlines · S3 outcome cards · footer · S2 hover */
@@ -33,7 +37,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
-  background: var(--paper);
+  background: var(--paper-off-b); /* v5 ivory ground */
   color: var(--ink);
   font-family: var(--font-body);
   font-weight: 300;
@@ -320,18 +324,21 @@ a { color: inherit; text-decoration: none; }
   opacity: 1;
   pointer-events: auto;
 }
+/* v5 black pill — measured from Home Page - Desktop comp: 185×43, fully rounded;
+   label DM Mono 300 16px / +1.43px tracking (Figma "Begin Practice" text node). */
 .float-cta__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  padding: 0 40px;
+  height: 43px;
+  padding: 0 16px;
   background: var(--ink);
   color: var(--paper);
-  border-radius: 4px;
+  border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 14.4px;
-  letter-spacing: 0.110em;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 1.43px;
   text-transform: uppercase;
   white-space: nowrap;
   transition: background 0.25s ease, color 0.25s ease;
@@ -340,11 +347,11 @@ a { color: inherit; text-decoration: none; }
   background: var(--blue);
   color: var(--paper);
 }
-/* Over the hero (S1): inverted — white surface, ink label. Reverts to the
-   default black on scroll into S2 (toggled by JS in Layout.astro). Hover stays --blue. */
+/* v5: over-hero white inversion removed — V3 hero is ivory ground, pill stays black.
+   (.over-hero class still toggled by Layout.astro JS; styles intentionally identical.) */
 .float-cta.over-hero .float-cta__link {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
 }
 .float-cta.over-hero .float-cta__link:hover {
   background: var(--blue);
