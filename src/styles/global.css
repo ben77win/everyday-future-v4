@@ -202,15 +202,9 @@ a { color: inherit; text-decoration: none; }
 .nav.scrolled .nav__link { color: var(--ink); text-shadow: none; }
 .nav.scrolled .nav__cta { background: var(--ink); color: var(--paper); }
 
-.nav__wordmark {
-  color: rgba(255,255,255,0.92);
-  font-family: var(--font-body);
-  font-weight: 200;       /* original ultralight (weight rolled back; size kept) */
-  font-size: 27.5px;      /* ~10% larger than the original 25px */
-  letter-spacing: -0.020em;
-  transition: color 0.3s;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.10), 0 0px 4px rgba(0,0,0,0.05);
-}
+/* v5 — the hero is ivory, so the nav is ink at rest (white-over-photo states retired) */
+.nav__wordmark--v5 { display: block; line-height: 0; }
+.nav__wordmark--v5 img { width: 160px; height: auto; }
 .nav__right {
   position: absolute;
   right: var(--gutter);
@@ -219,14 +213,23 @@ a { color: inherit; text-decoration: none; }
   gap: 28px;
 }
 .nav__link {
-  color: rgba(255,255,255,0.78);
+  color: var(--ink);
   font-family: var(--font-mono);
+  font-weight: 300;
   font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-  transition: color 0.3s;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.35), 0 0px 4px rgba(0,0,0,0.18);
+  transition: color 0.3s, background 0.3s;
 }
+/* v5 boxed Client Portal — Figma: 162×27 @1440, 1px ink border */
+.nav__link--boxed {
+  display: inline-flex;
+  align-items: center;
+  height: 27px;
+  padding: 0 10px;
+  border: 1px solid var(--ink);
+}
+.nav__link--boxed:hover { background: var(--ink); color: var(--paper); }
 .nav__link:hover,
 .nav.scrolled .nav__link:hover { color: var(--blue); }
 .nav__cta {

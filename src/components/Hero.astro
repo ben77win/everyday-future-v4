@@ -1,20 +1,67 @@
 ---
 ---
-<section class="hero" id="hero" aria-label="Hero">
-  <div class="hero__bg"></div>
-  <div class="hero__gradient"></div>
+{/* v5 hero — per Figma V3 Home Page - Desktop (node 188-2) + design-v5.md.
+    All positions measured in the 1440-frame and converted to vw (÷14.4).
+    Photos sit between the justified headline lines at 70% opacity; two
+    hand-drawn blue scribble marks overlay the type. The tree is a VIDEO in
+    the comp (IMG_0996.mp4) — poster PNG until the source clip arrives. */}
+<section class="hero hero--v5" id="hero" aria-label="Hero">
+  <img class="hv5__img hv5__img--tree" src="/images/v5/hero-tree.png" alt="" aria-hidden="true" />
+  <img class="hv5__img hv5__img--silhouette" src="/images/v5/hero-silhouette.png" alt="" aria-hidden="true" />
+  <img class="hv5__img hv5__img--tennis" src="/images/v5/hero-tennis.png" alt="" aria-hidden="true" />
 
-  <!-- Main content: headline + subhead + tags -->
-  <div class="hero__content">
-    <div class="hero__copy">
-      <h1 class="t-display hero__headline">A practice of <span style="position:relative;display:inline-block;">possibility<img src="/marks/Vector-5.svg" style="position:absolute;top:-16px;left:-10px;width:87%;opacity:0.75;pointer-events:none;transform:rotate(-3deg);filter:brightness(0) invert(1);" aria-hidden="true"/></span><span style="display:block;margin-top:0.38em;">+coaching</span></h1>
-      <p class="hero__subhead">Consciously expand how you want to work, the progress you care to create, and the change that changes you.</p>
-      <div class="tags hero__tags">
-        <span class="tag">Reduce resistance</span>
-        <span class="tag">Expand possibility</span>
-        <span class="tag">Increase progress</span>
-      </div>
-    </div>
-  </div>
+  <h1 class="hv5__headline">Consciously Expand How You Want To Work, The Progress You Care To Create, And The Change That Changes You.</h1>
 
+  <img class="hv5__mark hv5__mark--underline" src="/images/v5/scribble-underline.png" alt="" aria-hidden="true" />
+  <img class="hv5__mark hv5__mark--circle" src="/images/v5/scribble-circle.png" alt="" aria-hidden="true" />
 </section>
+
+<style is:global>
+/* ── v5 hero (desktop-first; values = Figma px ÷ 14.4 → vw) ── */
+.hero--v5 {
+  position: relative;
+  height: 62.4vw;            /* headline block + pill zone, clipped like the comp */
+  min-height: auto;
+  background: var(--paper-off-b);
+  overflow: hidden;
+}
+.hv5__img { position: absolute; object-fit: cover; opacity: 0.70; }
+.hv5__img--tree       { left: 0.15vw;  top: 12.39vw; width: 15.36vw; height: 27.30vw; }
+.hv5__img--silhouette { left: 59.03vw; top: 14.47vw; width: 17.18vw; height: 11.45vw; }
+.hv5__img--tennis     { left: 42.35vw; top: 35.74vw; width: 12.18vw; height: 14.41vw; }
+.hv5__headline {
+  position: absolute;
+  left: 2.10vw;
+  top: 20.44vw;
+  width: 96.92vw;
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 5.486vw;        /* 79px @1440 */
+  line-height: 8.681vw;      /* 125px @1440 */
+  letter-spacing: -0.03em;
+  text-align: justify;
+  text-align-last: justify;
+  color: var(--ink);
+}
+.hv5__mark { position: absolute; pointer-events: none; }
+.hv5__mark--underline { left: 4.10vw;  top: 22.82vw; width: 27.04vw; }
+.hv5__mark--circle    { left: 57.07vw; top: 37.75vw; width: 34.48vw; }
+
+/* Mobile — provisional stack until the Home Page - Mobile comp pass (Phase 3) */
+@media (max-width: 640px) {
+  .hero--v5 { height: auto; padding: 96px var(--gutter) 120px; }
+  .hv5__img--tree       { left: 0;    top: 70px;  width: 34vw; height: 60vw; }
+  .hv5__img--silhouette { right: 0;   left: auto; top: 110px; width: 40vw; height: 27vw; }
+  .hv5__img--tennis     { display: none; }
+  .hv5__headline {
+    position: relative;
+    left: auto; top: auto; width: 100%;
+    font-size: 34px;
+    line-height: 1.35;
+    text-align: left;
+    text-align-last: auto;
+  }
+  .hv5__mark--underline { left: 8px; top: 132px; width: 60vw; }
+  .hv5__mark--circle    { display: none; }
+}
+</style>

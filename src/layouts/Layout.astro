@@ -60,21 +60,7 @@ const ogImage = new URL(image, site).href;
 <slot />
 
 <script>
-  // ── Hero image rotation — cycles sequentially on each reload
-  (function() {
-    var bg = document.querySelector('.hero__bg');
-    if (!bg) return;
-    var images = [
-      { src: '/images/rhododendron.jpg',  pos: '50% 60%' },
-      { src: '/images/rainleaves.jpg',    pos: '50% 60%' },
-      { src: '/images/silhouette-coast.jpg', pos: '50% 50%' },
-      { src: '/images/rose-sky.jpg',         pos: '50% 40%' }
-    ];
-    var idx  = (parseInt(localStorage.getItem('edf_hero') || '0') + 1) % images.length;
-    localStorage.setItem('edf_hero', idx);
-    bg.style.backgroundImage    = 'url(' + images[idx].src + ')';
-    bg.style.backgroundPosition = images[idx].pos;
-  })();
+  /* v5: hero photo rotation retired (Ben 2026-08-05) — the V3 hero is static ivory. */
 
   // ── Nav + floating CTA: toggle after hero exits
   var nav      = document.getElementById('nav');

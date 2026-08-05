@@ -1,11 +1,14 @@
 ---
 ---
 <nav class="nav" id="nav">
-  <a href="/" class="nav__wordmark t-wordmark">Every Day Future</a>
+  {/* v5 — stacked wordmark SVG (Figma: 229.69×82 @1440, centered) */}
+  <a href="/" class="nav__wordmark nav__wordmark--v5" aria-label="Every Day Future — home">
+    <img src="/images/wordmark-stacked.svg" alt="Every Day Future" width="160" height="57" />
+  </a>
   <div class="nav__right">
     {/* Writing link hidden 2026-06-22 — section kept live + indexed; reintroduce when more essays publish:
         <a href="/writing" class="nav__link nav__link--writing">Writing</a> */}
-    <a href="https://portal.everydayfuture.work" class="nav__link" target="_blank" rel="noopener">Client Portal</a>
+    <a href="https://portal.everydayfuture.work" class="nav__link nav__link--boxed" target="_blank" rel="noopener">Client Portal ↗</a>
   </div>
   <button class="nav__link mmenu-trigger" id="mmenuTrigger" aria-expanded="false" aria-controls="mmenu" aria-haspopup="dialog">Menu</button>
 </nav>
