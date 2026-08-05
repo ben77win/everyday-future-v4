@@ -1,30 +1,71 @@
 ---
+/* v5 — "Someday already started" per Figma V3 (Start frame 1447×552 @ top 3928).
+   Scattered imagery + two body columns + blue clock scribble. All positions
+   measured in the 1440 frame and converted to vw (÷14.4). The figure photo
+   deliberately hangs below the text block, as in the comp. */
 ---
-<section class="s4" id="about">
-  <div class="s4__inner">
+<section class="sd5" id="about">
+  <img class="sd5__img sd5__img--pottery" src="/images/v5/someday-pottery.png" alt="" aria-hidden="true" />
+  <img class="sd5__img sd5__img--door" src="/images/waymaker-threshold.jpg" alt="" aria-hidden="true" />
+  <img class="sd5__img sd5__img--figure" src="/images/v5/someday-figure.png" alt="" aria-hidden="true" />
+  <img class="sd5__mark" src="/images/v5/scribble-clock.png" alt="" aria-hidden="true" />
 
-    <div class="s4__left">
-      <div style="position:relative;display:inline-block;">
-        <img src="/marks/Vector-8.svg" class="s4__mark" alt="" aria-hidden="true" style="filter:brightness(0) saturate(100%) invert(27%) sepia(90%) saturate(700%) hue-rotate(207deg) brightness(95%);" />
-        <h2 class="s4__heading">Someday already started</h2>
-      </div>
-      <p class="s4__body" id="s4Body">Your future is created by your attention and actions every day, most visibly in work. Without practice, what's possible is limited by predictable patterns repeated unknowingly.<br><br>Possibility is the capacity for change. With practice, what's possible expands through conscious change, reduced resistance, and meaningful progress toward the future you want, now.</p>
-      <div class="s4__tags" id="s4Tags">
-        <span class="s4__tag">Reduce resistance</span>
-        <span class="s4__tag">Expand possibility</span>
-        <span class="s4__tag">Increase progress</span>
-      </div>
-    </div>
-
-    <div class="s4__photos">
-      <div class="s4__photo-main">
-        <img src="/images/waymaker-threshold.jpg" alt="" />
-        <span class="s4__caption">THE THRESHOLD</span>
-      </div>
-      <div class="s4__photo-stack">
-        <img src="/images/waymaker-horizon.jpg" alt="" />
-      </div>
-    </div>
-
-  </div>
+  <h2 class="sd5__heading">Someday already started</h2>
+  <p class="sd5__body sd5__body--a">Your future is created by your attention and actions every day, most visibly in work. Without practice, what's possible is limited by predictable patterns repeated unknowingly.</p>
+  <p class="sd5__body sd5__body--b">Possibility is the capacity for change. With practice, what's possible expands through conscious change, reduced resistance, and meaningful progress toward the future you want, now.</p>
 </section>
+
+<style is:global>
+.sd5 {
+  position: relative;
+  height: 53vw;
+  background: var(--paper-off-b);
+  overflow: hidden;
+}
+.sd5__img { position: absolute; object-fit: cover; }
+.sd5__img--pottery { left: 0;       top: 9.00vw;  width: 16.76vw; height: 15.57vw; }
+.sd5__img--door    { left: 79.54vw; top: 0;       width: 20.97vw; height: 23.47vw; opacity: 0.70; }
+.sd5__img--figure  { left: 36.70vw; top: 35.56vw; width: 12.53vw; height: 15.46vw; }
+.sd5__mark {
+  position: absolute;
+  left: 85.82vw;
+  top: 23.17vw;
+  width: 23.27vw;
+  pointer-events: none;
+}
+.sd5__heading {
+  position: absolute;
+  left: 2.08vw;
+  top: 10.97vw;
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 46px;
+  letter-spacing: -0.020em;
+  color: var(--ink);
+}
+.sd5__body {
+  position: absolute;
+  top: 28.06vw;
+  width: 28.4vw;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.sd5__body--a { left: 2.08vw; }
+.sd5__body--b { left: 55.76vw; }
+
+@media (max-width: 900px) {
+  .sd5 { height: auto; padding: 96px var(--gutter) 120px; }
+  .sd5__heading,
+  .sd5__body { position: static; width: auto; }
+  .sd5__heading { font-size: 34px; margin-bottom: 32px; }
+  .sd5__body { max-width: 520px; }
+  .sd5__body--a { margin-bottom: 22px; }
+  .sd5__img--pottery { left: auto; right: 4vw; top: 4vw; width: 30vw; height: 28vw; }
+  .sd5__img--door    { left: auto; right: 0;   top: 40vw; width: 26vw; height: 30vw; }
+  .sd5__img--figure,
+  .sd5__mark { display: none; }
+}
+</style>
