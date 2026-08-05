@@ -10,7 +10,9 @@
   <img class="hv5__img hv5__img--silhouette" src="/images/v5/hero-silhouette.png" alt="" aria-hidden="true" />
   <img class="hv5__img hv5__img--tennis" src="/images/v5/hero-tennis.png" alt="" aria-hidden="true" />
 
-  <h1 class="hv5__headline">Consciously Expand How You Want To Work, The Progress You Care To Create, And The Change That Changes You.</h1>
+  {/* .hv5__ln spans: display:contents on desktop (natural 3-line justify),
+      display:block ≤640 to force the mobile comp's exact 6-line wrap */}
+  <h1 class="hv5__headline"><span class="hv5__ln">Consciously Expand</span> <span class="hv5__ln">How You Want To</span> <span class="hv5__ln">Work, The Progress</span> <span class="hv5__ln">You Care To Create,</span> <span class="hv5__ln">And The Change</span> <span class="hv5__ln">That Changes You.</span></h1>
 
   <img class="hv5__mark hv5__mark--underline" src="/images/v5/scribble-underline.png" alt="" aria-hidden="true" />
   <img class="hv5__mark hv5__mark--circle" src="/images/v5/scribble-circle.png" alt="" aria-hidden="true" />
@@ -43,25 +45,33 @@
   text-align-last: justify;
   color: var(--ink);
 }
+.hv5__ln { display: contents; }
 .hv5__mark { position: absolute; pointer-events: none; }
 .hv5__mark--underline { left: 4.10vw;  top: 22.82vw; width: 27.04vw; }
 .hv5__mark--circle    { left: 57.07vw; top: 37.75vw; width: 34.48vw; }
 
-/* Mobile — provisional stack until the Home Page - Mobile comp pass (Phase 3) */
+/* Mobile — measured from Home Page - Mobile comp (360-frame, ÷3.6 → vw).
+   Justified 7-line headline; tree left / silhouette right-bleed / tennis center;
+   underline under "Consciously", circle around "Changes". */
 @media (max-width: 640px) {
-  .hero--v5 { height: auto; padding: 96px var(--gutter) 120px; }
-  .hv5__img--tree       { left: 0;    top: 70px;  width: 34vw; height: 60vw; }
-  .hv5__img--silhouette { right: 0;   left: auto; top: 110px; width: 40vw; height: 27vw; }
-  .hv5__img--tennis     { display: none; }
+  .hero--v5 { height: 160vw; min-height: 0; }
+  .hv5__img--tree       { left: 0;      top: 27.8vw; width: 30.3vw; height: 63.4vw; }
+  .hv5__img--silhouette { left: 57.2vw; top: 45.0vw; width: 42.8vw; height: 30.0vw; }
+  .hv5__img--tennis     { display: block; left: 44.2vw; top: 75.3vw; width: 23.1vw; height: 43.4vw; }
   .hv5__headline {
-    position: relative;
-    left: auto; top: auto; width: 100%;
-    font-size: 34px;
-    line-height: 1.35;
-    text-align: left;
-    text-align-last: auto;
+    left: 6.1vw;
+    top: 28.9vw;
+    width: 87.8vw;
+    /* comp 40px @360 in HN LT Std; the wider system stand-in needs 9.6vw +
+       tighter tracking so "Consciously Expand" holds one line */
+    font-size: 9.6vw;
+    line-height: 12.1vw;
+    letter-spacing: -0.040em;
+    text-align: justify;
+    text-align-last: justify;
   }
-  .hv5__mark--underline { left: 8px; top: 132px; width: 60vw; }
-  .hv5__mark--circle    { display: none; }
+  .hv5__ln { display: block; }
+  .hv5__mark--underline { left: 8.9vw; top: 36.2vw; width: 48.3vw; }
+  .hv5__mark--circle    { display: block; left: 18vw; top: 86.5vw; width: 46vw; }
 }
 </style>

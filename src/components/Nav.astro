@@ -44,6 +44,8 @@
 .mmenu { display: none; }
 
 @media (max-width: 640px) {
+  /* v5: hamburger icon (two bars) per Home Page - Mobile comp — the "Menu"
+     text stays in the DOM for AT but is visually replaced by the bars */
   .mmenu-trigger {
     display: block;
     position: absolute;
@@ -51,12 +53,22 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 6px 0;
-    /* The UA button stylesheet forces font-weight 400, beating the inherited
-       body 300 that the nav <a> links (and the comp's MENU) render at */
-    font-weight: 300;
+    padding: 10px 0;
+    width: 26px;
+    font-size: 0;
+    color: transparent;
   }
-  .mmenu-trigger:active { color: var(--blue); text-shadow: none; }
+  .mmenu-trigger::before,
+  .mmenu-trigger::after {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 1.5px;
+    background: var(--ink);
+  }
+  .mmenu-trigger::before { margin-bottom: 8px; }
+  .mmenu-trigger:active::before,
+  .mmenu-trigger:active::after { background: var(--blue); }
 
   /* ── The curtain */
   .mmenu {

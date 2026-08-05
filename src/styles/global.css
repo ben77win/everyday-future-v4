@@ -1372,9 +1372,19 @@ a { color: inherit; text-decoration: none; }
 
   /* ── NAV */
   .nav { padding: 18px var(--gutter); }
-  /* The desktop links hide on mobile; the MENU trigger (Nav.astro .mmenu-trigger)
-     renders in their slot and opens the mobile menu curtain */
+  /* The desktop links hide on mobile; the hamburger trigger (Nav.astro
+     .mmenu-trigger) renders in their slot and opens the mobile menu curtain */
   .nav__right { display: none; }
+
+  .nav__wordmark--v5 img { width: 112px; } /* comp mobile wordmark ~112px */
+
+  /* ── FLOAT CTA — v5 mobile pill per Home Page - Mobile comp: ~123×28 */
+  .float-cta__link {
+    height: 28px;
+    padding: 0 14px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
 
   /* ── HERO */
   .hero__content  { padding: 0 var(--gutter) calc(100px + env(safe-area-inset-bottom, 0px)); }
