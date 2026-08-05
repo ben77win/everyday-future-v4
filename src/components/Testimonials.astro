@@ -1,76 +1,163 @@
 ---
+/* v5 — "Practice makes progress" band per Figma V3 (Testimonials frame 1755×786,
+   bleeding past the 1440 viewport; Alice comment #45: "slides through
+   testimonials and quotes"). Pale-yellow band, blue star rows (decorative — Ben
+   2026-08-05), big blue quote glyphs on quote cards, 1px ink hairlines between
+   columns, DM Mono uppercase attribution. Content = the site's existing
+   testimonial/outcome set, styled per the comp treatment. */
+const cards = [
+  { quote: false, body: "Reduced social anxiety and increased energy and ease in work, resulting in a seven-figure level promotion.", name: "Clara", role: "Senior IC leader, AI / major tech" },
+  { quote: true,  body: "I have done years of therapy and invested in personal growth. This is accelerated, transformative, and focused on my future. I have made so much progress in a year that didn't seem possible before.", name: "Clara", role: "Senior IC leader, AI / major tech" },
+  { quote: false, body: "Negotiated IP to relaunch and funded a top 1% podcast independently, and changed her relationship with fear.", name: "Maya", role: "Journalist & podcast creator" },
+  { quote: true,  body: "I have discovered so much about myself, what I want, and how to work with change in a way that I now experience greater wellbeing — and also get results that change everything, in a good way.", name: "", role: "" },
+  { quote: false, body: "Transformed consulting into a visionary leadership retreat center for climate-action decision-makers, in alignment with personal values.", name: "Alex, PhD", role: "Sustainability advisor & speaker" },
+  { quote: true,  body: "Working with Every Day Future feels like magic — but it's real.", name: "", role: "" },
+  { quote: false, body: "Navigated uncertainty using self-awareness through art and breathwork, and increased individual and interpersonal coherence.", name: "Senior Team", role: "at YouTube" },
+  { quote: true,  body: "Our company and executive leadership team was struggling with significant change and we needed coaching support, fast. The techniques and results were both unexpected and exceptional.", name: "", role: "" },
+];
 ---
-<section class="s3" id="results">
-  <div class="s3__head">
-    <h2 class="s3__heading">Practice makes progress</h2>
-    <h3 class="s3__subhead">Outcomes from conscious executive coaching</h3>
+<section class="ts5" id="results">
+  <div class="ts5__head">
+    <h2 class="ts5__heading">Practice makes progress</h2>
+    <img class="ts5__mark" src="/images/v5/scribble-loop-arrow.png" alt="" aria-hidden="true" />
   </div>
-
-  <div class="s3__carousel">
-  <button class="s3__chev s3__chev--prev" id="s3Prev" type="button" aria-label="Previous">
-    <svg class="s3__chev-icon" width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true"><path d="M12 3 L4 12 L12 21" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter"/></svg>
-  </button>
-  <div class="s3__rail" id="s3Rail">
-
-    <!-- 01 — Outcome: Maya -->
-    <article class="s3__card s3__card--outcome">
-      <p class="s3__card-body">Negotiated IP to relaunch and funded a top 1% podcast independently, and changed her relationship with fear.</p>
-      <footer class="s3__card-attribution">
-        <div class="s3__card-name">Maya</div>
-        <div class="s3__card-role">Journalist &amp; podcast creator</div>
-      </footer>
-    </article>
-
-    <!-- 02 — Testimonial -->
-    <article class="s3__card s3__card--testimonial">
-      <p class="s3__card-quote">I have done years of therapy and invested in personal growth. This is accelerated, transformative, and focused on my future. I have made so much progress in a year that didn't seem possible before.</p>
-    </article>
-
-    <!-- 03 — Outcome: Clara -->
-    <article class="s3__card s3__card--outcome">
-      <p class="s3__card-body">Reduced social anxiety and increased energy and ease in work, resulting in a seven-figure level promotion.</p>
-      <footer class="s3__card-attribution">
-        <div class="s3__card-name">Clara</div>
-        <div class="s3__card-role">Senior IC leader, AI / major tech</div>
-      </footer>
-    </article>
-
-    <!-- 04 — Testimonial -->
-    <article class="s3__card s3__card--testimonial">
-      <p class="s3__card-quote">I have discovered so much about myself, what I want, and how to work with change in a way that I now experience greater wellbeing — and also get results that change everything, in a good way.</p>
-    </article>
-
-    <!-- 05 — Outcome: Alex -->
-    <article class="s3__card s3__card--outcome">
-      <p class="s3__card-body">Transformed consulting into a visionary leadership retreat center for climate-action decision-makers, in alignment with personal values.</p>
-      <footer class="s3__card-attribution">
-        <div class="s3__card-name">Alex, PhD</div>
-        <div class="s3__card-role">Sustainability advisor &amp; speaker</div>
-      </footer>
-    </article>
-
-    <!-- 06 — Testimonial -->
-    <article class="s3__card s3__card--testimonial">
-      <p class="s3__card-quote">Working with Every Day Future feels like magic — but it's real.</p>
-    </article>
-
-    <!-- 07 — Outcome: Senior Team at YouTube -->
-    <article class="s3__card s3__card--outcome">
-      <p class="s3__card-body">Navigated uncertainty using self-awareness through art and breathwork, and increased individual and interpersonal coherence.</p>
-      <footer class="s3__card-attribution">
-        <div class="s3__card-name">Senior Team</div>
-        <div class="s3__card-role">at YouTube</div>
-      </footer>
-    </article>
-
-    <!-- 08 — Testimonial -->
-    <article class="s3__card s3__card--testimonial">
-      <p class="s3__card-quote">Our company and executive leadership team was struggling with significant change and we needed coaching support, fast. The techniques and results were both unexpected and exceptional.</p>
-    </article>
-
-  </div>
-  <button class="s3__chev s3__chev--next" id="s3Next" type="button" aria-label="Next">
-    <svg class="s3__chev-icon" width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true"><path d="M4 3 L12 12 L4 21" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter"/></svg>
-  </button>
+  <div class="ts5__rail" id="ts5Rail">
+    {cards.map((c) => (
+      <article class="ts5__card">
+        <div class="ts5__stars" aria-hidden="true">★★★★★</div>
+        {c.quote && <span class="ts5__q ts5__q--open" aria-hidden="true">“</span>}
+        <p class="ts5__body">{c.body}{c.quote && <span class="ts5__q ts5__q--close" aria-hidden="true">”</span>}</p>
+        {c.name && (
+          <footer class="ts5__attr">
+            <div class="ts5__name">{c.name}</div>
+            <div class="ts5__role">{c.role}</div>
+          </footer>
+        )}
+      </article>
+    ))}
   </div>
 </section>
+
+<style is:global>
+.ts5 {
+  background: var(--pale-yellow);
+  padding: 96px 0 120px;
+  overflow: hidden;
+}
+.ts5__head {
+  position: relative;
+  padding: 0 30px;
+  margin-bottom: 56px;
+}
+.ts5__heading {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 46px;
+  letter-spacing: -0.020em;
+  color: var(--ink);
+  display: inline-block;
+}
+.ts5__mark {
+  position: absolute;
+  left: 330px;
+  top: -48px;
+  width: 237px;
+  pointer-events: none;
+}
+.ts5__rail {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.ts5__rail::-webkit-scrollbar { display: none; }
+.ts5__rail.dragging { cursor: grabbing; user-select: none; }
+.ts5__card {
+  position: relative;
+  flex: 0 0 447px;
+  padding: 0 44px 8px 52px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+.ts5__stars {
+  color: var(--blue);
+  font-size: 19px;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+.ts5__q {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  color: var(--blue);
+  font-size: 46px;
+  line-height: 0;
+}
+.ts5__q--open { position: absolute; left: 10px; top: 68px; }
+.ts5__q--close { vertical-align: -0.4em; padding-left: 6px; }
+.ts5__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  min-height: 176px;
+}
+.ts5__attr { margin-top: auto; padding-top: 24px; }
+.ts5__name {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ts5__role {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12px;
+  color: rgba(0,0,0,0.55);
+  margin-top: 3px;
+}
+@media (max-width: 640px) {
+  .ts5 { padding: 72px 0 88px; }
+  .ts5__head { padding: 0 var(--gutter); margin-bottom: 40px; }
+  .ts5__heading { font-size: 34px; }
+  .ts5__mark { left: 56vw; top: -30px; width: 40vw; }
+  .ts5__card { flex-basis: 82vw; padding: 0 26px 8px 34px; }
+}
+</style>
+
+<script is:inline>
+(function () {
+  var rail = document.getElementById('ts5Rail');
+  if (!rail) return;
+  /* drag to scroll */
+  var down = false, startX = 0, startLeft = 0;
+  rail.addEventListener('pointerdown', function (e) {
+    down = true; startX = e.clientX; startLeft = rail.scrollLeft;
+    rail.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    rail.scrollLeft = startLeft - (e.clientX - startX);
+  });
+  window.addEventListener('pointerup', function () {
+    down = false; rail.classList.remove('dragging');
+  });
+  /* gentle auto-advance (pauses on hover/drag/hidden tab) — Alice comment #45 */
+  var hover = false;
+  rail.addEventListener('mouseenter', function () { hover = true; });
+  rail.addEventListener('mouseleave', function () { hover = false; });
+  setInterval(function () {
+    if (down || hover || document.hidden) return;
+    var card = rail.querySelector('.ts5__card');
+    if (!card) return;
+    var step = card.getBoundingClientRect().width;
+    var max = rail.scrollWidth - rail.clientWidth;
+    var next = rail.scrollLeft + step;
+    rail.scrollTo({ left: next >= max - 8 ? 0 : next, behavior: 'smooth' });
+  }, 4500);
+})();
+</script>
