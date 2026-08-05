@@ -1,26 +1,101 @@
 ---
+/* v5 — Taylor Winters bio per Figma V3 Home Page - Desktop.
+   Heading + blue oval-arrows scribble; intro paragraph left (rest behind
+   Show more — comp shows a SHOW MORE link); tall portrait right, bleeding
+   to the right edge (comp: x 871→1440, ~569px wide @1440). */
 ---
-<section class="s6" id="taylor">
-  <div class="s6__inner">
-
-    <!-- Portrait — two photos arranged diagonally in an implied box -->
-    <div class="s6__photos" id="s6Photos">
-      <img src="/images/DSCF0084.jpg" class="s6__photo s6__photo--ll" alt="Taylor Winters" />
-      <img src="/images/DSCF0184.jpg" class="s6__photo s6__photo--ur" alt="Taylor Winters" />
-    </div>
-
-    <!-- Bio -->
-    <div class="s6__bio" id="s6Bio">
-      <h2 class="s6__name">Taylor Winters</h2>
-      <p class="s6__para t-body-lg">As the founder of Every Day Future — a conscious executive coaching practice — my mission is to expand possibility through conscious change. I coach waymakers of industry, ideas, and influence: these are founders, executives, leaders, and career artists and creators who go first and set direction with their work.</p>
-      <p class="s6__para t-body-lg">I believe work has enormous leverage for our future because we spend a third of our lives doing it. I appreciate the value people create through their work, and I care to improve people's experience of work itself.</p>
-      <p class="s6__para t-body-lg">The EDF Practice emerged over a decade through coaching thousands of people alongside years of deep study and applied practice in mindfulness, leadership, psychology, and conscious change. Beyond my undergraduate degree I gained an executive coaching certification through UC Berkeley Haas School of Business, and trained in Neuro-Linguistic Programming (NLP), Dialectical Behavior Therapy (DBT), and Interpersonal Neurobiology (IPNB).</p>
-      <div class="s6__more" id="s6More">
-        <p class="s6__para t-body-lg">Before coaching, I co-founded and led a digital creative agency through a successful acquisition as Chief Strategy Officer. During that time, I began a serious meditation practice that intensified through pregnancy and becoming a mother, radically changing how I related to work, success, attention, and what felt possible in life.</p>
-        <p class="s6__para t-body-lg">I continue to practice possibility, and it has radically changed both my experience of life and what I am capable of creating: a wonderful family and deep relationships, good health, fulfilling and creative work, financial freedom, and greater coherence. This kind of change benefits not only ourselves, but all that we touch through how we change.</p>
+<section class="tb5" id="taylor">
+  <div class="tb5__head">
+    <h2 class="tb5__name">Taylor Winters</h2>
+    <img class="tb5__scribble" src="/images/v5/scribble-taylor-oval.png" alt="" aria-hidden="true" />
+  </div>
+  <div class="tb5__cols">
+    <div class="tb5__bio" id="s6Bio">
+      <p class="tb5__para">As the founder of Every Day Future — a conscious executive coaching practice — my mission is to expand possibility through conscious change. I coach waymakers of industry, ideas, and influence: these are founders, executives, leaders, and career artists and creators who go first and set direction with their work.</p>
+      <div class="tb5__more" id="s6More">
+        <p class="tb5__para">I believe work has enormous leverage for our future because we spend a third of our lives doing it. I appreciate the value people create through their work, and I care to improve people's experience of work itself.</p>
+        <p class="tb5__para">The EDF Practice emerged over a decade through coaching thousands of people alongside years of deep study and applied practice in mindfulness, leadership, psychology, and conscious change. Beyond my undergraduate degree I gained an executive coaching certification through UC Berkeley Haas School of Business, and trained in Neuro-Linguistic Programming (NLP), Dialectical Behavior Therapy (DBT), and Interpersonal Neurobiology (IPNB).</p>
+        <p class="tb5__para">Before coaching, I co-founded and led a digital creative agency through a successful acquisition as Chief Strategy Officer. During that time, I began a serious meditation practice that intensified through pregnancy and becoming a mother, radically changing how I related to work, success, attention, and what felt possible in life.</p>
+        <p class="tb5__para">I continue to practice possibility, and it has radically changed both my experience of life and what I am capable of creating: a wonderful family and deep relationships, good health, fulfilling and creative work, financial freedom, and greater coherence. This kind of change benefits not only ourselves, but all that we touch through how we change.</p>
       </div>
-      <button class="s6__more-toggle" id="s6MoreToggle" type="button" aria-expanded="false" aria-controls="s6More">Show more</button>
+      <button class="tb5__toggle" id="s6MoreToggle" type="button" aria-expanded="false" aria-controls="s6More">Show more</button>
     </div>
-
+    <img class="tb5__photo" src="/images/DSCF0184.jpg" alt="Taylor Winters, founder of Every Day Future" />
   </div>
 </section>
+
+<style is:global>
+.tb5 {
+  position: relative;
+  background: var(--paper-off-b);
+  padding: 13vw 0 0 3.2vw;   /* section gap above heading; left inset 46px @1440 */
+  overflow: hidden;
+}
+.tb5__head {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+  margin-bottom: 4.2vw;
+}
+.tb5__name {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: clamp(34px, 4.72vw, 68px);   /* comp heading ~68px */
+  letter-spacing: -0.030em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.tb5__scribble { width: 17.6vw; max-width: 254px; height: auto; }
+.tb5__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 39.5vw;
+  gap: 6vw;
+  align-items: start;
+}
+.tb5__bio { max-width: 640px; padding-bottom: 4vw; }
+.tb5__para {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 1.55;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+.tb5__para + .tb5__para { margin-top: 22px; }
+.tb5__more {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.tb5__more > .tb5__para:first-child { margin-top: 22px; }
+#s6Bio.more-open .tb5__more { max-height: 1600px; }
+.tb5__toggle {
+  margin-top: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.110em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.tb5__toggle:hover { color: var(--blue); }
+.tb5__photo {
+  width: 100%;
+  height: 42vw;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+
+@media (max-width: 900px) {
+  .tb5 { padding: 96px var(--gutter) 0; }
+  .tb5__head { margin-bottom: 32px; }
+  .tb5__scribble { display: none; }
+  .tb5__cols { grid-template-columns: 1fr; gap: 40px; }
+  .tb5__photo { height: auto; max-height: 120vw; margin-right: calc(-1 * var(--gutter)); }
+  .tb5__bio { padding-bottom: 0; }
+}
+</style>

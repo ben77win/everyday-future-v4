@@ -1,21 +1,103 @@
 ---
+/* v5 — "For Waymakers of Industry, Ideas, and Influence." per Figma V3.
+   Measured from Home Page - Desktop comp @1x: heading y≈4875 (justified display
+   line, full width); 5 white cards y 5042-5278 — x from 22, 274 wide, 6px gap,
+   236 tall; 60px line-art icon top-left, body text lower half.
+   Blue arc arrow above "Waymakers" + double ticks at the right edge. */
+const cards = [
+  { icon: 1, text: "You're a founder, executive, artist, or independent creator. You go first and create direction through your work." },
+  { icon: 2, text: "You're navigating growth, uncertainty, ambition, transition, creativity, leadership, and change." },
+  { icon: 3, text: "You're seeking greater clarity, coherence, courage, connection, and curiosity in how you work, relate, and create." },
+  { icon: 4, text: "You sense that what got you here won't get you to the future you want to create." },
+  { icon: 5, text: "You want to expand what's possible and create meaningful progress through conscious change." },
+];
 ---
-<section class="s5" id="waymaker">
-  <div class="s5__inner">
-
-    <div style="position:relative;display:inline-block;">
-      <img src="/marks/Vector-10.svg" class="s5__mark" alt="" aria-hidden="true" style="filter:brightness(0) saturate(100%) invert(27%) sepia(90%) saturate(700%) hue-rotate(207deg) brightness(95%);" />
-      <h2 class="s5__heading" id="s5Left"><span style="display:block">Who this practice</span><span style="display:block">is for</span></h2>
-    </div>
-
-    <div class="s5__body" id="s5Body">
-      <p class="s5__para">Waymakers of industry, ideas, and influence.</p>
-      <p class="s5__para t-body-lg">You're a founder, executive, artist, or independent creator. You go first and create direction through your work.</p>
-      <p class="s5__para t-body-lg">You're navigating growth, uncertainty, ambition, transition, creativity, leadership, and change.</p>
-      <p class="s5__para t-body-lg">You're seeking greater clarity, coherence, courage, connection, and curiosity in how you work, relate, and create.</p>
-      <p class="s5__para t-body-lg">You sense that what got you here won't get you to the future you want to create.</p>
-      <p class="s5__para t-body-lg">You want to expand what's possible and create meaningful progress through conscious change.</p>
-    </div>
-
+<section class="wm5" id="waymaker">
+  <img class="wm5__arc" src="/images/v5/scribble-arc-arrow.png" alt="" aria-hidden="true" />
+  <img class="wm5__ticks" src="/images/v5/scribble-ticks.png" alt="" aria-hidden="true" />
+  <h2 class="wm5__heading">For Waymakers of Industry, Ideas, and Influence.</h2>
+  <div class="wm5__cards">
+    {cards.map((c) => (
+      <div class="wm5__card">
+        <img class="wm5__icon" src={`/images/v5/wm-icon-${c.icon}.svg`} alt="" aria-hidden="true" />
+        <p class="wm5__text">{c.text}</p>
+      </div>
+    ))}
   </div>
 </section>
+
+<style is:global>
+.wm5 {
+  position: relative;
+  background: var(--paper-off-b);
+  padding: 24.5vw 1.53vw 0;  /* heading sits ~4875 in page flow — flow padding approximated from section gap */
+  padding-top: 160px;
+  padding-bottom: 0;
+}
+.wm5__arc {
+  position: absolute;
+  left: 25.5vw;
+  top: calc(160px - 4.2vw);
+  width: 14vw;
+  pointer-events: none;
+}
+.wm5__ticks {
+  position: absolute;
+  right: 4.6vw;
+  top: calc(160px - 3.6vw);
+  width: 2.4vw;
+  pointer-events: none;
+}
+.wm5__heading {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: clamp(34px, 5.486vw, 79px);
+  letter-spacing: -0.030em;
+  line-height: 1;
+  color: var(--ink);
+  text-align: justify;
+  text-align-last: justify;
+  margin-bottom: 7.4vw; /* heading → cards gap (≈107px @1440) */
+}
+.wm5__cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-bottom: 0;
+}
+.wm5__card {
+  background: var(--paper);
+  height: 16.4vw;       /* 236px @1440 */
+  min-height: 210px;
+  padding: 1.8vw 1.7vw;
+  display: flex;
+  flex-direction: column;
+}
+.wm5__icon { width: 4.17vw; min-width: 44px; height: auto; }
+.wm5__text {
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+
+@media (max-width: 1180px) {
+  .wm5__cards { grid-template-columns: repeat(3, 1fr); }
+  .wm5__card { height: auto; min-height: 200px; gap: 20px; }
+}
+@media (max-width: 900px) {
+  .wm5 { padding: 96px var(--gutter) 0; }
+  .wm5__heading { text-align: left; text-align-last: auto; margin-bottom: 48px; }
+  .wm5__arc, .wm5__ticks { display: none; }
+  .wm5__cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .wm5__cards { grid-template-columns: 1fr; }
+  .wm5__card { min-height: 0; padding: 24px 22px; }
+  .wm5__icon { width: 52px; }
+  .wm5__text { margin-top: 18px; }
+}
+</style>
