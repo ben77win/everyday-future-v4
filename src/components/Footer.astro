@@ -1,8 +1,17 @@
 ---
 ---
 <footer class="site-footer">
+  {/* v5 — giant repeated tagline, darkening toward the bottom edge, last line clipped
+      (matches Home Page - Desktop comp footer + Load screen motif) */}
+  <div class="site-footer__fade" aria-hidden="true">
+    <span class="site-footer__fade-line site-footer__fade-line--1">A Practice Of Possibility With Coaching</span>
+    <span class="site-footer__fade-line site-footer__fade-line--2">A Practice Of Possibility With Coaching</span>
+    <span class="site-footer__fade-line site-footer__fade-line--3">A Practice Of Possibility With Coaching</span>
+  </div>
   <div class="site-footer__inner">
-    <span class="site-footer__wordmark">Every Day Future</span>
+    <a href="/" class="site-footer__wordmark" aria-label="Every Day Future — home">
+      <img src="/images/wordmark-stacked.svg" alt="Every Day Future" width="90" height="32" />
+    </a>
     <nav class="site-footer__links" aria-label="Footer">
       {/* Writing link hidden 2026-06-22 — section kept live + indexed; reintroduce when more essays publish:
           <a href="/writing" class="site-footer__link">Writing</a> */}
