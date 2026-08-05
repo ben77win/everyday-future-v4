@@ -178,9 +178,15 @@ const faqLd = {
 .faq5 .s7__icon::after  { height: 46%; top: 27%; }
 
 @media (max-width: 900px) {
+  /* comp keeps the collage on mobile — compact block between heading and
+     accordion (Home Page - Mobile, ~y 480–900 @360) */
   .faq5 { grid-template-columns: 1fr; padding: 96px var(--gutter); gap: 40px; }
-  .faq5__collage { min-height: 0; }
-  .faq5__heading { position: static; margin-bottom: 24px; }
-  .faq5__img, .faq5__mark { display: none; }
+  .faq5__collage { min-height: 122vw; }
+  .faq5__heading { position: static; margin-bottom: 4vw; }
+  .faq5__img--vase    { left: auto; right: 0; top: 0;      width: 25.0vw; }
+  .faq5__img--checker { left: 9.6vw;  top: 25vw;   width: 24.0vw; }
+  .faq5__img--leaves  { left: calc(-1 * var(--gutter)); top: 49vw; width: 11.3vw; }
+  .faq5__mark         { left: 18vw;   top: 40.7vw; width: 41.0vw; }
+  .faq5__img--path    { left: auto; right: 0; top: 74.7vw; width: 40.5vw; }
 }
 </style>

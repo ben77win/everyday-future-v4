@@ -1222,6 +1222,26 @@ a { color: inherit; text-decoration: none; }
 .site-footer__link:hover {
   color: var(--blue);
 }
+@media (max-width: 640px) {
+  .site-footer { padding-top: 90px; }
+  .site-footer__fade { padding: 0 10px; }
+  .site-footer__fade-line {
+    font-size: 5.8vw;          /* full tagline edge-to-edge @360, per mobile comp */
+    letter-spacing: -0.040em;
+  }
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 26px var(--gutter) calc(30px + env(safe-area-inset-bottom, 0px));
+  }
+  .site-footer__links {
+    align-self: flex-end;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}
 /* ════════════════════════════════════════════════════════════════
    S7 — FAQ
 ════════════════════════════════════════════════════════════════ */
