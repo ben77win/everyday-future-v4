@@ -381,8 +381,11 @@ const optionDeksJson = JSON.stringify(
 }
 
 /* ── Step 2 inner — wider to accommodate 2-col */
+/* v5: step 2 is a full-bleed viewport split — no max-width cap (the old
+   handoff-6 1280px !important cap made the cream panel float inset on wide
+   screens; this is what broke the "Group 41" match on Ben's display). */
 .bf-step2__inner {
-  max-width: var(--max-w) !important;
+  max-width: none !important;
 }
 
 /* ── Step 2 nav bar */
