@@ -536,9 +536,11 @@ const optionDeksJson = JSON.stringify(
 .bf-step2-left {
   background: #FFFCD1; /* v5 Begin cream — deliberate callback to the v4 ground */
   padding: 150px 60px 140px 36px;
-  min-height: calc(100vh - 78px);
+  min-height: 100vh; /* cream persists to the viewport bottom (page has no top offset anymore) */
 }
-.bf-step2-formcol { padding: 150px 60px 96px 140px; }
+/* top = left panel's 150 + chip 28 + chip margin 28 + 56 gap, so "About you"
+   top-aligns with the service-name H1 (per Ben / 1440w light comp) */
+.bf-step2-formcol { padding: 262px 60px 96px 140px; }
 
 /* Selected chip — blue boxed mono per comp */
 .bf-chip {
