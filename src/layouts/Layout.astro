@@ -233,6 +233,34 @@ const ogImage = new URL(image, site).href;
     });
   });
 
+  // ── v5 parallax — ancillary photos only (data-plx="speed"), desktop >900px,
+  //    transform-only, off for reduced-motion. Blue scribbles are never tagged.
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-plx]'));
+    if (!els.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var active = false, raf = null;
+    function frame() {
+      els.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var mid = r.top + r.height / 2 - window.innerHeight / 2;
+        el.style.transform = 'translateY(' + (mid * parseFloat(el.dataset.plx)).toFixed(1) + 'px)';
+      });
+      raf = active ? requestAnimationFrame(frame) : null;
+    }
+    function update() {
+      var on = window.innerWidth > 900;
+      if (on && !active) { active = true; els.forEach(function (el) { el.style.willChange = 'transform'; }); frame(); }
+      else if (!on && active) {
+        active = false;
+        if (raf) cancelAnimationFrame(raf);
+        els.forEach(function (el) { el.style.transform = ''; el.style.willChange = ''; });
+      }
+    }
+    window.addEventListener('resize', update);
+    update();
+  })();
+
   // ── Taylor bio "show more"
   var bioToggle = document.getElementById('s6MoreToggle');
   if (bioToggle) {
