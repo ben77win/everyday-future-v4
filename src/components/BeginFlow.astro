@@ -444,6 +444,20 @@ const optionDeksJson = JSON.stringify(
   margin: 0 18px;
   flex: 0 0 auto;
 }
+/* v5: on the step-2 split screen the indicator pins to the cream panel's
+   bottom-left (comp: ✓ CHOOSE — ② YOUR DETAILS — ③ SCHEDULE at x46, bottom 34) */
+#bfSteps2 {
+  position: absolute;
+  left: 46px;
+  bottom: 34px;
+  z-index: 2;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  #bfSteps2 { position: static; margin: 0 0 24px; }
+  #bfStep2 .bf-nav { position: static; padding: 20px var(--gutter) 0; }
+  #bfStep2 .bf-step__inner { padding-top: 0; }
+}
 /* Explicit columns so the × stays hard-right even when the wordmark is hidden
    (display:none removes it from grid auto-placement, which otherwise pushed × to the middle column) */
 .bf-nav .bf-back  { grid-column: 1; justify-self: start; }
@@ -488,30 +502,48 @@ const optionDeksJson = JSON.stringify(
 .bf-close:hover { color: var(--blue); }
 
 
-/* ── Step 2 — anchored split (2026-06-11 redesign): chip + service-name H1 +
-   dek + offering detail in the LEFT column on the cream; the white form panel
-   RIGHT, top-aligned with the left column's first line. */
+/* ── Step 2 — v5 split screen (2026-08-05, Figma V3 "On About you section
+   click", flat variant per Ben): LEFT half = full-bleed CREAM #FFFCD1 panel
+   (chip / service H1 / dek / hairline / 2×2 offering grid / step indicator
+   pinned bottom-left); RIGHT half = white with the About-you form column. */
 .bf-step2-cols {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 72px;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: stretch;
 }
-#bfStep2 .bf-step__inner { padding-bottom: 96px; }
+#bfStep2 { position: relative; background: var(--paper); }
+#bfStep2 .bf-step__inner { max-width: none; padding: 0; }
+/* back/× float over the split (the inner no longer carries padding) */
+#bfStep2 .bf-nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 3;
+  padding: 22px 46px;
+  margin: 0;
+  border: none;
+  background: none;
+}
+.bf-step2-left {
+  background: #FFFCD1; /* v5 Begin cream — deliberate callback to the v4 ground */
+  padding: 96px 60px 140px 46px;
+  min-height: calc(100vh - 78px);
+}
+.bf-step2-formcol { padding: 96px 60px 96px 74px; }
 
-/* Selected chip */
+/* Selected chip — blue boxed mono per comp */
 .bf-chip {
   display: inline-flex;
   align-items: center;
   height: 28px;
   padding: 0 14px;
-  border: 1px solid rgba(0,0,0,0.30);
-  border-radius: 4px;
+  border: 1px solid var(--blue);
+  border-radius: 2px;
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.60);
+  color: var(--blue);
   margin-bottom: 28px;
 }
 .bf-chip--soon {
@@ -582,24 +614,27 @@ const optionDeksJson = JSON.stringify(
   color: rgba(0,0,0,0.66);
 }
 
-/* ── Form panel (right) — anchored paper surface */
+/* ── Form column (right) — v5: the whole right half is white; the form is a
+   ~300px column (comp: fields x 875–1143 @1440). Padding set in the split
+   block above. */
 .bf-step2-formcol {
   background: var(--paper);
-  padding: 48px 44px 44px;
-  align-self: start;
+  align-self: stretch;
+  max-width: none;
 }
+.bf-step2-formcol > * { max-width: 300px; }
 
 .bf-about-heading {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(28px, 3vw, 40px);
-  line-height: 1.05;
-  letter-spacing: -0.020em;
+  font-size: clamp(38px, 4.72vw, 68px);  /* comp "About you" display size */
+  line-height: 1.0;
+  letter-spacing: -0.030em;
   color: var(--ink);
   margin-top: 0;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0,0,0,0.14);
-  margin-bottom: 8px;
+  padding-bottom: 0;
+  border-bottom: none;
+  margin-bottom: 22px;
 }
 
 /* ── Step 1 option grid — 4-up matching S2 cards */
@@ -615,13 +650,14 @@ const optionDeksJson = JSON.stringify(
   flex-direction: column;
   gap: 12px;
   padding: 28px 24px 32px;
-  background: var(--paper);
+  background: var(--card-yellow-b); /* v5: yellow cards matching homepage Choose How */
   border: none;
   cursor: pointer;
   text-align: left;
-  transition: background 0.22s ease, color 0.22s ease;
+  transition: background 0.22s ease, color 0.22s ease, filter 0.2s ease;
   aspect-ratio: 1 / 1;
 }
+.bf-option[data-key="1on1"] { background: var(--card-yellow-a); }
 
 .bf-option__label {
   font-family: var(--font-body);
@@ -639,10 +675,8 @@ const optionDeksJson = JSON.stringify(
   transition: color 0.22s ease;
 }
 
-/* Hover / selected: invert to --blue (matches S2 cards) */
-.bf-option:hover { background: var(--blue); }
-.bf-option:hover .bf-option__label { color: var(--paper); }
-.bf-option:hover .bf-option__desc  { color: rgba(255,255,255,0.62); }
+/* Hover: slight darken (matches homepage Choose How cards); selected inverts blue */
+.bf-option:hover { filter: brightness(0.97); }
 
 .bf-option[aria-pressed="true"] { background: var(--blue); }
 .bf-option[aria-pressed="true"] .bf-option__label { color: var(--paper); }
@@ -761,12 +795,12 @@ const optionDeksJson = JSON.stringify(
   justify-content: center;
   gap: 12px;
   width: 100%;
-  min-height: 52px;
-  padding: 12px 24px;
+  min-height: 44px;
+  padding: 10px 24px;
   background: var(--ink);
   color: var(--paper);
   border: none;
-  border-radius: 4px;
+  border-radius: 0; /* v5: squared per comp */
   cursor: pointer;
   transition: background 0.25s ease;
 }
@@ -936,17 +970,20 @@ const optionDeksJson = JSON.stringify(
   .bf-steps :global(.bf-step-item__num) { font-size: 12px; }
   .bf-steps :global(.bf-step-item--on) { font-size: 13px; gap: 12px; }
 
-  /* Step 2: single column — indicator → chip → name → dek → offering → form panel */
+  /* Step 2: single column — indicator → chip → name → dek → offering → form.
+     v5: cream block on top (full-bleed), white form block below. */
   .bf-step2-cols {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  #bfStep2 .bf-step__inner { padding-bottom: 56px; }
+  #bfStep2 .bf-step__inner { padding-bottom: 0; }
+  .bf-step2-left { padding: 32px var(--gutter) 40px; min-height: 0; }
   .bf-chip { margin-bottom: 20px; }
   .bf-step2-dek { margin-top: 16px; }
   .bf-step2-offerings { margin-top: 28px; }
   .bf-offering { padding-top: 20px; }
-  .bf-step2-formcol { margin-top: 32px; padding: 20px; }  /* panel keeps the mobile card padding */
+  .bf-step2-formcol { margin-top: 0; padding: 40px var(--gutter) 56px; }
+  .bf-step2-formcol > * { max-width: none; }
 
   /* Offering detail grid: 1-col on mobile, collapsed behind a toggle (no card bg) */
   .bf-offering-card { padding: 0; }
