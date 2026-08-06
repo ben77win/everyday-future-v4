@@ -455,8 +455,11 @@ const optionDeksJson = JSON.stringify(
 }
 @media (max-width: 900px) {
   #bfSteps2 { position: static; margin: 0 0 24px; }
-  #bfStep2 .bf-nav { position: static; padding: 20px var(--gutter) 0; }
+  #bfStep2 .bf-step__inner .bf-nav { display: grid; position: static; padding: 20px var(--gutter) 0; background: none; }
   #bfStep2 .bf-step__inner { padding-top: 0; }
+  .bf-step2-left { padding-top: 32px; }
+  .bf-step2-heading { margin-top: 0; }
+  .bf-step2-formcol > * { max-width: none; }
 }
 /* Explicit columns so the × stays hard-right even when the wordmark is hidden
    (display:none removes it from grid auto-placement, which otherwise pushed × to the middle column) */
@@ -514,22 +517,25 @@ const optionDeksJson = JSON.stringify(
 }
 #bfStep2 { position: relative; background: var(--paper); }
 #bfStep2 .bf-step__inner { max-width: none; padding: 0; }
-/* back/× float over the split (the inner no longer carries padding) */
-#bfStep2 .bf-nav {
-  position: absolute;
-  top: 0; left: 0; right: 0;
+/* v5 desktop (1440w light comp): no back/× row — the site nav is the chrome.
+   The row stays in the homepage drawer (needs its own close) and on mobile. */
+#bfStep2 .bf-nav { display: none; }
+:global(.begin-page--drawer) #bfStep2 .bf-nav {
+  display: grid;
+  position: sticky;
+  top: 0;
   z-index: 3;
   padding: 22px 46px;
   margin: 0;
   border: none;
-  background: none;
+  background: var(--paper);
 }
 .bf-step2-left {
   background: #FFFCD1; /* v5 Begin cream — deliberate callback to the v4 ground */
-  padding: 96px 60px 140px 46px;
+  padding: 150px 60px 140px 36px;
   min-height: calc(100vh - 78px);
 }
-.bf-step2-formcol { padding: 96px 60px 96px 74px; }
+.bf-step2-formcol { padding: 150px 60px 96px 140px; }
 
 /* Selected chip — blue boxed mono per comp */
 .bf-chip {
@@ -551,14 +557,15 @@ const optionDeksJson = JSON.stringify(
   color: var(--blue);
 }
 
-/* Service name — the single H1, display tier */
+/* Service name — the single H1 (1440w light comp: ~96px) */
 .bf-step2-heading {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(46px, 5.6vw, 84px);
+  font-size: clamp(46px, 6.7vw, 96px);
   letter-spacing: -0.030em;
   line-height: 0.98;
   color: var(--ink);
+  margin-top: 56px; /* chip → heading gap per comp */
 }
 
 /* Dek — one supporting line under the name (the approved offering title copy) */
@@ -595,14 +602,15 @@ const optionDeksJson = JSON.stringify(
   gap: 36px 48px;
 }
 
+/* 1440w light comp: sentence-case body labels, not mono caps */
 .bf-offering-card__label {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.50);
-  margin-bottom: 12px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-bottom: 10px;
 }
 
 .bf-offering-card__body {
@@ -622,19 +630,19 @@ const optionDeksJson = JSON.stringify(
   align-self: stretch;
   max-width: none;
 }
-.bf-step2-formcol > * { max-width: 300px; }
+.bf-step2-formcol > * { max-width: 508px; } /* 1440w light comp: form column ~490–510 */
 
 .bf-about-heading {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(38px, 4.72vw, 68px);  /* comp "About you" display size */
+  font-size: clamp(38px, 5.9vw, 85px);  /* 1440w light comp "About you" */
   line-height: 1.0;
   letter-spacing: -0.030em;
   color: var(--ink);
   margin-top: 0;
   padding-bottom: 0;
   border-bottom: none;
-  margin-bottom: 22px;
+  margin-bottom: 30px;
 }
 
 /* ── Step 1 option grid — 4-up matching S2 cards */
@@ -721,8 +729,9 @@ const optionDeksJson = JSON.stringify(
 .bf-field {
   display: flex;
   flex-direction: column;
-  padding: 20px 0 22px;
-  border-bottom: 0.5px solid rgba(0,0,0,0.18);
+  position: relative; /* containing block for the sr-only labels */
+  padding: 30px 0 26px;  /* 1440w light comp: airier field rhythm */
+  border-bottom: 0.5px solid rgba(0,0,0,0.22);
   transition: border-color 0.2s ease;
 }
 /* (No border-top on the first field — the "About you" hairline + note sit above.) */
@@ -733,13 +742,14 @@ const optionDeksJson = JSON.stringify(
 .bf-field:focus-within { border-bottom-color: var(--blue); }
 .bf-field:has(.bf-input--error) { border-bottom-color: var(--ink); }
 
+/* v5 (1440w light): no visible mono labels — placeholder-style fields only.
+   Labels stay in the DOM for screen readers / validation targeting. */
 .bf-label {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.110em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.45);
-  margin-bottom: 10px;
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .bf-optional {
@@ -764,7 +774,7 @@ const optionDeksJson = JSON.stringify(
   -webkit-appearance: none;
   border-radius: 0;
 }
-.bf-input::placeholder { color: rgba(0,0,0,0.28); }
+.bf-input::placeholder { color: rgba(0,0,0,0.60); } /* 1440w light: placeholder doubles as the field label */
 
 .bf-field-error {
   display: none;
@@ -795,12 +805,13 @@ const optionDeksJson = JSON.stringify(
   justify-content: center;
   gap: 12px;
   width: 100%;
-  min-height: 44px;
-  padding: 10px 24px;
+  min-height: 52px;
+  padding: 12px 24px;
   background: var(--ink);
   color: var(--paper);
   border: none;
   border-radius: 0; /* v5: squared per comp */
+  margin-top: 40px; /* last field → button gap per comp */
   cursor: pointer;
   transition: background 0.25s ease;
 }
