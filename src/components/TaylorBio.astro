@@ -99,6 +99,7 @@
   .tb5__photo {
     order: -1;
     width: calc(100% + 2 * var(--gutter));
+    max-width: none; /* global img max-width:100% capped the full-bleed width — photo read as "stuck left" */
     height: 92vw;
     object-fit: cover;
     object-position: 50% 22%;
