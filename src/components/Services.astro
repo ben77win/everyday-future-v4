@@ -1,8 +1,10 @@
 ---
 /* v5 S2 — "Choose how you want to practice." per Figma V3 (section node 188-172).
-   Left: heading + body + collage (dusk-ridge still `DSCF4844` — replaced the comp's
+   Left: heading + body + collage (aerial CLOUD video `IMG_4529` — replaced the comp's
    sauna window / pending Gen-4 clip per Ben 2026-08-10 — book still, blue "Expand"
-   script). Pre-cropped to the 288x158 slot aspect with the sky/land line at 52%. Right: 2×2 textured yellow
+   script). Source is vertical 2160x3840; cropped horizontally to the 288x158 slot
+   aspect (y=150, the band with atmospheric recession), 5s trimmed then quarter-speed
+   with motion interpolation -> 19.7s loop. Poster still for reduced-motion. Right: 2×2 textured yellow
    cards, 326×326, gap 26, right-aligned to the 24px edge. Card descs match the
    comp copy verbatim (Ben 2026-08-05); links keep the /begin?option= keys. */
 ---
@@ -11,7 +13,8 @@
     <h2 class="s2v5__headline">Choose how you<br />want to practice.</h2>
     <p class="s2v5__body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
     <div class="s2v5__collage" aria-hidden="true">
-      <img data-plx="-0.08" class="s2v5__window" src="/images/v5/choose-dusk.jpg" alt="" />
+      <video data-plx="-0.08" class="s2v5__window s2v5__video" src="/images/v5/choose-clouds.mp4" poster="/images/v5/choose-clouds-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+      <img data-plx="-0.08" class="s2v5__window s2v5__video-still" src="/images/v5/choose-clouds-poster.jpg" alt="" />
       <img data-plx="0.06" class="s2v5__book" src="/images/v5/choose-book.png" alt="" />
       <img class="s2v5__script" src="/images/v5/scribble-expand-script.png" alt="" />
     </div>
@@ -71,6 +74,13 @@
 }
 .s2v5__collage { position: relative; height: 300px; }
 .s2v5__window { position: absolute; left: 128px; top: 0;    width: 288px; height: 158px; object-fit: cover; }
+/* video + poster carry no baked alpha — match the 70% via CSS (ground is solid) */
+.s2v5__video, .s2v5__video-still { opacity: 0.7; }
+.s2v5__video-still { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .s2v5__video { display: none; }
+  .s2v5__video-still { display: block; }
+}
 .s2v5__book   { position: absolute; left: 0;     top: 157px; width: 127px; height: 134px; object-fit: cover; }
 .s2v5__script { position: absolute; left: -30px; top: 186px; width: 550px; }
 .s2v5__cards {
