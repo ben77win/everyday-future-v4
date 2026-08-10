@@ -12,6 +12,7 @@ import TaylorBio from '../components/TaylorBio.astro';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
 import BeginFlow from '../components/BeginFlow.astro';
+import LoadScreen from '../components/LoadScreen.astro';
 
 // Organization + Person structured data (entity / AI citation). Facts traceable to site copy.
 const orgPersonLd = {
@@ -66,6 +67,7 @@ const orgPersonLd = {
   description="Conscious executive coaching with Taylor Winters — for leaders and founders navigating change. Reduce resistance, expand possibility. Seattle-based, remote."
 >
   <script type="application/ld+json" set:html={JSON.stringify(orgPersonLd)} is:inline />
+  <LoadScreen />
   <Nav />
   <Hero />
   <CTABar />

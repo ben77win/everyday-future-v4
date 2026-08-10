@@ -1,0 +1,195 @@
+---
+/* v5 LOAD SCREEN — homepage intro per Figma V3 "Load screen" frame + Ben-approved
+   motion comp (design-v5/comps/loadscreen-RECOMMENDED.html, 2026-08-05).
+
+   Choreography: 3 soft tagline lines emerge on load → each scroll gesture glides
+   the stack up a full row while a darker repetition surfaces at the bottom edge
+   (2 reveals) → next gesture lifts the screen away (220ms beat, 1.8s weighted
+   curve) and the hero settles beneath. Plays on every homepage load (Ben's call).
+   Skipped for: prefers-reduced-motion, deep links (hash / ?option present).
+
+   ROLLBACK: this feature is exactly one commit — revert it and the site is
+   byte-identical to before (component + one include line in index.astro).
+
+   Self-contained: all markup/CSS/JS in this file; ls5-* classes only. */
+const tagline = "A Practice Of Possibility With Coaching";
+---
+<div class="ls5" id="ls5" aria-hidden="true">
+  <img class="ls5__wm" src="/images/wordmark-stacked.svg" alt="" />
+  <div class="ls5__cue">Scroll&nbsp;&darr;</div>
+  <div class="ls5__stack">
+    <div class="ls5__clip ls5__clip--1"><span class="ls5__tag">{tagline}</span></div>
+    <div class="ls5__clip ls5__clip--2"><span class="ls5__tag">{tagline}</span></div>
+    <div class="ls5__clip ls5__clip--3"><span class="ls5__tag">{tagline}</span></div>
+    <div class="ls5__clip ls5__clip--r1"><span class="ls5__tag">{tagline}</span></div>
+    <div class="ls5__clip ls5__clip--r2"><span class="ls5__tag">{tagline}</span></div>
+  </div>
+</div>
+
+<style is:global>
+.ls5 {
+  position: fixed;
+  inset: 0;
+  z-index: 400; /* above nav (100) + float CTA (90); below the mobile menu (500) */
+  overflow: hidden;
+  background: linear-gradient(180deg, #F8FCF7 0%, #FAFCF3 70%, #FDFCE8 100%);
+  transition: transform 1.8s cubic-bezier(0.55, 0.05, 0.15, 1);
+}
+.ls5::after { /* background ripens as lines accumulate */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #F8FCF7 0%, var(--pale-yellow) 55%, #FFFDDE 100%);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.ls5.rise-1::after { opacity: 0.5; }
+.ls5.rise-2::after { opacity: 1; }
+.ls5.lift { transform: translateY(-100.5%); }
+.ls5--off { display: none; }
+
+.ls5__wm {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.45, 0.05, 0.15, 1);
+}
+.ls5.rise-1 .ls5__wm { opacity: 0.75; transform: translateX(-50%) translateY(-6px); }
+.ls5.rise-2 .ls5__wm { opacity: 0.45; transform: translateX(-50%) translateY(-14px); }
+
+.ls5__cue {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 46%;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.8s ease 1.7s;
+}
+.ls5.play .ls5__cue { opacity: 0.4; }
+.ls5.rise-1 .ls5__cue, .ls5.rise-2 .ls5__cue { opacity: 0 !important; transition: opacity 0.5s ease; }
+
+.ls5__stack {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 0;
+  transition: transform 1.45s cubic-bezier(0.45, 0.05, 0.15, 1);
+  will-change: transform;
+}
+.ls5__clip { overflow: hidden; }
+.ls5__clip .ls5__tag {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: clamp(30px, 5.486vw, 79px);
+  letter-spacing: -0.030em;
+  line-height: 1.0;
+  white-space: nowrap;
+  background: linear-gradient(90deg, var(--ink) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.24) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transform: translateY(110%);
+  transition: transform 1.7s cubic-bezier(0.45, 0.05, 0.15, 1);
+}
+.ls5__clip.in .ls5__tag { transform: translateY(0); }
+.ls5__clip--1 .ls5__tag { opacity: 0.30; }
+.ls5__clip--2, .ls5__clip--3, .ls5__clip--r1, .ls5__clip--r2 { border-top: 0.5px solid rgba(0,0,0,0.20); }
+.ls5__clip--2 .ls5__tag { opacity: 0.44; }
+.ls5__clip--3 .ls5__tag { opacity: 0.58; }
+.ls5__clip--r1 .ls5__tag { opacity: 0.74; }
+.ls5__clip--r2 .ls5__tag { opacity: 0.92; }
+
+/* hero settles beneath the lift (inline transform applied/cleared by JS) */
+.hero--v5 { transition: transform 1.9s cubic-bezier(0.45, 0.05, 0.15, 1) 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ls5 { display: none; }
+}
+</style>
+
+<script is:inline>
+(function () {
+  var ls = document.getElementById('ls5');
+  if (!ls) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var deepLink = !!location.hash || new URLSearchParams(location.search).has('option');
+  if (reduce || deepLink) { ls.classList.add('ls5--off'); return; }
+
+  var clips = ls.querySelectorAll('.ls5__clip');
+  var stack = ls.querySelector('.ls5__stack');
+  var reps = [clips[3], clips[4]];
+  var state = { acc: 0, grown: 0, rise: 0, lifted: false };
+
+  document.documentElement.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
+  var hero = null;
+  var floatCta = null;
+  function onReady(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  onReady(function () {
+    hero = document.querySelector('.hero--v5');
+    if (hero && !state.lifted) hero.style.transform = 'translateY(34px)';
+    floatCta = document.getElementById('floatCta');
+    if (floatCta && !state.lifted) { floatCta.style.opacity = '0'; floatCta.style.pointerEvents = 'none'; }
+    // intro emerge, staggered
+    setTimeout(function () { ls.classList.add('play'); clips[0].classList.add('in'); }, 150);
+    setTimeout(function () { clips[1].classList.add('in'); }, 420);
+    setTimeout(function () { clips[2].classList.add('in'); }, 660);
+  });
+
+  function lift() {
+    state.lifted = true;
+    setTimeout(function () {
+      ls.classList.add('lift');
+      if (hero) hero.style.transform = 'translateY(0)';
+      document.documentElement.style.overflow = '';
+      if (floatCta) { floatCta.style.opacity = ''; floatCta.style.pointerEvents = ''; }
+      // fully out of the way once the transition ends
+      setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 2000);
+    }, 220); /* settling beat */
+  }
+
+  function grow() {
+    if (state.grown < reps.length) {
+      var rep = reps[state.grown];
+      rep.classList.add('in');
+      state.rise += rep.offsetHeight;
+      stack.style.transform = 'translateY(-' + state.rise + 'px)';
+      state.grown++;
+      ls.classList.add('rise-' + state.grown);
+      state.acc = 0;
+    } else if (!state.lifted) {
+      lift();
+    }
+  }
+
+  function onDelta(dy) {
+    if (state.lifted || dy <= 0) return;
+    state.acc += dy;
+    if (state.acc > 75) grow();
+  }
+
+  window.addEventListener('wheel', function (e) { onDelta(e.deltaY); }, { passive: true });
+  var touchY = null;
+  window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchmove', function (e) {
+    if (touchY !== null) { onDelta(touchY - e.touches[0].clientY); touchY = e.touches[0].clientY; }
+  }, { passive: true });
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') onDelta(120);
+  });
+})();
+</script>
