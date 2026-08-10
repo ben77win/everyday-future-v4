@@ -126,6 +126,17 @@ const tagline = "A Practice Of Possibility With Coaching";
 /* hero settles beneath the lift (inline transform applied/cleared by JS) */
 .hero--v5 { transition: transform 2.6s cubic-bezier(0.55, 0.02, 0.12, 1) 0.45s; }
 
+@media (max-width: 640px) {
+  .ls5__stack {
+    left: 22px;
+    right: 22px;
+    /* the full line must fit the narrow viewport — ~5vw keeps the complete
+       tagline inside the gutters (matches the mobile footer scale) */
+    font-size: 5vw;
+  }
+  .ls5__wm { width: 118px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ls5 { display: none; }
 }
