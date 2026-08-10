@@ -1,5 +1,7 @@
 # Every Day Future — Site Context
 
+> 🧹 **Files awaiting manual deletion: [`CLEANUP.md`](CLEANUP.md)** — agent deletes are hard-blocked, so dead files are listed there instead. ~18 MB reclaimable; the three `public/_comp-*.html` files are publicly reachable and should go before the production merge.
+
 ## ✅ v5 merge-day QA (run immediately after v5 → main goes live)
 - [ ] **Share card:** text `everydayfuture.work/?v=5` (cache-busting query) in iMessage → the NEW stacked-tagline card (twitter-card-2a) must render. Also run X/Twitter card validator + LinkedIn Post Inspector on the bare domain. (Staging can never show it — og:image/og:url are canonical to production by design; a mismatched shared URL makes Messages drop the preview entirely.)
 - [ ] **Favicons:** hard-refresh production → scattered-EDF mark in the tab (16/32), check apple-touch by adding to iOS home screen.
