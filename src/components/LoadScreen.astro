@@ -33,7 +33,7 @@ const tagline = "A Practice Of Possibility With Coaching";
   z-index: 400; /* above nav (100) + float CTA (90); below the mobile menu (500) */
   overflow: hidden;
   background: linear-gradient(180deg, #F8FCF7 0%, #FAFCF3 70%, #FDFCE8 100%);
-  transition: transform 1.8s cubic-bezier(0.55, 0.05, 0.15, 1);
+  transition: transform 2.6s cubic-bezier(0.60, 0.02, 0.16, 1);
 }
 .ls5::after { /* background ripens as lines accumulate */
   content: '';
@@ -56,7 +56,7 @@ const tagline = "A Practice Of Possibility With Coaching";
   left: 50%;
   transform: translateX(-50%);
   width: 150px;
-  transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.45, 0.05, 0.15, 1);
+  transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.55, 0.02, 0.12, 1);
 }
 .ls5.rise-1 .ls5__wm { opacity: 0.75; transform: translateX(-50%) translateY(-6px); }
 .ls5.rise-2 .ls5__wm { opacity: 0.45; transform: translateX(-50%) translateY(-14px); }
@@ -89,7 +89,7 @@ const tagline = "A Practice Of Possibility With Coaching";
   flex-direction: column;
   align-items: stretch;
   font-size: clamp(30px, 5.486vw, 79px);
-  transition: transform 1.45s cubic-bezier(0.45, 0.05, 0.15, 1);
+  transition: transform 1.95s cubic-bezier(0.55, 0.02, 0.12, 1);
   will-change: transform;
 }
 .ls5__line {
@@ -102,7 +102,7 @@ const tagline = "A Practice Of Possibility With Coaching";
   white-space: nowrap;
   opacity: 0;
   transform: translateY(0.65em);
-  transition: transform 1.5s cubic-bezier(0.45, 0.05, 0.15, 1), opacity 1.2s ease;
+  transition: transform 2.1s cubic-bezier(0.55, 0.02, 0.12, 1), opacity 1.8s ease;
 }
 .ls5__line + .ls5__line { margin-top: -0.16em; }
 .ls5__line.on { opacity: 1; transform: none; }
@@ -124,7 +124,7 @@ const tagline = "A Practice Of Possibility With Coaching";
 .ls5__line.on.g2 { -webkit-text-stroke-color: rgba(0,0,0,0.22); }
 
 /* hero settles beneath the lift (inline transform applied/cleared by JS) */
-.hero--v5 { transition: transform 1.9s cubic-bezier(0.45, 0.05, 0.15, 1) 0.25s; }
+.hero--v5 { transition: transform 2.6s cubic-bezier(0.55, 0.02, 0.12, 1) 0.45s; }
 
 @media (prefers-reduced-motion: reduce) {
   .ls5 { display: none; }
@@ -182,8 +182,8 @@ const tagline = "A Practice Of Possibility With Coaching";
       if (hero) hero.style.transform = 'translateY(0)';
       document.documentElement.style.overflow = '';
       if (floatCta) { floatCta.style.opacity = ''; floatCta.style.pointerEvents = ''; }
-      setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 2000);
-    }, 220); /* settling beat */
+      setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 3200);
+    }, 420); /* settling beat */
   }
 
   function grow() {
