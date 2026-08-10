@@ -3,10 +3,13 @@
 {/* v5 hero — per Figma V3 Home Page - Desktop (node 188-2) + design-v5.md.
     All positions measured in the 1440-frame and converted to vw (÷14.4).
     Photos sit between the justified headline lines at 70% opacity; two
-    hand-drawn blue scribble marks overlay the type. The tree is a VIDEO in
-    the comp (IMG_0996.mp4) — poster PNG until the source clip arrives. */}
+    hand-drawn blue scribble marks overlay the type. Left slot = slow-motion
+    WATER video (IMG_4528 GIF re-encoded 0.5x → 10s MP4 loop; Ben 2026-08-10,
+    permanently replaces the pending ink-tree clip). Reduced-motion / blocked
+    autoplay falls back to the poster still. */}
 <section class="hero hero--v5" id="hero" aria-label="Hero">
-  <img data-plx="-0.10" class="hv5__img hv5__img--tree" src="/images/v5/hero-tree.png" alt="" aria-hidden="true" />
+  <video data-plx="-0.10" class="hv5__img hv5__img--tree hv5__video" src="/images/v5/hero-water.mp4" poster="/images/v5/hero-water-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <img data-plx="-0.10" class="hv5__img hv5__img--tree hv5__video-still" src="/images/v5/hero-water-poster.jpg" alt="" aria-hidden="true" />
   <img data-plx="0.07" class="hv5__img hv5__img--silhouette" src="/images/v5/hero-silhouette.png" alt="" aria-hidden="true" />
   <img data-plx="-0.06" class="hv5__img hv5__img--lonetree" src="/images/v5/hero-tree-china.jpg" alt="" aria-hidden="true" />
 
@@ -29,6 +32,13 @@
 }
 .hv5__img { position: absolute; object-fit: cover; } /* 70% opacity baked into the Figma exports */
 .hv5__img--tree       { left: 0.15vw;  top: 12.39vw; width: 15.36vw; height: 27.30vw; }
+/* water video + poster carry no baked alpha — match the 70% via CSS (ground is solid) */
+.hv5__video, .hv5__video-still { opacity: 0.7; }
+.hv5__video-still { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hv5__video { display: none; }
+  .hv5__video-still { display: block; }
+}
 .hv5__img--silhouette { left: 59.03vw; top: 14.47vw; width: 17.18vw; height: 11.45vw; }
 .hv5__img--lonetree   { left: 42.35vw; top: 35.74vw; width: 12.18vw; height: 14.41vw; }
 .hv5__headline {
