@@ -1,28 +1,28 @@
 ---
 /* v5 LOAD SCREEN — homepage intro per Figma V3 "Load screen" frame + Ben-approved
-   motion comp (design-v5/comps/loadscreen-RECOMMENDED.html, 2026-08-05).
+   STACKED v3 comp (design-v5/comps/loadscreen-STACKED.html, 2026-08-06).
 
-   Choreography: 3 soft tagline lines emerge on load → each scroll gesture glides
-   the stack up a full row while a darker repetition surfaces at the bottom edge
-   (2 reveals) → next gesture lifts the screen away (220ms beat, 1.8s weighted
-   curve) and the hero settles beneath. Plays on every homepage load (Ben's call).
+   Choreography: stack centered in the viewport; two hollow echoes print, then the
+   solid lead line lands (typeset per the frame: 79px, left-aligned full-bleed,
+   near-black fading to the bg at right). Each scroll gesture prints a fresh lead
+   while the stack glides up and older copies hollow to outlines; after two grows
+   the next gesture lifts the screen (220ms beat, 1.8s weighted curve) and the
+   hero settles beneath. Plays on every homepage load (Ben's call).
    Skipped for: prefers-reduced-motion, deep links (hash / ?option present).
 
-   ROLLBACK: this feature is exactly one commit — revert it and the site is
-   byte-identical to before (component + one include line in index.astro).
-
-   Self-contained: all markup/CSS/JS in this file; ls5-* classes only. */
+   ROLLBACK: single-commit feature — revert to remove.
+   Self-contained: ls5-* classes only. */
 const tagline = "A Practice Of Possibility With Coaching";
 ---
 <div class="ls5" id="ls5" aria-hidden="true">
   <img class="ls5__wm" src="/images/wordmark-stacked.svg" alt="" />
   <div class="ls5__cue">Scroll&nbsp;&darr;</div>
-  <div class="ls5__stack">
-    <div class="ls5__clip ls5__clip--1"><span class="ls5__tag">{tagline}</span></div>
-    <div class="ls5__clip ls5__clip--2"><span class="ls5__tag">{tagline}</span></div>
-    <div class="ls5__clip ls5__clip--3"><span class="ls5__tag">{tagline}</span></div>
-    <div class="ls5__clip ls5__clip--r1"><span class="ls5__tag">{tagline}</span></div>
-    <div class="ls5__clip ls5__clip--r2"><span class="ls5__tag">{tagline}</span></div>
+  <div class="ls5__stack" id="ls5Stack">
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
   </div>
 </div>
 
@@ -65,49 +65,63 @@ const tagline = "A Practice Of Possibility With Coaching";
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 46%;
+  bottom: 16%;
   font-family: var(--font-mono);
   font-weight: 300;
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0;
-  transition: opacity 0.8s ease 1.7s;
+  transition: opacity 0.8s ease 1.9s;
 }
 .ls5.play .ls5__cue { opacity: 0.4; }
 .ls5.rise-1 .ls5__cue, .ls5.rise-2 .ls5__cue { opacity: 0 !important; transition: opacity 0.5s ease; }
 
+/* ── centered stack; type per the V3 Load screen frame; replicated copies
+   hollow to outlines as they age upward ── */
 .ls5__stack {
   position: absolute;
-  left: 22px;
-  right: 22px;
-  bottom: 0;
+  left: 30px;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-46%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: clamp(30px, 5.486vw, 79px);
   transition: transform 1.45s cubic-bezier(0.45, 0.05, 0.15, 1);
   will-change: transform;
 }
-.ls5__clip { overflow: hidden; }
-.ls5__clip .ls5__tag {
+.ls5__line {
   display: block;
   font-family: var(--font-display);
   font-weight: var(--fw-roman);
-  font-size: clamp(30px, 5.486vw, 79px);
+  font-size: 1em;
   letter-spacing: -0.030em;
-  line-height: 1.0;
+  line-height: 1.02;
   white-space: nowrap;
-  background: linear-gradient(90deg, var(--ink) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.24) 100%);
+  opacity: 0;
+  transform: translateY(0.65em);
+  transition: transform 1.5s cubic-bezier(0.45, 0.05, 0.15, 1), opacity 1.2s ease;
+}
+.ls5__line + .ls5__line { margin-top: -0.16em; }
+.ls5__line.on { opacity: 1; transform: none; }
+/* lead — the frame's rendering: near-black left, dissolving to the bg at right */
+.ls5__line.lead {
+  background: linear-gradient(90deg, var(--ink) 0%, rgba(0,0,0,0.45) 48%, rgba(0,0,0,0) 96%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  transform: translateY(110%);
-  transition: transform 1.7s cubic-bezier(0.45, 0.05, 0.15, 1);
+  -webkit-text-stroke: 0;
 }
-.ls5__clip.in .ls5__tag { transform: translateY(0); }
-.ls5__clip--1 .ls5__tag { opacity: 0.30; }
-.ls5__clip--2, .ls5__clip--3, .ls5__clip--r1, .ls5__clip--r2 { border-top: 0.5px solid rgba(0,0,0,0.20); }
-.ls5__clip--2 .ls5__tag { opacity: 0.44; }
-.ls5__clip--3 .ls5__tag { opacity: 0.58; }
-.ls5__clip--r1 .ls5__tag { opacity: 0.74; }
-.ls5__clip--r2 .ls5__tag { opacity: 0.92; }
+/* replicated copies hollow out, fading with age */
+.ls5__line.on:not(.lead) {
+  color: transparent;
+  background: none;
+  -webkit-text-stroke: 1.2px rgba(0,0,0,0.46);
+}
+.ls5__line.on.g3 { -webkit-text-stroke-color: rgba(0,0,0,0.34); }
+.ls5__line.on.g2 { -webkit-text-stroke-color: rgba(0,0,0,0.22); }
 
 /* hero settles beneath the lift (inline transform applied/cleared by JS) */
 .hero--v5 { transition: transform 1.9s cubic-bezier(0.45, 0.05, 0.15, 1) 0.25s; }
@@ -125,13 +139,24 @@ const tagline = "A Practice Of Possibility With Coaching";
   var deepLink = !!location.hash || new URLSearchParams(location.search).has('option');
   if (reduce || deepLink) { ls.classList.add('ls5--off'); return; }
 
-  var clips = ls.querySelectorAll('.ls5__clip');
-  var stack = ls.querySelector('.ls5__stack');
-  var reps = [clips[3], clips[4]];
-  var state = { acc: 0, grown: 0, rise: 0, lifted: false };
+  var stack = document.getElementById('ls5Stack');
+  var spans = Array.prototype.slice.call(stack.querySelectorAll('.ls5__line'));
+  var state = { acc: 0, shown: 3, lifted: false };
 
   document.documentElement.style.overflow = 'hidden';
   window.scrollTo(0, 0);
+
+  function setLead(i) {
+    for (var k = 0; k < spans.length; k++) {
+      spans[k].classList.toggle('lead', k === i);
+      spans[k].classList.remove('g2'); spans[k].classList.remove('g3');
+      if (k < i) {
+        var d = i - k;
+        if (d === 2) spans[k].classList.add('g3');
+        else if (d >= 3) spans[k].classList.add('g2');
+      }
+    }
+  }
 
   var hero = null;
   var floatCta = null;
@@ -144,10 +169,10 @@ const tagline = "A Practice Of Possibility With Coaching";
     if (hero && !state.lifted) hero.style.transform = 'translateY(34px)';
     floatCta = document.getElementById('floatCta');
     if (floatCta && !state.lifted) { floatCta.style.opacity = '0'; floatCta.style.pointerEvents = 'none'; }
-    // intro emerge, staggered
-    setTimeout(function () { ls.classList.add('play'); clips[0].classList.add('in'); }, 150);
-    setTimeout(function () { clips[1].classList.add('in'); }, 420);
-    setTimeout(function () { clips[2].classList.add('in'); }, 660);
+    /* hollow echoes land first, the solid lead prints last */
+    setTimeout(function () { ls.classList.add('play'); spans[0].classList.add('on'); }, 150);
+    setTimeout(function () { spans[1].classList.add('on'); }, 500);
+    setTimeout(function () { spans[2].classList.add('on'); setLead(2); }, 850);
   });
 
   function lift() {
@@ -157,19 +182,19 @@ const tagline = "A Practice Of Possibility With Coaching";
       if (hero) hero.style.transform = 'translateY(0)';
       document.documentElement.style.overflow = '';
       if (floatCta) { floatCta.style.opacity = ''; floatCta.style.pointerEvents = ''; }
-      // fully out of the way once the transition ends
       setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 2000);
     }, 220); /* settling beat */
   }
 
   function grow() {
-    if (state.grown < reps.length) {
-      var rep = reps[state.grown];
-      rep.classList.add('in');
-      state.rise += rep.offsetHeight;
-      stack.style.transform = 'translateY(-' + state.rise + 'px)';
-      state.grown++;
-      ls.classList.add('rise-' + state.grown);
+    if (state.shown < spans.length) {
+      var i = state.shown;
+      spans[i].classList.add('on');
+      setLead(i); /* previous lead hollows */
+      var rise = (i - 2) * 0.43; /* glide up ~half the row pitch */
+      stack.style.transform = 'translateY(calc(-46% - ' + rise + 'em))';
+      state.shown++;
+      ls.classList.add('rise-' + (state.shown - 3));
       state.acc = 0;
     } else if (!state.lifted) {
       lift();
