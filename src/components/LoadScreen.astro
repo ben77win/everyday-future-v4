@@ -81,10 +81,14 @@ const tagline = "A Practice Of Possibility With Coaching";
    hollow to outlines as they age upward ── */
 .ls5__stack {
   position: absolute;
-  left: 30px;
-  right: 30px;
+  left: 50%;
   top: 50%;
-  transform: translateY(-1.37em); /* half the visible 3-line block (2.74em) — true optical center regardless of unprinted lines */
+  width: max-content;
+  max-width: calc(100vw - 60px);
+  /* centered on BOTH axes: -50% X for the line block (type caps at 79px, so wide
+     monitors otherwise leave it hanging left); -1.37em Y = half the visible
+     3-line block, independent of unprinted lines */
+  transform: translate(-50%, -1.37em);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -128,8 +132,7 @@ const tagline = "A Practice Of Possibility With Coaching";
 
 @media (max-width: 640px) {
   .ls5__stack {
-    left: 22px;
-    right: 22px;
+    max-width: calc(100vw - 44px);
     /* the full line must fit the narrow viewport — ~5vw keeps the complete
        tagline inside the gutters (matches the mobile footer scale) */
     font-size: 5vw;
@@ -203,7 +206,7 @@ const tagline = "A Practice Of Possibility With Coaching";
       spans[i].classList.add('on');
       setLead(i); /* previous lead hollows */
       var rise = (i - 2) * 0.43; /* glide up ~half the row pitch */
-      stack.style.transform = 'translateY(calc(-1.37em - ' + rise + 'em))';
+      stack.style.transform = 'translate(-50%, calc(-1.37em - ' + rise + 'em))';
       state.shown++;
       ls.classList.add('rise-' + (state.shown - 3));
       state.acc = 0;
