@@ -8,7 +8,7 @@
 <section class="hero hero--v5" id="hero" aria-label="Hero">
   <img data-plx="-0.10" class="hv5__img hv5__img--tree" src="/images/v5/hero-tree.png" alt="" aria-hidden="true" />
   <img data-plx="0.07" class="hv5__img hv5__img--silhouette" src="/images/v5/hero-silhouette.png" alt="" aria-hidden="true" />
-  <img data-plx="-0.06" class="hv5__img hv5__img--tennis" src="/images/v5/hero-tennis.png" alt="" aria-hidden="true" />
+  <img data-plx="-0.06" class="hv5__img hv5__img--lonetree" src="/images/v5/hero-tree-china.jpg" alt="" aria-hidden="true" />
 
   {/* .hv5__ln spans: display:contents on desktop (natural 3-line justify),
       display:block ≤640 to force the mobile comp's exact 6-line wrap */}
@@ -30,7 +30,7 @@
 .hv5__img { position: absolute; object-fit: cover; } /* 70% opacity baked into the Figma exports */
 .hv5__img--tree       { left: 0.15vw;  top: 12.39vw; width: 15.36vw; height: 27.30vw; }
 .hv5__img--silhouette { left: 59.03vw; top: 14.47vw; width: 17.18vw; height: 11.45vw; }
-.hv5__img--tennis     { left: 42.35vw; top: 35.74vw; width: 12.18vw; height: 14.41vw; }
+.hv5__img--lonetree   { left: 42.35vw; top: 35.74vw; width: 12.18vw; height: 14.41vw; }
 .hv5__headline {
   position: absolute;
   left: 2.10vw;
@@ -51,13 +51,13 @@
 .hv5__mark--circle    { left: 57.07vw; top: 37.75vw; width: 34.48vw; }
 
 /* Mobile — measured from Home Page - Mobile comp (360-frame, ÷3.6 → vw).
-   Justified 7-line headline; tree left / silhouette right-bleed / tennis center;
+   Justified 7-line headline; tree left / silhouette right-bleed / lone tree center;
    underline under "Consciously", circle around "Changes". */
 @media (max-width: 640px) {
   .hero--v5 { height: 160vw; min-height: 0; }
   .hv5__img--tree       { left: 0;      top: 27.8vw; width: 30.3vw; height: 63.4vw; }
   .hv5__img--silhouette { left: 57.2vw; top: 45.0vw; width: 42.8vw; height: 30.0vw; }
-  .hv5__img--tennis     { display: block; left: 44.2vw; top: 75.3vw; width: 23.1vw; height: 43.4vw; }
+  .hv5__img--lonetree   { display: block; left: 44.2vw; top: 75.3vw; width: 23.1vw; height: 43.4vw; }
   .hv5__headline {
     left: 6.1vw;
     top: 28.9vw;
