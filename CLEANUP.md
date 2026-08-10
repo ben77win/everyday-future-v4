@@ -12,6 +12,7 @@ _Last updated: 2026-08-10 (session 11)._
 |---|---|---|
 | `public/images/v5/hero-tennis.png` | 187 KB | Replaced by `hero-tree-china.jpg` in the hero (Ben, 2026-08-10). Ships in every deploy until removed. |
 | `public/images/v5/hero-tree.png` | 140 KB | Ink-tree still replaced by the water video `hero-water.mp4` (Ben, 2026-08-10). Ships in every deploy until removed. |
+| `public/images/v5/choose-window-video-poster.png` | 109 KB | Sauna-window poster replaced by `choose-rhody.jpg` (Ben, 2026-08-10). Ships in every deploy until removed. |
 | `public/_comp-a5.html` | ~8 KB | Load-screen comp staged for browser preview. **Publicly reachable** at `/_comp-a5.html` — worth removing before production. |
 | `public/_comp-rec.html` | ~9 KB | Same — recommended-cut load-screen comp. Publicly reachable. |
 | `public/_comp-stacked.html` | ~10 KB | Same — STACKED v3 comp (the approved one). Publicly reachable. |
