@@ -84,7 +84,7 @@ const tagline = "A Practice Of Possibility With Coaching";
   left: 30px;
   right: 30px;
   top: 50%;
-  transform: translateY(-46%);
+  transform: translateY(-1.37em); /* half the visible 3-line block (2.74em) — true optical center regardless of unprinted lines */
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -203,7 +203,7 @@ const tagline = "A Practice Of Possibility With Coaching";
       spans[i].classList.add('on');
       setLead(i); /* previous lead hollows */
       var rise = (i - 2) * 0.43; /* glide up ~half the row pitch */
-      stack.style.transform = 'translateY(calc(-46% - ' + rise + 'em))';
+      stack.style.transform = 'translateY(calc(-1.37em - ' + rise + 'em))';
       state.shown++;
       ls.classList.add('rise-' + (state.shown - 3));
       state.acc = 0;
