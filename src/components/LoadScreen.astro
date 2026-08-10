@@ -7,8 +7,10 @@
    near-black fading to the bg at right). Each scroll gesture prints a fresh lead
    while the stack glides up and older copies hollow to outlines; after two grows
    the next gesture lifts the screen (220ms beat, 1.8s weighted curve) and the
-   hero settles beneath. Plays on every homepage load (Ben's call).
-   Skipped for: prefers-reduced-motion, deep links (hash / ?option present).
+   hero settles beneath. Plays on every homepage load, DESKTOP ONLY (Ben's calls).
+   Skipped for: phones (≤640px), prefers-reduced-motion, deep links (hash / ?option).
+   Takes over history.scrollRestoration so a reload/back can't drop the user
+   mid-page beneath the curtain; always releases at the hero.
 
    ROLLBACK: single-commit feature — revert to remove.
    Self-contained: ls5-* classes only. */
@@ -130,14 +132,10 @@ const tagline = "A Practice Of Possibility With Coaching";
 /* hero settles beneath the lift (inline transform applied/cleared by JS) */
 .hero--v5 { transition: transform 2.6s cubic-bezier(0.55, 0.02, 0.12, 1) 0.45s; }
 
+/* No intro on phones (Ben 2026-08-10). CSS guard as well as the JS one so the
+   curtain can never flash before the script runs. */
 @media (max-width: 640px) {
-  .ls5__stack {
-    max-width: calc(100vw - 44px);
-    /* the full line must fit the narrow viewport — ~5vw keeps the complete
-       tagline inside the gutters (matches the mobile footer scale) */
-    font-size: 5vw;
-  }
-  .ls5__wm { width: 118px; }
+  .ls5 { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -150,15 +148,25 @@ const tagline = "A Practice Of Possibility With Coaching";
   var ls = document.getElementById('ls5');
   if (!ls) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phone  = window.matchMedia('(max-width: 640px)').matches; /* Ben 2026-08-10: no intro on phones */
   var deepLink = !!location.hash || new URLSearchParams(location.search).has('option');
-  if (reduce || deepLink) { ls.classList.add('ls5--off'); return; }
+  if (reduce || phone || deepLink) { ls.classList.add('ls5--off'); return; }
 
   var stack = document.getElementById('ls5Stack');
   var spans = Array.prototype.slice.call(stack.querySelectorAll('.ls5__line'));
   var state = { acc: 0, shown: 3, lifted: false };
 
+  /* The browser restores the previous scroll position on reload/back AFTER this
+     script runs, which left users mid-page beneath the curtain. Take over. */
+  /* Deliberately left 'manual' for this history entry (not restored on lift):
+     Ben's call is "always land at hero", so a later back/reload to the homepage
+     must not restore a mid-page position. scrollRestoration is per history
+     entry, so other pages keep the browser default. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   document.documentElement.style.overflow = 'hidden';
   window.scrollTo(0, 0);
+  /* re-assert through the load milestones, in case anything scrolls late */
+  window.addEventListener('load', function () { if (!state.lifted) window.scrollTo(0, 0); });
 
   function setLead(i) {
     for (var k = 0; k < spans.length; k++) {
@@ -195,6 +203,7 @@ const tagline = "A Practice Of Possibility With Coaching";
       ls.classList.add('lift');
       if (hero) hero.style.transform = 'translateY(0)';
       document.documentElement.style.overflow = '';
+      window.scrollTo(0, 0);   /* release at the hero, never mid-page */
       if (floatCta) { floatCta.style.opacity = ''; floatCta.style.pointerEvents = ''; }
       setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 3200);
     }, 420); /* settling beat */
