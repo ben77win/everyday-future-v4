@@ -115,8 +115,16 @@
   pointer-events: none;
   transition: opacity 0.28s ease;
 }
-.s2v5__card:hover::before,
-.s2v5__card:focus-visible::before { opacity: 0; }
+/* Touch: browsers paint an 18% BLACK tap highlight by default — a darkening
+   that appears nowhere in the Figma (Ben 2026-08-10, mobile). Suppress it and
+   use the designed bright state for press feedback instead. */
+.s2v5__card { -webkit-tap-highlight-color: transparent; }
+/* Hover only where hovering is real, so a tap can't leave a card stuck bright */
+@media (hover: hover) {
+  .s2v5__card:hover::before { opacity: 0; }
+}
+.s2v5__card:focus-visible::before,
+.s2v5__card:active::before { opacity: 0; }
 .s2v5__card > * { position: relative; z-index: 1; }  /* keep content above the wash */
 .s2v5__card-title {
   font-family: var(--font-display);
@@ -140,7 +148,10 @@
   color: var(--ink);
   transition: transform 0.2s ease;
 }
-.s2v5__card:hover .s2v5__card-arrow { transform: translateX(5px); }
+@media (hover: hover) {
+  .s2v5__card:hover .s2v5__card-arrow { transform: translateX(5px); }
+}
+.s2v5__card:active .s2v5__card-arrow { transform: translateX(5px); }
 
 @media (max-width: 1180px) {
   .s2--v5 { grid-template-columns: 1fr; }
