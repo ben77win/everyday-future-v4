@@ -65,9 +65,12 @@
    underline under "Consciously", circle around "Changes". */
 @media (max-width: 640px) {
   .hero--v5 { height: 149.6vw; min-height: 0; }  /* comp: hero zone ends ~538pt @360 */
-  .hv5__img--tree       { left: 0;      top: 27.8vw; width: 30.3vw; height: 63.4vw; }
-  .hv5__img--silhouette { left: 57.2vw; top: 45.0vw; width: 42.8vw; height: 30.0vw; }
-  .hv5__img--lonetree   { display: block; left: 44.2vw; top: 75.3vw; width: 23.1vw; height: 43.4vw; }
+  /* comp boxes @360 frame: slot1 0/100 95x172 · slot2 237/187 123x85 (bleeds
+     right) · slot3 157/335 80x85. Assets were swapped; the LAYOUT is the
+     comp's — object-fit:cover crops each asset into its box. */
+  .hv5__img--tree       { left: 0;       top: 27.8vw; width: 26.4vw; height: 47.8vw; }
+  .hv5__img--silhouette { left: 65.8vw;  top: 51.9vw; width: 34.2vw; height: 23.6vw; }
+  .hv5__img--lonetree   { display: block; left: 43.6vw; top: 93.1vw; width: 22.2vw; height: 23.6vw; }
   .hv5__headline {
     left: 6.1vw;
     top: 28.9vw;
