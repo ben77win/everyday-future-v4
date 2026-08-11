@@ -89,7 +89,7 @@ const cards = [
   .wm5__card { height: auto; min-height: 200px; gap: 20px; }
 }
 @media (max-width: 900px) {
-  .wm5 { padding: 96px var(--gutter) 0; }
+  .wm5 { padding: 0 var(--gutter) 0; }  /* Someday's padding-bottom already carries the full comp gap — this was double-padding */
   .wm5__heading { text-align: left; text-align-last: auto; margin-bottom: 48px; }
   .wm5__arc, .wm5__ticks { display: none; }
   .wm5__cards { grid-template-columns: 1fr 1fr; }
