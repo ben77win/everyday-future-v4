@@ -19,7 +19,33 @@
 
   <img class="hv5__mark hv5__mark--underline" src="/images/v5/scribble-underline.png" alt="" aria-hidden="true" />
   <img class="hv5__mark hv5__mark--circle" src="/images/v5/scribble-circle.png" alt="" aria-hidden="true" />
+  {/* Mobile-only static Begin Practice — owns the hero dead zone; the floating
+      pill takes over when this scrolls out (o-p-e-n.com pattern, Ben 2026-08-10) */}
+  <a class="hv5__pill" id="hv5Pill" href="/begin">Begin Practice</a>
 </section>
+
+<script is:inline>
+(function () {
+  var pill = document.getElementById('hv5Pill');
+  if (!pill) return;
+  pill.addEventListener('click', function (e) {
+    if (typeof window.__openBeginDrawer === 'function') { e.preventDefault(); window.__openBeginDrawer(); }
+  });
+  if (!window.matchMedia('(max-width: 640px)').matches) return;
+  /* set up after DOM-ready: the observer's INITIAL callback fires at parse time,
+     before #floatCta exists, and never re-fires while the visitor sits at the
+     top — so the float was never held on first paint */
+  function arm() {
+    var float = document.getElementById('floatCta');
+    if (!float) return;
+    new IntersectionObserver(function (entries) {
+      float.classList.toggle('float-cta--held', entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(pill);
+  }
+  if (document.readyState !== 'loading') arm();
+  else document.addEventListener('DOMContentLoaded', arm);
+})();
+</script>
 
 <style is:global>
 /* ── v5 hero (desktop-first; values = Figma px ÷ 14.4 → vw) ── */
@@ -30,7 +56,8 @@
   background: var(--paper-off-b);
   overflow: hidden;
 }
-.hv5__img { position: absolute; object-fit: cover; } /* 70% opacity baked into the Figma exports */
+.hv5__img { position: absolute; object-fit: cover; }
+.hv5__pill { display: none; } /* 70% opacity baked into the Figma exports */
 .hv5__img--tree       { left: 0.15vw;  top: 12.39vw; width: 15.36vw; height: 27.30vw; }
 /* water video + poster carry no baked alpha — match the 70% via CSS (ground is solid) */
 .hv5__video, .hv5__video-still { opacity: 0.7; }
@@ -64,7 +91,29 @@
    Justified 7-line headline; tree left / silhouette right-bleed / lone tree center;
    underline under "Consciously", circle around "Changes". */
 @media (max-width: 640px) {
-  .hero--v5 { height: calc(116.7vw + 42px); min-height: 0; }  /* = lonetree bottom (93.1+23.6vw) + fixed 42px breathing — section ends a constant distance under the last image at every width, no vw balloon, no clipping */  /* comp is 149.6vw but its lower zone holds a STATIC pill; ours floats, so close the dead air */
+  .hero--v5 { height: calc(116.7vw + 150px); min-height: 0; }  /* lonetree bottom + the full 150px gap — the hero owns the dead zone so the static pill can centre in it (S2 top padding is 0 on mobile) */
+  .hv5__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 53.5px;             /* centres the 43px pill in the 150px zone */
+    height: 43px;
+    padding: 0 16px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1.43px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hv5__pill:active { background: var(--blue); color: var(--paper); }  /* comp is 149.6vw but its lower zone holds a STATIC pill; ours floats, so close the dead air */
   /* comp boxes @360 frame: slot1 0/100 95x172 · slot2 237/187 123x85 (bleeds
      right) · slot3 157/335 80x85. Assets were swapped; the LAYOUT is the
      comp's — object-fit:cover crops each asset into its box. */
