@@ -8,9 +8,10 @@
    while the stack glides up and older copies hollow to outlines; after two grows
    the next gesture lifts the screen (220ms beat, 1.8s weighted curve) and the
    hero settles beneath. Plays on every homepage load, DESKTOP ONLY (Ben's calls).
-   Skipped for: phones (≤640px), prefers-reduced-motion, deep links (hash / ?option).
-   Takes over history.scrollRestoration so a reload/back can't drop the user
-   mid-page beneath the curtain; always releases at the hero.
+   Skipped for: phones (≤640px), prefers-reduced-motion, deep links (hash /
+   ?option), and RETURNING visits (reload / back-forward) so the browser can
+   restore their scroll position. On a fresh arrival it holds scrollRestoration
+   off for the duration and always releases at the hero.
 
    ROLLBACK: single-commit feature — revert to remove.
    Self-contained: ls5-* classes only. */
@@ -150,19 +151,27 @@ const tagline = "A Practice Of Possibility With Coaching";
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var phone  = window.matchMedia('(max-width: 640px)').matches; /* Ben 2026-08-10: no intro on phones */
   var deepLink = !!location.hash || new URLSearchParams(location.search).has('option');
-  if (reduce || phone || deepLink) { ls.classList.add('ls5--off'); return; }
+  /* RETURNING visitor — a reload or a back/forward to this page means the browser
+     has a scroll position to restore. Skip the intro and let it restore, so a
+     reload from the FAQ puts you back at the FAQ. A fresh arrival always starts
+     at the top, so the intro can play and end at the hero. This is what makes
+     "intro always ends at hero" and "reload keeps my place" compatible. */
+  var nav = (window.performance && performance.getEntriesByType &&
+             performance.getEntriesByType('navigation')[0]) || null;
+  var navType = nav ? nav.type
+    : (performance.navigation ? ['navigate','reload','back_forward'][performance.navigation.type] : 'navigate');
+  var returning = (navType === 'reload' || navType === 'back_forward');
+  if (reduce || phone || deepLink || returning) { ls.classList.add('ls5--off'); return; }
 
   var stack = document.getElementById('ls5Stack');
   var spans = Array.prototype.slice.call(stack.querySelectorAll('.ls5__line'));
   var state = { acc: 0, shown: 3, lifted: false };
 
-  /* The browser restores the previous scroll position on reload/back AFTER this
-     script runs, which left users mid-page beneath the curtain. Take over. */
-  /* Deliberately left 'manual' for this history entry (not restored on lift):
-     Ben's call is "always land at hero", so a later back/reload to the homepage
-     must not restore a mid-page position. scrollRestoration is per history
-     entry, so other pages keep the browser default. */
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  /* Hold restoration off only WHILE the intro runs (bfcache can still hand us a
+     scroll offset). Handed back to the browser on lift, so the next reload/back
+     restores the visitor's position normally. */
+  var hadRestore = ('scrollRestoration' in history);
+  if (hadRestore) history.scrollRestoration = 'manual';
   document.documentElement.style.overflow = 'hidden';
   window.scrollTo(0, 0);
   /* re-assert through the load milestones, in case anything scrolls late */
@@ -204,6 +213,7 @@ const tagline = "A Practice Of Possibility With Coaching";
       if (hero) hero.style.transform = 'translateY(0)';
       document.documentElement.style.overflow = '';
       window.scrollTo(0, 0);   /* release at the hero, never mid-page */
+      if (hadRestore) history.scrollRestoration = 'auto'; /* give it back */
       if (floatCta) { floatCta.style.opacity = ''; floatCta.style.pointerEvents = ''; }
       setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 3200);
     }, 420); /* settling beat */
