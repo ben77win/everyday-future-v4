@@ -22,7 +22,7 @@
   </div>
 
   <div class="s2v5__cards">
-    <a href="/begin?option=1on1" class="s2v5__card s2v5__card--bright">
+    <a href="/begin?option=1on1" class="s2v5__card">
       <span class="s2v5__card-title">1:1 Coaching</span>
       <span class="s2v5__card-desc">Dedicated practice to work on what matters for you with a&nbsp;coach</span>
       <span class="s2v5__card-arrow" aria-hidden="true"><svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>
@@ -92,23 +92,32 @@
   justify-content: end;
   align-content: start;
 }
+/* Rest = pale, hover = bright. The comp's bright first card is the HOVER state,
+   not a permanent variant (Ben 2026-08-10) — and the Figma has no darkening, so
+   the old brightness() filter is gone. Bright textured paper sits underneath and
+   a pale wash lifts off on hover, which lets the change animate. */
 .s2v5__card {
   position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 24px 26px;
-  background: var(--card-yellow-b);
-  background-image: linear-gradient(rgba(247,243,198,0.82), rgba(247,243,198,0.82)), url('/images/v5/card-texture-yellow-a.png');
-  background-size: auto, 260px 120px;
-  color: var(--ink);
-  transition: filter 0.2s ease, transform 0.2s ease;
-}
-.s2v5__card--bright {
-  background: var(--card-yellow-a);
-  background-image: url('/images/v5/card-texture-yellow-a.png');
+  background: var(--card-yellow-a) url('/images/v5/card-texture-yellow-a.png');
   background-size: 260px 120px;
+  color: var(--ink);
 }
-.s2v5__card:hover { filter: brightness(0.97); }
+.s2v5__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--card-yellow-b);
+  opacity: 0.82;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.s2v5__card:hover::before,
+.s2v5__card:focus-visible::before { opacity: 0; }
+.s2v5__card > * { position: relative; z-index: 1; }  /* keep content above the wash */
 .s2v5__card-title {
   font-family: var(--font-display);
   font-weight: var(--fw-roman);
