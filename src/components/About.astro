@@ -57,15 +57,20 @@
 .sd5__body--b { left: 55.76vw; }
 
 @media (max-width: 900px) {
-  .sd5 { height: auto; padding: 96px var(--gutter) 120px; }
+  /* Home Page - Mobile comp, in flow top to bottom: pottery (left bleed) →
+     heading → body A → door (right) → body B → figure (centered). The figure
+     was hidden, which read as a void before Waymakers (Ben 2026-08-10). */
+  .sd5 { height: auto; padding: 11.4vw var(--gutter) 36.1vw; }
   .sd5__heading,
   .sd5__body { position: static; width: auto; }
-  .sd5__heading { font-size: 34px; margin-bottom: 32px; }
+  .sd5__heading { font-size: 34px; margin-bottom: 5vw; }
   .sd5__body { max-width: 520px; }
-  .sd5__body--a { margin-bottom: 22px; }
-  .sd5__img--pottery { left: auto; right: 4vw; top: 4vw; width: 30vw; height: 28vw; }
-  .sd5__img--door    { left: auto; right: 0;   top: 40vw; width: 26vw; height: 30vw; }
-  .sd5__img--figure,
+  .sd5__body--a { margin-bottom: 6.4vw; }
+  .sd5__body--b { margin-bottom: 13.6vw; }
+  .sd5__img { position: static; display: block; object-fit: cover; }
+  .sd5__img--pottery { width: 35.6vw; height: 33.9vw; margin: 0 0 4.4vw calc(-1 * var(--gutter)); }
+  .sd5__img--door    { width: 30.8vw; height: 34.7vw; margin: 0 7.2vw 5vw auto; }
+  .sd5__img--figure  { width: 31.1vw; height: 33.3vw; margin: 0 auto; }
   .sd5__mark { display: none; }
 }
 </style>

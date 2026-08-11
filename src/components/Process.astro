@@ -94,7 +94,10 @@
   .procv5__grid { grid-template-columns: 1fr; gap: 48px; }
 }
 @media (max-width: 640px) {
-  .procv5 { padding: 88px var(--gutter); }
+  .procv5 { padding: 27.2vw var(--gutter) 8.9vw; }  /* comp: 98pt above, band pads the rest below */
   .procv5__headline { font-size: 34px; }
+  /* comp: number images are short full-width HORIZONTAL strips (~100pt tall),
+     not the desktop 437/420 blocks (Ben 2026-08-10 screen 2) */
+  .procv5__media { aspect-ratio: auto; height: 27.8vw; }
 }
 </style>
