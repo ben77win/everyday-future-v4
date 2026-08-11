@@ -64,7 +64,7 @@
    Justified 7-line headline; tree left / silhouette right-bleed / lone tree center;
    underline under "Consciously", circle around "Changes". */
 @media (max-width: 640px) {
-  .hero--v5 { height: 128vw; min-height: 0; }  /* comp is 149.6vw but its lower zone holds a STATIC pill; ours floats, so close the dead air */
+  .hero--v5 { height: calc(116.7vw + 42px); min-height: 0; }  /* = lonetree bottom (93.1+23.6vw) + fixed 42px breathing — section ends a constant distance under the last image at every width, no vw balloon, no clipping */  /* comp is 149.6vw but its lower zone holds a STATIC pill; ours floats, so close the dead air */
   /* comp boxes @360 frame: slot1 0/100 95x172 · slot2 237/187 123x85 (bleeds
      right) · slot3 157/335 80x85. Assets were swapped; the LAYOUT is the
      comp's — object-fit:cover crops each asset into its box. */
