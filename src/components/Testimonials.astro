@@ -124,7 +124,7 @@ const cards = [
   margin-top: 3px;
 }
 @media (max-width: 640px) {
-  .ts5 { padding: 72px 0 25.2vw; }  /* ordinary-tier gap: 28vw to the Someday pottery (which is absolutely placed, so the following section's padding can't carry it) */
+  .ts5 { padding: 72px 0 min(25.2vw, 95px); }  /* ordinary-tier gap: 28vw to the Someday pottery (which is absolutely placed, so the following section's padding can't carry it) */
   .ts5__head { padding: 0 var(--gutter); margin-bottom: 40px; }
   .ts5__heading { font-size: 34px; }
   .ts5__mark { left: 56vw; top: -30px; width: 40vw; }

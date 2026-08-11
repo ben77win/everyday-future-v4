@@ -94,7 +94,7 @@
   .procv5__grid { grid-template-columns: 1fr; gap: 48px; }
 }
 @media (max-width: 640px) {
-  .procv5 { padding: 28vw var(--gutter) 8.8vw; }  /* comp: 98pt above, band pads the rest below */
+  .procv5 { padding: min(28vw, 105px) var(--gutter) min(8.8vw, 33px); }  /* comp: 98pt above, band pads the rest below */
   .procv5__headline { font-size: 34px; }
   /* comp: number images are short full-width HORIZONTAL strips (~100pt tall),
      not the desktop 437/420 blocks (Ben 2026-08-10 screen 2) */
