@@ -21,7 +21,7 @@ they can start._
 
 ## Section 4 — Someday already started
 - [ ] **Clock illustration blurry + misplaced** — re-export at 2x from Figma, fix position vs comp
-- [x] **Figure slot final: IMG_3703 red rose** (2026-08-12; supersedes the coastal-path still and video tries)
+- [x] **Figure slot final: IMG_1357 video** (2026-08-12; supersedes IMG_3703 rose still — rose asset kept ready in git history)
 
 ## Section 5 — Waymaker
 - [x] **KEEP — Ben 2026-08-12** ("keep for SEO" per my flag; no change to the section)
@@ -42,7 +42,6 @@ they can start._
 - [ ] **Section anchor links** — v4 had `#practice` `#results` `#waymaker` `#taylor` `#faq` + the 4 Begin deep links. Confirm they still target the right v5 sections and add any missing ones
 
 ## Cleanup (Ben deletes by hand — agent delete is guarded off)
-- `public/images/v5/someday-figure.mp4` + `someday-figure-poster.jpg` — unused (video superseded by the rose still)
 - `public/images/v5/choose-clouds.mp4` + `choose-clouds-poster.jpg` — unused (clouds video superseded by the sunset still)
 - `public/_comp-a5.html`, `public/_comp-rec.html`, `public/_comp-stacked.html` — load-screen comp scaffolding (comps also live in design-v5/comps/)
 - `design-v5/comps/_footer-crop.jpg` — accidental full-size sips output (10MB)
