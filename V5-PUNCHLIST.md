@@ -5,7 +5,7 @@ syncs on Ben's word per the deploy plan. Items marked ❓ need Ben's input befor
 they can start._
 
 ## Global
-- [ ] **Begin Practice button +30%** — both pills (hero static + floating), mobile and desktop, scaled together so they stay visually identical
+- [x] **Begin Practice pills sized to best practice** — desktop 43→52px (matches menu pill + Begin submit), mobile 35→44px (Apple tap minimum), fonts/padding scaled (2026-08-12)
 - [ ] **Load screen: first visit only** — (Ben 2026-08-12, supersedes "remove") keep it, but play once per visitor (localStorage flag), skip on repeat visits. Scroll-landing bug fix folds into this
 
 ## Section 1 — Choose how you want to practice

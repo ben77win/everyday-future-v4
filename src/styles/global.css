@@ -338,8 +338,8 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 43px;
-  padding: 0 16px;
+  height: 52px;   /* Ben 2026-08-12: CTA sized to best practice; matches the menu pill + Begin submit */
+  padding: 0 24px;
   background: var(--ink);
   color: var(--paper);
   border-radius: 999px;
@@ -1522,9 +1522,9 @@ a { color: inherit; text-decoration: none; }
   .float-cta__link:active { background: var(--blue); color: var(--paper); }
   /* mobile pill = the comp's 27.5px pill — identical to the hero's static pill */
   .float-cta__link {
-    height: 35px;   /* Ben 2026-08-10: comp's 27.5 sized up for tap comfort */
-    padding: 0 15px;
-    font-size: 11px;
+    height: 44px;   /* Ben 2026-08-12: Apple minimum tap target */
+    padding: 0 19px;
+    font-size: 12px;
     letter-spacing: 0.18em;
   }
   /* the label rides in a .t-cta span that re-applies the 14.4px CTA type —
