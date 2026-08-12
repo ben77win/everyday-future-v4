@@ -13,7 +13,7 @@ they can start._
 - [x] **New images landed (Ben 2026-08-12):** book slot → IMG_0182 (brass paperclip); window slot → sunset figure (Screen Shot 2015-07-27); Someday figure → IMG_3703 red rose (after trying IMG_3424 path, IMG_3916 video, IMG_7858 roses)
 
 ## Section 2 — The Process
-- [ ] **Mobile images: center-aligned crop** — 01/02/03 banners should crop from center on mobile
+- [x] **Mobile banner crops** — per-banner object-position tuned so strips center on the SUBJECT (clouds/mountains), not the pixel middle (2026-08-12)
 
 ## Section 3 — Testimonials
 - [ ] **Carousel should not stop** — "Practice makes progress" rail keeps drifting continuously (no pause at ends / on idle)

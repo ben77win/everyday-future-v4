@@ -99,5 +99,10 @@
   /* comp: number images are short full-width HORIZONTAL strips (~100pt tall),
      not the desktop 437/420 blocks (Ben 2026-08-10 screen 2) */
   .procv5__media { aspect-ratio: auto; height: 27.8vw; }
+  /* Ben 2026-08-12: strips must center on the SUBJECT, not the pixel middle —
+     tuned per banner to match the mobile comp's framing */
+  .procv5__step:nth-child(1) .procv5__media :is(img,video) { object-position: 50% 42%; }
+  .procv5__step:nth-child(2) .procv5__media :is(img,video) { object-position: 50% 22%; }
+  .procv5__step:nth-child(3) .procv5__media :is(img,video) { object-position: 50% 58%; }
 }
 </style>
