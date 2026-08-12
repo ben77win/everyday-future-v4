@@ -6,7 +6,7 @@ they can start._
 
 ## Global
 - [x] **Begin Practice pills sized to best practice** — desktop 43→52px (matches menu pill + Begin submit), mobile 35→44px (Apple tap minimum), fonts/padding scaled (2026-08-12)
-- [ ] **Load screen: first visit only** — (Ben 2026-08-12, supersedes "remove") keep it, but play once per visitor (localStorage flag), skip on repeat visits. Scroll-landing bug fix folds into this
+- [x] **Load screen: first visit only** — localStorage flag set on lift; verified plays fresh, skips after (2026-08-12)
 
 ## Section 1 — Choose how you want to practice
 - [x] **Rollover: blue inversion** — (Ben 2026-08-12) card sweeps to --blue on hover/press, text + arrow white; supersedes the comp's pale→bright (too subtle)
@@ -16,8 +16,8 @@ they can start._
 - [x] **Mobile banner crops** — per-banner object-position tuned so strips center on the SUBJECT (clouds/mountains), not the pixel middle (2026-08-12)
 
 ## Section 3 — Testimonials
-- [ ] **Carousel should not stop** — "Practice makes progress" rail keeps drifting continuously (no pause at ends / on idle)
-- [ ] **Remove stars above testimonial quotes** — keep stars above the client-results cards only
+- [x] **Carousel: continuous drift** — rAF marquee with cloned wrap, only pauses while dragging (2026-08-12)
+- [x] **Stars only on result cards** — quote cards star-free (2026-08-12)
 
 ## Section 4 — Someday already started
 - [ ] **Clock illustration blurry + misplaced** — re-export at 2x from Figma, fix position vs comp
@@ -33,13 +33,13 @@ they can start._
 - [ ] ❓ **Different rollover behavior** — current: question nudges right + icon tints blue. What should it do instead?
 
 ## Footer
-- [ ] **Remove "A Practice Of Possibility With Coaching" fading stack** — footer becomes gradient + black bar only (or bar only? confirm)
+- [x] **Footer stack removed** — gradient kept (Ben's call) + black bar (2026-08-12)
 
 ## Nav
-- [ ] **Hide Client Portal link** — it currently lands on the portal ADMIN screen (the known `netlify.toml` root-redirect bug from v4). Hide in desktop nav + mobile menu until the portal root points at `client-portal.html`
+- [x] **Client Portal link hidden** — desktop nav + mobile menu (commented for easy reintroduction once the portal root redirect is fixed) (2026-08-12)
 
 ## Verify
-- [ ] **Section anchor links** — v4 had `#practice` `#results` `#waymaker` `#taylor` `#faq` + the 4 Begin deep links. Confirm they still target the right v5 sections and add any missing ones
+- [x] **Anchors verified** — #practice #results #waymaker #taylor #faq (+ #process #about) all present; Begin deep-link JS intact in index.astro (2026-08-12)
 
 ## Cleanup (Ben deletes by hand — agent delete is guarded off)
 - `public/images/v5/choose-clouds.mp4` + `choose-clouds-poster.jpg` — unused (clouds video superseded by the sunset still)

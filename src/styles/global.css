@@ -1164,7 +1164,7 @@ a { color: inherit; text-decoration: none; }
    wordmark (left) + white DM Mono links (right). */
 .site-footer {
   background: linear-gradient(180deg, var(--paper-off-b) 0%, var(--pale-yellow) 62%, #FFFDDE 100%);
-  padding: 200px 0 0;
+  padding: 140px 0 0;  /* gradient band above the bar (stack removed 2026-08-12) */
   margin-top: auto; /* sticky footer — pushed to the bottom of the flex-column body on short pages */
   overflow: hidden;
 }

@@ -161,7 +161,10 @@ const tagline = "A Practice Of Possibility With Coaching";
   var navType = nav ? nav.type
     : (performance.navigation ? ['navigate','reload','back_forward'][performance.navigation.type] : 'navigate');
   var returning = (navType === 'reload' || navType === 'back_forward');
-  if (reduce || phone || deepLink || returning) { ls.classList.add('ls5--off'); return; }
+  /* First visit only (Ben 2026-08-12): one play per visitor, then never again */
+  var seen = false;
+  try { seen = localStorage.getItem('edf_intro_seen') === '1'; } catch (e) {}
+  if (reduce || phone || deepLink || returning || seen) { ls.classList.add('ls5--off'); return; }
 
   var stack = document.getElementById('ls5Stack');
   var spans = Array.prototype.slice.call(stack.querySelectorAll('.ls5__line'));
@@ -208,6 +211,7 @@ const tagline = "A Practice Of Possibility With Coaching";
 
   function lift() {
     state.lifted = true;
+    try { localStorage.setItem('edf_intro_seen', '1'); } catch (e) {}
     setTimeout(function () {
       ls.classList.add('lift');
       if (hero) hero.style.transform = 'translateY(0)';

@@ -27,7 +27,7 @@ const cards = [
   <div class="ts5__rail" id="ts5Rail">
     {cards.map((c) => (
       <article class="ts5__card">
-        <div class="ts5__stars" aria-hidden="true">★★★★★</div>
+        {!c.quote && <div class="ts5__stars" aria-hidden="true">★★★★★</div>}
         {c.quote && <span class="ts5__q ts5__q--open" aria-hidden="true">“</span>}
         <p class="ts5__body">{c.body}{c.quote && <span class="ts5__q ts5__q--close" aria-hidden="true">”</span>}</p>
         {c.name && (
@@ -149,18 +149,26 @@ const cards = [
   window.addEventListener('pointerup', function () {
     down = false; rail.classList.remove('dragging');
   });
-  /* gentle auto-advance (pauses on hover/drag/hidden tab) — Alice comment #45 */
-  var hover = false;
-  rail.addEventListener('mouseenter', function () { hover = true; });
-  rail.addEventListener('mouseleave', function () { hover = false; });
-  setInterval(function () {
-    if (down || hover || document.hidden) return;
-    var card = rail.querySelector('.ts5__card');
-    if (!card) return;
-    var step = card.getBoundingClientRect().width;
-    var max = rail.scrollWidth - rail.clientWidth;
-    var next = rail.scrollLeft + step;
-    rail.scrollTo({ left: next >= max - 8 ? 0 : next, behavior: 'smooth' });
-  }, 4500);
+  /* continuous drift — never stops (Ben 2026-08-12; supersedes the pausing
+     auto-advance). Cards are cloned once so the wrap point lands on identical
+     content; pauses only while the user is actively dragging. */
+  var originals = Array.prototype.slice.call(rail.children);
+  originals.forEach(function (el) {
+    var clone = el.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    rail.appendChild(clone);
+  });
+  var half = 0;
+  function measure() { half = rail.scrollWidth / 2; }
+  measure();
+  window.addEventListener('resize', measure);
+  var SPEED = 0.45; /* px per frame ~ 27px/s */
+  function drift() {
+    if (!down && !document.hidden && half > 0) {
+      rail.scrollLeft = rail.scrollLeft + SPEED >= half ? rail.scrollLeft + SPEED - half : rail.scrollLeft + SPEED;
+    }
+    requestAnimationFrame(drift);
+  }
+  requestAnimationFrame(drift);
 })();
 </script>
