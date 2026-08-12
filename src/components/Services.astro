@@ -115,17 +115,35 @@
   pointer-events: none;
   transition: opacity 0.28s ease;
 }
-/* Touch: browsers paint an 18% BLACK tap highlight by default — a darkening
-   that appears nowhere in the Figma (Ben 2026-08-10, mobile). Suppress it and
-   use the designed bright state for press feedback instead. */
-.s2v5__card { -webkit-tap-highlight-color: transparent; }
-/* Hover only where hovering is real, so a tap can't leave a card stuck bright */
-@media (hover: hover) {
-  .s2v5__card:hover::before { opacity: 0; }
+/* Hover/press: BLUE inversion (Ben 2026-08-12 — the comp's pale->bright yellow
+   read too subtle; blue is the site's interaction signal, with v4-card
+   precedent). Rides ::after above the texture; text/arrow go white. */
+.s2v5__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--blue);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
 }
-.s2v5__card:focus-visible::before,
-.s2v5__card:active::before { opacity: 0; }
-.s2v5__card > * { position: relative; z-index: 1; }  /* keep content above the wash */
+/* Touch: suppress the default ~18% black tap highlight (not in the Figma);
+   press feedback = the same blue inversion */
+.s2v5__card { -webkit-tap-highlight-color: transparent; }
+/* Hover only where hovering is real, so a tap can't leave a card stuck blue */
+@media (hover: hover) {
+  .s2v5__card:hover::after { opacity: 1; }
+  .s2v5__card:hover .s2v5__card-title,
+  .s2v5__card:hover .s2v5__card-arrow { color: #fff; }
+  .s2v5__card:hover .s2v5__card-desc { color: rgba(255,255,255,0.82); }
+}
+.s2v5__card:focus-visible::after,
+.s2v5__card:active::after { opacity: 1; }
+.s2v5__card:focus-visible .s2v5__card-title, .s2v5__card:active .s2v5__card-title,
+.s2v5__card:focus-visible .s2v5__card-arrow, .s2v5__card:active .s2v5__card-arrow { color: #fff; }
+.s2v5__card:focus-visible .s2v5__card-desc, .s2v5__card:active .s2v5__card-desc { color: rgba(255,255,255,0.82); }
+.s2v5__card > * { position: relative; z-index: 1; }  /* keep content above the washes */
+.s2v5__card-title, .s2v5__card-desc, .s2v5__card-arrow { transition: color 0.28s ease; }
 .s2v5__card-title {
   font-family: var(--font-display);
   font-weight: var(--fw-roman);

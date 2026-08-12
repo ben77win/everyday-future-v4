@@ -6,10 +6,10 @@ they can start._
 
 ## Global
 - [ ] **Begin Practice button +30%** — both pills (hero static + floating), mobile and desktop, scaled together so they stay visually identical
-- [ ] **Remove the load screen** — not working reliably, deprioritized (single-commit feature: `git revert` of the LoadScreen commits + the `<LoadScreen />` include)
+- [ ] **Load screen: first visit only** — (Ben 2026-08-12, supersedes "remove") keep it, but play once per visitor (localStorage flag), skip on repeat visits. Scroll-landing bug fix folds into this
 
 ## Section 1 — Choose how you want to practice
-- [ ] **Rollover states too subtle** — strengthen the pale→bright yellow hover shift
+- [x] **Rollover: blue inversion** — (Ben 2026-08-12) card sweeps to --blue on hover/press, text + arrow white; supersedes the comp's pale→bright (too subtle)
 - [ ] ❓ **Choose new images (2)** — which two are being replaced (window/clouds video? book? and with what assets?)
 
 ## Section 2 — The Process
@@ -21,10 +21,10 @@ they can start._
 
 ## Section 4 — Someday already started
 - [ ] **Clock illustration blurry + misplaced** — re-export at 2x from Figma, fix position vs comp
-- [ ] ❓ **Replace woman-holding-bag figure image** — replacement asset needed (or should I propose from the Figma "Updated Photos" pool?)
+- [ ] **Replace woman-holding-bag figure image** — asset received 2026-08-12 (coastal path photo); match current proportions
 
 ## Section 5 — Waymaker
-- [ ] ❓ **Possibly remove the section entirely** — Ben deciding. (Note: the 5 "You're…" statements also live in the FAQ answer copy, so removal loses little; but the section carries the "waymakers of industry, ideas, and influence" positioning phrase on-page — SEO.md keyword relevance. Flag before deleting.)
+- [x] **KEEP — Ben 2026-08-12** ("keep for SEO" per my flag; no change to the section)
 
 ## Section 6 — Bio
 - [ ] ❓ **Different crop of Taylor's portrait** — and: can the busy background be replaced with a solid color? (Options: CSS crop to a cleaner region; or a real background knockout → needs a retouched asset like the v4 DSCF0184 treatment. Which direction?)
