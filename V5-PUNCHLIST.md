@@ -10,7 +10,7 @@ they can start._
 
 ## Section 1 — Choose how you want to practice
 - [x] **Rollover: blue inversion** — (Ben 2026-08-12) card sweeps to --blue on hover/press, text + arrow white; supersedes the comp's pale→bright (too subtle)
-- [ ] ❓ **Choose new images (2)** — which two are being replaced (window/clouds video? book? and with what assets?)
+- [x] **New images landed (Ben 2026-08-12):** book slot → IMG_0182 (brass paperclip); window slot → sunset figure (Screen Shot 2015-07-27); Someday figure → IMG_3703 red rose (after trying IMG_3424 path, IMG_3916 video, IMG_7858 roses)
 
 ## Section 2 — The Process
 - [ ] **Mobile images: center-aligned crop** — 01/02/03 banners should crop from center on mobile
@@ -21,7 +21,7 @@ they can start._
 
 ## Section 4 — Someday already started
 - [ ] **Clock illustration blurry + misplaced** — re-export at 2x from Figma, fix position vs comp
-- [ ] **Replace woman-holding-bag figure image** — asset received 2026-08-12 (coastal path photo); match current proportions
+- [x] **Figure slot final: IMG_3703 red rose** (2026-08-12; supersedes the coastal-path still and video tries)
 
 ## Section 5 — Waymaker
 - [x] **KEEP — Ben 2026-08-12** ("keep for SEO" per my flag; no change to the section)
@@ -40,3 +40,10 @@ they can start._
 
 ## Verify
 - [ ] **Section anchor links** — v4 had `#practice` `#results` `#waymaker` `#taylor` `#faq` + the 4 Begin deep links. Confirm they still target the right v5 sections and add any missing ones
+
+## Cleanup (Ben deletes by hand — agent delete is guarded off)
+- `public/images/v5/someday-figure.mp4` + `someday-figure-poster.jpg` — unused (video superseded by the rose still)
+- `public/images/v5/choose-clouds.mp4` + `choose-clouds-poster.jpg` — unused (clouds video superseded by the sunset still)
+- `public/_comp-a5.html`, `public/_comp-rec.html`, `public/_comp-stacked.html` — load-screen comp scaffolding (comps also live in design-v5/comps/)
+- `design-v5/comps/_footer-crop.jpg` — accidental full-size sips output (10MB)
+- `~/Downloads` copies of assets now in the repo (NEWCHINA9.jpg, DSCF0065.jpg etc.)
