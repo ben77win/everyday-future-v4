@@ -14,8 +14,7 @@
     <h2 class="s2v5__headline">Choose how you<br />want to practice.</h2>
     <p class="s2v5__body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
     <div class="s2v5__collage" aria-hidden="true">
-      <video data-plx="-0.08" class="s2v5__window s2v5__video" src="/images/v5/choose-clouds.mp4" poster="/images/v5/choose-clouds-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
-      <img data-plx="-0.08" class="s2v5__window s2v5__video-still" src="/images/v5/choose-clouds-poster.jpg" alt="" />
+      <img data-plx="-0.08" class="s2v5__window s2v5__sunset" src="/images/v5/choose-sunset.jpg" alt="" aria-hidden="true" />
       <img data-plx="0.06" class="s2v5__book" src="/images/v5/choose-book.png" alt="" />
       <img class="s2v5__script" src="/images/v5/scribble-expand-script.png" alt="" />
     </div>
@@ -74,13 +73,11 @@
   margin-bottom: 48px;
 }
 .s2v5__collage { position: relative; height: 300px; }
-.s2v5__window { position: absolute; left: 128px; top: 0;    width: 288px; height: 158px; object-fit: cover; }
+.s2v5__window { position: absolute; left: 127px; top: 0;    width: 288px; height: 157px; object-fit: cover; }  /* bottom-left corner meets the book's top-right at (127,157) exactly */
 /* video + poster carry no baked alpha — match the 70% via CSS (ground is solid) */
-.s2v5__video, .s2v5__video-still { opacity: 0.7; }
-.s2v5__video-still { display: none; }
+.s2v5__sunset { opacity: 0.7; }
 @media (prefers-reduced-motion: reduce) {
-  .s2v5__video { display: none; }
-  .s2v5__video-still { display: block; }
+  /* (video fallback removed with the clouds clip — static image now) */
 }
 .s2v5__book   { position: absolute; left: 0;     top: 157px; width: 127px; height: 134px; object-fit: cover; }
 .s2v5__script { position: absolute; left: -30px; top: 186px; width: 550px; }
@@ -189,7 +186,7 @@
   /* comp (mobile frame): collage 213pt tall; window x117-321 y893-1005;
      book x0-120 (left bleed) y1005-1112; script overlapping ~x100-300 */
   .s2v5__collage { height: 59.2vw; }
-  .s2v5__window { left: 25.3vw; top: 0; width: 56.7vw; height: 31.1vw; max-width: none; }
+  .s2v5__window { left: calc(33.3vw - var(--gutter)); top: 0; width: 56.7vw; height: 29.7vw; max-width: none; }  /* corner meets the book at its top-right */
   .s2v5__book   { left: calc(-1 * var(--gutter)); top: 29.7vw; width: 33.3vw; height: 29.7vw; }
   .s2v5__script { left: 20.6vw; top: 28vw; width: 55vw; max-width: none; }
 }
