@@ -7,7 +7,8 @@
 <section class="sd5" id="about">
   <img data-plx="-0.07" class="sd5__img sd5__img--pottery" src="/images/v5/someday-pottery.png" alt="" aria-hidden="true" />
   <img data-plx="0.08" class="sd5__img sd5__img--door" src="/images/waymaker-threshold.jpg" alt="" aria-hidden="true" />
-  <img data-plx="-0.05" class="sd5__img sd5__img--figure" src="/images/v5/someday-figure.png" alt="" aria-hidden="true" />
+  <video data-plx="-0.05" class="sd5__img sd5__img--figure sd5__video" src="/images/v5/someday-figure.mp4" poster="/images/v5/someday-figure-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <img data-plx="-0.05" class="sd5__img sd5__img--figure sd5__video-still" src="/images/v5/someday-figure-poster.jpg" alt="" aria-hidden="true" />
   <img class="sd5__mark" src="/images/v5/scribble-clock.png" alt="" aria-hidden="true" />
 
   <h2 class="sd5__heading">Someday already started</h2>
@@ -26,7 +27,14 @@
 .sd5__img--pottery { left: 0;       top: 9.00vw;  width: 16.76vw; height: 15.57vw; }
 .sd5__img--door    { left: 79.54vw; top: 0;       width: 20.97vw; height: 23.47vw; opacity: 0.70; }
 .sd5__img--figure  { left: 36.70vw; top: 35.56vw; width: 12.53vw; height: 15.46vw; }
-/* figure slot: IMG_7858 roses (Ben 2026-08-12) — 70% baked like the other stills */
+/* figure slot: IMG_1357 video (Ben 2026-08-12; 0.5x + minterpolate, hero-water
+   treatment) — no baked alpha on video, 70% via CSS over the solid ground */
+.sd5__video, .sd5__video-still { opacity: 0.7; }
+.sd5__video-still { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sd5__video { display: none; }
+  .sd5__video-still { display: block; }
+}
 .sd5__mark {
   position: absolute;
   left: 85.82vw;
