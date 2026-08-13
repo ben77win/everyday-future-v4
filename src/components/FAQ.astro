@@ -177,6 +177,46 @@ const faqLd = {
 .faq5 .s7__icon::before { width: 46%; left: 27%; }
 .faq5 .s7__icon::after  { height: 46%; top: 27%; }
 
+/* ── Row hover: blue highlight fade (handoff faq-hover-blue-fade.html, Ben
+   2026-08-12). A blue surface fades in BEHIND the row while the question and
+   icon flip to the ivory; nothing moves, so there's no layout shift — this
+   replaces the old nudge-right + blue-icon hover.
+   Brand-consistency substitutions (same call Ben ratified for the mobile menu):
+   site --blue for the spec's #2946ee, site ivory for its cream #fffef2. */
+.faq5 .s7__trigger { position: relative; }
+.faq5 .s7__trigger::before {
+  content: '';
+  position: absolute;
+  inset: 0 -14px;            /* slight bleed so the text isn't flush to the edge */
+  background: var(--blue);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq5 .s7__question, .faq5 .s7__icon { position: relative; }  /* above the surface */
+.faq5 .s7__icon { border-color: currentColor; }               /* rim follows the flip */
+.faq5 .s7__question, .faq5 .s7__icon,
+.faq5 .s7__icon::before, .faq5 .s7__icon::after {
+  transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              background 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* hover only where hovering is real, so a tap can't leave a row stuck blue */
+@media (hover: hover) {
+  .faq5 .s7__trigger:hover::before { opacity: 1; }
+  .faq5 .s7__trigger:hover .s7__question,
+  .faq5 .s7__trigger:hover .s7__icon { color: var(--paper-off-b); }
+  .faq5 .s7__trigger:hover .s7__question { transform: none; }  /* cancel the old nudge */
+}
+.faq5 .s7__trigger:focus-visible::before,
+.faq5 .s7__trigger:active::before { opacity: 1; }
+.faq5 .s7__trigger:focus-visible .s7__question, .faq5 .s7__trigger:active .s7__question,
+.faq5 .s7__trigger:focus-visible .s7__icon, .faq5 .s7__trigger:active .s7__icon { color: var(--paper-off-b); }
+@media (prefers-reduced-motion: reduce) {
+  .faq5 .s7__trigger::before,
+  .faq5 .s7__question, .faq5 .s7__icon { transition-duration: 0ms; }
+}
+
 @media (max-width: 900px) {
   /* comp keeps the collage on mobile — compact block between heading and
      accordion (Home Page - Mobile, ~y 480–900 @360) */

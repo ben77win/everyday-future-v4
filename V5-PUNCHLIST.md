@@ -30,7 +30,7 @@ they can start._
 - [x] **Bio portrait replaced** — DSCF0065 (striped shirt, wooden chair), square top-anchored crop excluding feet/lower legs; dropped into the existing slot with no CSS change (2026-08-12). Background left as shot — the new frame is calmer, so the solid-colour question is moot for now
 
 ## Section 7 — FAQ
-- [ ] ❓ **Different rollover behavior** — current: question nudges right + icon tints blue. What should it do instead?
+- [x] **Rollover: blue highlight fade** — per Ben's handoff (faq-hover-blue-fade.html, 2026-08-12): blue surface fades in behind the row (200ms), question + icon flip to ivory, no layout shift; replaces the nudge-right. Site --blue and site ivory used in place of the handoff's #2946ee/#fffef2, per the ratified brand-consistency call
 
 ## Footer
 - [x] **Footer stack removed** — gradient kept (Ben's call) + black bar (2026-08-12)
