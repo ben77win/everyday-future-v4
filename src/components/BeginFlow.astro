@@ -23,7 +23,7 @@ const optionDeksJson = JSON.stringify(
 
       <div class="bf-nav">
         <a class="bf-back" href="/"><span class="bf-back__arrow" aria-hidden="true">←</span> Back</a>
-        <span class="bf-nav__brand" aria-hidden="true">Every Day Future</span>
+        <span class="bf-nav__brand" aria-hidden="true"><img src="/images/wordmark-stacked.svg" alt="" /></span>
         <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
       </div>
 
@@ -59,7 +59,7 @@ const optionDeksJson = JSON.stringify(
         <button class="bf-back" id="bfBack" type="button">
           <span class="bf-back__arrow" aria-hidden="true">←</span> Back
         </button>
-        <span class="bf-nav__brand" aria-hidden="true">Every Day Future</span>
+        <span class="bf-nav__brand" aria-hidden="true"><img src="/images/wordmark-stacked.svg" alt="" /></span>
         <a class="bf-close" href="/" aria-label="Cancel and return to Every Day Future">×</a>
       </div>
 
@@ -273,7 +273,7 @@ const optionDeksJson = JSON.stringify(
         <button class="bf-back" id="bfBack3" type="button">
           <span class="bf-back__arrow" aria-hidden="true">←</span> Back
         </button>
-        <span class="bf-nav__brand" aria-hidden="true">Every Day Future</span>
+        <span class="bf-nav__brand" aria-hidden="true"><img src="/images/wordmark-stacked.svg" alt="" /></span>
         <a class="bf-close" href="/" aria-label="Close and return to Every Day Future">×</a>
       </div>
 
@@ -469,17 +469,15 @@ const optionDeksJson = JSON.stringify(
 .bf-nav .bf-back  { grid-column: 1; justify-self: start; }
 .bf-nav .bf-close { grid-column: 3; justify-self: end; margin-left: 0; }
 /* Wordmark — shown only in the drawer (the standalone page already has the site nav) */
+/* v5: the stacked SVG wordmark (was the v4 single-line text lockup, HN 200 22px)
+   — the mark is now one artwork everywhere (Ben 2026-08-13) */
 .bf-nav__brand {
   display: none;
   grid-column: 2;
   justify-self: center;
-  font-family: var(--font-body);
-  font-weight: 200;
-  font-size: 22px;
-  letter-spacing: -0.020em;
-  color: var(--ink);
-  white-space: nowrap;
+  line-height: 0;
 }
+.bf-nav__brand img { width: 92px; height: auto; } /* matches the mobile-menu top-bar mark */
 :global(.begin-page--drawer) .bf-nav__brand { display: block; }
 /* In the homepage drawer (full-screen, no tappable scrim) keep the nav pinned so
    Back/× stay reachable while scrolling — this replaces the old fixed drawer bar. */
