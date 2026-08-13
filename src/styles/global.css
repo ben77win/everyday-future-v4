@@ -204,7 +204,7 @@ a { color: inherit; text-decoration: none; }
 
 /* v5 — the hero is ivory, so the nav is ink at rest (white-over-photo states retired) */
 .nav__wordmark--v5 { display: block; line-height: 0; }
-.nav__wordmark--v5 img { width: 160px; height: auto; }
+.nav__wordmark--v5 img { width: 230px; height: auto; } /* Figma 1440w light: 229.69x82 — was 160 (-30%, Ben caught 2026-08-13) */
 .nav__right {
   position: absolute;
   right: var(--gutter);
