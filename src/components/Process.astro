@@ -1,36 +1,41 @@
 ---
 /* v5 — "The Process" (NEW section per Figma V3; promoted from the v4 S2 tier tiles).
    Reuses the existing repo assets (foundation01.jpg rock still, calibration.mp4
-   clouds, expansion.mp4 lake — same sources as the comp). Body copy is Lorem
-   ipsum per the comp, shipped as-is (Ben 2026-08-05). */
+   clouds, expansion.mp4 lake — same sources as the comp). */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BODY COPY SWITCH  (Ben 2026-08-12)
+   The paragraphs are HIDDEN while we wait on Taylor's real copy.
+
+   TO BRING THEM BACK:  set this to true.
+   TO SWAP IN THE REAL COPY:  edit the `body` strings just below.
+   Nothing is deleted — the text still lives in this file.
+   ───────────────────────────────────────────────────────────────────────── */
+const SHOW_BODY_COPY = false;
+
+const LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.";
+
+const steps = [
+  { num: "01", label: "Foundation",  media: { type: "img",   src: "/images/foundation01.jpg" },  body: LOREM },
+  { num: "02", label: "Calibration", media: { type: "video", src: "/videos/calibration.mp4" },   body: LOREM },
+  { num: "03", label: "Expansion",   media: { type: "video", src: "/videos/expansion.mp4" },     body: LOREM },
+];
 ---
 <section class="procv5" id="process">
   <h2 class="procv5__headline">The Process</h2>
   <div class="procv5__grid">
-    <div class="procv5__step">
-      <div class="procv5__media">
-        <span class="procv5__num">01</span>
-        <img src="/images/foundation01.jpg" alt="" />
+    {steps.map((s) => (
+      <div class="procv5__step">
+        <div class="procv5__media">
+          <span class="procv5__num">{s.num}</span>
+          {s.media.type === "img"
+            ? <img src={s.media.src} alt="" />
+            : <video src={s.media.src} autoplay loop muted playsinline></video>}
+        </div>
+        <h3 class="procv5__label">{s.label}</h3>
+        {SHOW_BODY_COPY && <p class="procv5__body">{s.body}</p>}
       </div>
-      <h3 class="procv5__label">Foundation</h3>
-      <p class="procv5__body procv5__body--placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.</p>
-    </div>
-    <div class="procv5__step">
-      <div class="procv5__media">
-        <span class="procv5__num">02</span>
-        <video src="/videos/calibration.mp4" autoplay loop muted playsinline></video>
-      </div>
-      <h3 class="procv5__label">Calibration</h3>
-      <p class="procv5__body procv5__body--placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.</p>
-    </div>
-    <div class="procv5__step">
-      <div class="procv5__media">
-        <span class="procv5__num">03</span>
-        <video src="/videos/expansion.mp4" autoplay loop muted playsinline></video>
-      </div>
-      <h3 class="procv5__label">Expansion</h3>
-      <p class="procv5__body procv5__body--placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.</p>
-    </div>
+    ))}
   </div>
 </section>
 
@@ -82,9 +87,6 @@
   color: var(--ink);
   margin: 28px 0 16px;
 }
-/* Placeholder copy hidden until Taylor's real Process copy lands (Ben 2026-08-12).
-   Markup kept in place — delete this rule (and the --placeholder class) to restore. */
-.procv5__body--placeholder { display: none; }
 .procv5__body {
   font-family: var(--font-body);
   font-weight: 300;
