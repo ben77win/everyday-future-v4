@@ -181,14 +181,15 @@ const faqLd = {
    2026-08-12). A blue surface fades in BEHIND the row while the question and
    icon flip to the ivory; nothing moves, so there's no layout shift — this
    replaces the old nudge-right + blue-icon hover.
-   Brand-consistency substitutions (same call Ben ratified for the mobile menu):
-   site --blue for the spec's #2946ee, site ivory for its cream #fffef2. */
+   Ben 2026-08-12: surface is the brand's bright YELLOW (--card-yellow-a, the
+   same hover yellow as the Choose How cards) rather than the handoff's blue.
+   Text therefore STAYS ink — ivory on yellow would fail contrast. */
 .faq5 .s7__trigger { position: relative; }
 .faq5 .s7__trigger::before {
   content: '';
   position: absolute;
   inset: 0 -14px;            /* slight bleed so the text isn't flush to the edge */
-  background: var(--blue);
+  background: var(--card-yellow-a);
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -205,13 +206,13 @@ const faqLd = {
 @media (hover: hover) {
   .faq5 .s7__trigger:hover::before { opacity: 1; }
   .faq5 .s7__trigger:hover .s7__question,
-  .faq5 .s7__trigger:hover .s7__icon { color: var(--paper-off-b); }
+  .faq5 .s7__trigger:hover .s7__icon { color: var(--ink); }
   .faq5 .s7__trigger:hover .s7__question { transform: none; }  /* cancel the old nudge */
 }
 .faq5 .s7__trigger:focus-visible::before,
 .faq5 .s7__trigger:active::before { opacity: 1; }
 .faq5 .s7__trigger:focus-visible .s7__question, .faq5 .s7__trigger:active .s7__question,
-.faq5 .s7__trigger:focus-visible .s7__icon, .faq5 .s7__trigger:active .s7__icon { color: var(--paper-off-b); }
+.faq5 .s7__trigger:focus-visible .s7__icon, .faq5 .s7__trigger:active .s7__icon { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   .faq5 .s7__trigger::before,
   .faq5 .s7__question, .faq5 .s7__icon { transition-duration: 0ms; }
