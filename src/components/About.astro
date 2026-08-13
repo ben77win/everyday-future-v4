@@ -37,12 +37,13 @@
 }
 .sd5__mark {
   position: absolute;
-  /* Ben 2026-08-12: 20% smaller, pulled 15% into frame, then halved again
-     (18.62 -> 9.31vw). Right edge held in place; top nudged to stay beside the
-     body copy. Smaller render also lifts the low-res source density ~2x. */
-  left: 92.34vw;
+  /* Ben 2026-08-12: 20% smaller, pulled 15% into frame, halved, then a further
+     20% (18.62 -> 9.31 -> 7.45vw). Right edge held at 101.65vw throughout, so it
+     keeps its bleed off the right edge. Smaller render also lifts the low-res
+     source density to 2.63x at 1440. */
+  left: 94.20vw;
   top: 26.50vw;
-  width: 9.31vw;
+  width: 7.45vw;
   pointer-events: none;
 }
 .sd5__heading {
