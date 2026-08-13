@@ -80,7 +80,7 @@
   /* (video fallback removed with the clouds clip — static image now) */
 }
 .s2v5__book   { position: absolute; left: 0;     top: 157px; width: 127px; height: 134px; object-fit: cover; }
-.s2v5__script { position: absolute; left: -30px; top: 200px; width: 400px; }  /* Ben 2026-08-12: reduced 550->400 so the low-res source renders denser (0.96x -> 1.32x) and reads less distressed */
+.s2v5__script { position: absolute; left: -30px; top: 200px; width: 280px; }  /* Ben 2026-08-12: 550 -> 400 -> 280 (a further 30%); the low-res source renders denser as it shrinks (0.96x -> 1.89x), so it reads far less distressed */
 .s2v5__cards {
   display: grid;
   grid-template-columns: repeat(2, 326px);
@@ -188,6 +188,6 @@
   .s2v5__collage { height: 59.2vw; }
   .s2v5__window { left: calc(33.3vw - var(--gutter)); top: 0; width: 56.7vw; height: 29.7vw; max-width: none; }  /* corner meets the book at its top-right */
   .s2v5__book   { left: calc(-1 * var(--gutter)); top: 29.7vw; width: 33.3vw; height: 29.7vw; }
-  .s2v5__script { left: 20.6vw; top: 29vw; width: 42vw; max-width: none; }
+  .s2v5__script { left: 20.6vw; top: 29vw; width: 29.4vw; max-width: none; }
 }
 </style>
