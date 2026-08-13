@@ -20,7 +20,7 @@ they can start._
 - [x] **Stars only on result cards** — quote cards star-free (2026-08-12)
 
 ## Section 4 — Someday already started
-- [x] **Clock re-exported + resized** — new Figma export (282x440, baked ivory ground knocked out), 20% smaller (18.62vw) and pulled 15% further into frame (2026-08-12). NOTE: render density is only ~1.05x — a true 2x export (~540px wide) would still sharpen it on retina
+- [x] **Clock + ALL 9 sketches re-exported at 4x from Figma** — resampled to true 2x-retina at a 1920 viewport (densities 2.0–2.7x, was ~1.0x). Clock rebuilt to the previous framing exactly so placement/sizing are unchanged (2026-08-12)
 - [x] **Figure slot final: IMG_1357 video** (2026-08-12; supersedes IMG_3703 rose still — rose asset kept ready in git history)
 
 ## Section 5 — Waymaker
