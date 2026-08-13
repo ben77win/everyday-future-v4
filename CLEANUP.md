@@ -2,7 +2,7 @@
 
 Deletes are hard-blocked for the agent (`~/.claude/settings.json` deny rules + `no-delete-guard.py`), so these accumulate here instead. **Nothing here is urgent** — none of it breaks the site. Clear it whenever convenient, ideally before the v5 → main merge so production ships clean.
 
-_Last updated: 2026-08-10 (session 11)._
+_Last updated: 2026-08-12 (session 12 — punch-list pass)._
 
 ---
 
@@ -45,3 +45,23 @@ These were cropped from the comps to measure geometry. Harmless, repo-only (neve
 - `public/images/DSCF0172.jpg` — unused since the S6 rework; explicitly left per Ben.
 - `_archive/index-pre-astro.html` — the intentional pre-Astro archive.
 - Anything under `Projects/Global Lease Renewal Project/Leases/` — write-protected source records.
+
+## Added 2026-08-12 (punch-list session)
+
+| File | Why it's dead |
+|---|---|
+| `public/images/v5/choose-clouds.mp4` + `choose-clouds-poster.jpg` | Clouds clip superseded by the sunset still in the S1 window slot. |
+| `public/images/v5/someday-figure-poster.jpg` | Still used as the reduced-motion fallback — **keep**, listed only so it isn't mistaken for dead. |
+| `public/images/DSCF0184.jpg` | Old bio portrait, replaced by `taylor-bio.jpg` (DSCF0065 square crop). Check `TaylorBio.astro` first if you ever revert. |
+| `design-v5/comps/_footer-crop.jpg` | 10 MB accidental full-size `sips` output. |
+| `design-v5/comps/_*.png` (crops) | Working crops used to measure the comps — `_faq-crop`, `_waymakers-crop`, `_gap-check`, `_mobile-1..4`, `_contact`. |
+
+## Outside the repo
+
+| Path | Why |
+|---|---|
+| `~/Desktop/EDF-sketches-review/` | Review copies of the 9 marks + the 13-SVG library, made for Finder browsing. Nothing references them. |
+| `~/Downloads/export-sketches/` | Alice's 1x sketch exports — superseded; the repo copies are what ship. |
+| `~/Downloads/Every Day Future - Visual Identity (4).zip` | The 4x Figma export that turned out to be upscaled; reverted. |
+| `~/Downloads/IMG_5637 1 2 (4).png` | Single 4x clock export from the same failed attempt. |
+| `~/Downloads/DSCF0065 (1).jpg`, `NEWCHINA9.jpg`, etc. | Duplicate copies of assets now committed to the repo. |
