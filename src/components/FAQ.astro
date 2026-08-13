@@ -192,22 +192,26 @@ const faqLd = {
   background: var(--card-yellow-a);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 480ms cubic-bezier(0.25, 0.1, 0.25, 1); /* was 200ms — read as flicker on tap (Ben 2026-08-13) */
 }
 .faq5 .s7__question, .faq5 .s7__icon { position: relative; }  /* above the surface */
+/* no nudge, any input — touch browsers emulate :hover on tap, so the v4
+   translateX(8px) was still firing on phones (Ben 2026-08-13) */
+.faq5 .s7__trigger:hover .s7__question,
+.faq5 .s7__trigger:active .s7__question,
+.faq5 .s7__trigger:focus-visible .s7__question { transform: none; }
 .faq5 .s7__icon { border-color: currentColor; }               /* rim follows the flip */
 .faq5 .s7__question, .faq5 .s7__icon,
 .faq5 .s7__icon::before, .faq5 .s7__icon::after {
-  transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1),
-              background 200ms cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 480ms cubic-bezier(0.25, 0.1, 0.25, 1),
+              background 480ms cubic-bezier(0.25, 0.1, 0.25, 1),
+              border-color 480ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 /* hover only where hovering is real, so a tap can't leave a row stuck blue */
 @media (hover: hover) {
   .faq5 .s7__trigger:hover::before { opacity: 1; }
   .faq5 .s7__trigger:hover .s7__question,
   .faq5 .s7__trigger:hover .s7__icon { color: var(--ink); }
-  .faq5 .s7__trigger:hover .s7__question { transform: none; }  /* cancel the old nudge */
 }
 .faq5 .s7__trigger:focus-visible::before,
 .faq5 .s7__trigger:active::before { opacity: 1; }
