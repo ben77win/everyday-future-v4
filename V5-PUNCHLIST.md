@@ -27,7 +27,7 @@ they can start._
 - [x] **KEEP — Ben 2026-08-12** ("keep for SEO" per my flag; no change to the section)
 
 ## Section 6 — Bio
-- [ ] ❓ **Different crop of Taylor's portrait** — and: can the busy background be replaced with a solid color? (Options: CSS crop to a cleaner region; or a real background knockout → needs a retouched asset like the v4 DSCF0184 treatment. Which direction?)
+- [x] **Bio portrait replaced** — DSCF0065 (striped shirt, wooden chair), square top-anchored crop excluding feet/lower legs; dropped into the existing slot with no CSS change (2026-08-12). Background left as shot — the new frame is calmer, so the solid-colour question is moot for now
 
 ## Section 7 — FAQ
 - [ ] ❓ **Different rollover behavior** — current: question nudges right + icon tints blue. What should it do instead?
