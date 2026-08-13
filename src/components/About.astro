@@ -96,6 +96,10 @@
   .sd5__body--a { margin-bottom: 4.9vw; }
   .sd5__body--b { margin-bottom: 12.4vw; }
   .sd5__img { position: static; display: block; object-fit: cover; }
+  /* ...but the poster still must stay hidden: the rule above has the same
+     specificity as `.sd5__video-still { display: none }` and comes later, so it
+     was un-hiding it and the water clip rendered twice on mobile (Ben 2026-08-12) */
+  .sd5__video-still { display: none; }
   .sd5__img--pottery {
     position: absolute;
     top: 2.8vw;
@@ -106,6 +110,10 @@
   }
   .sd5__img--door   { width: 32.2vw; height: 35.3vw; margin: 0 13.9vw 4.2vw auto; }
   .sd5__img--figure { width: 27.5vw; height: 34.2vw; margin: 0 0 0 34.2vw; }
+  @media (prefers-reduced-motion: reduce) {
+    .sd5__video { display: none; }
+    .sd5__video-still { display: block; }
+  }
   .sd5__mark { display: none; }
 }
 </style>
