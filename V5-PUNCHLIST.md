@@ -13,6 +13,7 @@ they can start._
 - [x] **New images landed (Ben 2026-08-12):** book slot → IMG_0182 (brass paperclip); window slot → sunset figure (Screen Shot 2015-07-27); Someday figure → IMG_3703 red rose (after trying IMG_3424 path, IMG_3916 video, IMG_7858 roses)
 
 ## Section 2 — The Process
+- [x] **Placeholder (lorem) copy hidden** — Ben 2026-08-12; markup retained, hidden by `.procv5__body--placeholder { display: none }`. To restore: delete that rule + the class, or just replace the text with Taylor's real copy
 - [x] **Mobile banner crops** — per-banner object-position tuned so strips center on the SUBJECT (clouds/mountains), not the pixel middle (2026-08-12)
 
 ## Section 3 — Testimonials
