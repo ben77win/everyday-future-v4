@@ -1,12 +1,16 @@
 
 /* ─── TOKENS ─────────────────────────────────────────────────── */
 :root {
-  /* — Surface (5) — */
-  --paper:        #FFFFFF;   /* page default · S2 cards · S3 floor · S6 · Begin step 3 panel */
+  /* — Surface (v5: ivory ground per design-v5.md; V3 comp frame fill #F8FCF7) — */
+  --paper:        #FFFFFF;   /* white panels (Begin form panel, cards) */
   --paper-off-a:  #FAFCFA;   /* (reserved — barely-warm paper) */
-  --paper-off-b:  #F8FCF7;   /* S4 About */
-  --paper-cream:  #FFFCD1;   /* S2 · S5 Waymaker · Begin drawer/page */
-  --paper-sage:   #E9EDE7;   /* S3 testimonial cards · S7 FAQ */
+  --paper-off-b:  #F8FCF7;   /* v5 GROUND — whole-site ivory */
+  --paper-cream:  #F8FCF7;   /* v5: re-pointed from v4 cream #FFFCD1 to the ivory ground */
+  --paper-sage:   #E9EDE7;   /* S3 testimonial cards · S7 FAQ (v4 leftover, replaced in Phase 2) */
+  /* — v5 yellows (measured from Home Page - Desktop comp 2026-08-05) — */
+  --card-yellow-a: #F2EC94;  /* Choose How card, bright (1:1 Coaching) */
+  --card-yellow-b: #F7F3C6;  /* Choose How card, pale (Orgs/Group/Self-led) */
+  --pale-yellow:   #FDFCE8;  /* testimonial band · footer gradient end */
 
   /* — Ink — */
   --ink:          #000000;   /* type · hairlines · S3 outcome cards · footer · S2 hover */
@@ -33,7 +37,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
-  background: var(--paper);
+  background: var(--paper-off-b); /* v5 ivory ground */
   color: var(--ink);
   font-family: var(--font-body);
   font-weight: 300;
@@ -198,15 +202,9 @@ a { color: inherit; text-decoration: none; }
 .nav.scrolled .nav__link { color: var(--ink); text-shadow: none; }
 .nav.scrolled .nav__cta { background: var(--ink); color: var(--paper); }
 
-.nav__wordmark {
-  color: rgba(255,255,255,0.92);
-  font-family: var(--font-body);
-  font-weight: 200;       /* original ultralight (weight rolled back; size kept) */
-  font-size: 27.5px;      /* ~10% larger than the original 25px */
-  letter-spacing: -0.020em;
-  transition: color 0.3s;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.10), 0 0px 4px rgba(0,0,0,0.05);
-}
+/* v5 — the hero is ivory, so the nav is ink at rest (white-over-photo states retired) */
+.nav__wordmark--v5 { display: block; line-height: 0; }
+.nav__wordmark--v5 img { width: 230px; height: auto; } /* Figma 1440w light: 229.69x82 — was 160 (-30%, Ben caught 2026-08-13) */
 .nav__right {
   position: absolute;
   right: var(--gutter);
@@ -215,14 +213,23 @@ a { color: inherit; text-decoration: none; }
   gap: 28px;
 }
 .nav__link {
-  color: rgba(255,255,255,0.78);
+  color: var(--ink);
   font-family: var(--font-mono);
+  font-weight: 300;
   font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-  transition: color 0.3s;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.35), 0 0px 4px rgba(0,0,0,0.18);
+  transition: color 0.3s, background 0.3s;
 }
+/* v5 boxed Client Portal — Figma: 162×27 @1440, 1px ink border */
+.nav__link--boxed {
+  display: inline-flex;
+  align-items: center;
+  height: 27px;
+  padding: 0 10px;
+  border: 1px solid var(--ink);
+}
+.nav__link--boxed:hover { background: var(--ink); color: var(--paper); }
 .nav__link:hover,
 .nav.scrolled .nav__link:hover { color: var(--blue); }
 .nav__cta {
@@ -314,24 +321,32 @@ a { color: inherit; text-decoration: none; }
   z-index: 90;
   pointer-events: auto;
   opacity: 1;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.2s ease; /* fast fade — o-p-e-n.com reference (Ben 2026-08-10) */
+}
+/* held while the hero's static pill is on screen (mobile homepage) */
+.float-cta.float-cta--held {
+  opacity: 0 !important;
+  pointer-events: none;
 }
 .float-cta.visible {
   opacity: 1;
   pointer-events: auto;
 }
+/* v5 black pill — measured from Home Page - Desktop comp: 185×43, fully rounded;
+   label DM Mono 300 16px / +1.43px tracking (Figma "Begin Practice" text node). */
 .float-cta__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  padding: 0 40px;
+  height: 52px;   /* Ben 2026-08-12: CTA sized to best practice; matches the menu pill + Begin submit */
+  padding: 0 24px;
   background: var(--ink);
   color: var(--paper);
-  border-radius: 4px;
+  border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 14.4px;
-  letter-spacing: 0.110em;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 1.43px;
   text-transform: uppercase;
   white-space: nowrap;
   transition: background 0.25s ease, color 0.25s ease;
@@ -340,11 +355,11 @@ a { color: inherit; text-decoration: none; }
   background: var(--blue);
   color: var(--paper);
 }
-/* Over the hero (S1): inverted — white surface, ink label. Reverts to the
-   default black on scroll into S2 (toggled by JS in Layout.astro). Hover stays --blue. */
+/* v5: over-hero white inversion removed — V3 hero is ivory ground, pill stays black.
+   (.over-hero class still toggled by Layout.astro JS; styles intentionally identical.) */
 .float-cta.over-hero .float-cta__link {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
 }
 .float-cta.over-hero .float-cta__link:hover {
   background: var(--blue);
@@ -1142,40 +1157,95 @@ a { color: inherit; text-decoration: none; }
 /* ════════════════════════════════════════════════════════════════
    FOOTER
 ════════════════════════════════════════════════════════════════ */
+/* v5 footer — per Home Page - Desktop comp (verified against _footer-crop.png):
+   ivory→pale-yellow gradient; giant tagline (display 79px/-3%) repeated 3×, each
+   line fading LEFT (ink) → RIGHT (pale) via background-clip:text; repeats 2–3
+   clipped under 0.5px hairlines; solid BLACK bottom bar with white stacked
+   wordmark (left) + white DM Mono links (right). */
 .site-footer {
-  background: var(--ink);
-  padding: 60px var(--gutter);
+  background: linear-gradient(180deg, var(--paper-off-b) 0%, var(--pale-yellow) 62%, #FFFDDE 100%);
+  padding: 140px 0 0;  /* gradient band above the bar (stack removed 2026-08-12) */
   margin-top: auto; /* sticky footer — pushed to the bottom of the flex-column body on short pages */
+  overflow: hidden;
 }
+.site-footer__fade {
+  padding: 0 22px;
+  pointer-events: none;
+  user-select: none;
+}
+.site-footer__fade-line {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: clamp(34px, 5.5vw, 79px);
+  letter-spacing: -0.030em;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(90deg, var(--ink) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.28) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* repeats 2–3: fixed-height clip windows under hairlines, glyphs cut per comp */
+.site-footer__fade-line--2,
+.site-footer__fade-line--3 {
+  border-top: 0.5px solid rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.site-footer__fade-line--2 { height: 0.53em; }
+.site-footer__fade-line--3 { height: 0.41em; }
 .site-footer__inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
+  background: var(--ink);
+  padding: 26px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.site-footer__wordmark {
-  font-family: var(--font-body);
-  font-weight: 200;        /* original ultralight (weight rolled back; size kept) */
-  font-size: 24.2px;       /* ~10% larger than the original 22px */
-  letter-spacing: -0.020em;
-  color: rgba(255,255,255,0.72);
+.site-footer__wordmark img {
+  width: 90px;
+  height: auto;
+  filter: brightness(0) invert(1); /* black SVG → white on the ink bar */
 }
 .site-footer__links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-left: 40px;
 }
 .site-footer__link {
   font-family: var(--font-mono);
+  font-weight: 300;
   font-size: 13px;
   letter-spacing: 0.110em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.46);
+  white-space: nowrap;
+  color: rgba(255,255,255,0.86);
   transition: color 0.2s ease;
 }
 .site-footer__link:hover {
   color: var(--blue);
+}
+@media (max-width: 640px) {
+  .site-footer { padding-top: 90px; }
+  .site-footer__fade { padding: 0 10px; }
+  .site-footer__fade-line {
+    font-size: 5.8vw;          /* full tagline edge-to-edge @360, per mobile comp */
+    letter-spacing: -0.040em;
+  }
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 26px var(--gutter) calc(30px + env(safe-area-inset-bottom, 0px));
+  }
+  .site-footer__links {
+    align-self: flex-end;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
 }
 /* ════════════════════════════════════════════════════════════════
    S7 — FAQ
@@ -1323,13 +1393,23 @@ a { color: inherit; text-decoration: none; }
 ════════════════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
 
-  :root { --gutter: 22px; }
+  :root { --gutter: 7.2vw; }  /* comp 26pt @360 frame — proportional per Ben 2026-08-10 */
 
   /* ── NAV */
   .nav { padding: 18px var(--gutter); }
-  /* The desktop links hide on mobile; the MENU trigger (Nav.astro .mmenu-trigger)
-     renders in their slot and opens the mobile menu curtain */
+  /* The desktop links hide on mobile; the hamburger trigger (Nav.astro
+     .mmenu-trigger) renders in their slot and opens the mobile menu curtain */
   .nav__right { display: none; }
+
+  .nav__wordmark--v5 img { width: 112px; } /* comp mobile wordmark ~112px */
+
+  /* ── FLOAT CTA — v5 mobile pill per Home Page - Mobile comp: ~123×28 */
+  .float-cta__link {
+    height: 28px;
+    padding: 0 14px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
 
   /* ── HERO */
   .hero__content  { padding: 0 var(--gutter) calc(100px + env(safe-area-inset-bottom, 0px)); }
@@ -1425,12 +1505,13 @@ a { color: inherit; text-decoration: none; }
   .s-contact { padding: 80px var(--gutter) 100px; }
   .s-contact__inner { grid-template-columns: 1fr; gap: 48px; }
 
-  /* ── FOOTER — extra bottom padding clears the fixed BEGIN bar */
-  .site-footer { padding: 44px var(--gutter) calc(52px + env(safe-area-inset-bottom, 16px)); }
+  /* ── FOOTER (v5) — tighter lead-in; ink bar stacks; safe-area padding on the bar */
+  .site-footer { padding: 18.1vw 0 0; }  /* comp: 65pt gap from FAQ */
   .site-footer__inner {
     flex-direction: column;
     align-items: flex-start;
     gap: 28px;
+    padding: 26px var(--gutter) calc(30px + env(safe-area-inset-bottom, 16px));
   }
   .site-footer__links { gap: 18px; flex-wrap: wrap; }
   .site-footer__dot   { display: none; }
@@ -1438,7 +1519,26 @@ a { color: inherit; text-decoration: none; }
   /* ── CTA BAR — same centered floating button as desktop. Over-footer parking
      (10px above) + always-black are handled in the base rules (all viewports). */
   /* Tap feedback for CTA */
+  /* Ben 2026-08-13: normal 32px ride throughout the scroll; only the PARKED
+     state (site fully scrolled, footer in view) resolves lower — 12px above the
+     black footer bar (76px + safe-area) instead of above the whole footer. */
+  .float-cta.over-footer { bottom: calc(var(--footer-bar-h, 76px) + 12px); }
   .float-cta__link:active { background: var(--blue); color: var(--paper); }
+  /* mobile pill = the comp's 27.5px pill — identical to the hero's static pill */
+  .float-cta__link {
+    height: 44px;   /* Ben 2026-08-12: Apple minimum tap target */
+    padding: 0 19px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+  /* the label rides in a .t-cta span that re-applies the 14.4px CTA type —
+     inherit so the mobile pill matches the hero's static pill exactly */
+  .float-cta__link .t-cta {
+    font-size: inherit;
+    letter-spacing: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+  }
   .float-cta.over-footer .float-cta__link:active { background: var(--blue); color: var(--paper); }
 
   /* Tap feedback for S2 cards */

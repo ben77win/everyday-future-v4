@@ -1,44 +1,193 @@
 ---
-import { practiceOptions } from '../data/options';
+/* v5 S2 — "Choose how you want to practice." per Figma V3 (section node 188-172).
+   Left: heading + body + collage (aerial CLOUD video `IMG_4529` — replaced the comp's
+   sauna window / pending Gen-4 clip per Ben 2026-08-10 — book still, blue "Expand"
+   script). Source is vertical 2160x3840; cropped horizontally to the 288x158 slot
+   aspect (y=150, the band with atmospheric recession); FULL source speed, 24fps,
+   10s trim (Ben 2026-08-10 — quarter then half both read too slow for clouds; no
+   slowdown means no motion interpolation needed). Poster still for reduced-motion. Right: 2×2 textured yellow
+   cards, 326×326, gap 26, right-aligned to the 24px edge. Card descs match the
+   comp copy verbatim (Ben 2026-08-05); links keep the /begin?option= keys. */
 ---
-<section class="s2" id="practice">
-
-  <!-- Header: headline + body only -->
-  <div class="s2__header">
-    <h2 class="s2__headline">Choose how<br />you practice</h2>
-    <p class="s2__header-body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
-  </div>
-
-  <!-- Option cards: 4-up grid -->
-  <div class="s2__cards">
-    {practiceOptions.map((opt) => (
-      <a href={`/begin?option=${opt.key}`} class="s2__card">
-        <span class="s2__card-label">{opt.label}</span>
-        <span class="s2__card-desc t-body-lg">{opt.desc}</span>
-        <span class="s2__card-arrow" aria-hidden="true">
-          <svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter"/></svg>
-        </span>
-      </a>
-    ))}
-  </div>
-
-  <!-- Tier tiles: Foundation / Calibration / Expansion — centered, max 880px -->
-  <div class="s2__tiers">
-    <div class="s2__tier">
-      <span class="s2__tier-num">01</span>
-      <img src="/images/foundation01.jpg" alt="" />
-      <span class="s2__tier-label">Foundation</span>
-    </div>
-    <div class="s2__tier">
-      <span class="s2__tier-num">02</span>
-      <video src="/videos/calibration.mp4" autoplay loop muted playsinline></video>
-      <span class="s2__tier-label">Calibration</span>
-    </div>
-    <div class="s2__tier">
-      <span class="s2__tier-num">03</span>
-      <video src="/videos/expansion.mp4" autoplay loop muted playsinline></video>
-      <span class="s2__tier-label">Expansion</span>
+<section class="s2 s2--v5" id="practice">
+  <div class="s2v5__left">
+    <h2 class="s2v5__headline">Choose how you<br />want to practice.</h2>
+    <p class="s2v5__body">Coaching, resources, and community to develop ways of working that reduce resistance to the unknown, expand what's possible, and increase capacity for growth.</p>
+    <div class="s2v5__collage" aria-hidden="true">
+      <img data-plx="-0.08" class="s2v5__window s2v5__sunset" src="/images/v5/choose-sunset.jpg" alt="" aria-hidden="true" />
+      <img data-plx="0.06" class="s2v5__book" src="/images/v5/choose-book.png" alt="" />
+      <img class="s2v5__script" src="/images/v5/scribble-expand-script.png" alt="" />
     </div>
   </div>
 
+  <div class="s2v5__cards">
+    <a href="/begin?option=1on1" class="s2v5__card">
+      <span class="s2v5__card-title">1:1 Coaching</span>
+      <span class="s2v5__card-desc">Dedicated practice to work on what matters for you with a&nbsp;coach</span>
+      <span class="s2v5__card-arrow" aria-hidden="true"><svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>
+    </a>
+    <a href="/begin?option=orgs" class="s2v5__card">
+      <span class="s2v5__card-title">Orgs &amp; Teams</span>
+      <span class="s2v5__card-desc">Workshops, offsites, and team programs designed and facilitated by a&nbsp;coach</span>
+      <span class="s2v5__card-arrow" aria-hidden="true"><svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>
+    </a>
+    <a href="/begin?option=group" class="s2v5__card">
+      <span class="s2v5__card-title">Group</span>
+      <span class="s2v5__card-desc">Shared practice in community with structure, support, and a&nbsp;coach</span>
+      <span class="s2v5__card-arrow" aria-hidden="true"><svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>
+    </a>
+    <a href="/begin?option=selflead" class="s2v5__card">
+      <span class="s2v5__card-title">Self-led</span>
+      <span class="s2v5__card-desc">Practice on your own with structure and guidance</span>
+      <span class="s2v5__card-arrow" aria-hidden="true"><svg width="30" height="14" viewBox="0 0 30 14" fill="none"><path d="M0 7 H28 M21.5 1 L28 7 L21.5 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/></svg></span>
+    </a>
+  </div>
 </section>
+
+<style is:global>
+/* ── v5 S2 — Choose How (values from choose-how@2x.png measurements) ── */
+.s2--v5 {
+  display: grid;
+  grid-template-columns: 1fr 678px;   /* cards: 2×326 + 26 gap */
+  gap: 60px;
+  padding: 144px 24px 144px 30px;
+  background: var(--paper-off-b);
+}
+.s2v5__headline {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 46px;
+  line-height: 1.18;
+  letter-spacing: -0.020em;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+.s2v5__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  max-width: 345px;
+  margin-bottom: 48px;
+}
+.s2v5__collage { position: relative; height: 300px; }
+.s2v5__window { position: absolute; left: 127px; top: 0;    width: 288px; height: 157px; object-fit: cover; }  /* bottom-left corner meets the book's top-right at (127,157) exactly */
+/* video + poster carry no baked alpha — match the 70% via CSS (ground is solid) */
+.s2v5__sunset { opacity: 0.7; }
+@media (prefers-reduced-motion: reduce) {
+  /* (video fallback removed with the clouds clip — static image now) */
+}
+.s2v5__book   { position: absolute; left: 0;     top: 157px; width: 127px; height: 134px; object-fit: cover; }
+.s2v5__script { position: absolute; left: -30px; top: 200px; width: 280px; }  /* Ben 2026-08-12: 550 -> 400 -> 280 (a further 30%); the low-res source renders denser as it shrinks (0.96x -> 1.89x), so it reads far less distressed */
+.s2v5__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 326px);
+  grid-auto-rows: 326px;
+  gap: 26px;
+  justify-content: end;
+  align-content: start;
+}
+/* Rest = pale, hover = bright. The comp's bright first card is the HOVER state,
+   not a permanent variant (Ben 2026-08-10) — and the Figma has no darkening, so
+   the old brightness() filter is gone. Bright textured paper sits underneath and
+   a pale wash lifts off on hover, which lets the change animate. */
+.s2v5__card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 26px;
+  background: var(--card-yellow-a) url('/images/v5/card-texture-yellow-a.png');
+  background-size: 260px 120px;
+  color: var(--ink);
+}
+.s2v5__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--card-yellow-b);
+  opacity: 0.82;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+/* Hover/press: BLUE inversion (Ben 2026-08-12 — the comp's pale->bright yellow
+   read too subtle; blue is the site's interaction signal, with v4-card
+   precedent). Rides ::after above the texture; text/arrow go white. */
+.s2v5__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--blue);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+/* Touch: suppress the default ~18% black tap highlight (not in the Figma);
+   press feedback = the same blue inversion */
+.s2v5__card { -webkit-tap-highlight-color: transparent; }
+/* Hover only where hovering is real, so a tap can't leave a card stuck blue */
+@media (hover: hover) {
+  .s2v5__card:hover::after { opacity: 1; }
+  .s2v5__card:hover .s2v5__card-title,
+  .s2v5__card:hover .s2v5__card-arrow { color: #fff; }
+  .s2v5__card:hover .s2v5__card-desc { color: rgba(255,255,255,0.82); }
+}
+.s2v5__card:focus-visible::after,
+.s2v5__card:active::after { opacity: 1; }
+.s2v5__card:focus-visible .s2v5__card-title, .s2v5__card:active .s2v5__card-title,
+.s2v5__card:focus-visible .s2v5__card-arrow, .s2v5__card:active .s2v5__card-arrow { color: #fff; }
+.s2v5__card:focus-visible .s2v5__card-desc, .s2v5__card:active .s2v5__card-desc { color: rgba(255,255,255,0.82); }
+.s2v5__card > * { position: relative; z-index: 1; }  /* keep content above the washes */
+.s2v5__card-title, .s2v5__card-desc, .s2v5__card-arrow { transition: color 0.28s ease; }
+.s2v5__card-title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 28px;
+  letter-spacing: -0.015em;
+}
+.s2v5__card-desc {
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.45;
+  max-width: 240px;
+  padding-right: 34px;
+}
+.s2v5__card-arrow {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  color: var(--ink);
+  transition: transform 0.2s ease;
+}
+@media (hover: hover) {
+  .s2v5__card:hover .s2v5__card-arrow { transform: translateX(5px); }
+}
+.s2v5__card:active .s2v5__card-arrow { transform: translateX(5px); }
+
+@media (max-width: 1180px) {
+  .s2--v5 { grid-template-columns: 1fr; }
+  .s2v5__cards { justify-content: start; }
+}
+@media (max-width: 900px) {
+  .s2v5__cards { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: minmax(240px, auto); }
+}
+@media (max-width: 640px) {
+  .s2--v5 { padding: 0 var(--gutter) 0;  /* the hero owns the 150px gap (static pill zone) */ gap: 40px; }  /* comp: heading 80pt below hero pill zone */
+  .s2v5__headline { font-size: 34px; }
+  .s2v5__cards { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 2.9vw; }  /* comp 10.5pt */
+  .s2v5__card { min-height: 41.4vw; padding: 6.9vw; }  /* comp 149pt, 25pt inset */
+  /* comp: desc runs to ~237pt of the 360pt frame and wraps to TWO lines — a
+     fixed 240px cap forced a third line at 375px (Ben 2026-08-10) */
+  .s2v5__card-desc { max-width: 65.8vw; padding-right: 0; }  /* arrow is absolutely positioned, so no right pad needed */
+  /* comp (mobile frame): collage 213pt tall; window x117-321 y893-1005;
+     book x0-120 (left bleed) y1005-1112; script overlapping ~x100-300 */
+  .s2v5__collage { height: 59.2vw; }
+  .s2v5__window { left: calc(33.3vw - var(--gutter)); top: 0; width: 56.7vw; height: 29.7vw; max-width: none; }  /* corner meets the book at its top-right */
+  .s2v5__book   { left: calc(-1 * var(--gutter)); top: 29.7vw; width: 33.3vw; height: 29.7vw; }
+  .s2v5__script { left: 20.6vw; top: 29vw; width: 29.4vw; max-width: none; }
+}
+</style>

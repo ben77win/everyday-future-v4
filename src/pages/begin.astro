@@ -25,6 +25,9 @@ import Footer from '../components/Footer.astro';
     text-shadow: none;
   }
   .page-begin .site-footer { display: none; }
+  /* v5 (per Ben 2026-08-05): no Client Portal link inside the begin flow —
+     it stays on the homepage nav only */
+  .page-begin .nav__right { display: none; }
 
   /* Hide step 1 before paint when a valid option param is present */
   html.bf-has-param #bfStep1 { display: none !important; }
@@ -32,14 +35,24 @@ import Footer from '../components/Footer.astro';
 </style>
 
 <style>
+/* v5: no top padding — the step-2 cream/white split runs to the very top of
+   the viewport, under the transparent fixed nav (per the 1440w light comp).
+   Steps 1 & 3 get their own nav clearance below. */
 .begin-page {
-  padding-top: 68px;
-  background: var(--paper-cream);
+  padding-top: 0;
+  background: var(--paper-off-b);
   min-height: 100vh;
+}
+.begin-page :global(#bfStep1 .bf-step__inner),
+.begin-page :global(#bfStep3 .bf-step__inner) {
+  padding-top: 150px;
 }
 
 @media (max-width: 640px) {
-  .begin-page { padding-top: 60px; }
+  .begin-page :global(#bfStep1 .bf-step__inner),
+  .begin-page :global(#bfStep3 .bf-step__inner) {
+    padding-top: 110px;
+  }
 }
 </style>
 

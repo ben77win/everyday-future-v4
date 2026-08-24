@@ -1,0 +1,113 @@
+---
+/* v5 — "The Process" (NEW section per Figma V3; promoted from the v4 S2 tier tiles).
+   Reuses the existing repo assets (foundation01.jpg rock still, calibration.mp4
+   clouds, expansion.mp4 lake — same sources as the comp). */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BODY COPY SWITCH  (Ben 2026-08-12)
+   The paragraphs are HIDDEN while we wait on Taylor's real copy.
+
+   TO BRING THEM BACK:  set this to true.
+   TO SWAP IN THE REAL COPY:  edit the `body` strings just below.
+   Nothing is deleted — the text still lives in this file.
+   ───────────────────────────────────────────────────────────────────────── */
+const SHOW_BODY_COPY = false;
+
+const LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo massa, fermentum elementum metus. Quisque eget felis mi. Etiam maximus neque in euismod commodo.";
+
+const steps = [
+  { num: "01", label: "Foundation",  media: { type: "img",   src: "/images/foundation01.jpg" },  body: LOREM },
+  { num: "02", label: "Calibration", media: { type: "video", src: "/videos/calibration.mp4" },   body: LOREM },
+  { num: "03", label: "Expansion",   media: { type: "video", src: "/videos/expansion.mp4" },     body: LOREM },
+];
+---
+<section class="procv5" id="process">
+  <h2 class="procv5__headline">The Process</h2>
+  <div class="procv5__grid">
+    {steps.map((s) => (
+      <div class="procv5__step">
+        <div class="procv5__media">
+          <span class="procv5__num">{s.num}</span>
+          {s.media.type === "img"
+            ? <img src={s.media.src} alt="" />
+            : <video src={s.media.src} autoplay loop muted playsinline></video>}
+        </div>
+        <h3 class="procv5__label">{s.label}</h3>
+        {SHOW_BODY_COPY && <p class="procv5__body">{s.body}</p>}
+      </div>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+.procv5 {
+  padding: 120px 24px 120px 30px;
+  background: var(--paper-off-b);
+}
+.procv5__headline {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 46px;
+  letter-spacing: -0.020em;
+  color: var(--ink);
+  margin-bottom: 56px;
+}
+.procv5__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+.procv5__media {
+  position: relative;
+  aspect-ratio: 437 / 420;
+  overflow: hidden;
+}
+.procv5__media img,
+.procv5__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.procv5__num {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 44px;
+  color: var(--paper);
+}
+.procv5__label {
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 28px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 28px 0 16px;
+}
+.procv5__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 340px;
+}
+@media (max-width: 900px) {
+  .procv5__grid { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 640px) {
+  .procv5 { padding: min(28vw, 105px) var(--gutter) min(8.8vw, 33px); }  /* comp: 98pt above, band pads the rest below */
+  .procv5__headline { font-size: 34px; }
+  /* comp: number images are short full-width HORIZONTAL strips (~100pt tall),
+     not the desktop 437/420 blocks (Ben 2026-08-10 screen 2) */
+  .procv5__media { aspect-ratio: auto; height: 27.8vw; }
+  /* Ben 2026-08-12: strips must center on the SUBJECT, not the pixel middle —
+     tuned per banner to match the mobile comp's framing */
+  .procv5__step:nth-child(1) .procv5__media :is(img,video) { object-position: 50% 42%; }
+  .procv5__step:nth-child(2) .procv5__media :is(img,video) { object-position: 50% 22%; }
+  .procv5__step:nth-child(3) .procv5__media :is(img,video) { object-position: 50% 58%; }
+}
+</style>

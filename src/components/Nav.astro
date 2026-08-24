@@ -1,21 +1,30 @@
 ---
 ---
 <nav class="nav" id="nav">
-  <a href="/" class="nav__wordmark t-wordmark">Every Day Future</a>
+  {/* v5 — stacked wordmark SVG (Figma: 229.69×82 @1440, centered) */}
+  <a href="/" class="nav__wordmark nav__wordmark--v5" aria-label="Every Day Future — home">
+    <img src="/images/wordmark-stacked.svg" alt="Every Day Future" width="160" height="57" />
+  </a>
   <div class="nav__right">
     {/* Writing link hidden 2026-06-22 — section kept live + indexed; reintroduce when more essays publish:
         <a href="/writing" class="nav__link nav__link--writing">Writing</a> */}
-    <a href="https://portal.everydayfuture.work" class="nav__link" target="_blank" rel="noopener">Client Portal</a>
+    {/* Client Portal hidden 2026-08-12 (root redirect lands on the ADMIN screen —
+        reintroduce when the portal's netlify.toml points / at client-portal.html):
+        <a href="https://portal.everydayfuture.work" class="nav__link nav__link--boxed" target="_blank" rel="noopener">Client Portal ↗</a> */}
   </div>
-  <button class="nav__link mmenu-trigger" id="mmenuTrigger" aria-expanded="false" aria-controls="mmenu" aria-haspopup="dialog">Menu</button>
+  <button class="nav__link mmenu-trigger" id="mmenuTrigger" aria-expanded="false" aria-controls="mmenu" aria-haspopup="dialog" aria-label="Menu">
+    <svg width="26" height="16" viewBox="0 0 26 16" aria-hidden="true"><path d="M1 1.5h24M1 8h24" stroke="currentColor" stroke-width="1.4"/></svg>
+  </button>
 </nav>
 
 <!-- Mobile menu curtain — sibling of .nav (a fixed child would be trapped by the
      scrolled nav's backdrop-filter containing block). Mobile-only (≤640px). -->
 <div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
   <div class="mmenu__nav">
-    <span class="mmenu__wordmark">Every Day Future</span>
-    <button class="mmenu__close" id="mmenuClose" aria-label="Close menu">&times;</button>
+    <img class="mmenu__wordmark" src="/images/wordmark-stacked.svg" alt="Every Day Future" />
+    <button class="mmenu__close" id="mmenuClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 3l16 16M19 3L3 19" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
   </div>
   <div class="mmenu__links">
     <a class="mmenu__link" href="/" data-mkey="home">Home <span class="mmenu__num">01</span></a>
@@ -23,7 +32,8 @@
         (numeral 02) and renumber Contact → 03 and Client Portal → 04.
         <a class="mmenu__link" href="/writing" data-mkey="writing">Writing <span class="mmenu__num">02</span></a> */}
     <a class="mmenu__link" href="/contact" data-mkey="contact">Contact <span class="mmenu__num">02</span></a>
-    <a class="mmenu__link" href="https://portal.everydayfuture.work" target="_blank" rel="noopener">Client Portal <span class="mmenu__num">03</span></a>
+    {/* Client Portal hidden 2026-08-12 — same reason as the desktop link; restore as 03:
+        <a class="mmenu__link" href="https://portal.everydayfuture.work" target="_blank" rel="noopener">Client Portal <span class="mmenu__num">03</span></a> */}
   </div>
   <a class="mmenu__cta" href="/begin" id="mmenuBegin">Begin Practice</a>
   <div class="mmenu__foot">
@@ -49,23 +59,19 @@
     border: none;
     cursor: pointer;
     padding: 6px 0;
-    /* The UA button stylesheet forces font-weight 400, beating the inherited
-       body 300 that the nav <a> links (and the comp's MENU) render at */
     font-weight: 300;
   }
-  .mmenu-trigger:active { color: var(--blue); text-shadow: none; }
+  .mmenu-trigger:active { color: var(--blue); }
 
-  /* ── The curtain */
+  /* ── The curtain — Mobile Menu V3 comp (393x852): light gradient ground */
   .mmenu {
     display: flex;
     flex-direction: column;
     position: fixed;
     inset: 0;
-    z-index: 500; /* above nav (100) + float CTA (90); below the Begin drawer (600) */
-    background: var(--ink);
-    color: #fff;
-    /* Safety valve for very short viewports (<~550px): content scrolls instead
-       of clipping; no effect at normal heights (content fits, no overflow) */
+    z-index: 500;
+    background: linear-gradient(180deg, #FBFEF9 0%, #F4F9F0 100%);
+    color: var(--ink);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     transform: translateY(-101%);
@@ -74,128 +80,131 @@
     transition-property: transform, visibility;
   }
   .mmenu.open { transform: translateY(0); visibility: visible; }
-  .mmenu:not(.open) { transition-delay: 0s, 0.45s; } /* keep visible while lifting */
+  .mmenu:not(.open) { transition-delay: 0s, 0.45s; }
 
-  /* ── Top row — mirrors the real mobile nav (18px / gutter padding, 27.5px wordmark) */
+  /* ── Top row: stacked wordmark left, thin x right (comp: 64px bar, 20px sides) */
+  /* wordmark identical to the closed-state homepage nav (centered, 112px,
+     top 18) so it does not move or resize when the menu opens (Ben 2026-08-10) */
   .mmenu__nav {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 18px var(--gutter);
+    justify-content: flex-end;
+    padding: 14px 20px 0;
+    min-height: 64px;
   }
   .mmenu__wordmark {
-    font-family: var(--font-body);
-    font-weight: 200;
-    font-size: 27.5px;
-    letter-spacing: -0.020em;
-    white-space: nowrap;
-    color: rgba(255,255,255,0.92);
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translateX(-50%);
+    width: 112px;
+    height: auto;
   }
   .mmenu__close {
-    position: absolute;
-    right: var(--gutter);
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0 4px;
-    font-family: var(--font-body);
-    font-weight: 200;
-    font-size: 26px;
-    line-height: 1;
-    color: rgba(255,255,255,0.70);
+    padding: 6px;
+    color: var(--ink);
+    line-height: 0;
     transition: color 0.2s;
   }
   .mmenu__close:active { color: var(--blue); }
 
-  /* ── Links — vertically centered hairline list
-     (0.5px hairlines + 11px mono numerals are menu-only departures, per the
-      approved handoff 7 comp — same precedent as the Writing section) */
+  /* ── Links: hairline rows, 52px labels, mono numerals right (comp: top 150) */
   .mmenu__links {
-    flex: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0 var(--gutter);
+    justify-content: flex-start;
+    margin-top: 86px;
+    padding: 0 20px;
   }
   .mmenu__link {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    padding: 24px 0;
-    border-top: 0.5px solid rgba(255,255,255,0.18);
+    padding: 30px 2px;
+    border-top: 1px solid rgba(0,0,0,0.25);
     font-family: var(--font-body);
     font-weight: 400;
-    font-size: 36px;
-    letter-spacing: -0.025em;
+    font-size: 52px;
+    letter-spacing: -0.015em;
     line-height: 1;
-    color: #fff;
+    color: var(--ink);
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.15s ease;
   }
-  .mmenu__link:last-of-type { border-bottom: 0.5px solid rgba(255,255,255,0.18); }
+  .mmenu__link:last-of-type { border-bottom: 1px solid rgba(0,0,0,0.25); }
   .mmenu__num {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.110em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: #6A6F66;
     transition: color 0.15s ease;
   }
   .mmenu__link:active,
   .mmenu__link:active .mmenu__num { color: var(--blue); }
   .mmenu__link--here .mmenu__num { color: var(--blue); }
 
-  /* ── Begin Practice — paper/ink (the over-hero CTA inversion, correct on ink) */
+  /* ── Begin Practice — black pill, hover/press blue (comp: 52px, bottom 118) */
   .mmenu__cta {
-    margin: 24px var(--gutter) 0;
+    margin: 24px 20px 42px;
+    flex-shrink: 0;
     height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--paper);
-    color: var(--ink);
-    border-radius: 4px;
+    background: #0D0D0D;
+    color: #fff;
+    border-radius: 999px;
     font-family: var(--font-mono);
-    font-size: 14.4px;
-    letter-spacing: 0.110em;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     opacity: 0;
     transform: translateY(12px);
-    transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.15s, color 0.15s;
+    transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.4s cubic-bezier(0.4,0,0.2,1);
   }
-  .mmenu__cta:active { background: var(--blue); color: var(--paper); }
+  .mmenu__cta:active { background: var(--blue); color: #fff; }
 
-  /* ── Foot row */
+  /* ── Foot: full-bleed black bar (comp: 76px) */
   .mmenu__foot {
+    flex-shrink: 0;
     display: flex;
-    gap: 20px;
+    gap: 28px;
+    align-items: center;
     justify-content: center;
-    padding: 22px var(--gutter) calc(26px + env(safe-area-inset-bottom, 0px));
+    min-height: 76px;
+    background: #000;
+    padding: 0 20px calc(env(safe-area-inset-bottom, 0px));
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1);
   }
   .mmenu__foot a {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.110em;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.46);
+    color: #E6E6DA;
   }
-  .mmenu__foot a:active { color: var(--blue); }
+  .mmenu__foot a:active { color: #fff; }
 
-  /* ── Stagger in as the curtain lands (top to bottom), fade together on close */
+  /* ── Stagger in as the curtain lands */
   .mmenu.open .mmenu__link,
   .mmenu.open .mmenu__cta,
   .mmenu.open .mmenu__foot { opacity: 1; transform: translateY(0); }
   .mmenu.open .mmenu__link:nth-of-type(1) { transition-delay: 0.15s, 0.15s, 0s; }
   .mmenu.open .mmenu__link:nth-of-type(2) { transition-delay: 0.21s, 0.21s, 0s; }
   .mmenu.open .mmenu__link:nth-of-type(3) { transition-delay: 0.27s, 0.27s, 0s; }
-  .mmenu.open .mmenu__link:nth-of-type(4) { transition-delay: 0.33s, 0.33s, 0s; }
-  .mmenu.open .mmenu__cta  { transition-delay: 0.40s, 0.40s, 0s, 0s; }
-  .mmenu.open .mmenu__foot { transition-delay: 0.46s, 0.46s; }
+  .mmenu.open .mmenu__cta  { transition-delay: 0.34s, 0.34s, 0s; }
+  .mmenu.open .mmenu__foot { transition-delay: 0.40s, 0.40s; }
   .mmenu:not(.open) .mmenu__link,
   .mmenu:not(.open) .mmenu__cta,
   .mmenu:not(.open) .mmenu__foot { transition-delay: 0s; transition-duration: 0.15s; }

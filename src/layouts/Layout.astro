@@ -39,7 +39,7 @@ const ogImage = new URL(image, site).href;
 
 <!-- Favicon / app icon -->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="256x256" href="/favicon.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -60,21 +60,7 @@ const ogImage = new URL(image, site).href;
 <slot />
 
 <script>
-  // ── Hero image rotation — cycles sequentially on each reload
-  (function() {
-    var bg = document.querySelector('.hero__bg');
-    if (!bg) return;
-    var images = [
-      { src: '/images/rhododendron.jpg',  pos: '50% 60%' },
-      { src: '/images/rainleaves.jpg',    pos: '50% 60%' },
-      { src: '/images/silhouette-coast.jpg', pos: '50% 50%' },
-      { src: '/images/rose-sky.jpg',         pos: '50% 40%' }
-    ];
-    var idx  = (parseInt(localStorage.getItem('edf_hero') || '0') + 1) % images.length;
-    localStorage.setItem('edf_hero', idx);
-    bg.style.backgroundImage    = 'url(' + images[idx].src + ')';
-    bg.style.backgroundPosition = images[idx].pos;
-  })();
+  /* v5: hero photo rotation retired (Ben 2026-08-05) — the V3 hero is static ivory. */
 
   // ── Nav + floating CTA: toggle after hero exits
   var nav      = document.getElementById('nav');
@@ -109,6 +95,8 @@ const ogImage = new URL(image, site).href;
     // ResizeObserver keeps it accurate through font loading, content/link changes, and wrapping.
     var setFooterH = function () {
       document.documentElement.style.setProperty('--footer-h', siteFooter.offsetHeight + 'px');
+      var bar = siteFooter.querySelector('.site-footer__inner');
+      if (bar) document.documentElement.style.setProperty('--footer-bar-h', bar.offsetHeight + 'px');
     };
     setFooterH();
     window.addEventListener('resize', setFooterH);
@@ -246,6 +234,34 @@ const ogImage = new URL(image, site).href;
       }
     });
   });
+
+  // ── v5 parallax — ancillary photos only (data-plx="speed"), desktop >900px,
+  //    transform-only, off for reduced-motion. Blue scribbles are never tagged.
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-plx]'));
+    if (!els.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var active = false, raf = null;
+    function frame() {
+      els.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var mid = r.top + r.height / 2 - window.innerHeight / 2;
+        el.style.transform = 'translateY(' + (mid * parseFloat(el.dataset.plx)).toFixed(1) + 'px)';
+      });
+      raf = active ? requestAnimationFrame(frame) : null;
+    }
+    function update() {
+      var on = window.innerWidth > 900;
+      if (on && !active) { active = true; els.forEach(function (el) { el.style.willChange = 'transform'; }); frame(); }
+      else if (!on && active) {
+        active = false;
+        if (raf) cancelAnimationFrame(raf);
+        els.forEach(function (el) { el.style.transform = ''; el.style.willChange = ''; });
+      }
+    }
+    window.addEventListener('resize', update);
+    update();
+  })();
 
   // ── Taylor bio "show more"
   var bioToggle = document.getElementById('s6MoreToggle');

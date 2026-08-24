@@ -1,20 +1,139 @@
 ---
 ---
-<section class="hero" id="hero" aria-label="Hero">
-  <div class="hero__bg"></div>
-  <div class="hero__gradient"></div>
+{/* v5 hero — per Figma V3 Home Page - Desktop (node 188-2) + design-v5.md.
+    All positions measured in the 1440-frame and converted to vw (÷14.4).
+    Photos sit between the justified headline lines at 70% opacity; two
+    hand-drawn blue scribble marks overlay the type. Left slot = slow-motion
+    WATER video (IMG_4528 GIF re-encoded 0.5x → 10s MP4 loop; Ben 2026-08-10,
+    permanently replaces the pending ink-tree clip). Reduced-motion / blocked
+    autoplay falls back to the poster still. */}
+<section class="hero hero--v5" id="hero" aria-label="Hero">
+  <video data-plx="-0.10" class="hv5__img hv5__img--tree hv5__video" src="/images/v5/hero-water.mp4" poster="/images/v5/hero-water-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <img data-plx="-0.10" class="hv5__img hv5__img--tree hv5__video-still" src="/images/v5/hero-water-poster.jpg" alt="" aria-hidden="true" />
+  <img data-plx="0.07" class="hv5__img hv5__img--silhouette" src="/images/v5/hero-silhouette.png" alt="" aria-hidden="true" />
+  <img data-plx="-0.06" class="hv5__img hv5__img--lonetree" src="/images/v5/hero-tree-china.jpg" alt="" aria-hidden="true" />
 
-  <!-- Main content: headline + subhead + tags -->
-  <div class="hero__content">
-    <div class="hero__copy">
-      <h1 class="t-display hero__headline">A practice of <span style="position:relative;display:inline-block;">possibility<img src="/marks/Vector-5.svg" style="position:absolute;top:-16px;left:-10px;width:87%;opacity:0.75;pointer-events:none;transform:rotate(-3deg);filter:brightness(0) invert(1);" aria-hidden="true"/></span><span style="display:block;margin-top:0.38em;">+coaching</span></h1>
-      <p class="hero__subhead">Consciously expand how you want to work, the progress you care to create, and the change that changes you.</p>
-      <div class="tags hero__tags">
-        <span class="tag">Reduce resistance</span>
-        <span class="tag">Expand possibility</span>
-        <span class="tag">Increase progress</span>
-      </div>
-    </div>
-  </div>
+  {/* .hv5__ln spans: display:contents on desktop (natural 3-line justify),
+      display:block ≤640 to force the mobile comp's exact 6-line wrap */}
+  <h1 class="hv5__headline"><span class="hv5__ln">Consciously Expand</span> <span class="hv5__ln">How You Want To</span> <span class="hv5__ln">Work, The Progress</span> <span class="hv5__ln">You Care To Create,</span> <span class="hv5__ln">And The Change</span> <span class="hv5__ln">That Changes You.</span></h1>
 
+  <img class="hv5__mark hv5__mark--underline" src="/marks/Vector-12.svg" alt="" aria-hidden="true" />
+  <img class="hv5__mark hv5__mark--circle" src="/marks/Vector-5.svg" alt="" aria-hidden="true" />
+  {/* Mobile-only static Begin Practice — owns the hero dead zone; the floating
+      pill takes over when this scrolls out (o-p-e-n.com pattern, Ben 2026-08-10) */}
+  <a class="hv5__pill" id="hv5Pill" href="/begin">Begin Practice</a>
 </section>
+
+<script is:inline>
+(function () {
+  var pill = document.getElementById('hv5Pill');
+  if (!pill) return;
+  pill.addEventListener('click', function (e) {
+    if (typeof window.__openBeginDrawer === 'function') { e.preventDefault(); window.__openBeginDrawer(); }
+  });
+  if (!window.matchMedia('(max-width: 640px)').matches) return;
+  /* set up after DOM-ready: the observer's INITIAL callback fires at parse time,
+     before #floatCta exists, and never re-fires while the visitor sits at the
+     top — so the float was never held on first paint */
+  function arm() {
+    var float = document.getElementById('floatCta');
+    if (!float) return;
+    new IntersectionObserver(function (entries) {
+      float.classList.toggle('float-cta--held', entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(pill);
+  }
+  if (document.readyState !== 'loading') arm();
+  else document.addEventListener('DOMContentLoaded', arm);
+})();
+</script>
+
+<style is:global>
+/* ── v5 hero (desktop-first; values = Figma px ÷ 14.4 → vw) ── */
+.hero--v5 {
+  position: relative;
+  height: 62.4vw;            /* headline block + pill zone, clipped like the comp */
+  min-height: auto;
+  background: var(--paper-off-b);
+  overflow: hidden;
+}
+.hv5__img { position: absolute; object-fit: cover; }
+.hv5__pill { display: none; } /* 70% opacity baked into the Figma exports */
+.hv5__img--tree       { left: 0.15vw;  top: 12.39vw; width: 15.36vw; height: 27.30vw; }
+/* water video + poster carry no baked alpha — match the 70% via CSS (ground is solid) */
+.hv5__video, .hv5__video-still { opacity: 0.7; }
+.hv5__video-still { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hv5__video { display: none; }
+  .hv5__video-still { display: block; }
+}
+.hv5__img--silhouette { left: 59.03vw; top: 14.47vw; width: 17.18vw; height: 11.45vw; }
+.hv5__img--lonetree   { left: 42.35vw; top: 35.74vw; width: 12.18vw; height: 14.41vw; }
+.hv5__headline {
+  position: absolute;
+  left: 2.10vw;
+  top: 20.44vw;
+  width: 96.92vw;
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 5.486vw;        /* 79px @1440 */
+  line-height: 8.681vw;      /* 125px @1440 */
+  letter-spacing: -0.03em;
+  text-align: justify;
+  text-align-last: justify;
+  color: var(--ink);
+}
+.hv5__ln { display: contents; }
+.hv5__mark { position: absolute; pointer-events: none; }
+.hv5__mark--underline { left: 4.10vw;  top: 26.30vw; width: 27.04vw; }  /* vector mark (Vector-12, v4 hero underline). Sits BELOW the baseline of "Consciously" — at the raster's old y it read as a strike-through (Ben 2026-08-12) */
+.hv5__mark--circle    { left: 57.07vw; top: 37.75vw; width: 34.48vw; height: 10.20vw; object-fit: fill; }  /* vector oval (Vector-5, v4 "possibility" mark); stretched to the raster's 3.38 aspect so placement is unchanged */
+
+/* Mobile — measured from Home Page - Mobile comp (360-frame, ÷3.6 → vw).
+   Justified 7-line headline; tree left / silhouette right-bleed / lone tree center;
+   underline under "Consciously", circle around "Changes". */
+@media (max-width: 640px) {
+  .hero--v5 { height: calc(116.7vw + 150px); min-height: 0; }  /* lonetree bottom + the full 150px gap — the hero owns the dead zone so the static pill can centre in it (S2 top padding is 0 on mobile) */
+  .hv5__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 53px;               /* centres the 44px pill in the 150px zone */
+    height: 44px;               /* Ben 2026-08-12: Apple minimum tap target */
+    padding: 0 19px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hv5__pill:active { background: var(--blue); color: var(--paper); }  /* comp is 149.6vw but its lower zone holds a STATIC pill; ours floats, so close the dead air */
+  /* comp boxes @360 frame: slot1 0/100 95x172 · slot2 237/187 123x85 (bleeds
+     right) · slot3 157/335 80x85. Assets were swapped; the LAYOUT is the
+     comp's — object-fit:cover crops each asset into its box. */
+  .hv5__img--tree       { left: 0;       top: 27.8vw; width: 26.4vw; height: 47.8vw; }
+  .hv5__img--silhouette { left: 65.8vw;  top: 51.9vw; width: 34.2vw; height: 23.6vw; }
+  .hv5__img--lonetree   { display: block; left: 43.6vw; top: 93.1vw; width: 22.2vw; height: 23.6vw; }
+  .hv5__headline {
+    left: 6.1vw;
+    top: 28.9vw;
+    width: 87.8vw;
+    /* comp 40px @360 in HN LT Std; the wider system stand-in needs 9.6vw +
+       tighter tracking so "Consciously Expand" holds one line */
+    font-size: 9.6vw;
+    line-height: 12.1vw;
+    letter-spacing: -0.040em;
+    text-align: justify;
+    text-align-last: justify;
+  }
+  .hv5__ln { display: block; }
+  .hv5__mark--underline { left: 8.9vw; top: 42.4vw; width: 48.3vw; }
+  .hv5__mark--circle    { display: block; left: 18vw; top: 86.5vw; width: 46vw; height: 13.6vw; }
+}
+</style>

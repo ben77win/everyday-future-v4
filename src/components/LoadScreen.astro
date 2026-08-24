@@ -1,0 +1,257 @@
+---
+/* v5 LOAD SCREEN — homepage intro per Figma V3 "Load screen" frame + Ben-approved
+   STACKED v3 comp (design-v5/comps/loadscreen-STACKED.html, 2026-08-06).
+
+   Choreography: stack centered in the viewport; two hollow echoes print, then the
+   solid lead line lands (typeset per the frame: 79px, left-aligned full-bleed,
+   near-black fading to the bg at right). Each scroll gesture prints a fresh lead
+   while the stack glides up and older copies hollow to outlines; after two grows
+   the next gesture lifts the screen (220ms beat, 1.8s weighted curve) and the
+   hero settles beneath. Plays on every homepage load, DESKTOP ONLY (Ben's calls).
+   Skipped for: phones (≤640px), prefers-reduced-motion, deep links (hash /
+   ?option), and RETURNING visits (reload / back-forward) so the browser can
+   restore their scroll position. On a fresh arrival it holds scrollRestoration
+   off for the duration and always releases at the hero.
+
+   ROLLBACK: single-commit feature — revert to remove.
+   Self-contained: ls5-* classes only. */
+const tagline = "A Practice Of Possibility With Coaching";
+---
+<div class="ls5" id="ls5" aria-hidden="true">
+  <img class="ls5__wm" src="/images/wordmark-stacked.svg" alt="" />
+  <div class="ls5__cue">Scroll&nbsp;&darr;</div>
+  <div class="ls5__stack" id="ls5Stack">
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+    <span class="ls5__line">{tagline}</span>
+  </div>
+</div>
+
+<style is:global>
+.ls5 {
+  position: fixed;
+  inset: 0;
+  z-index: 400; /* above nav (100) + float CTA (90); below the mobile menu (500) */
+  overflow: hidden;
+  background: linear-gradient(180deg, #F8FCF7 0%, #FAFCF3 70%, #FDFCE8 100%);
+  transition: transform 2.6s cubic-bezier(0.60, 0.02, 0.16, 1);
+}
+.ls5::after { /* background ripens as lines accumulate */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #F8FCF7 0%, var(--pale-yellow) 55%, #FFFDDE 100%);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.ls5.rise-1::after { opacity: 0.5; }
+.ls5.rise-2::after { opacity: 1; }
+.ls5.lift { transform: translateY(-100.5%); }
+.ls5--off { display: none; }
+
+.ls5__wm {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  transition: opacity 2.0s ease, transform 2.0s cubic-bezier(0.55, 0.02, 0.12, 1);
+}
+.ls5.rise-1 .ls5__wm { opacity: 0.75; transform: translateX(-50%) translateY(-6px); }
+.ls5.rise-2 .ls5__wm { opacity: 0.45; transform: translateX(-50%) translateY(-14px); }
+
+.ls5__cue {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16%;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.8s ease 1.9s;
+}
+.ls5.play .ls5__cue { opacity: 0.4; }
+.ls5.rise-1 .ls5__cue, .ls5.rise-2 .ls5__cue { opacity: 0 !important; transition: opacity 0.5s ease; }
+
+/* ── centered stack; type per the V3 Load screen frame; replicated copies
+   hollow to outlines as they age upward ── */
+.ls5__stack {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max-content;
+  max-width: calc(100vw - 60px);
+  /* centered on BOTH axes: -50% X for the line block (type caps at 79px, so wide
+     monitors otherwise leave it hanging left); -1.37em Y = half the visible
+     3-line block, independent of unprinted lines */
+  transform: translate(-50%, -1.37em);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: clamp(30px, 5.486vw, 79px);
+  transition: transform 1.95s cubic-bezier(0.55, 0.02, 0.12, 1);
+  will-change: transform;
+}
+.ls5__line {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--fw-roman);
+  font-size: 1em;
+  letter-spacing: -0.030em;
+  line-height: 1.02;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(0.65em);
+  transition: transform 2.1s cubic-bezier(0.55, 0.02, 0.12, 1), opacity 1.8s ease;
+}
+.ls5__line + .ls5__line { margin-top: -0.16em; }
+.ls5__line.on { opacity: 1; transform: none; }
+/* lead — the frame's rendering: near-black left, dissolving to the bg at right */
+.ls5__line.lead {
+  background: linear-gradient(90deg, var(--ink) 0%, rgba(0,0,0,0.45) 48%, rgba(0,0,0,0) 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 0;
+}
+/* replicated copies hollow out, fading with age */
+.ls5__line.on:not(.lead) {
+  color: transparent;
+  background: none;
+  -webkit-text-stroke: 1.2px rgba(0,0,0,0.46);
+}
+.ls5__line.on.g3 { -webkit-text-stroke-color: rgba(0,0,0,0.34); }
+.ls5__line.on.g2 { -webkit-text-stroke-color: rgba(0,0,0,0.22); }
+
+/* hero settles beneath the lift (inline transform applied/cleared by JS) */
+.hero--v5 { transition: transform 2.6s cubic-bezier(0.55, 0.02, 0.12, 1) 0.45s; }
+
+/* No intro on phones (Ben 2026-08-10). CSS guard as well as the JS one so the
+   curtain can never flash before the script runs. */
+@media (max-width: 640px) {
+  .ls5 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls5 { display: none; }
+}
+</style>
+
+<script is:inline>
+(function () {
+  var ls = document.getElementById('ls5');
+  if (!ls) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phone  = window.matchMedia('(max-width: 640px)').matches; /* Ben 2026-08-10: no intro on phones */
+  var deepLink = !!location.hash || new URLSearchParams(location.search).has('option');
+  /* RETURNING visitor — a reload or a back/forward to this page means the browser
+     has a scroll position to restore. Skip the intro and let it restore, so a
+     reload from the FAQ puts you back at the FAQ. A fresh arrival always starts
+     at the top, so the intro can play and end at the hero. This is what makes
+     "intro always ends at hero" and "reload keeps my place" compatible. */
+  var nav = (window.performance && performance.getEntriesByType &&
+             performance.getEntriesByType('navigation')[0]) || null;
+  var navType = nav ? nav.type
+    : (performance.navigation ? ['navigate','reload','back_forward'][performance.navigation.type] : 'navigate');
+  var returning = (navType === 'reload' || navType === 'back_forward');
+  /* First visit only (Ben 2026-08-12): one play per visitor, then never again */
+  var seen = false;
+  try { seen = localStorage.getItem('edf_intro_seen') === '1'; } catch (e) {}
+  if (reduce || phone || deepLink || returning || seen) { ls.classList.add('ls5--off'); return; }
+
+  var stack = document.getElementById('ls5Stack');
+  var spans = Array.prototype.slice.call(stack.querySelectorAll('.ls5__line'));
+  var state = { acc: 0, shown: 3, lifted: false };
+
+  /* Hold restoration off only WHILE the intro runs (bfcache can still hand us a
+     scroll offset). Handed back to the browser on lift, so the next reload/back
+     restores the visitor's position normally. */
+  var hadRestore = ('scrollRestoration' in history);
+  if (hadRestore) history.scrollRestoration = 'manual';
+  document.documentElement.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+  /* re-assert through the load milestones, in case anything scrolls late */
+  window.addEventListener('load', function () { if (!state.lifted) window.scrollTo(0, 0); });
+
+  function setLead(i) {
+    for (var k = 0; k < spans.length; k++) {
+      spans[k].classList.toggle('lead', k === i);
+      spans[k].classList.remove('g2'); spans[k].classList.remove('g3');
+      if (k < i) {
+        var d = i - k;
+        if (d === 2) spans[k].classList.add('g3');
+        else if (d >= 3) spans[k].classList.add('g2');
+      }
+    }
+  }
+
+  var hero = null;
+  var floatCta = null;
+  function onReady(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  onReady(function () {
+    hero = document.querySelector('.hero--v5');
+    if (hero && !state.lifted) hero.style.transform = 'translateY(34px)';
+    floatCta = document.getElementById('floatCta');
+    if (floatCta && !state.lifted) { floatCta.style.opacity = '0'; floatCta.style.pointerEvents = 'none'; }
+    /* hollow echoes land first, the solid lead prints last */
+    setTimeout(function () { ls.classList.add('play'); spans[0].classList.add('on'); }, 150);
+    setTimeout(function () { spans[1].classList.add('on'); }, 500);
+    setTimeout(function () { spans[2].classList.add('on'); setLead(2); }, 850);
+  });
+
+  function lift() {
+    state.lifted = true;
+    try { localStorage.setItem('edf_intro_seen', '1'); } catch (e) {}
+    setTimeout(function () {
+      ls.classList.add('lift');
+      if (hero) hero.style.transform = 'translateY(0)';
+      document.documentElement.style.overflow = '';
+      window.scrollTo(0, 0);   /* release at the hero, never mid-page */
+      if (hadRestore) history.scrollRestoration = 'auto'; /* give it back */
+      if (floatCta) { floatCta.style.opacity = ''; floatCta.style.pointerEvents = ''; }
+      setTimeout(function () { ls.classList.add('ls5--off'); if (hero) { hero.style.transform = ''; } }, 3200);
+    }, 420); /* settling beat */
+  }
+
+  function grow() {
+    if (state.shown < spans.length) {
+      var i = state.shown;
+      spans[i].classList.add('on');
+      setLead(i); /* previous lead hollows */
+      var rise = (i - 2) * 0.43; /* glide up ~half the row pitch */
+      stack.style.transform = 'translate(-50%, calc(-1.37em - ' + rise + 'em))';
+      state.shown++;
+      ls.classList.add('rise-' + (state.shown - 3));
+      state.acc = 0;
+    } else if (!state.lifted) {
+      lift();
+    }
+  }
+
+  function onDelta(dy) {
+    if (state.lifted || dy <= 0) return;
+    state.acc += dy;
+    if (state.acc > 75) grow();
+  }
+
+  window.addEventListener('wheel', function (e) { onDelta(e.deltaY); }, { passive: true });
+  var touchY = null;
+  window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchmove', function (e) {
+    if (touchY !== null) { onDelta(touchY - e.touches[0].clientY); touchY = e.touches[0].clientY; }
+  }, { passive: true });
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') onDelta(120);
+  });
+})();
+</script>
