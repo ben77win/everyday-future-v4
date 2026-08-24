@@ -225,7 +225,7 @@ const faqLd = {
 @media (max-width: 900px) {
   /* comp keeps the collage on mobile — compact block between heading and
      accordion (Home Page - Mobile, ~y 480–900 @360) */
-  .faq5 { grid-template-columns: 1fr; padding: min(40vw, 150px) var(--gutter) 0; gap: 40px; }  /* comp: 140pt gap from bio; the FAQ->footer 65pt gap is carried by .site-footer padding-top */
+  .faq5 { grid-template-columns: 1fr; padding: min(40vw, 150px) var(--gutter) 92px; gap: 40px; }  /* comp: 140pt gap from bio. 92px bottom = pill (44) + anchor (12) + breathing room, so the last FAQ row can scroll clear of the floating CTA (Ben 2026-08-13); the footer's padding-top still carries the visual gap */
   .faq5__collage { min-height: 122vw; }
   .faq5__heading { position: static; margin-bottom: 4vw; }
   .faq5__img--vase    { left: auto; right: 0; top: 0;      width: 25.0vw; }
