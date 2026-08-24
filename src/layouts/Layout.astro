@@ -95,6 +95,8 @@ const ogImage = new URL(image, site).href;
     // ResizeObserver keeps it accurate through font loading, content/link changes, and wrapping.
     var setFooterH = function () {
       document.documentElement.style.setProperty('--footer-h', siteFooter.offsetHeight + 'px');
+      var bar = siteFooter.querySelector('.site-footer__inner');
+      if (bar) document.documentElement.style.setProperty('--footer-bar-h', bar.offsetHeight + 'px');
     };
     setFooterH();
     window.addEventListener('resize', setFooterH);
