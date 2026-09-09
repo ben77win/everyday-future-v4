@@ -13,7 +13,7 @@ Deploy plan unchanged: build on `v5` → merge `staging` (Ben approves) → merg
 |---|------|-----|------|
 | 1.1 | **Real Process copy** | Taylor | Placeholder is hidden behind `SHOW_BODY_COPY = false` at the top of `Process.astro`. Drop the real text into the `steps` array's `body` fields and flip the switch to `true`. Nothing else to change. |
 | 1.2 | **High-res source for the blue sketches** | Alice | The V3 sketches in Figma are crops of one photographed sheet (`IMG_5637 1.png`) with no vector behind them — exporting at 4x makes them *worse*, verified and reverted. Ask for her originals (Procreate/Illustrator/vector), or trace them (see 2.1). |
-| 1.3 | **Portal root redirect** | Ben | `portal.everydayfuture.work/` currently redirects to `admin-create.html`, i.e. the portal *creator*. Fix `netlify.toml` in `edf-portal-updated_3` to point `/` → `client-portal.html`, then un-hide the Client Portal links (see 3.2). |
+| 1.3 | ~~Portal root redirect~~ | — | ✅ Resolved 2026-09-09: portal root serves the magic-login screen at `/` (200 rewrite); site links un-hidden (3.2). |
 
 ## 2. SVG / sketch marks
 
@@ -44,7 +44,7 @@ ProfessionalService schema; canonical; GA4 `G-05G2PBBWW1`; sitemap with all 8
 URLs; robots.txt.
 
 - [ ] **3.1 — Writing links still hidden** (`SEO-ACTIONS.md` B1). Hidden 2026-06-22 "for ~2 weeks"; now ~7 weeks. The two essays are the only content targeting the niche term and are **orphaned** (zero internal links). v5's nav has no Writing link either. **Decide before merge:** give Writing a place in the v5 nav/footer, or accept continued orphaning.
-- [ ] **3.2 — Client Portal links** are hidden pending 1.3; restore once the redirect is fixed (commented in `Nav.astro` ×2 with the reason).
+- [x] **3.2 — Client Portal links restored + live on production 2026-09-09** (portal root now serves the magic-login screen; 1.3 resolved by the portal project).
 - [ ] **3.3 — Post-merge SEO watch.** v5 changes the H1 and much body copy. Expect a short re-evaluation wobble in impressions; re-check GSC ~1 and ~4 weeks after production. Current baseline (2026-07-15): 369 impressions / avg position 18.9, top query "conscious executive coaching."
 - [ ] **3.4 — Carry-over items from `SEO-ACTIONS.md`, unaffected by v5:** A3 (request indexing for the 2 essay URLs), A4 (GBP review requests — biggest map-pack lever, still 0 reviews), A7 (podcast leverage), B3 (definitional "What is conscious executive coaching?" page — #1 content lever), B4 (long-tail articles), B5 (`llms.txt`, article `og:type`), B6 (MCC + UPenn + Harvard credentials into Person schema).
 
